@@ -21,7 +21,7 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
   const [state, setState] = useState<string>('default value')
   const [role, setRole] = useState<string>('user') // Change this to 'admin' to test admin view
   const [authenticated, setAuthenticated] = useState<boolean>(false)
-  const [loggedUser, setLoggedUser] = useState<User>()
+  const [loggedUser, setLoggedUser] = useState<User | any>()
 
   return (
     <GlobalContext.Provider value={{

@@ -15,7 +15,7 @@ const EventDetail = ({ }) => {
   const router = useRouter();
   const { id } = router.query; // Dynamic route parameter
 
-  const project = MOCK_DATA_EVENTS.find(p => p.id === parseInt(id));
+  const project = MOCK_DATA_EVENTS.find(p => p.id === parseInt(id as string, 10));
 
   if (!project) {
     return <div>Loading...</div>;

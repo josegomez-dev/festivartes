@@ -21,12 +21,12 @@ const ArtworkRegisterForm = () => {
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFormData((prevData) => ({
-        ...prevData,
-        image: e.target.files[0],
-      }));
-    }
+    // if (e.target.files && e.target.files[0]) {
+    //   setFormData((prevData) => ({
+    //     ...prevData,
+    //     image: e.target.files[0],
+    //   }));
+    // }
   };
 
   const handleSubmit = (e: React.FormEvent) => {

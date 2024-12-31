@@ -1,7 +1,15 @@
 // components/CustomModal.js
-import React from 'react';
+import React, { ReactNode } from 'react';
 
-const CustomModal = ({ isOpen, onClose, height, bgColor, children }) => {
+interface CustomModalProps {
+  isOpen: boolean; // Explicitly set the type for isOpen
+  onClose: () => void; // Function type for onClose
+  height?: string; // Optional string for height
+  bgColor?: string; // Optional string for bgColor
+  children: ReactNode; // React children (JSX)
+}
+
+const CustomModal: React.FC<CustomModalProps> = ({ isOpen, onClose, height, bgColor, children }) => {
   return (
     <>
       {isOpen && <div className="modal-overlay" onClick={onClose}></div>}

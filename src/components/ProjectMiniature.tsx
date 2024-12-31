@@ -1,10 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
 
-const ProjectMiniature = ({ projects, type }) => {
+interface ProjectMiniatureProps {
+  projects: any;
+  type: string;
+}
+
+const ProjectMiniature : React.FC<ProjectMiniatureProps> = ({ projects, type }) => {
   return (
     <div className={`project-miniature-container project-miniature-custom-${type}`}>
-      {projects.map((project, index) => (
+      {projects.map((project: any, index: number) => (
         <Link 
           key={index + project.name + 'react-key'} 
           href={`/${type}-detail?id=${project.id}`} // Use the unique ID or name

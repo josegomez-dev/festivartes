@@ -49,7 +49,7 @@ const FloatingMenuButton = () => {
 
   const toggleDropdown = () => {
     setIsMenuOpen(!isMenuOpen);
-    if (menuDropdown) {
+    if (menuDropdown && menuDropdown instanceof HTMLElement) {
       menuDropdown.style.display = isMenuOpen ? 'none' : 'flex';
     }
   };
@@ -58,7 +58,7 @@ const FloatingMenuButton = () => {
     <>
       <div className="floating-menu">
         <div className="menu-dropdown">
-          {options.map((option: string | number | bigint | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<React.AwaitedReactNode> | null | undefined, index: React.Key | null | undefined) => (
+          {options.map((option: string, index: number) => (
             <div key={index} className="menu-item" onClick={() => handleOptionClick(option)}>
               {option}
             </div>
@@ -110,7 +110,7 @@ const FloatingMenuButton = () => {
         <h2>{currentAction}</h2>
         <div>
           <br />
-          <iframe src="https://www.mep.go.cr/sites/default/files/2023-05/reglamento-FEA-23.pdf" width={"100%"} height={"500px"} frameborder="0"></iframe>
+          <iframe src="https://www.mep.go.cr/sites/default/files/2023-05/reglamento-FEA-23.pdf" width={"100%"} height={"500px"}></iframe>
         </div>
       </CustomModal>
     </>

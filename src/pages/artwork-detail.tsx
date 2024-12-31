@@ -1,19 +1,14 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
 import CoreSectionFestivartes from '@/components/CoreSectionFestivartes';
-import ProjectMiniature from '@/components/ProjectMiniature';
 import SubMenu from '@/components/SubMenu';
-import { MOCK_DATA_ARTWORKS, MOCK_DATA_EVENTS } from '@/utils/constants';
-import Link from 'next/link';
+import { MOCK_DATA_ARTWORKS } from '@/utils/constants';
 import { useRouter } from 'next/router';
-import { FaUserAstronaut } from 'react-icons/fa';
-import { IoSettings } from 'react-icons/io5';
-import { MdDashboardCustomize, MdEmojiEvents } from 'react-icons/md';
 
 const ArtworkDetail = ({ }) => {
   const router = useRouter();
   const { id } = router.query; // Dynamic route parameter
 
-  const project = MOCK_DATA_ARTWORKS.find(p => p.id === parseInt(id));
+  const project = MOCK_DATA_ARTWORKS.find(p => p.id === parseInt(id as string, 10));
 
   if (!project) {
     return <div>Loading...</div>;

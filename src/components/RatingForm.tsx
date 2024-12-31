@@ -34,20 +34,20 @@ const RatingForm = () => {
     }));
   };
 
-  const handleMultiCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, checked } = e.target;
+  // const handleMultiCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { value, checked } = e.target;
 
-    setFormData((prevData) => {
-      const updatedCheckboxes = checked
-        ? [...prevData.multiCheckbox, value]
-        : prevData.multiCheckbox.filter((item) => item !== value);
+  //   setFormData((prevData) => {
+  //     const updatedCheckboxes = checked
+  //       ? [...prevData.multiCheckbox, value]
+  //       : prevData.multiCheckbox.filter((item) => item !== value);
 
-      return {
-        ...prevData,
-        multiCheckbox: updatedCheckboxes,
-      };
-    });
-  };
+  //     return {
+  //       ...prevData,
+  //       multiCheckbox: updatedCheckboxes,
+  //     };
+  //   });
+  // };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -95,12 +95,10 @@ const RatingForm = () => {
         <br /> */}
         <label className={styles.label}>Obseravaciones: </label>
         <textarea
-          type="checkbox"
           id="question3"
           name="question3"
           className={styles.toggle}
-          checked={formData.question3}
-          onChange={handleToggleChange}
+          onChange={() => handleToggleChange}
         />
       </div>
 
@@ -128,12 +126,10 @@ const RatingForm = () => {
         <br /> */}
         <label className={styles.label}>Obseravaciones: </label>
         <textarea
-          type="checkbox"
           id="question3"
           name="question3"
           className={styles.toggle}
-          checked={formData.question3}
-          onChange={handleToggleChange}
+          onChange={() => handleToggleChange}
         />
       </div>
 
@@ -161,12 +157,10 @@ const RatingForm = () => {
         <br /> */}
         <label className={styles.label}>Obseravaciones: </label>
         <textarea
-          type="checkbox"
           id="question3"
           name="question3"
           className={styles.toggle}
-          checked={formData.question3}
-          onChange={handleToggleChange}
+          onChange={() => handleToggleChange}
         />
       </div>
 
@@ -194,12 +188,10 @@ const RatingForm = () => {
         <br /> */}
         <label className={styles.label}>Obseravaciones: </label>
         <textarea
-          type="checkbox"
           id="question3"
           name="question3"
           className={styles.toggle}
-          checked={formData.question3}
-          onChange={handleToggleChange}
+          onChange={() => handleToggleChange}
         />
       </div>
 
@@ -227,12 +219,10 @@ const RatingForm = () => {
         <br /> */}
         <label className={styles.label}>Obseravaciones: </label>
         <textarea
-          type="checkbox"
           id="question3"
           name="question3"
           className={styles.toggle}
-          checked={formData.question3}
-          onChange={handleToggleChange}
+          onChange={() => handleToggleChange}
         />
       </div>
 
@@ -260,12 +250,10 @@ const RatingForm = () => {
         <br /> */}
         <label className={styles.label}>Obseravaciones: </label>
         <textarea
-          type="checkbox"
           id="question3"
           name="question3"
           className={styles.toggle}
-          checked={formData.question3}
-          onChange={handleToggleChange}
+          onChange={() => handleToggleChange}
         />
       </div>
 
@@ -350,12 +338,10 @@ const RatingForm = () => {
         <br /> */}
         <label className={styles.label}>Obseravaciones: </label>
         <textarea
-          type="checkbox"
           id="question3"
           name="question3"
           className={styles.toggle}
-          checked={formData.question3}
-          onChange={handleToggleChange}
+          onChange={() => handleToggleChange}
         />
       </div>
 
@@ -383,12 +369,10 @@ const RatingForm = () => {
         <br /> */}
         <label className={styles.label}>Obseravaciones: </label>
         <textarea
-          type="checkbox"
           id="question3"
           name="question3"
           className={styles.toggle}
-          checked={formData.question3}
-          onChange={handleToggleChange}
+          onChange={() => handleToggleChange}
         />
       </div>
 
@@ -416,12 +400,10 @@ const RatingForm = () => {
         <br /> */}
         <label className={styles.label}>Obseravaciones: </label>
         <textarea
-          type="checkbox"
           id="question3"
           name="question3"
           className={styles.toggle}
-          checked={formData.question3}
-          onChange={handleToggleChange}
+          onChange={() => handleToggleChange}
         />
       </div>
 
@@ -449,12 +431,10 @@ const RatingForm = () => {
         <br /> */}
         <label className={styles.label}>Obseravaciones: </label>
         <textarea
-          type="checkbox"
           id="question3"
           name="question3"
           className={styles.toggle}
-          checked={formData.question3}
-          onChange={handleToggleChange}
+          onChange={() => handleToggleChange}
         />
       </div>
 
@@ -483,12 +463,10 @@ const RatingForm = () => {
         <br /> */}
         <label className={styles.label}>Obseravaciones: </label>
         <textarea
-          type="checkbox"
           id="question3"
           name="question3"
           className={styles.toggle}
-          checked={formData.question3}
-          onChange={handleToggleChange}
+          onChange={() => handleToggleChange}
         />
       </div>
 
