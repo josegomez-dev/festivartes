@@ -13,10 +13,10 @@ const SubMenu = ({ }) => {
       <>
         <div className={styles['quick-links']} style={{ marginTop: '-50px'}}>
             <Link href={`/${role}/events`}>
-              <GiPartyFlags color="black" />
+              <GiPartyFlags color="orange" />
             </Link>
             <Link href={`/${role}/artworks`}>
-              <RiBubbleChartFill color="black" />
+              <RiBubbleChartFill color="orange" />
             </Link>
             {role === 'admin' && <Link href={`/${role}/users`}>
               <FaPersonDotsFromLine color="black" />

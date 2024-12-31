@@ -27,8 +27,9 @@ const UserHome = () => {
             <p>
               Hola, <b>Jose Alejandro!</b>
             </p>
-            Animate a descubrir tu artista interior.
-
+            <b style={{ fontSize: '20px' }}>
+              Animate a descubrir tu artista interior.
+            </b>
             <p className={styles['slogan-text']}>
               Simplifica, automatiza y digitaliza todo tu festival artístico: registros, calificaciones y premiaciones en un solo lugar.
             </p>

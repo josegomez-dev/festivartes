@@ -26,6 +26,7 @@ const Home = () => {
       <div className={styles.center}>
         <div className="logo-positioning-for-mobile">
           <Image
+            style={{ filter: 'drop-shadow(0 0 1rem black)' }}
             className={styles.logo}
             src="/logo2.png"
             alt="Catarsis Musical Logo"

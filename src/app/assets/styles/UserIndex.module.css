@@ -9,6 +9,7 @@
     font-weight: bold;
     margin-bottom: 20px;
     color: var(--primary-color);
+    text-align: center;
   }
 
 
@@ -24,7 +25,8 @@
     padding: 10px;
     text-justify: auto;
     text-align: center;
-    filter: drop-shadow(0 0 0.1rem gray);
+    filter: drop-shadow(0 0 0.2rem black);
+    margin-top: 15px;
   }
 
   .dashboard {

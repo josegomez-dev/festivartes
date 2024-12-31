@@ -7,7 +7,14 @@
 
   .sidebar {
     width: 75px;
-    background-color: darkorange; /* Darker blue/gray for the sidebar */
+
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    backdrop-filter: blur(100px); /* Apply the blur effect */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Optional border for added style */
+    border-left: 1px solid rgba(255, 255, 255, 0.2); /* Optional border for added style */
+    border-right: 1px solid rgba(255, 255, 255, 0.2); /* Optional border for added style */
+
+
     color: white;
     padding: 20px;
     display: flex;
@@ -29,10 +36,13 @@
   .sidebar nav a {
     color: gold;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 30px;
+    margin-left: -5px;
+    margin-top: 10px;
     padding: 10px;
     border-radius: 5px;
     transition: background-color 0.3s;
+    margin-bottom: -15px;
   }
 
   .sidebar nav a:hover {

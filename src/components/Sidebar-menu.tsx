@@ -23,16 +23,16 @@ const SidebarMenu = () => {
         {/* <h2><TiThMenu /></h2> */}
         <nav>
           <Link href={`/${role}/events`}>
-            <GiPartyFlags />
+            <GiPartyFlags color='orange' />
           </Link>
           <Link href={`/${role}/artworks`}>
-            <RiBubbleChartFill />
+            <RiBubbleChartFill color='orange' />
           </Link>
           {role === 'admin' && <Link href={`/${role}/users`}>
-            <FaPersonDotsFromLine />
+            <FaPersonDotsFromLine color='orange' />
           </Link>}
           {role === 'admin' && <Link href={`/${role}/settings`}>
-            <IoSettings />
+            <IoSettings color='orange' />
           </Link>}
         </nav>
       </div>
