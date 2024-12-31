@@ -1,6 +1,7 @@
 /* ArtworkRegisterForm.module.css */
 
 .form {
+    max-width: 500px;
     margin: 0 auto;
     padding: 20px;
     background-color: darkorange;

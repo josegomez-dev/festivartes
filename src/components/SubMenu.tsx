@@ -13,16 +13,16 @@ const SubMenu = ({ }) => {
       <>
         <div className={styles['quick-links']} style={{ marginTop: '-50px'}}>
             <Link href={`/${role}/events`}>
-              <GiPartyFlags color="orange" />
+              <GiPartyFlags style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color="orange" />
             </Link>
             <Link href={`/${role}/artworks`}>
-              <RiBubbleChartFill color="orange" />
+              <RiBubbleChartFill style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color="gold" />
             </Link>
             {role === 'admin' && <Link href={`/${role}/users`}>
-              <FaPersonDotsFromLine color="black" />
+              <FaPersonDotsFromLine style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color="lightgreen" />
             </Link>}
             {role === 'admin' && <Link href={`/${role}/settings`}>
-            <IoSettings color="black" />
+            <IoSettings style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color="#32acc0" />
             </Link>}
         </div>
       </>

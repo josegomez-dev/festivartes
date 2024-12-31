@@ -232,7 +232,6 @@ b {
   overflow-x: auto;
   overflow-y: hidden;
   max-height: 400px;
-
 }
 
 .project-miniature {
@@ -281,14 +280,14 @@ b {
 .project-miniature-custom-event .project-miniature, .project-miniature-custom-event .project-thumbnail {
   width: 150px;
   height: 250px;
+  overflow: hidden;
 }
 
 .project-miniature-custom-event .project-miniature {
   background: linear-gradient(0deg, #000, orange);
-  border: 3px solid white;
 }
 .project-miniature-custom-event .project-thumbnail {
-  width: 145px;
+  width: 148px;
 }
 
 
@@ -299,7 +298,7 @@ b {
 }
 .project-miniature-custom-judge .project-miniature {
 	background: linear-gradient(0deg, #000, orange);
-  border: 1px solid orange;
+  border: 1px solid #32acc0;
 }
 .project-miniature-custom-judge .project-thumbnail {
   width: 68px;
@@ -308,10 +307,10 @@ b {
 
 .project-miniature-custom-artwork .project-miniature {
 	background: linear-gradient(0deg, #000, orange);
-  border: 3px solid orange;
+  overflow: hidden;
 }
 .project-miniature-custom-artwork .project-thumbnail {
-  width: 94px;
+  width: 98px;
 }
 
 .upcoming-overlay {
@@ -352,7 +351,7 @@ b {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   z-index: 999;
 }
 
@@ -392,6 +391,8 @@ b {
 .modal-content {
   padding: 20px;
   overflow-y: auto;
+
+
 }
 
 .highlighted-text {

@@ -1,5 +1,7 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
+import CoreSectionFestivartes from '@/components/CoreSectionFestivartes';
 import ProjectMiniature from '@/components/ProjectMiniature';
+import SubMenu from '@/components/SubMenu';
 import { MOCK_DATA_EVENTS, MOCK_DATA_JUDGES } from '@/utils/constants';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -19,20 +21,7 @@ const JudgeDetail = ({ }) => {
 
   return (
     <div className={styles['admin-index']}>
-      <div className={styles['quick-links']} style={{ marginTop: '-50px'}}>
-        {/* <Link href="/admin/dashboard">
-          <MdDashboardCustomize />
-        </Link> */}
-        <Link href="/admin/events">
-          <MdEmojiEvents />
-        </Link>
-        <Link href="/admin/users">
-          <FaUserAstronaut />
-        </Link>
-        <Link href="/admin/settings">
-          <IoSettings />
-        </Link>
-      </div>
+      <SubMenu />
 
       <div style={{ textAlign: 'center', marginBottom: '25px' }}>
         <div className="project-detail-container">
@@ -61,22 +50,7 @@ const JudgeDetail = ({ }) => {
             </ul>
           </div>
 
-          <div className={styles.card} style={{ marginTop: '25px' }}>
-            <p>
-              Lista de todos los <span className='bolder-text'>eventos registrados</span>.
-            </p>
-            <br />
-            {MOCK_DATA_EVENTS.length <= 0 ? 
-              <div className={styles.grid}>
-                <div className={styles.card}>
-                  <h3>Registra tu primer Evento Calificado</h3>
-                  <p>Evento con jurado y reglamento.</p>
-                </div> 
-              </div> 
-              : 
-              <ProjectMiniature projects={MOCK_DATA_EVENTS} type={'event'} />
-            }
-          </div>
+          <CoreSectionFestivartes />
           {/* Add more project details as needed */}
         </div>
       </div>

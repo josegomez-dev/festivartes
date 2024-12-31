@@ -1,5 +1,8 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
+import CoreSectionArtworks from '@/components/CoreSectionArtworks';
+import CoreSectionJudges from '@/components/CoreSectionJudges';
 import ProjectMiniature from '@/components/ProjectMiniature';
+import SubMenu from '@/components/SubMenu';
 import { MOCK_DATA_ARTWORKS, MOCK_DATA_EVENTS, MOCK_DATA_JUDGES } from '@/utils/constants';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -20,20 +23,7 @@ const EventDetail = ({ }) => {
 
   return (
     <div className={styles['admin-index']}>
-      <div className={styles['quick-links']} style={{ marginTop: '-50px'}}>
-        {/* <Link href="/admin/dashboard">
-          <MdDashboardCustomize />
-        </Link> */}
-        <Link href="/admin/events">
-          <MdEmojiEvents />
-        </Link>
-        <Link href="/admin/users">
-          <FaUserAstronaut />
-        </Link>
-        <Link href="/admin/settings">
-          <IoSettings />
-        </Link>
-      </div>
+      <SubMenu />
 
       <div style={{ textAlign: 'center', marginBottom: '25px' }}>
         <div className="project-detail-container">
@@ -79,42 +69,12 @@ const EventDetail = ({ }) => {
 
       <hr />
 
-      <div className={styles.card} style={{ marginTop: '25px' }}>
-        <p>
-          <span className='bolder-text'><FaUserAstronaut /> Jurado Seleccionador</span>
-        </p>
-        <br />
-        {MOCK_DATA_JUDGES.length <= 0 ? 
-          <div className={styles.grid}>
-            <div className={styles.card}>
-              <h3>Invita a tu Jurado Seleccionador</h3>
-              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-            </div> 
-          </div> 
-          : 
-          <ProjectMiniature projects={MOCK_DATA_JUDGES} type="judge" />
-        }
-      </div>
+      <CoreSectionJudges />
 
-       <br />
-        <hr />
+      <br />
+      <hr />
 
-        <div className={styles.card} style={{ marginTop: '25px' }}>
-          <p>
-            <span className='bolder-text'><BiSolidHeart/> Obras Registradas</span>
-          </p>
-          <br />
-          {MOCK_DATA_ARTWORKS.length <= 0 ? 
-            <div className={styles.grid}>
-              <div className={styles.card}>
-                <h3>No hay registros de obras</h3>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-              </div> 
-            </div> 
-            : 
-            <ProjectMiniature projects={MOCK_DATA_ARTWORKS} type={'artwork'} />
-          }
-        </div>
+      <CoreSectionArtworks />
 
     </div>
   );
