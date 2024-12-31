@@ -1,0 +1,66 @@
+/* ArtworkRegisterForm.module.css */
+
+.form {
+    margin: 0 auto;
+    padding: 20px;
+    background-color: darkorange;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    overflow-y: scroll; /* Add this to make scrolling section */
+    height: 400px; /* Add this to make scrolling section */
+  }
+  
+  .label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #222;
+  }
+  
+  .input,
+  .textarea,
+  .select,
+  .fileInput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    color: #555;
+  }
+  
+  .input:focus,
+  .textarea:focus,
+  .select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  .textarea {
+    resize: none;
+  }
+  
+  .fileInput {
+    padding: 0;
+  }
+  
+  .submitButton {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    background-color: orange;
+    color: black;
+    border: 1px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submitButton:hover {
+    background-color: #0056b3;
+  }
+  

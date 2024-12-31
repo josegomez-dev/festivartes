@@ -20,9 +20,9 @@ const ArtworkDetail = ({ }) => {
   return (
     <div className={styles['admin-index']}>
       <div className={styles['quick-links']} style={{ marginTop: '-50px'}}>
-        <Link href="/admin/dashboard">
+        {/* <Link href="/admin/dashboard">
           <MdDashboardCustomize />
-        </Link>
+        </Link> */}
         <Link href="/admin/events">
           <MdEmojiEvents />
         </Link>

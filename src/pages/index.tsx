@@ -27,10 +27,10 @@ const Home = () => {
         <div className="logo-positioning-for-mobile">
           <Image
             className={styles.logo}
-            src="/logo-white.png"
+            src="/logo2.png"
             alt="Catarsis Musical Logo"
-            width={340}
-            height={100}
+            width={400}
+            height={400}
             priority
           />
         </div>
@@ -44,7 +44,7 @@ const Home = () => {
           rel="noopener noreferrer"
         >
           <h2>
-            Festivartes <span>-&gt;</span>
+            Festivartes:
           </h2>
           <p>
           Es una plataforma con <b>servicio premium</b> para quienes desean una experiencia artística sin
@@ -60,7 +60,7 @@ y entidades gubernamentales</b> como el <b>Ministerio de Educación Pública</b>
           rel="noopener noreferrer"
         >
           <h2>
-            Servicio Premium <span>-&gt;</span>
+            Servicio Premium:
           </h2>
           <p>
           Con características
@@ -77,7 +77,7 @@ beneficios exclusivos.
           rel="noopener noreferrer"
         >
           <h2>
-            Roles <span>-&gt;</span>
+            Roles:
           </h2>
           <p>
             <b>Administración:</b> Usuarios encargados de la gestión de la plataforma
@@ -96,7 +96,7 @@ beneficios exclusivos.
           rel="noopener noreferrer"
         >
           <h2>
-          Obras Musicales: <b>Premiación y Evaluación</b> <span>-&gt;</span>
+          Obras Musicales: <b>Premiación y Evaluación</b>
           </h2>
           <p>
           <b>(Calificaciones y Votaciones)</b> &nbsp;Sistema de recompensas para participantes destacados: Mecanismo para

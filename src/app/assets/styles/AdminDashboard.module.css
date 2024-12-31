@@ -7,7 +7,7 @@
 
   .sidebar {
     width: 75px;
-    background-color: var(--primary-color); /* Darker blue/gray for the sidebar */
+    background-color: darkorange; /* Darker blue/gray for the sidebar */
     color: white;
     padding: 20px;
     display: flex;
@@ -42,7 +42,7 @@
   .main-content {
     flex: 1;
     padding: 20px;
-    overflow-y: auto;
+    width: 80%;
   }
 
   .header {
@@ -59,7 +59,12 @@
   }
 
   .card {
-    background-color: white;
+    text-align: center;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    backdrop-filter: blur(100px); /* Apply the blur effect */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Optional border for added style */
+
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -72,7 +77,7 @@
   }
 
   .card p {
-    color: #555;
+    color: white;
   }
 
 

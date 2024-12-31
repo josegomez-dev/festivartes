@@ -3,16 +3,15 @@ import UnauthorizedMessage from '@/components/UnauthorizedMessage';
 import { useGlobalContext } from '@/context/GlobalContext';
 import SidebarMenu from '../../components/Sidebar-menu';
 import ProjectMiniature from '@/components/ProjectMiniature';
-import { MOCK_DATA_JUDGES } from '@/utils/constants';
+import { MOCK_DATA_EVENTS } from '@/utils/constants';
 import FloatingMenuButton from '@/components/FloatingMenuButton';
-import { FaUserAstronaut } from 'react-icons/fa';
-import CoreSectionJudges from '@/components/CoreSectionJudges';
+import { MdEmojiEvents } from 'react-icons/md';
+import CoreSectionFestivartes from '@/components/CoreSectionFestivartes';
 
-
-export default function AdminUsers() {
+export default function JudgeEvents() {
   const { role, authenticated } = useGlobalContext()
 
-  if (role !== 'admin' || !authenticated) {
+  if (role !== 'judge' || !authenticated) {
     // Redirect to login if not admin or not authenticated
     return <UnauthorizedMessage />
   }
@@ -23,8 +22,8 @@ export default function AdminUsers() {
       <SidebarMenu />
       {/* Main Content */}
       <div className={styles['main-content']}>
-       
-        <CoreSectionJudges />
+
+        <CoreSectionFestivartes />
 
         <FloatingMenuButton />
       </div>

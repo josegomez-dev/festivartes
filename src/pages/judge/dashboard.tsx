@@ -7,22 +7,18 @@ import { MOCK_DATA_ARTWORKS, MOCK_DATA_JUDGES, MOCK_DATA_EVENTS } from '@/utils/
 import Link from 'next/link';
 import { MdDashboardCustomize, MdEmojiEvents } from 'react-icons/md';
 import { FaUserAstronaut } from 'react-icons/fa';
+import { BiSolidHeart } from "react-icons/bi";
 import { IoSettings } from 'react-icons/io5';
-import { BiSolidHeart } from 'react-icons/bi';
-import { GiPartyFlags } from 'react-icons/gi';
-import { FaPersonDotsFromLine } from 'react-icons/fa6';
-import { RiBubbleChartFill } from 'react-icons/ri';
+import SubMenu from '@/components/SubMenu';
 import CoreSectionFestivartes from '@/components/CoreSectionFestivartes';
 import CoreSectionArtworks from '@/components/CoreSectionArtworks';
-import CoreSectionJudges from '@/components/CoreSectionJudges';
 import BannerFooter from '@/components/BannerFooter';
-import SubMenu from '@/components/SubMenu';
 
 
-export default function AdminDashboard() {
+export default function JudgeDashboard() {
   const { role, authenticated } = useGlobalContext()
 
-  if (role !== 'admin' || !authenticated) {
+  if (role !== 'judge' || !authenticated) {
     // Redirect to login if not admin or not authenticated
     return <UnauthorizedMessage />
   }
@@ -33,22 +29,21 @@ export default function AdminDashboard() {
       <SubMenu />
 
       <div className={styles['welcome-message']} style={{ textAlign: 'center' }}>
-        Bievenido al <b>Panel Principal!</b>
+        Bienvenido <b>Jurado Seleccionador!</b>
         <p className={styles['slogan-text']}>
           Simplifica, automatiza y digitaliza todo tu festival artístico: registros, calificaciones y premiaciones en un solo lugar.
         </p>
       </div>
-      
       {/* Main Content */}
       <div className={styles['main-content']}>
+
         <CoreSectionFestivartes />
         <br />
         <hr />
         <CoreSectionArtworks />
-        <br />
-        <hr />
-        <CoreSectionJudges />
+
         <BannerFooter />
+        
         <FloatingMenuButton />
       </div>
     </div>

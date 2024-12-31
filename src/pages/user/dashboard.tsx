@@ -1,6 +1,14 @@
 import styles from '@/app/assets/styles/UserIndex.module.css';
+import BannerFooter from '@/components/BannerFooter';
+import CoreSectionArtworks from '@/components/CoreSectionArtworks';
+import CoreSectionFestivartes from '@/components/CoreSectionFestivartes';
+import FloatingMenuButton from '@/components/FloatingMenuButton';
+import ProjectMiniature from '@/components/ProjectMiniature';
+import SubMenu from '@/components/SubMenu';
 import UnauthorizedMessage from '@/components/UnauthorizedMessage';
 import { useGlobalContext } from '@/context/GlobalContext';
+import { MOCK_DATA_ARTWORKS, MOCK_DATA_EVENTS } from '@/utils/constants';
+import { MdEmojiEvents } from 'react-icons/md';
 
 const UserHome = () => {
   const { role, authenticated } = useGlobalContext()
@@ -12,16 +20,31 @@ const UserHome = () => {
   return (
     <>
       <div className={styles['user-index']}>
+        <SubMenu />
+
+
         <div className={styles['welcome-message']}>
             <p>
               Hola, <b>Jose Alejandro!</b>
             </p>
             Animate a descubrir tu artista interior.
-        </div>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum molestiae libero sunt provident sed! Vitae expedita odio repellendus debitis reiciendis nihil assumenda molestiae ut, architecto nesciunt tempore, deleniti dicta eveniet!
-        </p>
 
+            <p className={styles['slogan-text']}>
+              Simplifica, automatiza y digitaliza todo tu festival artístico: registros, calificaciones y premiaciones en un solo lugar.
+            </p>
+        </div>
+        {/* Main Content */}
+        <div className={styles['main-content']}>
+
+          <CoreSectionFestivartes />
+          <br />
+          <hr />
+          <CoreSectionArtworks />
+
+          <BannerFooter />
+
+          <FloatingMenuButton />
+        </div>
       </div>
     </>
   )

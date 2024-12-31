@@ -1,5 +1,5 @@
 .navbar {
-    background-color: var(--primary-color);
+    background-color:#32acc0;
     color: white;
     padding: 1rem;
     width: 100%;
@@ -8,12 +8,8 @@
     justify-content: space-between;
     align-items: center;
 
-  }
-
-  @media (min-width: 700px) {
-    .navbar {
-      position: fixed;
-    }
+    /* max-width: 900px; */
+    margin: 0 auto;
   }
 
   .nav-list {
@@ -40,6 +36,7 @@
 
   .nav-link:hover {
     background-color: orange;
+    border: 1px solid white;
   }
 
   .logo-container {

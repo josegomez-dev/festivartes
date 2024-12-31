@@ -14,12 +14,15 @@ const LoginPage = () => {
 
   const handleLogin = () => {
     // Perform authentication logic here (mocked)
-    if (email === 'admin@example.com') {
-      setRole('admin')
-      router.push('/admin/dashboard')
+    if (email === 'admin') {
+      setRole('admin');
+      router.push('/admin/dashboard');
+    } else if (email === 'judge') {
+      setRole('judge');
+      router.push('/judge/dashboard');
     } else {
-      setRole('user')
-      router.push('/user/dashboard')
+      setRole('user');
+      router.push('/user/dashboard');
     }
     setLoggedUser({ ...EMPTY_USER, email })
     setAuthenticated(true)
@@ -29,26 +32,29 @@ const LoginPage = () => {
     <>
       <div className="auth-container">
         <div className="auth-form">
-          <h2 className="auth-title">Bienvenido a Festivartes</h2>
-          <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email" className="auth-input" required />
-          <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password" className="auth-input" required />
+          <h2 className="auth-title">Bienvenido a <b>FESTIVARTES</b></h2>
+          <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Correo electrónico" className="auth-input" required />
+          <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Contraseña" className="auth-input" required />
           <button type="submit" onClick={() => handleLogin()} className="auth-button">Ingresar</button>
           <p className="auth-link">
-            <b>
-            No tienes una cuenta? &nbsp;
+          ¿No tienes una cuenta?
+            <b> &nbsp;
             <Link href="/signup">
               Registrarse
             </Link>
             </b>
           </p>
-          <article className={styles['btw-text-tip']}>
+          {/* <article className={styles['btw-text-tip']}>
             <p>
-              Use admin@example.com - <b>Admin View</b>
+              Use admin - <b>Admin View</b>
             </p>
             <p>
-              or any other to - <b>General User</b>
+              or judge - <b>Judge View</b>
             </p>
-          </article>
+            <p>
+              or any other - <b>General User View</b>
+            </p>
+          </article> */}
         </div>
       </div>
       <div style={{ maxWidth: '400px', margin: '0 auto', textAlign: 'center', padding: '0 25px', marginTop: '-100px' }}>

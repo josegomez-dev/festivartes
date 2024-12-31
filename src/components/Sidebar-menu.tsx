@@ -4,8 +4,11 @@ import Link from 'next/link';
 import { FaUserAstronaut } from "react-icons/fa";
 import { IoSettings } from "react-icons/io5";
 import { MdDashboardCustomize, MdEmojiEvents } from "react-icons/md";
-
-// import { useGlobalContext } from '../context/GlobalContext'
+import { useGlobalContext } from '../context/GlobalContext'
+import { BiSolidHeart } from 'react-icons/bi';
+import { FaPersonDotsFromLine } from 'react-icons/fa6';
+import { GiPartyFlags } from 'react-icons/gi';
+import { RiBubbleChartFill } from 'react-icons/ri';
 
 // interface SidebarMenuProps {
 //   children: ReactNode
@@ -13,24 +16,24 @@ import { MdDashboardCustomize, MdEmojiEvents } from "react-icons/md";
 
 // const SidebarMenu = ({ children }: SidebarMenuProps) => {
 const SidebarMenu = () => {
-  // const { authenticated, role } = useGlobalContext()
+  const { role } = useGlobalContext()
 
   return (
       <div className={styles.sidebar}>
         {/* <h2><TiThMenu /></h2> */}
         <nav>
-          <Link href="/admin/dashboard">
-            <MdDashboardCustomize />
+          <Link href={`/${role}/events`}>
+            <GiPartyFlags />
           </Link>
-          <Link href="/admin/events">
-            <MdEmojiEvents />
+          <Link href={`/${role}/artworks`}>
+            <RiBubbleChartFill />
           </Link>
-          <Link href="/admin/users">
-            <FaUserAstronaut />
-          </Link>
-          <Link href="/admin/settings">
+          {role === 'admin' && <Link href={`/${role}/users`}>
+            <FaPersonDotsFromLine />
+          </Link>}
+          {role === 'admin' && <Link href={`/${role}/settings`}>
             <IoSettings />
-          </Link>
+          </Link>}
         </nav>
       </div>
   )

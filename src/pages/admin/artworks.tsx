@@ -3,13 +3,13 @@ import UnauthorizedMessage from '@/components/UnauthorizedMessage';
 import { useGlobalContext } from '@/context/GlobalContext';
 import SidebarMenu from '../../components/Sidebar-menu';
 import ProjectMiniature from '@/components/ProjectMiniature';
-import { MOCK_DATA_JUDGES } from '@/utils/constants';
+import { MOCK_DATA_ARTWORKS, MOCK_DATA_EVENTS } from '@/utils/constants';
 import FloatingMenuButton from '@/components/FloatingMenuButton';
-import { FaUserAstronaut } from 'react-icons/fa';
-import CoreSectionJudges from '@/components/CoreSectionJudges';
+import { BiSolidHeart } from 'react-icons/bi';
+import { GiPartyFlags } from 'react-icons/gi';
+import CoreSectionArtworks from '@/components/CoreSectionArtworks';
 
-
-export default function AdminUsers() {
+export default function AdminArtworks() {
   const { role, authenticated } = useGlobalContext()
 
   if (role !== 'admin' || !authenticated) {
@@ -23,8 +23,8 @@ export default function AdminUsers() {
       <SidebarMenu />
       {/* Main Content */}
       <div className={styles['main-content']}>
-       
-        <CoreSectionJudges />
+
+        <CoreSectionArtworks />
 
         <FloatingMenuButton />
       </div>

@@ -26,14 +26,15 @@ const SignUp = () => {
     <>
       <div className="auth-container">
         <div className="auth-form">
-          <h2 className="auth-title">Registrarse</h2>
-          <input type="text" onChange={(e) => setName(e.target.value)} placeholder="Name" className="auth-input" required />
-          <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email" className="auth-input" required />
-          <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password" className="auth-input" required />
+          <h2 className="auth-title">Crea tu cuenta en <b>FESTIVARTES</b></h2>
+          <input type="text" onChange={(e) => setName(e.target.value)} placeholder="Nombre" className="auth-input" required />
+          <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Correo electrónico" className="auth-input" required />
+          <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Contraseña" className="auth-input" required />
           <button type="submit" onClick={() => handleSignUp()} className="auth-button">Registrarse</button>
           <p className="auth-link">
+          ¿Ya tienes una cuenta?
             <b>
-            Ya tienes una cuenta? &nbsp;
+            &nbsp;
             <Link href="/login">
               Ingresar
             </Link>

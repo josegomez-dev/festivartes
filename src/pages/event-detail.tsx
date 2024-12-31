@@ -1,8 +1,9 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
 import ProjectMiniature from '@/components/ProjectMiniature';
-import { MOCK_DATA_EVENTS, MOCK_DATA_JUDGES } from '@/utils/constants';
+import { MOCK_DATA_ARTWORKS, MOCK_DATA_EVENTS, MOCK_DATA_JUDGES } from '@/utils/constants';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { BiSolidHeart } from 'react-icons/bi';
 import { FaUserAstronaut } from 'react-icons/fa';
 import { IoSettings } from 'react-icons/io5';
 import { MdDashboardCustomize, MdEmojiEvents } from 'react-icons/md';
@@ -20,9 +21,9 @@ const EventDetail = ({ }) => {
   return (
     <div className={styles['admin-index']}>
       <div className={styles['quick-links']} style={{ marginTop: '-50px'}}>
-        <Link href="/admin/dashboard">
+        {/* <Link href="/admin/dashboard">
           <MdDashboardCustomize />
-        </Link>
+        </Link> */}
         <Link href="/admin/events">
           <MdEmojiEvents />
         </Link>
@@ -80,7 +81,7 @@ const EventDetail = ({ }) => {
 
       <div className={styles.card} style={{ marginTop: '25px' }}>
         <p>
-          <span className='bolder-text'>Jurado Seleccionado</span>.
+          <span className='bolder-text'><FaUserAstronaut /> Jurado Seleccionador</span>
         </p>
         <br />
         {MOCK_DATA_JUDGES.length <= 0 ? 
@@ -94,6 +95,26 @@ const EventDetail = ({ }) => {
           <ProjectMiniature projects={MOCK_DATA_JUDGES} type="judge" />
         }
       </div>
+
+       <br />
+        <hr />
+
+        <div className={styles.card} style={{ marginTop: '25px' }}>
+          <p>
+            <span className='bolder-text'><BiSolidHeart/> Obras Registradas</span>
+          </p>
+          <br />
+          {MOCK_DATA_ARTWORKS.length <= 0 ? 
+            <div className={styles.grid}>
+              <div className={styles.card}>
+                <h3>No hay registros de obras</h3>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+              </div> 
+            </div> 
+            : 
+            <ProjectMiniature projects={MOCK_DATA_ARTWORKS} type={'artwork'} />
+          }
+        </div>
 
     </div>
   );
