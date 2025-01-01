@@ -5,6 +5,10 @@ import CustomModal from "./CustomModal";
 import ArtworkRegisterForm from "./ArtworkRegisterForm";
 import RatingForm from "./RatingForm";
 import Image from 'next/image'
+import Link from "next/link";
+import { GiPartyFlags } from "react-icons/gi";
+import { FaPersonDotsFromLine } from "react-icons/fa6";
+import { RiBubbleChartFill } from "react-icons/ri";
 
 const FloatingMenuButton = () => {
   const { role } = useGlobalContext();
@@ -24,6 +28,14 @@ const FloatingMenuButton = () => {
   const openRulesModal = () => setIsRulesModalOpen(true);
   const closeRulesModal = () =>setIsRulesModalOpen(false);
 
+  const [isEventModalOpen, setIsEventModalOpen] = useState(false);
+  const openEventModal = () => setIsEventModalOpen(true);
+  const closeEventModal = () =>setIsEventModalOpen(false);
+
+  const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
+  const openInviteModal = () => setIsInviteModalOpen(true);
+  const closeInviteModal = () =>setIsInviteModalOpen(false);
+
   const menuOptions : any = {
     admin: ["Registrar Evento", "Invitar Jurado"],
     judge: ["Calificar Obra", "Consultar Reglamento"],
@@ -35,12 +47,16 @@ const FloatingMenuButton = () => {
   // Handle click function
   const handleOptionClick = (option: string) => {
     setCurrentAction(option);
-    if (option === 'Registrar Nueva Obra') {
+    if (option === 'Registrar Nueva Obra') { // user
       openUserModal();
-    } else if (option === 'Calificar Obra') {
+    } else if (option === 'Calificar Obra') { // judge
       openJudgeModal();
-    } else if (option === 'Consultar Reglamento') {
+    } else if (option === 'Consultar Reglamento') { // judge
       openRulesModal();
+    } else if (option === 'Registrar Evento') { // admin
+      openEventModal();
+    } else if (option === 'Invitar Jurado') { // admin
+      openInviteModal();
     }
     return;
   };
@@ -60,6 +76,12 @@ const FloatingMenuButton = () => {
         <div className="menu-dropdown">
           {options.map((option: string, index: number) => (
             <div key={index} className="menu-item" onClick={() => handleOptionClick(option)}>
+              {option === 'Registrar Evento' && <GiPartyFlags style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color="orange" />}
+              {option === 'Invitar Jurado' && <FaPersonDotsFromLine style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color="lightgreen" />}
+              {option === 'Calificar Obra' && <RiBubbleChartFill style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color="gold" />}
+              {option === 'Consultar Reglamento' && <FaPersonDotsFromLine style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color="lightgreen" />}
+              {option === 'Registrar Nueva Obra' && <RiBubbleChartFill style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color="gold" />}
+              &nbsp;
               {option}
             </div>
           ))}
@@ -75,13 +97,14 @@ const FloatingMenuButton = () => {
           />
         </button>
       </div>
+
       <CustomModal
         isOpen={isUserModalOpen}
         onClose={closeUserModal}
         height="60%" // Custom height
-        bgColor="black" // Custom background color
+        // bgColor="black" // Custom background color
       >
-        <h2>{currentAction}</h2>
+        <b>{currentAction}</b>
         <div>
           <br />
           <ArtworkRegisterForm />
@@ -92,9 +115,9 @@ const FloatingMenuButton = () => {
         isOpen={isJudgeModalOpen}
         onClose={closeJudgeModal}
         height="85%" // Custom height
-        bgColor="black" // Custom background color
+        // bgColor="black" // Custom background color
       >
-        <h2>{currentAction}</h2>
+        <b>{currentAction}</b>
         <div>
           <br />
           <RatingForm />
@@ -105,12 +128,40 @@ const FloatingMenuButton = () => {
         isOpen={isRulesModalOpen}
         onClose={closeRulesModal}
         height="90%" // Custom height
-        bgColor="black" // Custom background color
+        // bgColor="black" // Custom background color
       >
-        <h2>{currentAction}</h2>
+        <b>{currentAction}</b>
         <div>
           <br />
           <iframe src="https://www.mep.go.cr/sites/default/files/2023-05/reglamento-FEA-23.pdf" width={"100%"} height={"500px"}></iframe>
+        </div>
+      </CustomModal>
+
+      <CustomModal
+        isOpen={isEventModalOpen}
+        onClose={closeEventModal}
+        height="90%" // Custom height
+        // bgColor="black" // Custom background color
+      >
+        <b>{currentAction}</b>
+        <div>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi repellat quia qui vitae? Illo eveniet ut fugit! Cupiditate facere magni aut architecto eaque dolores quibusdam dolor sint voluptate. Laboriosam, aliquam.
+          </p>
+        </div>
+      </CustomModal>
+   
+      <CustomModal
+        isOpen={isInviteModalOpen}
+        onClose={closeInviteModal}
+        height="90%" // Custom height
+        // bgColor="black" // Custom background color
+      >
+        <b>{currentAction}</b>
+        <div>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi repellat quia qui vitae? Illo eveniet ut fugit! Cupiditate facere magni aut architecto eaque dolores quibusdam dolor sint voluptate. Laboriosam, aliquam.
+          </p>
         </div>
       </CustomModal>
     </>

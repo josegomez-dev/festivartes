@@ -195,8 +195,11 @@ b {
 
 .menu-dropdown {
   margin-top: 10px;
-  background: orange;
-  border: 1px solid #ddd;
+  
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  backdrop-filter: blur(100px); /* Apply the blur effect */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Optional border for added style */
+
   border-radius: 8px;
   padding: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -214,12 +217,13 @@ b {
 .menu-item {
   padding: 8px 12px;
   cursor: pointer;
-  border-radius: 4px;
   font-weight: bolder;
+  border-bottom: 1px solid #32acc0;
 }
 
 .menu-item:hover {
-  background: black;
+  background: #32acc0;
+  border-radius: 0 0 10px 0;
 }
 
 
@@ -313,19 +317,6 @@ b {
   width: 98px;
 }
 
-.upcoming-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.7); /* Semi-transparent overlay */
-  backdrop-filter: blur(10px); /* Blurred effect */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-}
 
 .upcoming-message {
   margin-top: 15px;
@@ -384,7 +375,7 @@ b {
   top: 10px;
   right: 10px;
   cursor: pointer;
-  color: #333;
+  color: #32acc0;
 }
 
 /* Modal Content */

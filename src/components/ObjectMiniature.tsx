@@ -1,18 +1,19 @@
 import React from 'react';
 import Link from 'next/link';
 
-interface ProjectMiniatureProps {
+interface ObjectMiniatureProps {
   projects: any;
   type: string;
 }
 
-const ProjectMiniature : React.FC<ProjectMiniatureProps> = ({ projects, type }) => {
+const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type }) => {
   return (
     <div className={`project-miniature-container project-miniature-custom-${type}`}>
       {projects.map((project: any, index: number) => (
         <Link 
           key={index + project.name + 'react-key'} 
           href={`/${type}-detail?id=${project.id}`} // Use the unique ID or name
+          style={{ textDecoration: 'none' }}
         >
           <div className="project-miniature">
             {project.upcoming && <div className="upcoming-message">
@@ -31,4 +32,4 @@ const ProjectMiniature : React.FC<ProjectMiniatureProps> = ({ projects, type }) 
   );
 };
 
-export default ProjectMiniature;
+export default ObjectMiniature;

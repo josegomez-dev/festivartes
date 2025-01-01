@@ -16,16 +16,14 @@ const LoginPage = () => {
     // Perform authentication logic here (mocked)
     if (email === 'admin') {
       setRole('admin');
-      router.push('/admin/dashboard');
     } else if (email === 'judge') {
       setRole('judge');
-      router.push('/judge/dashboard');
     } else {
       setRole('user');
-      router.push('/user/dashboard');
     }
     setLoggedUser({ ...EMPTY_USER, email })
     setAuthenticated(true)
+    router.push('/dashboard');
   }
 
   return (

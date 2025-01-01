@@ -1,19 +1,16 @@
 import styles from '@/app/assets/styles/AdminDashboard.module.css';
 import UnauthorizedMessage from '@/components/UnauthorizedMessage';
 import { useGlobalContext } from '@/context/GlobalContext';
-import SidebarMenu from '../../components/Sidebar-menu';
-import ProjectMiniature from '@/components/ProjectMiniature';
-import { MOCK_DATA_EVENTS } from '@/utils/constants';
+import SidebarMenu from '@/components/Sidebar-menu';
 import FloatingMenuButton from '@/components/FloatingMenuButton';
-import { MdEmojiEvents } from 'react-icons/md';
-import { GiPartyFlags } from 'react-icons/gi';
 import CoreSectionFestivartes from '@/components/CoreSectionFestivartes';
 import SubMenu from '@/components/SubMenu';
 
-export default function AdminEvents() {
+export default function Events() {
   const { role, authenticated } = useGlobalContext()
 
-  if (role !== 'admin' || !authenticated) {
+  console.log(role);
+  if (!authenticated) {
     // Redirect to login if not admin or not authenticated
     return <UnauthorizedMessage />
   }
@@ -24,6 +21,11 @@ export default function AdminEvents() {
       <SidebarMenu />
       {/* Main Content */}
       <div className={styles['main-content']}>
+        <br />
+        <br />
+        <br />
+        <SubMenu />
+
         <CoreSectionFestivartes />
 
         <FloatingMenuButton />

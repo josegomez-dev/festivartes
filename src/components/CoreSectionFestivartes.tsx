@@ -1,8 +1,7 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
 import { MOCK_DATA_EVENTS } from '@/utils/constants';
-import { ReactNode } from 'react'
 import { GiPartyFlags } from 'react-icons/gi';
-import ProjectMiniature from './ProjectMiniature';
+import ObjectMiniature from './ObjectMiniature';
 
 const CoreSectionFestivartes = ({ }) => {
 
@@ -24,7 +23,7 @@ const CoreSectionFestivartes = ({ }) => {
                 </div> 
             </div> 
             : 
-            <ProjectMiniature projects={MOCK_DATA_EVENTS} type={'event'} />
+            <ObjectMiniature projects={MOCK_DATA_EVENTS} type={'event'} />
             }
         </div>
       </>

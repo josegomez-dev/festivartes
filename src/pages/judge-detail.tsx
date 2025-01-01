@@ -1,6 +1,6 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
 import CoreSectionFestivartes from '@/components/CoreSectionFestivartes';
-import ProjectMiniature from '@/components/ProjectMiniature';
+import ProjectMiniature from '@/components/ObjectMiniature';
 import SubMenu from '@/components/SubMenu';
 import { MOCK_DATA_EVENTS, MOCK_DATA_JUDGES } from '@/utils/constants';
 import Link from 'next/link';

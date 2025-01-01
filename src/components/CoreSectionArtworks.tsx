@@ -1,6 +1,6 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
 import { MOCK_DATA_ARTWORKS } from '@/utils/constants';
-import ProjectMiniature from './ProjectMiniature';
+import ObjectMiniature from './ObjectMiniature';
 import { RiBubbleChartFill } from 'react-icons/ri';
 
 const CoreSectionArtworks = ({ }) => {
@@ -9,7 +9,7 @@ const CoreSectionArtworks = ({ }) => {
       <>
         <div className={styles.card} style={{ marginTop: '25px' }}>
           <p>
-            <span className='bolder-text'><RiBubbleChartFill color='orange'/> <b>Obras Artísticas</b></span>
+            <span className='bolder-text'><RiBubbleChartFill color='gold'/> <b>Obras Artísticas</b></span>
           </p>
           <br />
           <p className='bolder-text'>
@@ -23,7 +23,7 @@ const CoreSectionArtworks = ({ }) => {
               </div> 
             </div> 
             : 
-            <ProjectMiniature projects={MOCK_DATA_ARTWORKS} type={'artwork'} />
+            <ObjectMiniature projects={MOCK_DATA_ARTWORKS} type={'artwork'} />
           }
         </div>
       </>

@@ -1,11 +1,8 @@
 import styles from '@/app/assets/styles/AdminDashboard.module.css';
 
 import Link from 'next/link';
-import { FaUserAstronaut } from "react-icons/fa";
 import { IoSettings } from "react-icons/io5";
-import { MdDashboardCustomize, MdEmojiEvents } from "react-icons/md";
 import { useGlobalContext } from '../context/GlobalContext'
-import { BiSolidHeart } from 'react-icons/bi';
 import { FaPersonDotsFromLine } from 'react-icons/fa6';
 import { GiPartyFlags } from 'react-icons/gi';
 import { RiBubbleChartFill } from 'react-icons/ri';
@@ -22,16 +19,16 @@ const SidebarMenu = () => {
       <div className={styles.sidebar}>
         {/* <h2><TiThMenu /></h2> */}
         <nav>
-          <Link href={`/${role}/events`}>
+          <Link href={`/events`}>
             <GiPartyFlags style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color='orange' />
           </Link>
-          <Link href={`/${role}/artworks`}>
+          <Link href={`/artworks`}>
             <RiBubbleChartFill style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color='gold' />
           </Link>
-          {role === 'admin' && <Link href={`/${role}/users`}>
+          {role === 'admin' && <Link href={`/judges`}>
             <FaPersonDotsFromLine style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color='lightgreen' />
           </Link>}
-          {role === 'admin' && <Link href={`/${role}/settings`}>
+          {role === 'admin' && <Link href={`/settings`}>
             <IoSettings style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color='#32acc0' />
           </Link>}
         </nav>

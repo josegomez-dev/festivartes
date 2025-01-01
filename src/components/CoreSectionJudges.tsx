@@ -1,6 +1,6 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
 import { MOCK_DATA_JUDGES } from '@/utils/constants';
-import ProjectMiniature from './ProjectMiniature';
+import ObjectMiniature from './ObjectMiniature';
 import { FaPersonDotsFromLine } from 'react-icons/fa6';
 
 const CoreSectionJudges = ({ }) => {
@@ -9,7 +9,7 @@ const CoreSectionJudges = ({ }) => {
       <>
         <div className={styles.card} style={{ marginTop: '25px' }}>
           <p>
-            <span className='bolder-text'> <FaPersonDotsFromLine color='orange' /> <b>Jurado Seleccionador</b></span>
+            <span className='bolder-text'> <FaPersonDotsFromLine color='lightgreen' /> <b>Jurado Seleccionador</b></span>
           </p>
           <br />
           <p className='bolder-text'>
@@ -23,7 +23,7 @@ const CoreSectionJudges = ({ }) => {
               </div> 
             </div> 
             : 
-            <ProjectMiniature projects={MOCK_DATA_JUDGES} type="judge" />
+            <ObjectMiniature projects={MOCK_DATA_JUDGES} type="judge" />
           }
         </div>
       </>

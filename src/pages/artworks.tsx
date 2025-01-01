@@ -1,18 +1,16 @@
 import styles from '@/app/assets/styles/AdminDashboard.module.css';
 import UnauthorizedMessage from '@/components/UnauthorizedMessage';
 import { useGlobalContext } from '@/context/GlobalContext';
-import SidebarMenu from '../../components/Sidebar-menu';
-import ProjectMiniature from '@/components/ProjectMiniature';
-import { MOCK_DATA_JUDGES } from '@/utils/constants';
+import SidebarMenu from '@/components/Sidebar-menu';
 import FloatingMenuButton from '@/components/FloatingMenuButton';
-import { FaUserAstronaut } from 'react-icons/fa';
-import CoreSectionJudges from '@/components/CoreSectionJudges';
+import CoreSectionArtworks from '@/components/CoreSectionArtworks';
+import SubMenu from '@/components/SubMenu';
 
-
-export default function AdminUsers() {
+export default function Artworks() {
   const { role, authenticated } = useGlobalContext()
 
-  if (role !== 'admin' || !authenticated) {
+  console.log(role);
+  if (!authenticated) {
     // Redirect to login if not admin or not authenticated
     return <UnauthorizedMessage />
   }
@@ -23,8 +21,12 @@ export default function AdminUsers() {
       <SidebarMenu />
       {/* Main Content */}
       <div className={styles['main-content']}>
-       
-        <CoreSectionJudges />
+        <br />
+        <br />
+        <br />
+        <SubMenu />
+
+        <CoreSectionArtworks />
 
         <FloatingMenuButton />
       </div>

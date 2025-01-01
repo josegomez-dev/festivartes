@@ -1,17 +1,17 @@
 import styles from '@/app/assets/styles/AdminDashboard.module.css';
 import UnauthorizedMessage from '@/components/UnauthorizedMessage';
 import { useGlobalContext } from '@/context/GlobalContext';
-import SidebarMenu from '../../components/Sidebar-menu';
-import ProjectMiniature from '@/components/ProjectMiniature';
-import { MOCK_DATA_EVENTS } from '@/utils/constants';
+import SidebarMenu from '@/components/Sidebar-menu';
 import FloatingMenuButton from '@/components/FloatingMenuButton';
-import { MdEmojiEvents } from 'react-icons/md';
-import CoreSectionFestivartes from '@/components/CoreSectionFestivartes';
+import CoreSectionJudges from '@/components/CoreSectionJudges';
+import SubMenu from '@/components/SubMenu';
 
-export default function JudgeEvents() {
+
+export default function Users() {
   const { role, authenticated } = useGlobalContext()
 
-  if (role !== 'judge' || !authenticated) {
+  console.log(role);
+  if (!authenticated) {
     // Redirect to login if not admin or not authenticated
     return <UnauthorizedMessage />
   }
@@ -22,8 +22,12 @@ export default function JudgeEvents() {
       <SidebarMenu />
       {/* Main Content */}
       <div className={styles['main-content']}>
+        <br />
+        <br />
+        <br />
+        <SubMenu />
 
-        <CoreSectionFestivartes />
+        <CoreSectionJudges />
 
         <FloatingMenuButton />
       </div>
