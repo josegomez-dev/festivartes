@@ -25,7 +25,7 @@ const SidebarMenu = () => {
           <Link href={`/artworks`}>
             <RiBubbleChartFill style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color='gold' />
           </Link>
-          {role === 'admin' && <Link href={`/judges`}>
+          {<Link href={`/judges`}>
             <FaPersonDotsFromLine style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color='lightgreen' />
           </Link>}
           {role === 'admin' && <Link href={`/settings`}>
