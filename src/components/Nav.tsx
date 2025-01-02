@@ -18,9 +18,9 @@ export default function Nav() {
   }
 
   return (
-    authenticated && <nav className={`${styles.navbar} bg-gray-800 text-white`}>
+    <nav className={`${styles.navbar} bg-gray-800 text-white`}>
     <div className="flex items-center">
-      <Link href={`/dashboard`}>
+      {authenticated && <Link href={`/dashboard`}>
         <div className="logo-container">
           <Image
             style={{ position: 'absolute', top: '2px', filter: 'drop-shadow(0 0 0.3rem black)' }}
@@ -31,7 +31,7 @@ export default function Nav() {
             priority
           />
         </div>
-      </Link>
+      </Link>}
     </div>
     <ul className={`${styles['nav-list']} flex-row-reverse`}>
       {authenticated && (
