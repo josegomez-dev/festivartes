@@ -9,10 +9,10 @@ const CoreSectionJudges = ({ }) => {
       <>
         <div className={styles.card} style={{ marginTop: '25px' }}>
           <p>
-            <span className='bolder-text'> <FaPersonDotsFromLine color='lightgreen' /> 
-              <b>Jurado Seleccionador</b>
-              <p className='bolder-text' style={{ fontSize: '12px' }}>
-                👨‍⚖️ ✨ Transparencia y excelencia: los expertos evalúan lo mejor de las obras artísticas 🎤 🏆
+            <span className='bolder-text'> <FaPersonDotsFromLine color='lightgreen' /> &nbsp;
+              <b>Jurado Seleccionador 🏆</b>
+              <p className='bolder-text' style={{ fontSize: '10px' }}>
+                🌟 Los expertos evalúan las obras artísticas.
               </p>
             </span>
           </p>

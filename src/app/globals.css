@@ -253,9 +253,29 @@ b {
   transition: all 0.2s;
 }
 
+.image-container .banner {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  width: 10px !important;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+  color: #fff; /* White text color */
+}
+
+.image-container .banner h1 {
+  margin: 0 0 10px;
+  font-size: 0.5em; /* Adjust font size */
+}
+
+.image-container .banner p {
+  margin: 0;
+  font-size: 0.5em;
+}
+
 .project-miniature:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .project-thumbnail {
@@ -320,7 +340,7 @@ b {
 
 
 .project-miniature-custom-artwork .project-miniature {
-	background: linear-gradient(0deg, #000, orange);
+  background: linear-gradient(0deg, #32acc0, orange);
   overflow: hidden;
 }
 .project-miniature-custom-artwork .project-thumbnail {
@@ -332,6 +352,10 @@ b {
   margin-top: 15px;
   font-size: 16px;
   margin-bottom: 15px;
+  
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  backdrop-filter: blur(100px); /* Apply the blur effect */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Optional border for added style */
 }
 
 .upcoming-message .icon {
@@ -395,13 +419,6 @@ b {
 
 
 }
-
-.highlighted-text {
-  font-weight: normal;
-  color: red;
-}
-
-
 
 
 /* SIDEBAR STYLES */

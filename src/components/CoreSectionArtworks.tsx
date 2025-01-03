@@ -9,10 +9,10 @@ const CoreSectionArtworks = ({ }) => {
       <>
         <div className={styles.card} style={{ marginTop: '25px' }}>
           <p>
-            <span className='bolder-text'><RiBubbleChartFill color='gold'/> 
-              <b>Obras Artísticas</b>
-              <p className='bolder-text' style={{ fontSize: '12px' }}>
-                🎨 🌟 Descubre, comparte y transforma tu talento en una obra maestra 🌍 🖌️
+            <span className='bolder-text'><RiBubbleChartFill color='gold'/> &nbsp;
+              <b>Obras Artísticas 🌍</b>
+              <p className='bolder-text' style={{ fontSize: '10px' }}>
+                 🌟 Transforma tu talento en una obra maestra.
               </p>
             </span>
           </p>

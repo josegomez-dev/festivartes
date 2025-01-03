@@ -11,9 +11,9 @@ const CoreSectionFestivartes = ({ }) => {
             <p>
               <span className='bolder-text'><GiPartyFlags color='orange' /> 
                 &nbsp;
-                <b>Festivartes</b>
-                <p className='bolder-text' style={{ fontSize: '12px' }}>
-                🎭 ✨ Lleva tu arte al siguiente nivel con nuestra app revolucionaria 🎶 📚
+                <b>Festivartes 📲</b>
+                <p className='bolder-text' style={{ fontSize: '10px' }}>
+                  🌟 Lleva tu arte al siguiente nivel con nuestra app 
                 </p>
                 <br />
               </span>
