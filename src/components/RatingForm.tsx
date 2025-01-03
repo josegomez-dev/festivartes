@@ -178,9 +178,9 @@ const RatingForm = () => {
             className={styles.select}
             onChange={handleSelectChange}
           >
-            {[...Array(11).keys()].map((score) => (
-              <option key={score} value={score}>
-                {score}
+            {Array.from({ length: 11 }, (_, index) => (
+              <option key={index} value={index}>
+                {index}
               </option>
             ))}
           </select>
