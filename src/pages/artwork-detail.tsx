@@ -15,7 +15,7 @@ const ArtworkDetail = ({ }) => {
   }
 
   return (
-    <div className={styles['admin-index']}>
+    <div className={styles['full-view']}>
       <SubMenu />
 
       <div style={{ textAlign: 'center', marginBottom: '25px' }}>

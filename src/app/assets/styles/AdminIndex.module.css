@@ -1,81 +1,96 @@
-.admin-index {
-    padding: 20px;
-    background-color: var(--background-end-rgb);
-    min-height: 100vh;
-  }
 
-  .welcome-message {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: orange;
-  }
+.sidebar-menu-view {
+  display: flex;
+  height: 100vh;
+  background-color: transparent; /* Light gray background for the main area */
+  margin-top: -60px;
+}
 
-  .slogan-text {
-    background: orange;
-    color: black;
-    font-size: 12px;
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    border-radius: 10px;
-    line-height: 14px;
-    padding: 10px;
-    text-justify: auto;
-    filter: drop-shadow(0 0 0.4rem orange);
-    margin-top: 15px;
-  }
+.main-content {
+  flex: 1;
+  padding: 20px;
+  width: 80%;
+}
 
-  .quick-links {
-    display: flex;
-    gap: 5px;
-    margin-bottom: 20px;
-    justify-content: center;
-  }
+.full-view {
+  padding: 20px;
+  background-color: var(--background-end-rgb);
+  min-height: 100vh;
+}
 
-  .quick-links a {
-    display: block;
-    padding: 10px 20px;
-    
-    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
-    backdrop-filter: blur(100px); /* Apply the blur effect */
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Optional border for added style */
+.welcome-message {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: orange;
+}
 
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+.slogan-text {
+  background-color: orange;
+  color: #222;
+  font-size: 12px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 10px;
+  line-height: 14px;
+  padding: 10px;
+  text-justify: auto;
+  filter: drop-shadow(0 0 0.1rem black);
+  margin-top: 15px;
+}
 
-  .quick-links a:hover {
-    background-color: #32acc0;
-  }
+.quick-links {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
 
-  .dashboard {
-    display: grid;
-    gap: 20px;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  }
+.quick-links a {
+  display: block;
+  padding: 10px 20px;
+  
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  backdrop-filter: blur(100px); /* Apply the blur effect */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Optional border for added style */
 
-  .card {
-    text-align: center;
-    color: #fff;
-    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
-    backdrop-filter: blur(100px); /* Apply the blur effect */
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Optional border for added style */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 5px #32acc0;
-  }
+.quick-links a:hover {
+  background-color: #32acc0;
+}
 
-  .card h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: var(--primary-color);
-  }
+.dashboard {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
 
-  .card p {
-    color: white;
-  }
+.card {
+  text-align: center;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  backdrop-filter: blur(100px); /* Apply the blur effect */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Optional border for added style */
+
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 5px black;
+}
+
+.card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+}
+
+.card p {
+  color: white;
+}
+

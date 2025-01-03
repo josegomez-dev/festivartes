@@ -1,15 +1,9 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
 import CoreSectionArtworks from '@/components/CoreSectionArtworks';
 import CoreSectionJudges from '@/components/CoreSectionJudges';
-import ProjectMiniature from '@/components/ObjectMiniature';
 import SubMenu from '@/components/SubMenu';
-import { MOCK_DATA_ARTWORKS, MOCK_DATA_EVENTS, MOCK_DATA_JUDGES } from '@/utils/constants';
-import Link from 'next/link';
+import { MOCK_DATA_EVENTS } from '@/utils/constants';
 import { useRouter } from 'next/router';
-import { BiSolidHeart } from 'react-icons/bi';
-import { FaUserAstronaut } from 'react-icons/fa';
-import { IoSettings } from 'react-icons/io5';
-import { MdDashboardCustomize, MdEmojiEvents } from 'react-icons/md';
 
 const EventDetail = ({ }) => {
   const router = useRouter();
@@ -22,46 +16,31 @@ const EventDetail = ({ }) => {
   }
 
   return (
-    <div className={styles['admin-index']}>
+    <div className={styles['full-view']}>
       <SubMenu />
 
       <div style={{ textAlign: 'center', marginBottom: '25px' }}>
         <div className="project-detail-container">
-          <h1>{project.name}</h1>
+          <h2>{project.name}</h2>
           <br />
+          Fecha &
+          Clasificación
           <img src={project.thumbnail} alt={project.name} />
-          <br />
-          <br />
-          <div style={{ textAlign: 'left' }}>
-            <p>
-              <b>Tipo de evento</b>
-              <ul>
-                <li>Publico | Para toda la familia</li>
-                <li>Entrada: c2000</li>
-              </ul>
-              <br />
-            </p>
-            <hr />
-            <p>
+          <p style={{ fontSize: '11px' }}><span className='bolder-text'>Ubicación</span>: Alajuela, Parque de Grecia.</p>
+          <div>
             <br />
-              <b>Contacto</b>
-              <ul>
-                <li><span className='bolder-text'>Fecha</span>: 02 de Febrero.</li>
-                <li><span className='bolder-text'>Ubicacion</span>Ubicacion: Alajuela, Parque de Grecia.</li>
-                <li><span className='bolder-text'>Horario</span>: 12md</li>
-                <li><span className='bolder-text'>Cupo Limitado</span>: SI o NO</li>
-                <li><span className='bolder-text'>Reserva</span>: SI o NO</li>
-              </ul> 
+            <b>Información del evento</b> &nbsp;
+              (<span style={{ color: 'lightgreen' }}>+</span> / <span style={{ color: 'red' }}>-</span>)
               <br />
-              <hr />
               <br />
-              <b>Contacto de Agente</b>
-              <ul>
-                <li className='bolder-text'>Jhon Doe | Agente de Festivartes</li>
-                <li>jhon.doe@festivartes.com</li>
-                <li>+506 8888-8888</li>
-              </ul> 
-            </p>            
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut ipsa, delectus sequi nobis quaerat consequuntur tempore.
+            </p>
+            <br />
+            <p>
+              <span className='bolder-text'>ENTRADA</span>:₡2000 &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <span className='bolder-text'>VIP</span>: ₡10 000
+            </p>
           </div>
           {/* Add more project details as needed */}
         </div>

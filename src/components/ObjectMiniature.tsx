@@ -17,8 +17,8 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type }) =>
         >
           <div className="project-miniature">
             {project.upcoming && <div className="upcoming-message">
-                <span className="icon">⏰</span>
-                <b>Próximamente</b>
+                {/* <span className="icon">⏰</span> */}
+                <b style={{ color: 'black' }}>Próximamente</b>
               </div>}
             <img 
               src={project.thumbnail} 

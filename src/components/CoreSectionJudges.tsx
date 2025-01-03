@@ -9,12 +9,14 @@ const CoreSectionJudges = ({ }) => {
       <>
         <div className={styles.card} style={{ marginTop: '25px' }}>
           <p>
-            <span className='bolder-text'> <FaPersonDotsFromLine color='lightgreen' /> <b>Jurado Seleccionador</b></span>
+            <span className='bolder-text'> <FaPersonDotsFromLine color='lightgreen' /> 
+              <b>Jurado Seleccionador</b>
+              <p className='bolder-text' style={{ fontSize: '12px' }}>
+                👨‍⚖️ ✨ Transparencia y excelencia: los expertos evalúan lo mejor de las obras artísticas 🎤 🏆
+              </p>
+            </span>
           </p>
           <br />
-          <p className='bolder-text'>
-            👨‍⚖️ ✨ Transparencia y excelencia: los expertos evalúan lo mejor del arte contigo 🎤 🏆
-          </p> <br />
           {MOCK_DATA_JUDGES.length <= 0 ? 
             <div className={styles.grid}>
               <div className={styles.card}>

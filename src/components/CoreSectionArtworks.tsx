@@ -9,12 +9,14 @@ const CoreSectionArtworks = ({ }) => {
       <>
         <div className={styles.card} style={{ marginTop: '25px' }}>
           <p>
-            <span className='bolder-text'><RiBubbleChartFill color='gold'/> <b>Obras Artísticas</b></span>
+            <span className='bolder-text'><RiBubbleChartFill color='gold'/> 
+              <b>Obras Artísticas</b>
+              <p className='bolder-text' style={{ fontSize: '12px' }}>
+                🎨 🌟 Descubre, comparte y transforma tu talento en una obra maestra 🌍 🖌️
+              </p>
+            </span>
           </p>
           <br />
-          <p className='bolder-text'>
-            🎨 🌟 Descubre, comparte y transforma tu talento en una obra maestra 🌍 🖌️
-          </p> <br />
           {MOCK_DATA_ARTWORKS.length <= 0 ? 
             <div className={styles.grid}>
               <div className={styles.card}>

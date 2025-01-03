@@ -9,12 +9,15 @@ const CoreSectionFestivartes = ({ }) => {
       <>
         <div className={styles.card} style={{ marginTop: '25px' }}>
             <p>
-            <span className='bolder-text'><GiPartyFlags color='orange' /> &nbsp;<b>Festivartes</b></span>
+              <span className='bolder-text'><GiPartyFlags color='orange' /> 
+                &nbsp;
+                <b>Festivartes</b>
+                <p className='bolder-text' style={{ fontSize: '12px' }}>
+                🎭 ✨ Lleva tu arte al siguiente nivel con nuestra app revolucionaria 🎶 📚
+                </p>
+                <br />
+              </span>
             </p>
-            <br />
-            <p className='bolder-text'>
-            🎭 ✨ Lleva tu arte al siguiente nivel con nuestra app revolucionaria 🎶 📚
-            </p> <br />
             {MOCK_DATA_EVENTS.length <= 0 ? 
             <div className={styles.grid}>
                 <div className={styles.card}>

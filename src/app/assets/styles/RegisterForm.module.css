@@ -1,0 +1,104 @@
+/* Merged CSS File */
+
+.form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  overflow-y: scroll; /* Ensures scrolling section */
+  height: 480px; /* Takes the taller height */
+
+  background: #32acc0;
+  backdrop-filter: blur(100px); /* Apply the blur effect */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Optional border for added style */
+}
+
+.form-wrapper {
+  margin-top: 10px;
+}
+
+.label {
+  display: block;
+  font-weight: bold;
+  
+  font-size: 14px;
+  color: #555; /* From RatingForm */
+}
+
+.input,
+.textarea,
+.select,
+.fileInput,
+.toggle {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  color: #555;
+  transition: border-color 0.3s ease;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus,
+.toggle:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  
+}
+
+.textarea {
+  resize: none;
+}
+
+.fileInput {
+  padding: 0;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  background-color: darkorange;
+  color: black;
+  border: 1px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: gold;
+}
+
+.formGroup {
+  margin-bottom: 20px; /* From RatingForm */
+}
+
+.toggleLabel {
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.checkboxGroup {
+  display: flex;
+  flex-direction: column; /* From RatingForm */
+}
+
+.checkboxLabel {
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #555; /* From RatingForm */
+}
+
+.input-container-right {
+  text-align: right;
+  margin-right: 50px;
+  margin-top: 10px;
+}

@@ -7,7 +7,7 @@ import RatingForm from "./RatingForm";
 import Image from 'next/image'
 import Link from "next/link";
 import { GiPartyFlags } from "react-icons/gi";
-import { FaPersonDotsFromLine } from "react-icons/fa6";
+import { FaCirclePlus, FaPersonDotsFromLine, FaPlus } from "react-icons/fa6";
 import { RiBubbleChartFill } from "react-icons/ri";
 
 const FloatingMenuButton = () => {
@@ -88,20 +88,14 @@ const FloatingMenuButton = () => {
         </div>
         <br />
         <button className="menu-button" onClick={() => toggleDropdown()}>
-          <Image
-            src="/3d-rendered-illustration-button-icon-260nw-66130720-removebg-preview.png"
-            alt="3d bottom menu"
-            width={100}
-            height={100}
-            priority
-          />
+          <FaCirclePlus style={{ fontSize: '50px', marginBottom: '-4px' }} />
         </button>
       </div>
 
       <CustomModal
         isOpen={isUserModalOpen}
         onClose={closeUserModal}
-        height="60%" // Custom height
+        height="90%" // Custom height
         // bgColor="black" // Custom background color
       >
         <b>{currentAction}</b>
@@ -114,12 +108,16 @@ const FloatingMenuButton = () => {
       <CustomModal
         isOpen={isJudgeModalOpen}
         onClose={closeJudgeModal}
-        height="85%" // Custom height
+        height="90%" // Custom height
         // bgColor="black" // Custom background color
       >
-        <b>{currentAction}</b>
-        <div>
-          <br />
+        {/* <b>{currentAction}</b> */}
+        <div style={{ textAlign: 'center' }}>
+          <b style={{ fontSize: '30px' }}>
+            &nbsp;Puntuación Final (0-10)&nbsp;
+          </b>
+        </div>
+        <div className="form-wrapper">
           <RatingForm />
         </div>
       </CustomModal>

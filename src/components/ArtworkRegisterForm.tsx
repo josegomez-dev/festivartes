@@ -1,6 +1,6 @@
 // components/ArtworkRegisterForm.tsx
 import React, { useState } from "react";
-import styles from "./../app/assets/styles/ArtworkRegisterForm.module.css";
+import styles from "./../app/assets/styles/RegisterForm.module.css";
 
 const ArtworkRegisterForm = () => {
   const [formData, setFormData] = useState({

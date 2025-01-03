@@ -60,16 +60,6 @@ const LoginPage = () => {
           “El arte no es lo que ves, sino lo que haces ver a los demás” - <b>Edgar Degas</b>
         </p>
       </div>
-      <div className={styles.center} style={{ marginTop: '50px', textAlign: 'center' }}>
-        <Image
-          className={styles.logo}
-          src="/logo-white.png"
-          alt="Catarsis Musical Logo"
-          width={340}
-          height={100}
-          priority
-        />
-      </div>
     </>
   );
 };

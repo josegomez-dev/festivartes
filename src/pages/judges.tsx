@@ -1,4 +1,4 @@
-import styles from '@/app/assets/styles/AdminDashboard.module.css';
+import styles from '@/app/assets/styles/AdminIndex.module.css';
 import UnauthorizedMessage from '@/components/UnauthorizedMessage';
 import { useGlobalContext } from '@/context/GlobalContext';
 import SidebarMenu from '@/components/Sidebar-menu';
@@ -17,7 +17,7 @@ export default function Users() {
   }
 
   return (
-    <div className={styles['admin-dashboard']}>
+    <div className={styles['sidebar-menu-view']}>
       {/* Sidebar */}
       <SidebarMenu />
       {/* Main Content */}

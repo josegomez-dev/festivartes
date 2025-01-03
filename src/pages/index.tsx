@@ -50,7 +50,7 @@ const Home = () => {
           <p>
           Es una plataforma con <b>servicio premium</b> para quienes desean una experiencia artística sin
 límites. Ofrece suscripciones adaptadas a diferentes tipos de usuarios: <b>personal, empresas
-y entidades gubernamentales</b> como el <b>Ministerio de Educación Pública</b>.
+y entidades gubernamentales</b>.
           </p>
         </a>
 
@@ -82,10 +82,10 @@ beneficios exclusivos.
           </h2>
           <p>
             <b>Administración:</b> Usuarios encargados de la gestión de la plataforma
-          y sus funciones.
-            <b>Jurado:</b> Participantes que califican y puntúan las obras presentadas
-          en eventos.
-            <b>Usuario General:</b> Subcategoría de Usuarios.
+          y sus funciones. <br />
+            <b>Jurado Seleccionador:</b> Participantes que califican y puntúan las obras presentadas
+          en eventos. <br />
+            <b>Usuario General:</b> Subcategoría para Artistas, Compositores y Creadores de Arte en general.
 
           </p>
         </a>

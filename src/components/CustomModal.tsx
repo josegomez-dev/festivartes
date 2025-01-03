@@ -16,7 +16,7 @@ const CustomModal: React.FC<CustomModalProps> = ({ isOpen, onClose, height, bgCo
       <div
         className={`modal-container ${isOpen ? 'open' : ''}`}
         style={{ height: height || '50%',   background: 'rgba(255, 255, 255, 0.1)',
-          backdropFilter: 'blur(10px)', border: '1px solid rgba(255, 255, 255, 0.2)' }}
+          backdropFilter: 'blur(50px)', border: '1px solid rgba(255, 255, 255, 0.2)' }}
       >
         <button className="close-button" onClick={onClose}>
           &times;
