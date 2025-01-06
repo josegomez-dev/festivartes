@@ -1,5 +1,4 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
-import CoreSectionFestivartes from '@/components/CoreSectionFestivartes';
 import SubMenu from '@/components/SubMenu';
 import { MOCK_DATA_JUDGES } from '@/utils/constants';
 import { useRouter } from 'next/router';
@@ -45,7 +44,6 @@ const JudgeDetail = ({ }) => {
             </ul>
           </div>
 
-          <CoreSectionFestivartes />
           {/* Add more project details as needed */}
         </div>
       </div>

@@ -1,5 +1,4 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
-import CoreSectionFestivartes from '@/components/CoreSectionFestivartes';
 import SubMenu from '@/components/SubMenu';
 import { MOCK_DATA_ARTWORKS } from '@/utils/constants';
 import { useRouter } from 'next/router';
@@ -53,7 +52,6 @@ const ArtworkDetail = ({ }) => {
             <br />
           </div>
           
-          <CoreSectionFestivartes />
           {/* Add more project details as needed */}
         </div>
       </div>

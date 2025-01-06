@@ -16,13 +16,13 @@ const SidebarMenu = () => {
             <img width={"50px"} style={{ marginLeft: '-12px' }} src="https://cdn-icons-png.flaticon.com/512/3851/3851099.png" alt="" />
           </Link>
           <Link href={`/artworks`}>
-            <RiBubbleChartFill style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color='gold' />
+            <img style={{ width: '60px', marginLeft: '-18px', marginTop: '10px', filter: 'drop-shadow(0 0 0.2rem black)' }} src="https://i.pinimg.com/originals/0a/bd/be/0abdbe1930b79e8a6c1176a64b5910e8.png" alt="" />
           </Link>
           {<Link href={`/judges`}>
-            <FaPersonDotsFromLine style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color='#32acc0' />
+            <img style={{ width: '50px', marginLeft: '-13px', marginTop: '8px' }} src="https://cdn1.iconfinder.com/data/icons/cyber-sport/96/jury_judge_arbiter_referee_expert_competition_contest-512.png" alt="" />
           </Link>}
           {role === 'admin' && <Link href={`/settings`}>
-            <IoSettings style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color='white' />
+            <IoSettings style={{ marginLeft: '-3px', marginTop: '15px', filter: 'drop-shadow(0 0 0.2rem black)' }} color='white' />
           </Link>}
         </nav>
       </div>
