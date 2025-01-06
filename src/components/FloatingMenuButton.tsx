@@ -77,9 +77,9 @@ const FloatingMenuButton = () => {
           {options.map((option: string, index: number) => (
             <div key={index} className="menu-item" onClick={() => handleOptionClick(option)}>
               {option === 'Registrar Evento' && <GiPartyFlags style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color="orange" />}
-              {option === 'Invitar Jurado' && <FaPersonDotsFromLine style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color="lightgreen" />}
+              {option === 'Invitar Jurado' && <FaPersonDotsFromLine style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color="#32acc0" />}
               {option === 'Calificar Obra' && <RiBubbleChartFill style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color="gold" />}
-              {option === 'Consultar Reglamento' && <FaPersonDotsFromLine style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color="lightgreen" />}
+              {option === 'Consultar Reglamento' && <FaPersonDotsFromLine style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color="#32acc0" />}
               {option === 'Registrar Nueva Obra' && <RiBubbleChartFill style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color="gold" />}
               &nbsp;
               {option}
@@ -98,7 +98,10 @@ const FloatingMenuButton = () => {
         height="90%" // Custom height
         // bgColor="black" // Custom background color
       >
-        <b>{currentAction}</b>
+        {/* <b>{currentAction}</b> */}
+        <p style={{ textAlign: 'center' }}>
+          <span>Anímate a descubrir tu </span><b>Artista Interior</b>
+        </p>
         <div>
           <br />
           <ArtworkRegisterForm />

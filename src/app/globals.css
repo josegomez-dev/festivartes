@@ -349,10 +349,9 @@ b {
 
 
 .upcoming-message {
-  margin-top: 15px;
   font-size: 16px;
-  margin-bottom: 15px;
-  
+  padding: 10px;
+
   background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
   backdrop-filter: blur(100px); /* Apply the blur effect */
   border: 1px solid rgba(255, 255, 255, 0.2); /* Optional border for added style */

@@ -9,9 +9,10 @@ const CoreSectionFestivartes = ({ }) => {
       <>
         <div className={styles.card} style={{ marginTop: '25px' }}>
             <p>
-              <span className='bolder-text'><GiPartyFlags color='orange' /> 
+              <span className='bolder-text'>
+                <img width={"25px"} src="https://cdn-icons-png.flaticon.com/512/3851/3851099.png" alt="" />
                 &nbsp;
-                <b>Festivartes 📲</b>
+                <b>Festivartes </b>
                 <p className='bolder-text' style={{ fontSize: '10px' }}>
                   🌟 Lleva tu arte al siguiente nivel con nuestra app 
                 </p>

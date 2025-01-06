@@ -23,9 +23,11 @@ export default function Dashboard() {
       <SubMenu />
 
       <div className={styles['welcome-message']} style={{ textAlign: 'center' }}>
-        Bievenido al <b>Panel Principal!</b>
+        Bievenido al <b>¡Panel Principal!</b>
         <p className={styles['slogan-text']}>
-          Simplifica, automatiza y digitaliza todo tu festival artístico: registros, calificaciones y premiaciones. <br /><br /> <b>Todo en un solo lugar</b>
+          Simplifica, automatiza y digitaliza todo tu festival cultural: registros, calificaciones y premiaciones. 
+          <br /><br /> 
+          <b>¡Todo en un solo lugar!</b>
         </p>
       </div>
       

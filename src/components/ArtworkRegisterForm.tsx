@@ -147,7 +147,7 @@ const ArtworkRegisterForm = () => {
         />
 
         <button type="submit" className={styles.submitButton}>
-          Enviar Formulario
+          <b>Enviar Formulario</b>
         </button>
       </form>
     </>
