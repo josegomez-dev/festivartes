@@ -9,6 +9,8 @@ import Link from "next/link";
 import { GiPartyFlags } from "react-icons/gi";
 import { FaCirclePlus, FaPersonDotsFromLine, FaPlus } from "react-icons/fa6";
 import { RiBubbleChartFill } from "react-icons/ri";
+import EventRegisterForm from "./EventRegisterForm";
+import InviteRegisterForm from "./InviteRegisterForm copy";
 
 const FloatingMenuButton = () => {
   const { role } = useGlobalContext();
@@ -76,11 +78,11 @@ const FloatingMenuButton = () => {
         <div className="menu-dropdown">
           {options.map((option: string, index: number) => (
             <div key={index} className="menu-item" onClick={() => handleOptionClick(option)}>
-              {option === 'Registrar Evento' && <GiPartyFlags style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color="orange" />}
-              {option === 'Invitar Jurado' && <FaPersonDotsFromLine style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color="#32acc0" />}
-              {option === 'Calificar Obra' && <RiBubbleChartFill style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color="gold" />}
-              {option === 'Consultar Reglamento' && <FaPersonDotsFromLine style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color="#32acc0" />}
-              {option === 'Registrar Nueva Obra' && <RiBubbleChartFill style={{ filter: 'drop-shadow(0 0 0.2rem black)' }} color="gold" />}
+              {option === 'Registrar Evento' && <GiPartyFlags className="deep-styled-icon" color="orange" />}
+              {option === 'Invitar Jurado' && <FaPersonDotsFromLine className="deep-styled-icon" color="#32acc0" />}
+              {option === 'Calificar Obra' && <RiBubbleChartFill className="deep-styled-icon" color="gold" />}
+              {option === 'Consultar Reglamento' && <FaPersonDotsFromLine className="deep-styled-icon" color="#32acc0" />}
+              {option === 'Registrar Nueva Obra' && <RiBubbleChartFill className="deep-styled-icon" color="gold" />}
               &nbsp;
               {option}
             </div>
@@ -88,7 +90,7 @@ const FloatingMenuButton = () => {
         </div>
         <br />
         <button className="menu-button" onClick={() => toggleDropdown()}>
-          <FaCirclePlus style={{ fontSize: '50px', marginBottom: '-4px' }} />
+          <FaCirclePlus className="floating-menu-button" />
         </button>
       </div>
 
@@ -96,14 +98,11 @@ const FloatingMenuButton = () => {
         isOpen={isUserModalOpen}
         onClose={closeUserModal}
         height="90%" // Custom height
-        // bgColor="black" // Custom background color
       >
-        {/* <b>{currentAction}</b> */}
-        <p style={{ textAlign: 'center' }}>
-          <span>Anímate a descubrir tu </span><b>Artista Interior</b>
-        </p>
-        <div>
-          <br />
+        <div className="modal-title-centered">
+            <b>Anímate a descubrir tu Artista Interior</b>
+        </div>
+        <div className="form-wrapper">
           <ArtworkRegisterForm />
         </div>
       </CustomModal>
@@ -112,11 +111,9 @@ const FloatingMenuButton = () => {
         isOpen={isJudgeModalOpen}
         onClose={closeJudgeModal}
         height="90%" // Custom height
-        // bgColor="black" // Custom background color
       >
-        {/* <b>{currentAction}</b> */}
-        <div style={{ textAlign: 'center' }}>
-          <b style={{ fontSize: '30px' }}>
+        <div className="modal-title-centered">
+          <b>
             &nbsp;Puntuación Final (0-10)&nbsp;
           </b>
         </div>
@@ -129,10 +126,9 @@ const FloatingMenuButton = () => {
         isOpen={isRulesModalOpen}
         onClose={closeRulesModal}
         height="90%" // Custom height
-        // bgColor="black" // Custom background color
       >
         <b>{currentAction}</b>
-        <div>
+        <div className="form-wrapper">
           <br />
           <iframe src="https://www.mep.go.cr/sites/default/files/2023-05/reglamento-FEA-23.pdf" width={"100%"} height={"500px"}></iframe>
         </div>
@@ -142,13 +138,14 @@ const FloatingMenuButton = () => {
         isOpen={isEventModalOpen}
         onClose={closeEventModal}
         height="90%" // Custom height
-        // bgColor="black" // Custom background color
       >
-        <b>{currentAction}</b>
-        <div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi repellat quia qui vitae? Illo eveniet ut fugit! Cupiditate facere magni aut architecto eaque dolores quibusdam dolor sint voluptate. Laboriosam, aliquam.
-          </p>
+        <div className="modal-title-centered">
+          <b>
+            <b>{currentAction}</b>
+          </b>
+        </div>
+        <div className="form-wrapper">
+          <EventRegisterForm />
         </div>
       </CustomModal>
    
@@ -158,11 +155,13 @@ const FloatingMenuButton = () => {
         height="90%" // Custom height
         // bgColor="black" // Custom background color
       >
-        <b>{currentAction}</b>
-        <div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi repellat quia qui vitae? Illo eveniet ut fugit! Cupiditate facere magni aut architecto eaque dolores quibusdam dolor sint voluptate. Laboriosam, aliquam.
-          </p>
+        <div className="modal-title-centered">
+          <b>
+            <b>{currentAction}</b>
+          </b>
+        </div>
+        <div className="form-wrapper">
+          <InviteRegisterForm />
         </div>
       </CustomModal>
     </>

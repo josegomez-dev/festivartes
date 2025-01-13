@@ -3,7 +3,7 @@ const BannerFooter = ({ }) => {
 
   return (
       <>
-        <div style={{ width: '250px', margin: '0 auto' }}>
+        <div className="limited-size-centered">
           <br />
           <p className='bolder-text'>¡Transforma la magia del arte con tecnología! 🖋️ 🎨 🎶 ✨</p>
         </div>

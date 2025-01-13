@@ -17,12 +17,15 @@ const ArtworkDetail = ({ }) => {
     <div className={styles['full-view']}>
       <SubMenu />
 
-      <div style={{ textAlign: 'center', marginBottom: '25px' }}>
+      <div className='project-detail-wrapper'>
         <div className="project-detail-container">
           <h1>{project.name}</h1>
           <br />
-          <img src={project.thumbnail} alt={project.name} />
-          <br />
+          {project.thumbnail ? 
+            <img src={project.thumbnail} alt={project.name} className='project-thumbnail-wrapper' />
+          : 
+            <img src='https://getuikit.com/v2/docs/images/placeholder_600x400.svg' alt={project.name} className='project-thumbnail-wrapper' />
+          }
           <br />
           <div>
             <p><b>Categoria de la Obra</b></p>

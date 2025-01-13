@@ -17,12 +17,15 @@ const JudgeDetail = ({ }) => {
     <div className={styles['full-view']}>
       <SubMenu />
 
-      <div style={{ textAlign: 'center', marginBottom: '25px' }}>
+      <div className='project-detail-wrapper'>
         <div className="project-detail-container">
           <h1>{project.name}</h1>
           <br />
-          <img src={project.thumbnail} alt={project.name} />
-          <br />
+          {project.thumbnail ? 
+            <img src={project.thumbnail} alt={project.name} style={{ maxWidth: '200px', borderRadius: '50%' }} />
+          : 
+            <img src='https://cdn-icons-png.flaticon.com/512/149/149071.png' alt={project.name} style={{ maxWidth: '150px', borderRadius: '50%' }} />
+          }
           <br />
           <div>
             <p><b>Informacion de Contacto</b></p>

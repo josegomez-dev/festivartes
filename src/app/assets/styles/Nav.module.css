@@ -1,60 +1,74 @@
 .navbar {
-    background-color:#32acc0;
-    color: white;
-    padding: 1rem;
-    width: 100%;
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  background-color:#32acc0;
+  color: white;
+  padding: 1rem;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    /* max-width: 900px; */
-    margin: 0 auto;
-    box-shadow: 0 0.5px 10px black;
-  }
+  /* max-width: 900px; */
+  margin: 0 auto;
+  box-shadow: 0 0.5px 10px black;
+}
 
-  .nav-list {
-    display: flex;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
+.nav-list {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
 
-  .nav-link {
-    color: white;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    transition: background-color 0.3s;
-  }
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s;
+}
 
-  .nav-link a {
-    display: inherit;
-    justify-content: inherit;
-    align-items: inherit;
-    font-size: 25px;
-    font-family: var(--font-mono);
-  }
+.nav-link a {
+  display: inherit;
+  justify-content: inherit;
+  align-items: inherit;
+  font-size: 25px;
+  font-family: var(--font-mono);
+}
 
-  .nav-link:hover {
-    background-color: orange;
-    border: 1px solid white;
-  }
+.nav-link:hover {
+  background-color: orange;
+  border: 1px solid white;
+}
 
-  .logo-container {
-    display: flex;
-    align-items: center;
-    padding: 12px;
-  }
-  .logo-container img {
-    z-index: 1000;
-    margin-left: -25px;
-  }
+.logo-container {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+}
+.logo-container img {
+  z-index: 1000;
+  margin-left: -25px;
+}
 
-  .flex-row-reverse {
-    flex-direction: row-reverse;
-  }
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
 
-  .bg-red-500:hover {
-    background-color: orange;
-  }
+.bg-red-500:hover {
+  background-color: orange;
+}
 
+.profile-picture {
+  position: absolute; 
+  right: 45px; 
+  top: 25px; 
+  border-radius: 50%; 
+  filter: drop-shadow(0 0 0.3rem black);
+}
+
+.profile-role {
+  position: absolute; 
+  top: 5px; 
+  right: 85px; 
+  font-size: 18px;
+}

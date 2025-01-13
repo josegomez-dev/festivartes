@@ -13,11 +13,11 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type }) =>
         <Link 
           key={index + project.name + 'react-key'} 
           href={`/${type}-detail?id=${project.id}`}
-          style={{ textDecoration: 'none' }}
+          className='project-miniature-link'
         >
           <div className="project-miniature">
             {project.upcoming && <div className="upcoming-message">
-                <b style={{ color: 'black' }}>Próximamente</b>
+                <b className='medium-text-size'>Próximamente</b>
               </div>}
             {project.thumbnail ? 
             <img 
@@ -25,10 +25,8 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type }) =>
               alt={project.name} 
               className="project-thumbnail"
             /> : 
-            <div className="banner" style={{ padding: '10px' }}>
-              {!project.upcoming && <><br /></>}
-              <p style={{ fontSize: '14px' }}>{project.name}</p>
-              <p style={{ fontSize: '8px', height: 'auto', marginTop: '5px', color: '#444' }}>Lorem ipsum adipisicing elit. Magni?</p>
+            <div className='banner-title'>
+              <p className='small-text-size'>{project.name}</p>
             </div>}
           </div>
         </Link>

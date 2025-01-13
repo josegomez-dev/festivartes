@@ -22,7 +22,7 @@ export const MOCK_DATA_ARTWORKS = [
     {
       id: 2000,
       name: 'Betty',
-      thumbnail: 'https://scontent.fsjo14-1.fna.fbcdn.net/v/t39.30808-6/413838373_10211297256302544_9089693405933198178_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=a40pB5RJkfUQ7kNvgGOB0vs&_nc_zt=23&_nc_ht=scontent.fsjo14-1.fna&_nc_gid=Ahoy3knrVGLWdquvtAtBKUZ&oh=00_AYD1dtFLke7epCOW8w6RDYF_CJGgBo4hG3L_dN9-SlX-Vw&oe=6776740C',
+      thumbnail: '',
     },
   ];
 

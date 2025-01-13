@@ -1,7 +1,5 @@
-import styles from '@/app/assets/styles/Auth.module.css';
 import { useGlobalContext } from '@/context/GlobalContext';
 import { EMPTY_USER } from '@/types/userTypes';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -14,15 +12,20 @@ const LoginPage = () => {
 
   const handleLogin = () => {
     // Perform authentication logic here (mocked)
+    let role = ''
     if (email === 'admin') {
-      setRole('admin');
+      role = 'admin'
     } else if (email === 'judge') {
-      setRole('judge');
+      role = 'judge'
     } else {
-      setRole('user');
+      role = 'user'
     }
-    setLoggedUser({ ...EMPTY_USER, email })
-    setAuthenticated(true)
+    setRole(role);
+    setLoggedUser({ 
+      ...EMPTY_USER, 
+      email,
+    });
+    setAuthenticated(true);
     router.push('/dashboard');
   }
 

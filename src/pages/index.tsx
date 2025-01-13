@@ -26,10 +26,10 @@ const Home = () => {
       <div className={styles.center}>
         <div className="logo-positioning-for-mobile">
           <Image
-            style={{ filter: 'drop-shadow(0 0 1rem black)' }}
+            style={{ filter: 'drop-shadow(0 0 1rem white)' }}
             className={styles.logo}
             src="/logo2.png"
-            alt="Catarsis Musical Logo"
+            alt="Festivartes Main Logo"
             width={400}
             height={400}
             priority
