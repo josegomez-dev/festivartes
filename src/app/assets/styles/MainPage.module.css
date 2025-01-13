@@ -91,6 +91,7 @@
 
 .logo {
   position: relative;
+  filter: drop-shadow(0 0 1rem white);
 }
 
 /* Enable hover only on non-touch devices */

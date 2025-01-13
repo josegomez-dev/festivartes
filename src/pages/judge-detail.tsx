@@ -22,13 +22,13 @@ const JudgeDetail = ({ }) => {
           <h1>{project.name}</h1>
           <br />
           {project.thumbnail ? 
-            <img src={project.thumbnail} alt={project.name} style={{ maxWidth: '200px', borderRadius: '50%' }} />
+            <img src={project.thumbnail} alt={project.name} className='project-thumbnail-judge' />
           : 
-            <img src='https://cdn-icons-png.flaticon.com/512/149/149071.png' alt={project.name} style={{ maxWidth: '150px', borderRadius: '50%' }} />
+            <img src='https://cdn-icons-png.flaticon.com/512/149/149071.png' alt={project.name} className='project-thumbnail-judge' /> 
           }
           <br />
           <div>
-            <p><b>Informacion de Contacto</b></p>
+            <p><b>Información de Contacto</b></p>
             <p className='bolder-text'>
               Jose Alejandro Gomez Castro | Software Engineer, Creative Technologist & Musician
             </p>

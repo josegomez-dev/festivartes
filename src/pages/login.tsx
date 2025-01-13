@@ -45,20 +45,9 @@ const LoginPage = () => {
             </Link>
             </b>
           </p>
-          {/* <article className={styles['btw-text-tip']}>
-            <p>
-              Use admin - <b>Admin View</b>
-            </p>
-            <p>
-              or judge - <b>Judge View</b>
-            </p>
-            <p>
-              or any other - <b>General User View</b>
-            </p>
-          </article> */}
         </div>
       </div>
-      <div style={{ maxWidth: '400px', margin: '0 auto', textAlign: 'center', padding: '0 25px', marginTop: '-100px' }}>
+      <div className='banner-label'>
         <p className="weekly-phrase-banner">
           “El arte no es lo que ves, sino lo que haces ver a los demás” - <b>Edgar Degas</b>
         </p>

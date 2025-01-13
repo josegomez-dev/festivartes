@@ -2,6 +2,10 @@ import styles from '@/app/assets/styles/AdminIndex.module.css';
 import SubMenu from '@/components/SubMenu';
 import { MOCK_DATA_ARTWORKS } from '@/utils/constants';
 import { useRouter } from 'next/router';
+import { IoIosMusicalNotes } from "react-icons/io";
+import { FaVideo } from "react-icons/fa6";
+import { MdOutlineMenuBook } from "react-icons/md";
+import { FaGuitar } from "react-icons/fa";
 
 const ArtworkDetail = ({ }) => {
   const router = useRouter();
@@ -28,29 +32,32 @@ const ArtworkDetail = ({ }) => {
           }
           <br />
           <div>
-            <p><b>Categoria de la Obra</b></p>
+            <p><b>Categoría de la Obra</b></p>
             <p className='bolder-text'>
-              Cantautor Solista Nacional (Inedito)
+              Cantautor Solista
             </p> 
             <br />
             <hr />
             <br />
-            <p><b>Multimedia</b></p>
-            <p>
-              <span className='bolder-text'>Audio (MP3)</span>: /domain/audios/item/234 <br />
-              <span className='bolder-text'>Video (MP4)</span>: /domain/videos/item/234 <br />
-              <span className='bolder-text'>Letra (PDF)</span>: /domain/lyrcs/item/234 <br />
-              <span className='bolder-text'>Partituras (PDF)</span>: /domain/tabs/item/234
+            <p><b>Archivos de la Obra</b> (PDF)</p>
+            <p className='links-spaced'>
+              <IoIosMusicalNotes /> : <a href="#" className='artwork-links'>route</a>
+            </p>
+            <p className='links-spaced'>
+              <FaVideo /> : <a href="#" className='artwork-links'>route</a>
+            </p>
+            <p className='links-spaced'>
+              <MdOutlineMenuBook /> : <a href="#" className='artwork-links'>route</a>
+            </p>
+            <p className='links-spaced'>
+              <FaGuitar /> : <a href="#" className='artwork-links'>route</a>
             </p>
             <br />
             <hr />
             <p>
               <br />
-              <b>Letra & Musica</b>
-                <p><span className='bolder-text'>Musica</span>: Jose Alejandro Gomez Castro</p>
-                <p><span className='bolder-text'>Letra</span>: Jose Alejandro Gomez Castro</p>
-                <p><span className='bolder-text'>Interpretacion</span>: <a href="">@alegomez.cr</a></p>
-                <p><span className='bolder-text'>Produccion</span>: Catarsis Musical Studio</p>
+              <b>Letra & Música</b>
+              <p>Jose Alejandro Gomez Castro</p>
             </p>
             <br />
           </div>

@@ -288,6 +288,11 @@ b {
   max-width: 200px; 
   border: 1px solid #32acc0;
 }
+.project-thumbnail-judge {
+  max-width: 200px; 
+  border: 1px solid #32acc0;
+  border-radius: 50%;
+}
 
 .project-name {
   margin-top: 8px;
@@ -528,6 +533,18 @@ b {
 .project-detail-wrapper {
   text-align: center;
   margin-bottom: 25px; 
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   margin: 0 auto;
+}
+.banner-label {
+  max-width: 400px; 
+  margin: 0 auto;
+  text-align: center; 
+  padding: 0 25px;
+  margin-top: -100px;
+}
+.artwork-links {
+  font-size: 16px;
+  color: orange;
 }
