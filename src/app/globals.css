@@ -156,7 +156,7 @@ b {
 @media only screen and (max-width: 767px) {
   /* Styles specifically for phones */
   .auth-form {
-    margin-top: -200px !important;
+    margin-top: -200px;
   }
 
   .weekly-phrase-banner {
@@ -179,6 +179,7 @@ b {
   flex-direction: column;
   align-items: flex-end;
   z-index: 1000;
+  filter: drop-shadow(0 0 0.5rem white);
 }
 
 .menu-button {
@@ -200,8 +201,8 @@ b {
 .menu-dropdown {
   margin-top: 10px;
   
-  background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
-  backdrop-filter: blur(100px); /* Apply the blur effect */
+  background: orange; /* Semi-transparent background */
+  backdrop-filter: blur(50px); /* Apply the blur effect */
   border: 1px solid rgba(255, 255, 255, 0.2); /* Optional border for added style */
 
   border-radius: 8px;
@@ -213,16 +214,11 @@ b {
   
 }
 
-/* .menu-button:hover + .menu-dropdown, 
-.menu-dropdown:hover {
-  display: flex;
-} */
-
 .menu-item {
   padding: 8px 12px;
   cursor: pointer;
   font-weight: bolder;
-  border-bottom: 1px solid #32acc0;
+  border-bottom: 1px solid orange;
 }
 
 .menu-item:hover {
@@ -257,7 +253,6 @@ b {
   position: absolute;
   top: 100px;
   left: 0;
-  width: 10px !important;
   text-align: center;
   background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
   color: #fff; /* White text color */
@@ -458,12 +453,14 @@ b {
   color: gold;
   text-decoration: none;
   font-size: 30px;
-  margin-left: -5px;
+  margin-left: -18px;
   margin-top: 10px;
   padding: 10px;
   border-radius: 5px;
   transition: background-color 0.3s;
   margin-bottom: -15px;
+
+  filter: drop-shadow(0 0 0.2rem black);
 }
 
 .sidebar nav a:hover {
@@ -547,4 +544,28 @@ b {
 .artwork-links {
   font-size: 16px;
   color: orange;
+}
+
+.overflow-area {
+  
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  backdrop-filter: blur(100px); /* Apply the blur effect */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Optional border for added style */
+
+
+  border-radius: 12px; 
+  color: white; 
+  border: 1px solid rgba(255, 255, 255, 0.2); 
+  width: 100%; 
+  max-width: 300px; 
+  margin: 0 auto; 
+  height: 80px;
+  overflow-y: scroll; 
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.price-text {
+  color: orange;
+  filter: drop-shadow(0 0 0.2rem black);
 }

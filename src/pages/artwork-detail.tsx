@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import { IoIosMusicalNotes } from "react-icons/io";
 import { FaVideo } from "react-icons/fa6";
 import { MdOutlineMenuBook } from "react-icons/md";
-import { FaGuitar } from "react-icons/fa";
 
 const ArtworkDetail = ({ }) => {
   const router = useRouter();
@@ -41,16 +40,13 @@ const ArtworkDetail = ({ }) => {
             <br />
             <p><b>Archivos de la Obra</b> (PDF)</p>
             <p className='links-spaced'>
+              <MdOutlineMenuBook /> : <a href="#" className='artwork-links'>route</a>
+            </p>
+            <p className='links-spaced'>
               <IoIosMusicalNotes /> : <a href="#" className='artwork-links'>route</a>
             </p>
             <p className='links-spaced'>
               <FaVideo /> : <a href="#" className='artwork-links'>route</a>
-            </p>
-            <p className='links-spaced'>
-              <MdOutlineMenuBook /> : <a href="#" className='artwork-links'>route</a>
-            </p>
-            <p className='links-spaced'>
-              <FaGuitar /> : <a href="#" className='artwork-links'>route</a>
             </p>
             <br />
             <hr />

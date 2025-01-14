@@ -29,24 +29,16 @@ const EventDetail = ({ }) => {
             className='project-thumbnail-wrapper'
           />
           <br />
-
-
-          <p style={{ fontSize: '12px' }}><b className='bolder-text'>Fecha</b>: 25 de Enero, 2025.</p>
-          <p style={{ fontSize: '12px' }}><b className='bolder-text'>Ubicación</b>: Alajuela, Parque de Grecia.</p>
-          {/* <p style={{ fontSize: '11px' }}><b className='bolder-text'>Categoria</b>: Circuital</p>
-          <p style={{ fontSize: '11px' }}><b className='bolder-text'>Clasificación</b>: OPEN</p> */}
-
+          <p ><b className='bolder-text'>Fecha</b>: 25 de Enero, 2025.</p>
+          <p ><b className='bolder-text'>Ubicación</b>: Alajuela, Parque de Grecia.</p>      
           <br />
-          <p style={{ background: 'white', borderRadius: '12px', color: '#32acc0', border: '1px solid rgba(255, 255, 255, 0.2)', width: '100%', maxWidth: '300px', margin: '0 auto', height: '80px', overflowY: 'scroll', padding: '5px 10px', fontSize: '12px' }}>
+          <p className='overflow-area'>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit quam vero aspernatur temporibus distinctio quae enim, accusamus atque, reiciendis harum aliquid quisquam accusantium, tempora autem quibusdam commodi iure corrupti sequi!
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas praesentium dicta rem numquam aut maiores molestiae aspernatur eaque suscipit maxime, aliquid tempora, facere laborum autem, officiis est nostrum vero cum.
           </p>
-
           <div>
             <br />
             <p>
-              <span className='bolder-text'>ENTRADA</span>:₡2000 &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <span className='bolder-text'>VIP</span>: ₡10 000
+              <span className='bolder-text price-text'>COSTO DE LA ENTRADA</span>: ₡2000
             </p>
           </div>
           {/* Add more project details as needed */}

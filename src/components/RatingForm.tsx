@@ -115,7 +115,7 @@ const RatingForm = () => {
     <div className={styles['form-wrapper']}>
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
-          <p style={{ color: 'white', fontWeight: 'bolder' }}>Desglose de valoracion de aspectos formativos de la propuesta artistica:</p>
+          <p className="bolder-text">Desglose de valoracion de aspectos formativos de la propuesta artistica:</p>
           <br />
           <MultiCheckBoxQuestionForm
             multiCheckboxOptions={multiCheckboxOptions}
@@ -159,7 +159,7 @@ const RatingForm = () => {
           handleToggleChange={handleToggleChange}
         />
 
-        <p style={{ fontWeight: 'bolder' }}>Desgloce de valoracion de aspectos tecnico-artisticos (Observaciones de la valoracion integral de la obra).</p>
+        <p className="bolder-text">Desgloce de valoracion de aspectos tecnico-artisticos (Observaciones de la valoracion integral de la obra).</p>
 
         <YesOrNoQuestionForm
           textContent="¿Propongo esta obra artística para ser considerada en la deliberación con posibilidad de ser seleccionada?"

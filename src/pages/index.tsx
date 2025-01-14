@@ -6,19 +6,24 @@ import Link from "next/link";
 const Home = () => {
   return (
     <main className={styles.main}>
+      <br />
+      <br />
+      <br />
+      <br />
       <div className={styles.description}>
         <p>
-            <Link href="/login"> Ingresar </Link>
-            <Link href="/signup"> Registrarse </Link>
+            <Link href="/login" className="project-miniature-link"> <b>Iniciar sesión</b> </Link>
+            <Link href="/signup" className="project-miniature-link"> <b>Registrarse</b> </Link>
         </p>
         <div>
           <a
             href="https://app.daily.dev/josegomezdev"
             target="_blank"
             rel="noopener noreferrer"
+            className="project-miniature-link"
           >
             By{" "}
-            José Alejandro Gómez Castro
+            <b>José Alejandro Gómez Castro</b>
           </a>
         </div>
       </div>

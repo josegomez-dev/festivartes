@@ -57,7 +57,6 @@ const Onboarding = () => {
           <p>{steps[currentStep].description}</p>
           {steps[currentStep].imageUrl && (
             <Image
-              style={{ filter: 'invert(1) drop-shadow(0 0 0.3rem #ffffff70)' }}
               src={steps[currentStep].imageUrl}
               alt={steps[currentStep].title}
               width={350}

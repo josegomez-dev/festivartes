@@ -24,38 +24,44 @@ const SignUp = () => {
 
   return (
     <>
+      <br />
+      <br />
+      <br />
+      <br />
       <div className="auth-container">
         <div className="auth-form">
           <h2 className="auth-title">Crea tu cuenta en <b>FESTIVARTES</b></h2>
           <input type="text" onChange={(e) => setName(e.target.value)} placeholder="Nombre" className="auth-input" required />
           <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Correo electrónico" className="auth-input" required />
           <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Contraseña" className="auth-input" required />
-          <button type="submit" onClick={() => handleSignUp()} className="auth-button">Registrarse</button>
+          <button type="submit" onClick={() => handleSignUp()} className="auth-button">Crear cuenta</button>
           <p className="auth-link">
           ¿Ya tienes una cuenta?
             <b>
             &nbsp;
             <Link href="/login">
-              Ingresar
+              Iniciar sesión
             </Link>
             </b>
           </p>
         </div>
       </div>
-      <div style={{ maxWidth: '400px', margin: '0 auto', textAlign: 'center', padding: '0 25px', marginTop: '-100px' }}>
-        <p className="weekly-phrase-banner">
-          “El arte no es lo que ves, sino lo que haces ver a los demás” - <b>Edgar Degas</b>
-        </p>
-      </div>
-      <div className={styles.center} style={{ marginTop: '50px', textAlign: 'center' }}>
-        <Image
-          className={styles.logo}
-          src="/logo-white.png"
-          alt="Catarsis Musical Logo"
-          width={340}
-          height={100}
-          priority
-        />
+      <div className={styles['main-logo-footer']}>
+        <div className='limited-size-centered'>
+          <p className="weekly-phrase-banner">
+            “El arte no es lo que ves, sino lo que haces ver a los demás” - <b>Edgar Degas</b>
+          </p>
+        </div>
+        <Link href={'./'}>
+          <Image
+            className={styles.logo}
+            src="/logo2.png"
+            alt="Catarsis Musical Logo"
+            width={250}
+            height={250}
+            priority
+          />
+        </Link>
       </div>
     </>
   )

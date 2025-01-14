@@ -13,8 +13,7 @@ const CustomModal: React.FC<CustomModalProps> = ({ isOpen, onClose, height, bgCo
   return (
     <>
       {isOpen && <div className="modal-overlay" onClick={onClose}></div>}
-      <div
-        className={`modal-container modal-bg ${isOpen ? 'open' : ''}`} style={{ height: height || '50%' }}>
+      <div className={`modal-container modal-bg ${isOpen ? 'open' : ''}`} style={{ height: height || '80%' }} >
         <button className="close-button" onClick={onClose}>
           &times;
         </button>

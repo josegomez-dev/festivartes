@@ -51,7 +51,7 @@
 
   .auth-button {
     padding: 0.75rem;
-    background-color: black;
+    background-color: orange;
     color: white;
     border: none;
     border-radius: 4px;
@@ -61,7 +61,7 @@
   }
 
   .auth-button:hover {
-    background-color: orange;
+    background-color: #32acc0;
   }
 
   .auth-title {
@@ -89,4 +89,8 @@
   .btw-text-tip p {
     text-align: right;
     color: #ccc;
+  }
+
+  .main-logo-footer {
+    text-align: center;
   }
