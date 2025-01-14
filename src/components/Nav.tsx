@@ -42,9 +42,9 @@ export default function Nav() {
   return (
     <nav className={`${styles.navbar} bg-gray-800 text-white`}>
     <div className="flex items-center">
-      {/* <Link href={`/dashboard`}>
-        <b>asdsad</b>
-      </Link> */}
+      <Link href={`/dashboard`}>
+        <b>¡Hola Jose!</b>
+      </Link>
     </div>
     <ul className={`${styles['nav-list']} flex-row-reverse`}>
       {authenticated && (

@@ -2,6 +2,8 @@ import styles from '@/app/assets/styles/AdminIndex.module.css';
 import { MOCK_DATA_JUDGES } from '@/utils/constants';
 import ObjectMiniature from './ObjectMiniature';
 import { FaPersonDotsFromLine } from 'react-icons/fa6';
+import Image from 'next/image';
+import { RiBubbleChartFill } from 'react-icons/ri';
 
 const CoreSectionJudges = ({ }) => {
 
@@ -9,8 +11,17 @@ const CoreSectionJudges = ({ }) => {
       <>
         <div className={`${styles.card} top-spaced`}>
           <p>
-            <span className='bolder-text'> <FaPersonDotsFromLine color='#32acc0' /> &nbsp;
-              <b>Jurado Seleccionador 🏆</b>
+            <span className='bolder-text'> 
+              <RiBubbleChartFill color='gold'/> &nbsp;
+              <b>Jurado Seleccionador &nbsp;
+                <Image
+                  src="/judges-icon.png"
+                  alt="Catarsis Musical Logo"
+                  width={25}
+                  height={25}
+                  priority
+                />
+              </b>
               <p className='bolder-text small-text-size'>
                 🌟 Los expertos evalúan las obras artísticas.
               </p>

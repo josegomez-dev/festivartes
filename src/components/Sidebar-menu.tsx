@@ -18,7 +18,7 @@ const SidebarMenu = () => {
               alt="Catarsis Musical Logo"
               width={100}
               height={100}
-              style={{ marginLeft: '-25px', marginTop: '-30px', marginBottom: '-10px' }}
+              style={{ marginLeft: '-25px', marginBottom: '-15px' }}
             />
           </Link>
           <Link href={`/events`}>

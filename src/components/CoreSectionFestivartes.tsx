@@ -2,6 +2,8 @@ import styles from '@/app/assets/styles/AdminIndex.module.css';
 import { MOCK_DATA_EVENTS } from '@/utils/constants';
 import { GiPartyFlags } from 'react-icons/gi';
 import ObjectMiniature from './ObjectMiniature';
+import Image from 'next/image';
+import { RiBubbleChartFill } from 'react-icons/ri';
 
 const CoreSectionFestivartes = ({ }) => {
 
@@ -10,11 +12,18 @@ const CoreSectionFestivartes = ({ }) => {
         <div className={styles.card}>
             <p>
               <span className='bolder-text'>
-                <img width={"25px"} src="https://cdn-icons-png.flaticon.com/512/3851/3851099.png" alt="" />
-                &nbsp;
-                <b>Festivartes </b>
+                <RiBubbleChartFill color='gold'/> &nbsp;
+                <b>Festivartes &nbsp; 
+                  <Image
+                    src="/events-icon.png"
+                    alt="Catarsis Musical Logo"
+                    width={35}
+                    height={35}
+                    priority
+                  />
+                </b>
                 <p className='bolder-text small-text-size'>
-                  🌟 Lleva tu arte al siguiente nivel con nuestra app 
+                  🌟 Lleva tu arte al siguiente nivel con nuestra app.
                 </p>
                 <br />
               </span>

@@ -2,6 +2,7 @@ import styles from '@/app/assets/styles/AdminIndex.module.css';
 import { MOCK_DATA_ARTWORKS } from '@/utils/constants';
 import ObjectMiniature from './ObjectMiniature';
 import { RiBubbleChartFill } from 'react-icons/ri';
+import Image from 'next/image';
 
 const CoreSectionArtworks = ({ }) => {
 
@@ -9,8 +10,17 @@ const CoreSectionArtworks = ({ }) => {
       <>
         <div className={`${styles.card} top-spaced`}>
           <p>
-            <span className='bolder-text'><RiBubbleChartFill color='gold'/> &nbsp;
-              <b>Obras Artísticas 🌍</b>
+            <span className='bolder-text'>
+              <RiBubbleChartFill color='gold'/> &nbsp;
+              <b>Obras Artísticas &nbsp; 
+                <Image
+                  src="/artworks-icon.png"
+                  alt="Catarsis Musical Logo"
+                  width={25}
+                  height={25}
+                  priority
+                />
+              </b>
               <p className='bolder-text small-text-size'>
                  🌟 Transforma tu talento en una obra maestra.
               </p>
