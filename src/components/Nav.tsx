@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { FaSignOutAlt } from "react-icons/fa"
+import ChatSidebar from './ChatSidebar'
 
 export default function Nav() {
   const { role, authenticated, setAuthenticated, setRole, loggedUser, setLoggedUser } = useGlobalContext()
@@ -43,7 +44,7 @@ export default function Nav() {
     <nav className={`${styles.navbar} bg-gray-800 text-white`}>
     <div className="flex items-center">
       <Link href={`/dashboard`}>
-        <b>¡Hola Jose!</b>
+        {authenticated && <b>¡Hola Jose!</b>}
       </Link>
     </div>
     <ul className={`${styles['nav-list']} flex-row-reverse`}>
@@ -62,6 +63,7 @@ export default function Nav() {
           <li className={styles['nav-link']}>
             <Link href="/signup">Crear Cuenta</Link>
           </li>
+          <span style={{marginTop: '18px'}}>|</span>
           <li className={styles['nav-link']}>
             <Link href="/login">Iniciar sesión</Link>
           </li>
@@ -83,6 +85,7 @@ export default function Nav() {
         </>
       )}
     </ul>
+    {authenticated && <ChatSidebar />}
   </nav>
   )
 }

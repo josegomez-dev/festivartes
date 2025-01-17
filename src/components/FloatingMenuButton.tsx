@@ -78,11 +78,48 @@ const FloatingMenuButton = () => {
         <div className="menu-dropdown">
           {options.map((option: string, index: number) => (
             <div key={index} className="menu-item" onClick={() => handleOptionClick(option)}>
-              {option === 'Registrar Evento' && <GiPartyFlags className="deep-styled-icon" color="orange" />}
-              {option === 'Invitar Jurado' && <FaPersonDotsFromLine className="deep-styled-icon" color="#32acc0" />}
-              {option === 'Calificar Obra' && <RiBubbleChartFill className="deep-styled-icon" color="gold" />}
-              {option === 'Consultar Reglamento' && <FaPersonDotsFromLine className="deep-styled-icon" color="#32acc0" />}
-              {option === 'Registrar Nueva Obra' && <RiBubbleChartFill className="deep-styled-icon" color="gold" />}
+              {option === 'Registrar Evento' && 
+                <Image
+                  src="/events-icon.png"
+                  alt="Catarsis Musical Logo"
+                  width={25}
+                  height={25}
+                  priority
+                />}
+              {option === 'Invitar Jurado' && 
+                <Image
+                  src="/judges-icon.png"
+                  alt="Catarsis Musical Logo"
+                  width={25}
+                  height={25}
+                  priority
+                />}
+
+              {option === 'Calificar Obra' && 
+                <Image
+                  src="/judges-icon.png"
+                  alt="Catarsis Musical Logo"
+                  width={25}
+                  height={25}
+                  priority
+                />}
+              {option === 'Consultar Reglamento' && 
+                <Image
+                  src="/judges-icon.png"
+                  alt="Catarsis Musical Logo"
+                  width={25}
+                  height={25}
+                  priority
+                />}
+              {option === 'Registrar Nueva Obra' && 
+                <Image
+                  src="/artworks-icon.png"
+                  alt="Catarsis Musical Logo"
+                  width={25}
+                  height={25}
+                  priority
+                />}
+              &nbsp;
               &nbsp;
               {option}
             </div>

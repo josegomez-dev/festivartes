@@ -1,9 +1,10 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function UnauthorizedMessage() {
   return (
     <div className='unauthorized-message-wrapper'>
-      <div>
+      <Link href="./">
         <Image
           src="/logo2.png"
           alt="Catarsis Musical Logo"
@@ -14,7 +15,7 @@ export default function UnauthorizedMessage() {
         <br />
         <b>Lo sentimos...</b>
         <p>Por favor ingresa otra vez.</p>
-      </div>
+      </Link>
     </div> // Simple message if not authenticated
   )
 }

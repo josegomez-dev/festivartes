@@ -12,8 +12,13 @@ const Home = () => {
       <br />
       <div className={styles.description}>
         <p>
-            <Link href="/login" className="project-miniature-link"> <b>Iniciar sesión</b> </Link>
-            <Link href="/signup" className="project-miniature-link"> <b>Registrarse</b> </Link>
+            <Link href="/login" className="project-miniature-link">
+              Iniciar sesión 
+            </Link>
+            |
+            <Link href="/signup" className="project-miniature-link"> 
+              Registrarse 
+            </Link>
         </p>
         <div>
           <a
