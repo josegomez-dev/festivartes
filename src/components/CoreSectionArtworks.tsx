@@ -4,7 +4,13 @@ import ObjectMiniature from './ObjectMiniature';
 import { RiBubbleChartFill } from 'react-icons/ri';
 import Image from 'next/image';
 
-const CoreSectionArtworks = ({ }) => {
+interface CoreSectionArtworksProps {
+  filterBy?: any
+}
+
+const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
+  
+  const data = filterBy ? MOCK_DATA_ARTWORKS.filter(item => filterBy.includes(item.id)) : MOCK_DATA_ARTWORKS;
 
   return (
       <>
@@ -27,7 +33,7 @@ const CoreSectionArtworks = ({ }) => {
             </span>
           </p>
           <br />
-          {MOCK_DATA_ARTWORKS.length <= 0 ? 
+          {data.length <= 0 ? 
             <div className={styles.grid}>
               <div className={styles.card}>
                 <h3>No hay registros de obras</h3>
@@ -35,7 +41,7 @@ const CoreSectionArtworks = ({ }) => {
               </div> 
             </div> 
             : 
-            <ObjectMiniature projects={MOCK_DATA_ARTWORKS} type={'artwork'} />
+            <ObjectMiniature projects={data} type={'artwork'} />
           }
         </div>
       </>

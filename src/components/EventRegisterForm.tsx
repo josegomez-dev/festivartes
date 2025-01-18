@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styles from "./../app/assets/styles/RegisterForm.module.css";
-import YesOrNoQuestionForm from "./YesOrNoQuestionForm";
 
 const EventRegisterForm = () => {
   const [formData, setFormData] = useState({

@@ -23,7 +23,7 @@ const CoreSectionFestivartes = ({ }) => {
                   />
                 </b>
                 <p className='bolder-text small-text-size'>
-                  🌟 Lleva tu arte al siguiente nivel con nuestra app.
+                  🌟 Lleva tu evento al siguiente nivel con nuestra app.
                 </p>
                 <br />
               </span>

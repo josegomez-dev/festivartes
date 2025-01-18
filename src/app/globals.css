@@ -507,6 +507,7 @@ b {
 
 .project-miniature-link {
   text-decoration: none;
+  padding: 5px 0;
 }
 
 .banner-title {
@@ -564,4 +565,18 @@ b {
 .price-text {
   color: orange;
   filter: drop-shadow(0 0 0.2rem black);
+  font-size: 12px;
+}
+
+.stars-container {
+  position: absolute;
+  width: 80px;
+  font-size: 12px;
+  height: 15px;
+  margin-top: 10px;
+  margin-left: 10px;
+  text-align: left;
+  white-space: nowrap; /* Prevents text from wrapping to the next line */
+  overflow: hidden;    /* Hides the overflowing text */
+  text-overflow: ellipsis; 
 }

@@ -29,16 +29,19 @@ const EventDetail = ({ }) => {
             className='project-thumbnail-wrapper'
           />
           <br />
-          <p ><b className='bolder-text'>Fecha</b>: 25 de Enero, 2025.</p>
-          <p ><b className='bolder-text'>Ubicación</b>: Alajuela, Parque de Grecia.</p>      
+          <p ><b className='bolder-text'>Fecha</b>: {project.date}</p>
+          <p ><b className='bolder-text'>Ubicación</b>: {project.location}</p>      
           <br />
           <p className='overflow-area'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit quam vero aspernatur temporibus distinctio quae enim, accusamus atque, reiciendis harum aliquid quisquam accusantium, tempora autem quibusdam commodi iure corrupti sequi!
+            {project.description}
           </p>
           <div>
             <br />
             <p>
-              <span className='bolder-text price-text'>COSTO DE LA ENTRADA</span>: ₡2000
+              {project.price <= 0 ? 
+                <span className='bolder-text price-text'>Entrada libre y para toda la familia.</span> : 
+                <span className='bolder-text price-text'>Costo de la entrada: ₡{project.price}</span>
+              } 
             </p>
           </div>
           {/* Add more project details as needed */}
@@ -48,12 +51,12 @@ const EventDetail = ({ }) => {
       <br />
       <hr />
 
-      <CoreSectionJudges />
+      <CoreSectionJudges filterBy={project.judges} />
 
       <br />
       <hr />
 
-      <CoreSectionArtworks />
+      <CoreSectionArtworks filterBy={project.artworks} />
 
     </div>
   );
