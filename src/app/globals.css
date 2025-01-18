@@ -229,9 +229,10 @@ b {
   display: flex;
   flex-direction: row;
   gap: 5px;
+  max-height: 400px;
+
   overflow-x: auto;
   overflow-y: hidden;
-  max-height: 400px;
 }
 
 .project-miniature {
@@ -349,6 +350,12 @@ b {
 }
 .project-miniature-custom-artwork .project-thumbnail {
   width: 98px;
+}
+.project-miniature-custom-artwork {
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Adjust column width */
+  overflow: auto; /* Enables both horizontal and vertical scrolling if needed */
 }
 
 
@@ -542,6 +549,22 @@ b {
   font-size: 16px;
   color: orange;
 }
+.overflow--big-area {
+  background: rgba(255, 255, 255, 0.4); /* Semi-transparent background */
+  backdrop-filter: blur(100px); /* Apply the blur effect */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Optional border for added style */
+
+
+  border-radius: 12px; 
+  color: white; 
+  border: 1px solid rgba(255, 255, 255, 0.2); 
+  width: 100%; 
+  margin: 0 auto; 
+  height: 235px;
+  overflow-y: scroll; 
+  padding: 10px 20px;
+  font-size: 14px;
+}
 
 .overflow-area {
   
@@ -579,4 +602,59 @@ b {
   white-space: nowrap; /* Prevents text from wrapping to the next line */
   overflow: hidden;    /* Hides the overflowing text */
   text-overflow: ellipsis; 
+}
+
+.artwork-miniature-title {
+  position: absolute;
+  margin-top: 80px;
+  margin-left: 5px;
+  width: 90px;
+  background-color: orange;
+  border-radius: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.event-miniature-title {
+  position: absolute;
+  margin-top: 120px;
+  margin-left: 5px;
+  width: 110px;
+  color: white !important;
+  filter: drop-shadow(0 0 0.2rem black);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 16px;
+
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center;    /* Center vertically */
+  height: 55px;   
+}
+
+.judges-badge {
+  width: 25px;
+  padding: 1px;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 0.2rem white);
+}
+
+.badge-orange {
+  background-color: orange;
+}
+
+.badge-blue {
+  background-color: #32acc0;
+}
+
+.badge-white {
+  background-color: white;
+}
+
+.image-container-author {
+  position: absolute; 
+  margin-left: 78px; 
+  margin-top: -10px;
+  filter: drop-shadow(0 0 0.2em white);
 }

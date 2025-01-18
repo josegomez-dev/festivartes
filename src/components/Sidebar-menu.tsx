@@ -5,6 +5,7 @@ import { FaPersonDotsFromLine } from 'react-icons/fa6';
 import { GiPartyFlags } from 'react-icons/gi';
 import { RiBubbleChartFill } from 'react-icons/ri';
 import Image from 'next/image';
+import { MdDashboardCustomize } from "react-icons/md";
 
 const SidebarMenu = () => {
   const { role } = useGlobalContext()
@@ -12,15 +13,6 @@ const SidebarMenu = () => {
   return (
       <div className="sidebar">
         <nav>
-          <Link href={'/dashboard'}>
-            <img
-              src="/logo2.png"
-              alt="Catarsis Musical Logo"
-              width={100}
-              height={100}
-              style={{ marginLeft: '-25px', marginBottom: '-15px' }}
-            />
-          </Link>
           <Link href={`/events`}>
             <Image
               src="/events-icon.png"

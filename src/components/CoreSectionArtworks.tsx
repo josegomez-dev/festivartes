@@ -13,7 +13,7 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
   const data = filterBy ? MOCK_DATA_ARTWORKS.filter(item => filterBy.includes(item.id)) : MOCK_DATA_ARTWORKS;
 
   return (
-      <>
+      <div className=''>
         <div className={`${styles.card} top-spaced`}>
           <p>
             <span className='bolder-text'>
@@ -41,10 +41,12 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
               </div> 
             </div> 
             : 
-            <ObjectMiniature projects={data} type={'artwork'} />
+            <div className='overflow--big-area'>
+              <ObjectMiniature projects={data} type={'artwork'} />
+            </div>
           }
         </div>
-      </>
+      </div>
   )
 }
 

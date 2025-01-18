@@ -11,11 +11,11 @@ const ChatSidebar = () => {
   return (
     <>
       <button className={styles.chatToggle} onClick={toggleChat}>
-        <b>Festivartes</b> {isOpen ? "Chat" : "CHAT"}
+        <b>Festivartes</b> <span className="">CHAT</span>
       </button>
       <div className={`${styles.chatSidebar} ${isOpen ? styles.open : ""}`}>
         <div className={styles.chatHeader}>
-          <h2><b>Festivartes</b> CHAT</h2>
+          <h2><b>Festivartes</b> <span className="small-text-size">CHAT</span></h2>
           <button onClick={toggleChat} className={styles.closeButton}>
             ✖
           </button>

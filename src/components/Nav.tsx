@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { FaSignOutAlt } from "react-icons/fa"
 import ChatSidebar from './ChatSidebar'
+import { MdDashboardCustomize } from "react-icons/md";
 
 export default function Nav() {
   const { role, authenticated, setAuthenticated, setRole, loggedUser, setLoggedUser } = useGlobalContext()
@@ -44,7 +45,7 @@ export default function Nav() {
     <nav className={`${styles.navbar} bg-gray-800 text-white`}>
     <div className="flex items-center">
       <Link href={`/dashboard`}>
-        {authenticated && <b>¡Hola Jose!</b>}
+        {authenticated && <MdDashboardCustomize color="gold" />}
       </Link>
     </div>
     <ul className={`${styles['nav-list']} flex-row-reverse`}>
