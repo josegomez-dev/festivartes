@@ -20,7 +20,7 @@ const SubMenu = ({ }) => {
             </Link>
             <Link href={`/artworks`}>
               <Image
-                src="/artwork-icon.png"
+                src="/artworks-icon.png"
                 alt="Catarsis Musical Logo"
                 width={50}
                 height={50}
