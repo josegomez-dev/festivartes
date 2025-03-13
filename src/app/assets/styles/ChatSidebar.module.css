@@ -12,7 +12,11 @@
     font-size: 10px;
     filter: drop-shadow(0 0 0.5rem white);
   }
-  
+  .content-centered {
+    margin: 0 auto;
+    background-color: black !important;
+  }
+
   .chatSidebar {
     position: fixed;
     bottom: 0;
