@@ -33,6 +33,7 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
             </span>
           </p>
           <br />
+
           {data.length <= 0 ? 
             <div className={styles.grid}>
               <div className={styles.card}>
@@ -42,7 +43,9 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
             </div> 
             : 
             <div className='overflow--big-area'>
+      
               <ObjectMiniature projects={data} type={'artwork'} />
+              
             </div>
           }
         </div>

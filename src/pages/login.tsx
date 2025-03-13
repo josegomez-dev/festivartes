@@ -4,13 +4,19 @@ import { EMPTY_USER } from '@/types/userTypes';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const LoginPage = () => {
   const { setAuthenticated, setRole, setLoggedUser } = useGlobalContext()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const router = useRouter()
+
+  useEffect(() => {
+    if (document.body.classList.contains('prevent-scroll')) {
+      document.body.classList.remove('prevent-scroll');
+    }
+  }, []);
 
   const handleLogin = () => {
     // Perform authentication logic here (mocked)
@@ -51,23 +57,6 @@ const LoginPage = () => {
             </b>
           </p>
         </div>
-      </div>
-      <div className={styles['main-logo-footer']}>
-        <div className='limited-size-centered'>
-          <p className="weekly-phrase-banner">
-            “El arte no es lo que ves, sino lo que haces ver a los demás” - <b>Edgar Degas</b>
-          </p>
-        </div>
-        <Link href={'./'}>
-          <Image
-            className={styles.logo}
-            src="/logo2.png"
-            alt="Catarsis Musical Logo"
-            width={250}
-            height={250}
-            priority
-          />
-        </Link>
       </div>
     </>
   );

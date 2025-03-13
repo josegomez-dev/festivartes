@@ -1,6 +1,5 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
 import { MOCK_DATA_EVENTS } from '@/utils/constants';
-import { GiPartyFlags } from 'react-icons/gi';
 import ObjectMiniature from './ObjectMiniature';
 import Image from 'next/image';
 import { RiBubbleChartFill } from 'react-icons/ri';

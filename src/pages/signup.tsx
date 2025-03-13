@@ -46,23 +46,6 @@ const SignUp = () => {
           </p>
         </div>
       </div>
-      <div className={styles['main-logo-footer']}>
-        <div className='limited-size-centered'>
-          <p className="weekly-phrase-banner">
-            “El arte no es lo que ves, sino lo que haces ver a los demás” - <b>Edgar Degas</b>
-          </p>
-        </div>
-        <Link href={'./'}>
-          <Image
-            className={styles.logo}
-            src="/logo2.png"
-            alt="Catarsis Musical Logo"
-            width={250}
-            height={250}
-            priority
-          />
-        </Link>
-      </div>
     </>
   )
 }

@@ -64,7 +64,6 @@ export default function Nav() {
           <li className={styles['nav-link']}>
             <Link href="/signup">Crear Cuenta</Link>
           </li>
-          <span style={{marginTop: '18px'}}>|</span>
           <li className={styles['nav-link']}>
             <Link href="/login">Iniciar sesión</Link>
           </li>
@@ -73,7 +72,7 @@ export default function Nav() {
         <>
           &nbsp; <b className={styles['profile-role']}>{role}</b> &nbsp;
           <li className={styles['']}>
-          <Link href="/user-profile">
+          <Link href="/profile">
               <Image
                 src={avatar}
                 alt="Profile Picture"
