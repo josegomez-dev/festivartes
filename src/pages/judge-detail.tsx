@@ -41,7 +41,7 @@ const JudgeDetail = ({ }) => {
             <br />
             <hr />
             <br />
-            <ul>
+            <ul style={{ listStyleType: 'none' }}>
               <li>josegomez.dev@gmail.com</li>
               <li>+506 6240 29 74</li>
             </ul>

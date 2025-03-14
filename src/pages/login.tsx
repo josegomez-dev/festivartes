@@ -4,13 +4,22 @@ import { EMPTY_USER } from '@/types/userTypes';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const LoginPage = () => {
   const { setAuthenticated, setRole, setLoggedUser } = useGlobalContext()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const router = useRouter()
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const playAudio = () => {
+    if (audioRef.current) {
+      audioRef.current.play().catch((error) => {
+        console.error("Playback failed:", error);
+      });
+    }
+  };
 
   useEffect(() => {
     if (document.body.classList.contains('prevent-scroll')) {
@@ -34,6 +43,7 @@ const LoginPage = () => {
       email,
     });
     setAuthenticated(true);
+    playAudio();
     router.push('/dashboard');
   }
 
@@ -42,6 +52,10 @@ const LoginPage = () => {
       <br />
       <br />
       <br />
+      <div style={{ display: 'none' }}>
+        <audio ref={audioRef} src="https://cdn.freesound.org/previews/784/784433_4468658-lq.mp3" />
+        <button id="playBtn" onClick={playAudio}>Play</button>
+      </div>
       <div className="auth-container">
         <div className="auth-form">
           <h2 className="auth-title">Bienvenido a <b>FESTIVARTES</b></h2>

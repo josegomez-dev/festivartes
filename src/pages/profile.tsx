@@ -70,6 +70,9 @@ export default function Profile() {
     <div className={styles['full-view']}>
       <div className={`pCard_card ${isActive ? 'pCard_on' : ''}`}> 
         <div className="pCard_up">
+            <button style={{ marginRight: '-250px' }} onClick={handleEditToggle}>
+                <b>{isEditing ? "Save" : "Edit"}</b>
+            </button>
           <div className="pCard_text">
             {isEditing ? (
               <div className="pCard_edit_inputs">
@@ -89,8 +92,8 @@ export default function Profile() {
         </div>
         <div className="pCard_down">
           <div>
-            <p>Projects</p>
-            <p>126</p>
+            <p>Artworks</p>
+            <p>12</p>
           </div>
           <div>
             <p>Views</p>
@@ -100,9 +103,6 @@ export default function Profile() {
             <p>Likes</p>
             <p>1,976</p>
           </div>
-            <button className={`${stylesChat['chatInput']} ${stylesChat['content-centered']}`} onClick={handleEditToggle}>
-                <b>{isEditing ? "Save" : "Edit Profile"}</b>
-            </button>
         </div>
         <div className="pCard_back">
           <p>See My Latest Work Here</p>

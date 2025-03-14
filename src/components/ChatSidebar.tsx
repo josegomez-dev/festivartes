@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./../app/assets/styles/ChatSidebar.module.css";
 
 const ChatSidebar = () => {
