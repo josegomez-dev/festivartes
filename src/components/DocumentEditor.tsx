@@ -4,7 +4,12 @@ import "react-quill/dist/quill.snow.css"; // Editor styles
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
-const DocumentEditor = ({ initialContent = "" }) => {
+interface DocumentEditorProps {
+  initialContent?: string;
+  title: string;
+}
+
+const DocumentEditor = ({ initialContent = "", title }: DocumentEditorProps) => {
   const [content, setContent] = useState(initialContent);
 
   const handleSave = () => {
@@ -14,7 +19,7 @@ const DocumentEditor = ({ initialContent = "" }) => {
 
   return (
     <div className="editor-container">
-      <h2>📄 Vivir sin miedo</h2>
+      <h2>📄 {title}</h2>
       <ReactQuill value={content} onChange={setContent} />
       <button onClick={handleSave}>💾 Save</button>
       <style jsx>{`

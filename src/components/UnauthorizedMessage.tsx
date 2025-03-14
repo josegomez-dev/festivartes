@@ -10,13 +10,15 @@ export default function UnauthorizedMessage() {
           <b>Lo sentimos...</b>
           <p>Por favor ingresa otra vez.</p>
         </div>
-        <Image
-          src="/logo2.png"
-          alt="Catarsis Musical Logo"
-          width={250}
-          height={250}
-          priority
-        />
+        <div>
+          <Image
+            src="/logo2.png"
+            alt="Catarsis Musical Logo"
+            width={250}
+            height={250}
+            priority
+          />
+        </div>
         <Link href="/">
           <button className={`${authStyles['auth-button']}`}>
               <b>Volver a la pagina principal</b>

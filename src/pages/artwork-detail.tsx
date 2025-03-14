@@ -95,7 +95,7 @@ const ArtworkDetail = () => {
 
             {/* Tab Content */}
             <div className="tab-content">
-              {activeTab === 'document' && <DocumentEditor />}
+              {activeTab === 'document' && <DocumentEditor title={project.name} />}
               {activeTab === 'video' && (
                 <div className="carousel">
                   <VideoPlayer src={videos[currentIndex].src} title={videos[currentIndex].title} />
