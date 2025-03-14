@@ -1,7 +1,7 @@
 // Interface for a User
 export interface User {
     id: string;
-    name: string;
+    displayName: string;
     email: string;
     bio: string;
     role: 'admin' | 'judge' | 'user'; // Could use an enum for roles too
@@ -12,7 +12,7 @@ export interface User {
   // Mock Data for an empty user
   export const EMPTY_USER: User = {
     id: '',
-    name: '',
+    displayName: '',
     email: '',
     bio: '',
     role: 'user',

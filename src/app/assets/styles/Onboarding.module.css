@@ -4,7 +4,11 @@
     align-items: center;
     justify-content: center;
     padding: 40px;
-    background-color: #f0f0f0;
+    
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    backdrop-filter: blur(100px); /* Apply the blur effect */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Optional border for added style */
+
     min-height: 100vh;
   }
 
@@ -33,7 +37,7 @@
   }
 
   .onboarding-step p {
-    color: #555;
+    color: gray;
     margin-bottom: 10px;
   }
 
@@ -59,7 +63,7 @@
   }
 
   .navigation-button-primary {
-    background-color: black;
+    background-color: orange;
     color: white;
   }
 

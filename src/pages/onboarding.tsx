@@ -7,24 +7,37 @@ import { useState } from 'react'
 
 const steps = [
   {
-    title: "Welcome to the App!",
-    description: "We're excited to have you. Let's get started with a quick tour.",
-    imageUrl: "/catarsismusical-logo.png"
+    title: `Bienvenido a Festivartes`,
+    description: "Simplifica, automatiza y digitaliza todo tu festival cultural: registros, calificaciones y premiaciones. ¡Todo en un solo lugar!",
+    imageUrl: "/logo2.png"
   },
   {
-    title: "Personalize Your Profile",
-    description: "Add some personal details to customize your profile.",
-    imageUrl: "/catarsismusical-logo.png"
+    title: "Público Objetivo",
+    description: `
+    Organizadores de festivales culturales.
+
+Artistas y colectivos artísticos.
+
+Jurados y evaluadores de eventos.
+
+Instituciones y entidades de promoción cultural.
+`,
+    imageUrl: "/events-icon.png"
   },
   {
-    title: "Explore Features",
-    description: "Learn about the key features of our app to make the most out of it.",
-    imageUrl: "/catarsismusical-logo.png"
+    title: "Sistema de calificaciones en tiempo real.",
+    description: "Automatizar la generación de premiaciones y resultados.",
+    imageUrl: "/judges-icon.png"
   },
   {
-    title: "Get Started!",
-    description: "You're all set. Enjoy using the app and feel free to reach out if you need any help.",
-    imageUrl: "/catarsismusical-logo.png"
+    title: "Transparencia y eficiencia en la evaluación y premiación.",
+    description: "Reducción del tiempo y costo en la gestión de festivales.",
+    imageUrl: "/artworks-icon.png"
+  },
+  {
+    title: "Vamos!",
+    description: "Ya estas preparado para utilizar la plataforma intuitiva para la gestión de eventos.",
+    imageUrl: "/logo2.png"
   }
 ]
 
@@ -37,7 +50,7 @@ const Onboarding = () => {
       setCurrentStep(currentStep + 1)
     } else {
       // Navigate to the user's main dashboard or home after the final step
-      router.push('/user')
+      router.push('/dashboard')
     }
   }
 

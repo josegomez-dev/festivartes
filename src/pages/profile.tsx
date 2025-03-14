@@ -1,4 +1,5 @@
 import stylesChat from "./../app/assets/styles/ChatSidebar.module.css";
+import { useAuth } from "@/context/AuthContext";
 import styles from '@/app/assets/styles/AdminIndex.module.css';
 import UnauthorizedMessage from '@/components/UnauthorizedMessage';
 import { useGlobalContext } from '@/context/GlobalContext';
@@ -7,6 +8,7 @@ import { FaFacebook, FaInstagramSquare, FaTiktok, FaYoutube, FaPinterestSquare, 
 
 export default function Profile() {
   const { role, authenticated } = useGlobalContext();
+  const { user } = useAuth();
   
   if (!authenticated) {
     return <UnauthorizedMessage />;
@@ -33,7 +35,7 @@ export default function Profile() {
     image: string;
     socialLinks: SocialLinks;
   }>({
-    name: "Jose Alejandro Gomez Castro",
+    name: user?.displayName || "Set your name",
     bio: "Musician & Software Engineer",
     image: "", 
     socialLinks: {

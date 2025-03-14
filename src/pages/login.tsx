@@ -1,15 +1,19 @@
-import styles from '@/app/assets/styles/Auth.module.css';
+"use client"; // Required for Next.js App Router
+
 import { useGlobalContext } from '@/context/GlobalContext';
+import { useAuth } from "@/context/AuthContext";
 import { EMPTY_USER } from '@/types/userTypes';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
+import { use, useEffect, useRef, useState } from 'react';
+import { FaGoogle } from 'react-icons/fa';
 
 const LoginPage = () => {
-  const { setAuthenticated, setRole, setLoggedUser } = useGlobalContext()
+  const { setAuthenticated, setRole, setLoggedUser, loggedUser } = useGlobalContext();
+  const { user, signInWithGoogle, signIn, logout } = useAuth();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
   const router = useRouter()
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -22,33 +26,46 @@ const LoginPage = () => {
   };
 
   useEffect(() => {
+    logout();
     if (document.body.classList.contains('prevent-scroll')) {
       document.body.classList.remove('prevent-scroll');
     }
   }, []);
 
-  const handleLogin = () => {
-    // Perform authentication logic here (mocked)
-    let role = ''
-    if (email === 'admin') {
-      role = 'admin'
-    } else if (email === 'judge') {
-      role = 'judge'
-    } else {
-      role = 'user'
-    }
-    setRole(role);
-    setLoggedUser({ 
-      ...EMPTY_USER, 
-      email,
-    });
-    setAuthenticated(true);
-    playAudio();
-    router.push('/dashboard');
-  }
+  const handleLogin = async () => {
 
+    if (email === '' || password === '') {
+      setErrorMessage('Por favor, rellena todos los campos');
+      return;
+    }
+
+    try {
+      const response = await signIn(email, password);
+      console.log(response);
+      setRole('user');
+      setLoggedUser({ 
+        ...EMPTY_USER, 
+        email,
+      });
+      setAuthenticated(true);
+      playAudio();
+      router.push('/dashboard');
+    }
+    catch (error) {
+      setErrorMessage(error.message);
+      setTimeout(() => {
+        setErrorMessage('');
+      }
+      , 3000);
+    }    
+  }
+  
   return (
     <>
+      <br />
+      <br />
+      <br />
+      <br />
       <br />
       <br />
       <br />
@@ -59,9 +76,36 @@ const LoginPage = () => {
       <div className="auth-container">
         <div className="auth-form">
           <h2 className="auth-title">Bienvenido a <b>FESTIVARTES</b></h2>
+          <b style={{ textAlign: 'center' }}>{user?.displayName}</b>
+          <br />
           <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Correo electrónico" className="auth-input" required />
           <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Contraseña" className="auth-input" required />
+          {errorMessage !== '' && <p style={{ textAlign: 'center', color: 'red', background: 'black', borderRadius: '10px', width: '180px', margin: '0 auto', padding: '10px' }}>
+            {errorMessage}
+          </p>}
+          <br />
           <button type="submit" onClick={() => handleLogin()} className="auth-button">Iniciar sesión</button>
+          <br />
+          {!user && (
+            <>
+              <div className="external-logins">
+              <div>
+                <FaGoogle onClick={async () => {
+                  await signInWithGoogle();
+                  setRole('user');
+                  setLoggedUser({
+                    ...EMPTY_USER,
+                    email: user?.email,
+                    displayName: user?.displayName
+                  });
+                  setAuthenticated(true);
+                  playAudio();
+                  router.push('/dashboard');
+                }} />
+              </div>
+            </div>
+            </>
+          )}
           <p className="auth-link">
           ¿No tienes una cuenta?
             <b> &nbsp;

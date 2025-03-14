@@ -1,25 +1,39 @@
 // pages/signup.tsx
-import styles from '@/app/assets/styles/Auth.module.css';
 import { useGlobalContext } from '@/context/GlobalContext';
+import { useAuth } from "@/context/AuthContext";
 import { EMPTY_USER } from '@/types/userTypes';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 const SignUp = () => {
   const { setAuthenticated, setRole, setLoggedUser } = useGlobalContext()
+  const { user, signUp } = useAuth()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
   const router = useRouter()
 
-  const handleSignUp = () => {
-    // Perform signup logic here (mocked)
-    setRole('user')
-    setAuthenticated(true)
-    setLoggedUser({ ...EMPTY_USER, name, email })
-    router.push('/onboarding')
+  const handleSignUp = async () => {
+    if (name === '' || email === '' || password === '') {
+      setErrorMessage('Por favor, rellena todos los campos')
+      return
+    }
+    try {
+      await signUp(email, password)      
+      setRole('user')
+      setAuthenticated(true)
+      setLoggedUser({ ...EMPTY_USER, name, email })
+      router.push('/onboarding')  
+    } catch (error) {
+      setErrorMessage(error.message)
+      setTimeout(() => {
+        setErrorMessage('')
+      }, 3000)
+      return
+    }
+
   }
 
   return (
@@ -34,6 +48,9 @@ const SignUp = () => {
           <input type="text" onChange={(e) => setName(e.target.value)} placeholder="Nombre" className="auth-input" required />
           <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Correo electrónico" className="auth-input" required />
           <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Contraseña" className="auth-input" required />
+          {errorMessage !== '' && <p style={{ textAlign: 'center', color: 'red', background: 'black', borderRadius: '10px', width: '180px', margin: '0 auto', padding: '10px' }}>
+            {errorMessage}
+          </p>}
           <button type="submit" onClick={() => handleSignUp()} className="auth-button">Crear cuenta</button>
           <p className="auth-link">
           ¿Ya tienes una cuenta?
