@@ -23,17 +23,22 @@ export default function Profile() {
     profilePic: '/blank-profile-picture.png', // Default profile picture
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
     setProfile((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      const file = files[0];
       const imageUrl = URL.createObjectURL(file);
       setProfile((prev) => ({ ...prev, profilePic: imageUrl }));
     }
+  };
+
+  const requestRoleChange = () => {
+    alert('Role change requested');
   };
   
   return (
@@ -52,12 +57,12 @@ export default function Profile() {
 
         <div className="input-group">
           <label>Display Name</label>
-          <input type="text" name="displayName" value={profile.displayName} onChange={handleInputChange} />
+          <input type="text" name="displayName" value={profile.displayName || ''} onChange={handleInputChange} />
         </div>
 
         <div className="input-group">
           <label>Email</label>
-          <input type="email" name="email" value={profile.email} onChange={handleInputChange} />
+          <input type="email" name="email" value={profile.email || ''} onChange={handleInputChange} />
         </div>
 
         {/* <div className="input-group">
@@ -67,7 +72,7 @@ export default function Profile() {
 
         <div className="input-group">
           <label>Role</label>
-          <button className="role-change-button">Request Role Change</button>
+          <button onClick={requestRoleChange} className="role-change-button">Request Role Change</button>
           <input style={{maxWidth: '125px'}} type="text" name="role" value={profile.role} disabled className="disabled" />
           {/* <select name="role" value={profile.role} onChange={handleInputChange}>
             <option value="Admin">Admin</option>

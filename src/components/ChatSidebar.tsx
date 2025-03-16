@@ -1,10 +1,13 @@
+import { useAuth } from "@/context/AuthContext";
 import React, { useRef, useState } from "react";
 import styles from "./../app/assets/styles/ChatSidebar.module.css";
 
 const ChatSidebar = () => {
+  const { user } = useAuth();
+
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { sender: "admin", text: "Bienvenido, Jose al Chat General." },
+    { sender: "admin", text: `Bienvenido, ${user?.displayName} al Chat General.` },
   ]);
   const [newMessage, setNewMessage] = useState("");
 

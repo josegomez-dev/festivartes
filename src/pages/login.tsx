@@ -83,9 +83,6 @@ const LoginPage = () => {
       <div className="auth-container">
         <div className="auth-form">
           <h2 className="auth-title">Bienvenido a <b>FESTIVARTES</b></h2>
-          <p>
-            Please use <strong>google login</strong> to access the platform. <br /> 
-          </p>
           <b style={{ textAlign: 'center' }}>{user?.displayName}</b>
           <br />
           <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Correo electrónico" className="auth-input disabled" disabled required />
@@ -96,6 +93,10 @@ const LoginPage = () => {
           <br />
           <button type="submit" onClick={() => handleLogin()} className="auth-button disabled" disabled>Iniciar sesión</button>
           <br />
+          <p>
+            Please use <strong>google login</strong> to access the platform. <br /> 
+          </p>
+
           {!user && (
             <>
               <div className="external-logins">

@@ -990,9 +990,13 @@ Down
   border: 1px solid white;
   border-radius: 10px;
   padding: 0 5px;
+  transition: all 0.5s;
 }
 
-
+.external-logins .google-login:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
 
 
 
@@ -1065,14 +1069,12 @@ Down
 }
 
 .role-change-button {
-  background: #32acc0;
   color: white;
   padding: 8px 16px;
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s;
   float: right;
-  position: absolute;
-  right: 35px;
-  margin-top: -1.5px;
+  width: 170px;
+  margin-top: -2px;
 }
