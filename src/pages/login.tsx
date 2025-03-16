@@ -52,13 +52,20 @@ const LoginPage = () => {
       router.push('/dashboard');
     }
     catch (error) {
-      setErrorMessage(error.message);
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage('An unknown error occurred');
+      }
       setTimeout(() => {
         setErrorMessage('');
       }
       , 3000);
     }    
   }
+
+  const _userEmail = user?.email
+  const _userDisplayName = user?.displayName
   
   return (
     <>
@@ -95,8 +102,8 @@ const LoginPage = () => {
                   setRole('user');
                   setLoggedUser({
                     ...EMPTY_USER,
-                    email: user?.email,
-                    displayName: user?.displayName
+                    email: _userEmail || '',
+                    displayName: _userDisplayName || '',
                   });
                   setAuthenticated(true);
                   playAudio();

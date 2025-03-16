@@ -24,10 +24,10 @@ const SignUp = () => {
       await signUp(email, password)      
       setRole('user')
       setAuthenticated(true)
-      setLoggedUser({ ...EMPTY_USER, name, email })
+      setLoggedUser({ ...EMPTY_USER, displayName: name, email })
       router.push('/onboarding')  
     } catch (error) {
-      setErrorMessage(error.message)
+      setErrorMessage((error as Error).message)
       setTimeout(() => {
         setErrorMessage('')
       }, 3000)
