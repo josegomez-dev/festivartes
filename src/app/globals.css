@@ -192,13 +192,16 @@ b {
 .menu-dropdown {
   margin-top: 10px;
   
-  background: black; /* Semi-transparent background */
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+  backdrop-filter: blur(100px); /* Apply the blur effect */
+  border: 1px solid rgba(255, 255, 255, 0.8); /* Optional border for added style */
 
   border-radius: 8px;
   padding: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   display: none;
   flex-direction: column;
+  color: orange;
 }
 
 .menu-item {
@@ -978,9 +981,98 @@ Down
   margin: 0 auto;
   align-items: center;
   gap: 25px;
-  margin-top: 20px;
+  margin-top: 10px;
+  border-radius: 50%;
 }
 
-.external-logins div {
+.external-logins .google-login {
   font-size: 2rem;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 0 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #32acc0;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  border-radius: 10px;
+  max-width: 350px;
+  margin: 20px auto;
+}
+
+.profile-pic-label {
+  cursor: pointer;
+  display: block;
+  text-align: center;
+}
+
+.profile-pic {
+  border-radius: 50%;
+  border: 2px solid gray;
+  transition: opacity 0.3s;
+  width: 100px;
+}
+
+.profile-pic:hover {
+  opacity: 0.8;
+}
+
+.input-group {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.input-group .disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.save-btn:hover {
+  background: #0056b3;
+}
+
+.role-change-button {
+  background: #32acc0;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+  float: right;
+  position: absolute;
+  right: 35px;
+  margin-top: -1.5px;
 }

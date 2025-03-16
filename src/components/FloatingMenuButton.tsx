@@ -63,13 +63,12 @@ const FloatingMenuButton = () => {
     return;
   };
 
-  const menuDropdown = document.querySelector('.menu-dropdown');
+  const menuDropdown = document.querySelector('.menu-dropdown') as HTMLElement;
 
   const toggleDropdown = () => {
     setIsMenuOpen(!isMenuOpen);
-    if (menuDropdown && menuDropdown instanceof HTMLElement) {
-      menuDropdown.style.display = isMenuOpen ? 'none' : 'flex';
-    }
+    
+    (menuDropdown as HTMLElement).style.display = 'flex';
   };
   
   return (

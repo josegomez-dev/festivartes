@@ -83,34 +83,37 @@ const LoginPage = () => {
       <div className="auth-container">
         <div className="auth-form">
           <h2 className="auth-title">Bienvenido a <b>FESTIVARTES</b></h2>
+          <p>
+            Please use <strong>google login</strong> to access the platform. <br /> 
+          </p>
           <b style={{ textAlign: 'center' }}>{user?.displayName}</b>
           <br />
-          <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Correo electrónico" className="auth-input" required />
-          <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Contraseña" className="auth-input" required />
+          <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Correo electrónico" className="auth-input disabled" disabled required />
+          <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Contraseña" className="auth-input disabled" disabled required />
           {errorMessage !== '' && <p style={{ textAlign: 'center', color: 'red', background: 'black', borderRadius: '10px', width: '180px', margin: '0 auto', padding: '10px' }}>
             {errorMessage}
           </p>}
           <br />
-          <button type="submit" onClick={() => handleLogin()} className="auth-button">Iniciar sesión</button>
+          <button type="submit" onClick={() => handleLogin()} className="auth-button disabled" disabled>Iniciar sesión</button>
           <br />
           {!user && (
             <>
               <div className="external-logins">
-              <div>
-                <FaGoogle onClick={async () => {
-                  await signInWithGoogle();
-                  setRole('user');
-                  setLoggedUser({
-                    ...EMPTY_USER,
-                    email: _userEmail || '',
-                    displayName: _userDisplayName || '',
-                  });
-                  setAuthenticated(true);
-                  playAudio();
-                  router.push('/dashboard');
-                }} />
+                <div className='google-login'>
+                  <FaGoogle style={{ marginTop: '8px' }} onClick={async () => {
+                    await signInWithGoogle();
+                    setRole('user');
+                    setLoggedUser({
+                      ...EMPTY_USER,
+                      email: _userEmail || '',
+                      displayName: _userDisplayName || '',
+                    });
+                    setAuthenticated(true);
+                    playAudio();
+                    router.push('/dashboard');
+                  }} />
+                </div>
               </div>
-            </div>
             </>
           )}
           <p className="auth-link">
