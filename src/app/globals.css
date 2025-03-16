@@ -1026,13 +1026,11 @@ Down
 
 .profile-pic {
   border-radius: 50%;
-  border: 2px solid gray;
-  transition: opacity 0.3s;
   width: 100px;
 }
 
 .profile-pic:hover {
-  opacity: 0.8;
+  opacity: 0.5;
 }
 
 .input-group {

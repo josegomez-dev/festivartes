@@ -83,7 +83,7 @@ const LoginPage = () => {
       <div className="auth-container">
         <div className="auth-form">
           <h2 className="auth-title">Bienvenido a <b>FESTIVARTES</b></h2>
-          <b style={{ textAlign: 'center' }}>{user?.displayName}</b>
+          {/* <b style={{ textAlign: 'center' }}>{user?.displayName}</b> */}
           <br />
           <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Correo electrónico" className="auth-input" required />
           <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Contraseña" className="auth-input" required />

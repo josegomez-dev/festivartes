@@ -63,12 +63,21 @@ const FloatingMenuButton = () => {
     return;
   };
 
-  const menuDropdown = document.querySelector('.menu-dropdown') as HTMLElement;
 
-  const toggleDropdown = () => {
-    setIsMenuOpen(!isMenuOpen);
-    
-    (menuDropdown as HTMLElement).style.display = 'flex';
+  const openDropdown = () => {
+    if (isMenuOpen) {
+      closeDropdown();
+    } else {
+      const menuDropdown = document.querySelector('.menu-dropdown') as HTMLElement;
+      setIsMenuOpen(true);
+      menuDropdown.style.display = 'block';  
+    }
+  };
+
+  const closeDropdown = () => {
+    const menuDropdown = document.querySelector('.menu-dropdown') as HTMLElement;
+    setIsMenuOpen(false);
+    menuDropdown.style.display = 'none';
   };
   
   return (
@@ -125,7 +134,7 @@ const FloatingMenuButton = () => {
           ))}
         </div>
         <br />
-        <button className="menu-button" onClick={() => toggleDropdown()}>
+        <button className="menu-button" onClick={() => openDropdown()}>
           <FaCirclePlus className="floating-menu-button" />
         </button>
       </div>

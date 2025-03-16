@@ -29,8 +29,8 @@ const EventDetail = ({ }) => {
             className='project-thumbnail-wrapper'
           />
           <br />
-          <p ><b className='bolder-text'>Fecha</b>: {project.date}</p>
-          <p ><b className='bolder-text'>Ubicación</b>: {project.location}</p>      
+          <p ><b className='bolder-text'>Fecha:</b> {project.date}</p>
+          <p ><b className='bolder-text'>Ubicación:</b> {project.location}</p>      
           <br />
           <p className='overflow-area'>
             {project.description}

@@ -152,7 +152,7 @@ const ArtworkRegisterForm = () => {
           required
         />
 
-        <button type="submit" className={styles.submitButton}>
+        <button type="submit" className={`${styles.submitButton} disabled`} disabled>
           <b>Enviar Formulario</b>
         </button>
       </form>

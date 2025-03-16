@@ -77,7 +77,7 @@ const InviteRegisterForm = () => {
           rows={4}
         ></textarea>
 
-        <button type="submit" className={styles.submitButton}>
+        <button type="submit" className={`${styles.submitButton} disabled`} disabled>
           <b>Enviar Formulario</b>
         </button>
       </form>

@@ -16,7 +16,7 @@ const SignUp = () => {
   const router = useRouter()
 
   const handleSignUp = async () => {
-    if (name === '' || email === '' || password === '') {
+    if (email === '' || password === '') {
       setErrorMessage('Por favor, rellena todos los campos')
       return
     }
@@ -24,7 +24,7 @@ const SignUp = () => {
       await signUp(email, password)      
       setRole('user')
       setAuthenticated(true)
-      setLoggedUser({ ...EMPTY_USER, displayName: name, email })
+      setLoggedUser({ ...EMPTY_USER, email })
       router.push('/onboarding')  
     } catch (error) {
       setErrorMessage((error as Error).message)
@@ -45,7 +45,7 @@ const SignUp = () => {
       <div className="auth-container">
         <div className="auth-form">
           <h2 className="auth-title">Crea tu cuenta en <b>FESTIVARTES</b></h2>
-          <input type="text" onChange={(e) => setName(e.target.value)} placeholder="Nombre" className="auth-input" required />
+          {/* <input type="text" onChange={(e) => setName(e.target.value)} placeholder="Nombre" className="auth-input" required /> */}
           <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Correo electrónico" className="auth-input" required />
           <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Contraseña" className="auth-input" required />
           {errorMessage !== '' && <p style={{ textAlign: 'center', color: 'red', background: 'black', borderRadius: '10px', width: '180px', margin: '0 auto', padding: '10px' }}>

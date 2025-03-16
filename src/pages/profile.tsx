@@ -23,6 +23,8 @@ export default function Profile() {
     profilePic: '/blank-profile-picture.png', // Default profile picture
   });
 
+  console.log(user, loggedUser);
+
   const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
     setProfile((prev) => ({ ...prev, [name]: value }));
@@ -55,13 +57,13 @@ export default function Profile() {
           <input id="profile-pic" type="file" accept="image/*" className="hidden" onChange={handleImageChange} />
         </label>
 
-        <div className="input-group">
-          <label>Display Name</label>
+        {/* <div className="input-group">
+          <label>Nombre</label>
           <input type="text" name="displayName" value={profile.displayName || ''} onChange={handleInputChange} />
-        </div>
+        </div> */}
 
         <div className="input-group">
-          <label>Email</label>
+          <label>Correo electronico</label>
           <input type="email" name="email" value={profile.email || ''} onChange={handleInputChange} />
         </div>
 
@@ -71,8 +73,8 @@ export default function Profile() {
         </div> */}
 
         <div className="input-group">
-          <label>Role</label>
-          <button onClick={requestRoleChange} className="role-change-button">Request Role Change</button>
+          <label>Rol de Usuario</label>
+          <button onClick={requestRoleChange} className="role-change-button disabled" disabled>Solicitar Actualización</button>
           <input style={{maxWidth: '125px'}} type="text" name="role" value={profile.role} disabled className="disabled" />
           {/* <select name="role" value={profile.role} onChange={handleInputChange}>
             <option value="Admin">Admin</option>
@@ -83,7 +85,7 @@ export default function Profile() {
 
         <br />
 
-        <button className={authStyles['auth-button']}>Save Changes</button>
+        <button className={`${authStyles['auth-button']} disabled`} disabled>Guardar Cambios</button>
       </div>
     </div>
   );
