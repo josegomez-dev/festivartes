@@ -85,16 +85,16 @@ const LoginPage = () => {
           <h2 className="auth-title">Bienvenido a <b>FESTIVARTES</b></h2>
           <b style={{ textAlign: 'center' }}>{user?.displayName}</b>
           <br />
-          <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Correo electrónico" className="auth-input disabled" disabled required />
-          <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Contraseña" className="auth-input disabled" disabled required />
+          <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Correo electrónico" className="auth-input" required />
+          <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Contraseña" className="auth-input" required />
           {errorMessage !== '' && <p style={{ textAlign: 'center', color: 'red', background: 'black', borderRadius: '10px', width: '180px', margin: '0 auto', padding: '10px' }}>
             {errorMessage}
           </p>}
           <br />
-          <button type="submit" onClick={() => handleLogin()} className="auth-button disabled" disabled>Iniciar sesión</button>
+          <button type="submit" onClick={() => handleLogin()} className="auth-button">Iniciar sesión</button>
           <br />
           <p>
-            Please use <strong>google login</strong> to access the platform. <br /> 
+            Tambien puedes usar el boton de <strong>Google</strong> para acceder a la plataforma. <br /> 
           </p>
 
           {!user && (
