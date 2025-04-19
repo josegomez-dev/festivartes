@@ -1,14 +1,12 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
 import SubMenu from '@/components/SubMenu';
-import { MOCK_DATA_ARTWORKS } from '@/utils/constants';
 import { useRouter } from 'next/router';
-import { IoIosMusicalNotes } from "react-icons/io";
-import { FaVideo } from "react-icons/fa6";
-import { MdOutlineMenuBook } from "react-icons/md";
 import AudioPlayer from "@/components/AudioPlayer";
 import VideoPlayer from "@/components/VideoPlayer";
 import DocumentEditor from "@/components/DocumentEditor";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from './../../firebaseConfig';
 
 const videos = [
   { id: 1, title: "Video 1", src: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4" },
@@ -21,7 +19,32 @@ const ArtworkDetail = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [activeTab, setActiveTab] = useState('document'); // Active tab state
 
-  const project = MOCK_DATA_ARTWORKS.find(p => p.id === parseInt(id as string, 10));
+  const [data, setData] = useState<{ id: string; [key: string]: any }[]>([]);
+  const [project, setProject] = useState<{ id: string; [key: string]: any } | null>(null);
+
+
+  const fetchEvents = async (id: string | string[] | undefined) => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'artworks'));
+      const events = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      const selectedProject = events.find(event => event.id === id);
+      if (selectedProject) {
+        setProject(selectedProject);
+      }
+      setData(events);
+      return events;
+    } catch (error) {
+      console.error('Error fetching events:', error);
+      return [];
+    }
+  };
+
+  useEffect(() => {
+    fetchEvents(id);
+  }, []);
 
   if (!project) {
     return <div>Loading...</div>;
@@ -59,15 +82,14 @@ const ArtworkDetail = () => {
           <br />
           <div>
             <p><b>Categoría de la Obra</b></p>
-            <span className='bolder-text'>Cantautor Solista</span> 
+            <span className='bolder-text'>{project?.category}</span> 
             <br />
             <br />
-            <div className='links-spaced'>
-              <AudioPlayer src="https://file-examples.com/storage/fe46ad26fa67d4043a4b9e6/2017/11/file_example_MP3_700KB.mp3" title="Sample Track" />
-            </div>
-            <br />
-            <hr />
-            <br />
+            {project?.audio && (
+              <div className='links-spaced'>
+                <AudioPlayer src="https://file-examples.com/storage/fe46ad26fa67d4043a4b9e6/2017/11/file_example_MP3_700KB.mp3" title="Sample Track" />
+              </div>
+              )}
             <p><b>Archivos de la Obra</b></p>
             <br />
 
@@ -79,12 +101,12 @@ const ArtworkDetail = () => {
               >
                 Editor de Documentos
               </button>
-              <button 
+              {/* <button 
                 className={activeTab === 'video' ? 'active' : ''}
                 onClick={() => handleTabClick('video')}
               >
                 Reproductor de Video
-              </button>
+              </button> */}
               <button 
                 className={activeTab === 'live' ? 'active' : ''}
                 onClick={() => handleTabClick('live')}

@@ -4,12 +4,38 @@ import CoreSectionJudges from '@/components/CoreSectionJudges';
 import SubMenu from '@/components/SubMenu';
 import { MOCK_DATA_EVENTS } from '@/utils/constants';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from './../../firebaseConfig';
 
 const EventDetail = ({ }) => {
   const router = useRouter();
   const { id } = router.query; // Dynamic route parameter
+  const [data, setData] = useState<{ id: string; [key: string]: any }[]>([]);
+  const [project, setProject] = useState<{ id: string; [key: string]: any } | null>(null);
 
-  const project = MOCK_DATA_EVENTS.find(p => p.id === parseInt(id as string, 10));
+  const fetchEvents = async (id: string | string[] | undefined) => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'events'));
+      const events = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      const selectedProject = events.find(event => event.id === id);
+      if (selectedProject) {
+        setProject(selectedProject);
+      }
+      setData(events);
+      return events;
+    } catch (error) {
+      console.error('Error fetching events:', error);
+      return [];
+    }
+  };
+
+  useEffect(() => {
+    fetchEvents(id);
+  }, []);
 
   if (!project) {
     return <div>Loading...</div>;
@@ -29,7 +55,7 @@ const EventDetail = ({ }) => {
             className='project-thumbnail-wrapper'
           />
           <br />
-          <p ><b className='bolder-text'>Fecha:</b> {project.date}</p>
+          <p ><b className='bolder-text'>Fecha:</b> {project.date.toDate().toLocaleDateString()}</p>
           <p ><b className='bolder-text'>Ubicación:</b> {project.location}</p>      
           <br />
           <p className='overflow-area'>
@@ -53,10 +79,10 @@ const EventDetail = ({ }) => {
 
       <CoreSectionJudges filterBy={project.judges} />
 
-      <br />
+      {/* <br />
       <hr />
 
-      <CoreSectionArtworks filterBy={project.artworks} />
+      <CoreSectionArtworks filterBy={project.artworks} /> */}
 
     </div>
   );

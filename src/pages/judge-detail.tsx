@@ -2,12 +2,40 @@ import styles from '@/app/assets/styles/AdminIndex.module.css';
 import SubMenu from '@/components/SubMenu';
 import { MOCK_DATA_JUDGES } from '@/utils/constants';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from './../../firebaseConfig';
 
 const JudgeDetail = ({ }) => {
   const router = useRouter();
   const { id } = router.query; // Dynamic route parameter
+  const [data, setData] = useState<{ id: string; [key: string]: any }[]>([]);
+  const [project, setProject] = useState<{ id: string; [key: string]: any } | null>(null);
 
-  const project = MOCK_DATA_JUDGES.find(p => p.id === parseInt(id as string, 10));
+  const fetchEvents = async (id: string | string[] | undefined) => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'judges'));
+      const events = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      const selectedProject = events.find(event => event.id === id);
+      if (selectedProject) {
+        setProject(selectedProject);
+      }
+      setData(events);
+      return events;
+    } catch (error) {
+      console.error('Error fetching events:', error);
+      return [];
+    }
+  };
+
+  useEffect(() => {
+    fetchEvents(id);
+  }, []);
+
+  // const project = MOCK_DATA_JUDGES.find(p => p.id === parseInt(id as string, 10));
 
   if (!project) {
     return <div>Loading...</div>;
@@ -30,23 +58,16 @@ const JudgeDetail = ({ }) => {
           <div>
             <p><b>Información de Contacto</b></p>
             <p className='bolder-text'>
-              Jose Alejandro Gomez Castro | Software Engineer, Creative Technologist & Musician
+              {project?.name} | {project?.bio || 'Agrega una descripcion'}
             </p>
-            <br />
-            <hr />
             <br />
             <p>
-              <span className='bolder-text'>Bio:</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, vero iusto eaque placeat eos sapiente labore esse excepturi qui consectetur.
+              Correo electronico:&nbsp;{project?.email || 'Agrega un correo electronico'}
             </p>
-            <br />
-            <hr />
-            <br />
-            <ul style={{ listStyleType: 'none' }}>
-              <li>josegomez.dev@gmail.com</li>
-              <li>+506 6240 29 74</li>
-            </ul>
+            <p>
+              Telefono:&nbsp;{project?.phone || 'Agrega un numero de telefono'}
+            </p>
           </div>
-
           {/* Add more project details as needed */}
         </div>
       </div>

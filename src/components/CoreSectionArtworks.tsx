@@ -1,8 +1,10 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
-import { MOCK_DATA_ARTWORKS } from '@/utils/constants';
 import ObjectMiniature from './ObjectMiniature';
 import { RiBubbleChartFill } from 'react-icons/ri';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from './../../firebaseConfig';
 
 interface CoreSectionArtworksProps {
   filterBy?: any
@@ -10,7 +12,26 @@ interface CoreSectionArtworksProps {
 
 const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
   
-  const data = filterBy ? MOCK_DATA_ARTWORKS.filter(item => filterBy.includes(item.id)) : MOCK_DATA_ARTWORKS;
+  const [data, setData] = useState<{ id: string; [key: string]: any }[]>([]);
+
+  const fetchEvents = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'artworks'))
+      const events = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }))
+      setData(events);
+      return events
+    } catch (error) {
+      console.error('Error fetching events:', error)
+      return []
+    }
+  }
+
+  useEffect(() => {
+    fetchEvents()
+  }, []);
 
   return (
       <div className=''>

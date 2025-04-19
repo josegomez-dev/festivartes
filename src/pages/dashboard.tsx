@@ -8,9 +8,8 @@ import CoreSectionJudges from '@/components/CoreSectionJudges';
 import BannerFooter from '@/components/BannerFooter';
 import SubMenu from '@/components/SubMenu';
 
-
 export default function Dashboard() {
-  const { role, authenticated } = useGlobalContext()
+  const { role, authenticated, loggedUser } = useGlobalContext()
 
   if (!authenticated) {
     // Redirect to login if not admin or not authenticated

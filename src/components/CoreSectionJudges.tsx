@@ -3,14 +3,38 @@ import { MOCK_DATA_JUDGES } from '@/utils/constants';
 import ObjectMiniature from './ObjectMiniature';
 import Image from 'next/image';
 import { RiBubbleChartFill } from 'react-icons/ri';
+import { useEffect, useState } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from './../../firebaseConfig'; 
 
 interface CoreSectionJudgesProps {
   filterBy?: any
 }
 
 const CoreSectionJudges = ({ filterBy }: CoreSectionJudgesProps) => {
+
+  const [data, setData] = useState<{ id: string; [key: string]: any }[]>([]);
+
+  const fetchEvents = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'judges'))
+      const events = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }))
+      setData(events);
+      return events
+    } catch (error) {
+      console.error('Error fetching events:', error)
+      return []
+    }
+  }
+
+  useEffect(() => {
+    fetchEvents()
+  }, []);
   
-  const data = filterBy ? MOCK_DATA_JUDGES.filter(item => filterBy.includes(item.id)) : MOCK_DATA_JUDGES;
+  // const data = filterBy ? MOCK_DATA_JUDGES.filter(item => filterBy.includes(item.id)) : MOCK_DATA_JUDGES;
 
   return (
     <div className={`${styles.card} top-spaced`}>

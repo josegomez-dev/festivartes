@@ -1,10 +1,32 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
-import { MOCK_DATA_EVENTS } from '@/utils/constants';
 import ObjectMiniature from './ObjectMiniature';
 import Image from 'next/image';
 import { RiBubbleChartFill } from 'react-icons/ri';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from './../../firebaseConfig'; // update path if needed
+import { useEffect, useState } from 'react';
 
 const CoreSectionFestivartes = ({ }) => {
+  const [data, setData] = useState<{ id: string; [key: string]: any }[]>([]);
+
+  const fetchEvents = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'events'))
+      const events = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }))
+      setData(events);
+      return events
+    } catch (error) {
+      console.error('Error fetching events:', error)
+      return []
+    }
+  }
+
+  useEffect(() => {
+    fetchEvents()
+  }, []);
 
   return (
       <>
@@ -27,7 +49,7 @@ const CoreSectionFestivartes = ({ }) => {
                 <br />
               </span>
             </p>
-            {MOCK_DATA_EVENTS.length <= 0 ? 
+            {data.length <= 0 ? 
             <div className={styles.grid}>
                 <div className={styles.card}>
                 <h3>Registra tu primer Evento Calificado</h3>
@@ -35,7 +57,7 @@ const CoreSectionFestivartes = ({ }) => {
                 </div> 
             </div> 
             : 
-            <ObjectMiniature projects={MOCK_DATA_EVENTS} type={'event'} />
+            <ObjectMiniature projects={data} type={'event'} />
             }
         </div>
       </>
