@@ -7,8 +7,7 @@
   border-radius: 8px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   overflow-y: scroll; /* Ensures scrolling section */
-  height: 480px; /* Takes the taller height */
-
+  height: 420px; /* Takes the taller height */
   background: #32acc0;
   backdrop-filter: blur(100px); /* Apply the blur effect */
   border: 1px solid rgba(255, 255, 255, 0.2); /* Optional border for added style */

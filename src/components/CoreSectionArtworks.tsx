@@ -58,8 +58,8 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
           {data.length <= 0 ? 
             <div className={styles.grid}>
               <div className={styles.card}>
-                <h3>No hay registros de obras</h3>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <h3>¡Ups! No hay obras registradas</h3>
+                <p>Aún no se han registrado obras en esta cuenta. Cuando se agregue una, aparecerá aquí automáticamente.</p>
               </div> 
             </div> 
             : 

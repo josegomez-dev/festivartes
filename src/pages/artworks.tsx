@@ -1,13 +1,13 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
 import UnauthorizedMessage from '@/components/UnauthorizedMessage';
-import { useGlobalContext } from '@/context/GlobalContext';
+import { useAuth } from '@/context/AuthContext';
 import SidebarMenu from '@/components/Sidebar-menu';
 import FloatingMenuButton from '@/components/FloatingMenuButton';
 import CoreSectionArtworks from '@/components/CoreSectionArtworks';
 import SubMenu from '@/components/SubMenu';
 
 export default function Artworks() {
-  const { role, authenticated } = useGlobalContext()
+  const { role, authenticated } = useAuth()
 
   if (!authenticated) {
     // Redirect to login if not admin or not authenticated

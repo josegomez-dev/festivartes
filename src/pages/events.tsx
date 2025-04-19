@@ -1,13 +1,13 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
 import UnauthorizedMessage from '@/components/UnauthorizedMessage';
-import { useGlobalContext } from '@/context/GlobalContext';
+import { useAuth } from '@/context/AuthContext';
 import SidebarMenu from '@/components/Sidebar-menu';
 import FloatingMenuButton from '@/components/FloatingMenuButton';
 import CoreSectionFestivartes from '@/components/CoreSectionFestivartes';
 import SubMenu from '@/components/SubMenu';
 
 export default function Events() {
-  const { role, authenticated } = useGlobalContext()
+  const { role, authenticated } = useAuth()
 
   console.log(role);
   if (!authenticated) {

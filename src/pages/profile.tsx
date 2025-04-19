@@ -2,8 +2,7 @@ import { useAuth } from "@/context/AuthContext";
 import styles from '@/app/assets/styles/AdminIndex.module.css';
 import authStyles from '@/app/assets/styles/Auth.module.css';
 import UnauthorizedMessage from '@/components/UnauthorizedMessage';
-import { useGlobalContext } from '@/context/GlobalContext';
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaFacebook, FaInstagramSquare, FaTiktok, FaYoutube, FaPinterestSquare, FaMedium, FaLinkedin, FaGithub, FaDiscord, FaSoundcloud } from "react-icons/fa";
 import Image from "next/image";
 import { doc, updateDoc, getDoc } from "firebase/firestore";
@@ -11,8 +10,7 @@ import { db, storage } from "./../../firebaseConfig"
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 export default function Profile() {
-  const { role, authenticated } = useGlobalContext();
-  const { user } = useAuth();
+  const { user, role, authenticated } = useAuth();
   const [loading, setLoading] = useState(true);
 
   const [accountData, setAccountData] = useState({

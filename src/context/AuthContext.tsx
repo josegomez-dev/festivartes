@@ -18,6 +18,12 @@ import { EMPTY_USER } from "@/types/userTypes";
 interface AuthContextType {
   user: User | null;
   loading: boolean;
+  
+  role: string
+  setRole: React.Dispatch<React.SetStateAction<string>>
+  authenticated: boolean
+  setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
+
   signUp: (email: string, password: string) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
@@ -30,6 +36,8 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [role, setRole] = useState<string>('user')
+  const [authenticated, setAuthenticated] = useState<boolean>(false)
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -44,6 +52,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
               ...user,
               ...accountData,
             });
+            setAuthenticated(true);
+            setRole(accountData.role || "user");
+            console.log("User signed in and account fetched successfully.");
           } else {
             console.warn("No account document found for this user.");
           }
@@ -82,7 +93,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         updatedAt: new Date(),        
       });
   
-      setUser(user);
+      setUser(_user as any);
+      setAuthenticated(true);
+      setRole(_user.role || "user");
+
       console.log("User and profile created successfully.");
     } catch (error) {
       console.error("Error signing up:", error);
@@ -107,6 +121,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           ...user,
           ...accountData,
         });
+        setAuthenticated(true);
+        setRole(accountData.role || "user");
   
         console.log("User signed in and account fetched successfully.");
       } else {
@@ -130,11 +146,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const accountSnap = await getDoc(accountRef);
       if (accountSnap.exists()) {
         const accountData = accountSnap.data();
+
         // Update global user state here
         setUser({
           ...user,
           ...accountData,
         });
+        setAuthenticated(true);
+        setRole(accountData.role || "user");
+
         console.log("User signed in with Google and account fetched successfully.");
         return;
       }
@@ -147,6 +167,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const logout = async () => {
     await signOut(auth);
     setUser(null);
+    setAuthenticated(false);
+    setRole("user");
     console.log("User signed out successfully.");
   };
 
@@ -156,7 +178,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, signUp, signIn, signInWithGoogle, logout, resetPassword }}
+      value={{ 
+        user, 
+        loading, 
+        role,
+        setRole,
+        authenticated,
+        setAuthenticated,
+        signUp, 
+        signIn, 
+        signInWithGoogle, 
+        logout, 
+        resetPassword 
+      }}
     >
       {children}
     </AuthContext.Provider>

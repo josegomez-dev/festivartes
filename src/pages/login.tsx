@@ -1,16 +1,13 @@
 "use client"; // Required for Next.js App Router
 
-import { useGlobalContext } from '@/context/GlobalContext';
 import { useAuth } from "@/context/AuthContext";
-import { EMPTY_USER } from '@/types/userTypes';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { use, useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { FaGoogle } from 'react-icons/fa';
 
 const LoginPage = () => {
-  const { setAuthenticated, setRole } = useGlobalContext();
-  const { user, signInWithGoogle, signIn, logout, resetPassword } = useAuth();
+  const { user, signInWithGoogle, signIn, resetPassword } = useAuth();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
@@ -25,15 +22,7 @@ const LoginPage = () => {
     }
   };
 
-  useEffect(() => {
-    // logout();
-    // if (document.body.classList.contains('prevent-scroll')) {
-    //   document.body.classList.remove('prevent-scroll');
-    // }
-  }, []);
-
   const handleLogin = async () => {
-
     if (email === '' || password === '') {
       setErrorMessage('Por favor, rellena todos los campos');
       return;
@@ -42,8 +31,6 @@ const LoginPage = () => {
     try {
       const response = await signIn(email, password);
       console.log(response);
-      setRole('user');
-      setAuthenticated(true);
       playAudio();
       router.push('/dashboard');
     }
@@ -61,7 +48,6 @@ const LoginPage = () => {
   }
 
   if (user) {
-    setAuthenticated(true);
     playAudio();
     router.push('/dashboard');
   }
@@ -103,8 +89,6 @@ const LoginPage = () => {
                 <div className='google-login'>
                   <FaGoogle style={{ marginTop: '8px' }} onClick={async () => {
                     await signInWithGoogle();
-                    setRole('user');
-                    setAuthenticated(true);
                     playAudio();
                     router.push('/dashboard');
                   }} />

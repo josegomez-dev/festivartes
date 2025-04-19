@@ -1,11 +1,8 @@
 import Link from 'next/link';
 import { IoSettings } from "react-icons/io5";
-import { useGlobalContext } from '../context/GlobalContext'
 import Image from 'next/image';
 
 const SidebarMenu = () => {
-  // const { role } = useGlobalContext()
-
   return (
       <div className="sidebar">
         <nav>

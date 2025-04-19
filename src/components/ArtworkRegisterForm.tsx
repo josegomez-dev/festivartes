@@ -1,15 +1,29 @@
 // components/ArtworkRegisterForm.tsx
 import React, { useState } from "react";
 import styles from "./../app/assets/styles/RegisterForm.module.css";
+import { db, storage } from "./../../firebaseConfig"
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { setDoc, doc } from 'firebase/firestore';
+import Image from "next/image";
+import { useAuth } from "./../context/AuthContext";
 
 const ArtworkRegisterForm = () => {
-  const [formData, setFormData] = useState({
+  const { user } = useAuth();
+
+  const [formData, setFormData] = useState<{
+    title: string;
+    artist: string;
+    stars: number;
+    description: string;
+    category: string;
+    thumbnail: string;
+  }>({
     title: "",
     artist: "",
     description: "",
-    year: "",
+    stars: 0,
     category: "",
-    image: null,
+    thumbnail: '/logo2.png',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -20,19 +34,67 @@ const ArtworkRegisterForm = () => {
     }));
   };
 
+  const uploadArtworksPhoto = async (file: File, userId: string) => {
+    try {
+      const storageRef = ref(storage, `artworks/${userId}/${file.name}`);
+      await uploadBytes(storageRef, file); // Upload the file
+      const downloadURL = await getDownloadURL(storageRef); // Get the download URL
+      return downloadURL;
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      throw error;
+    }
+  };
+  
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // if (e.target.files && e.target.files[0]) {
-    //   setFormData((prevData) => ({
-    //     ...prevData,
-    //     image: e.target.files[0],
-    //   }));
-    // }
+    const file = e.target.files?.[0];
+    if (file) {
+      if (user?.uid) {
+        uploadArtworksPhoto(file, user.uid).then((url) => {
+          setFormData((prevData) => ({
+            ...prevData,
+            thumbnail: url,
+          }));
+        }).catch((error) => {
+          console.error("Error uploading image:", error);
+        });
+      } else {
+        console.error("User ID is undefined. Cannot upload the image.");
+      }
+    }    
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Add logic to send data to the backend or state management system
+    
+    if (!user) {
+      console.error("User is not logged in.");
+      return;
+    }
+
+    const _artwork = {
+      uid: user.uid,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+
+    // Create associated account in Firestore
+    await setDoc(doc(db, "artworks", user.uid), {
+      ..._artwork,
+      ...formData,
+      createdAt: new Date(),
+      updatedAt: new Date(),        
+    });
+
+    alert("Obra de arte registrada con éxito");
+    setFormData({
+      title: "",
+      artist: "",
+      description: "",
+      stars: 0,
+      category: "",
+      thumbnail: '/logo2.png',
+    });    
   };
 
   return (
@@ -52,18 +114,26 @@ const ArtworkRegisterForm = () => {
           required
         />
 
-        <label className={styles.label} htmlFor="artist">
-          <b>Artista o Compositor</b>
+
+        <label className={styles.label} htmlFor="image">
+          <b>Foto o Imagen de la Obra</b>
+          <Image
+            src={formData.thumbnail}
+            alt="Artwork Picture"
+            width={100}
+            height={100}
+          />
         </label>
         <input
-          type="text"
-          id="artist"
-          name="artist"
-          className={styles.input}
-          value={formData.artist}
-          onChange={handleChange}
+          type="file"
+          id="image"
+          name="image"
+          className={styles.fileInput}
+          accept="image/*"
+          onChange={handleImageUpload}
           required
         />
+
 
         <label className={styles.label} htmlFor="category">
           <b>Categoría</b>
@@ -77,25 +147,25 @@ const ArtworkRegisterForm = () => {
           required
         >
           <option value="">Selecciona una categoría</option>
-          <option value="Painting">Pintura</option>
-          <option value="Sculpture">Escultura</option>
-          <option value="Photography">Fotografía</option>
-          <option value="Digital Art">Arte Digital</option>
-          <option value="Musica">Música</option>
-          <option value="Dance">Baile o Danza</option>
+          <option value="pintura">Pintura</option>
+          <option value="escultura">Escultura</option>
+          <option value="fotografia">Fotografía</option>
+          <option value="arte_digital">Arte Digital</option>
+          <option value="musica">Música</option>
+          <option value="baile">Baile o Danza</option>
         </select>
 
 
-        <label className={styles.label} htmlFor="image">
-          <b>Foto o Imagen de la Obra</b>
+        <label className={styles.label} htmlFor="artist">
+          <b>Artista o Compositor</b>
         </label>
         <input
-          type="file"
-          id="image"
-          name="image"
-          className={styles.fileInput}
-          accept="image/*"
-          onChange={handleImageUpload}
+          type="text"
+          id="artist"
+          name="artist"
+          className={styles.input}
+          value={formData.artist}
+          onChange={handleChange}
           required
         />
 
@@ -110,18 +180,6 @@ const ArtworkRegisterForm = () => {
           onChange={handleChange}
           rows={4}
         ></textarea>
-
-        {/* <label className={styles.label} htmlFor="year">
-          Year
-        </label>
-        <input
-          type="number"
-          id="year"
-          name="year"
-          className={styles.input}
-          value={formData.year}
-          onChange={handleChange}
-        /> */}
 
         {formData.category === "Musica" ? 
         <>
@@ -139,20 +197,8 @@ const ArtworkRegisterForm = () => {
           />
         </> : null}
 
-        <label className={styles.label} htmlFor="image">
-          <b>Video</b> 
-        </label>
-        <input
-          type="file"
-          id="image"
-          name="image"
-          className={styles.fileInput}
-          accept="image/*"
-          onChange={handleImageUpload}
-          required
-        />
 
-        <button type="submit" className={`${styles.submitButton} disabled`} disabled>
+        <button type="submit" className={`${styles.submitButton}`}>
           <b>Enviar Formulario</b>
         </button>
       </form>

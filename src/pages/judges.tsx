@@ -1,6 +1,6 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
 import UnauthorizedMessage from '@/components/UnauthorizedMessage';
-import { useGlobalContext } from '@/context/GlobalContext';
+import { useAuth } from '@/context/AuthContext';
 import SidebarMenu from '@/components/Sidebar-menu';
 import FloatingMenuButton from '@/components/FloatingMenuButton';
 import CoreSectionJudges from '@/components/CoreSectionJudges';
@@ -8,7 +8,7 @@ import SubMenu from '@/components/SubMenu';
 
 
 export default function Users() {
-  const { role, authenticated } = useGlobalContext()
+  const { role, authenticated } = useAuth()
 
   console.log(role);
   if (!authenticated) {

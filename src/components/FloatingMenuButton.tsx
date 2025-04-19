@@ -1,19 +1,16 @@
-import { useGlobalContext } from "@/context/GlobalContext";
+import { useAuth } from "@/context/AuthContext";
 import React, { useState } from "react";
 import { FiPlusCircle } from "react-icons/fi";
 import CustomModal from "./CustomModal";
 import ArtworkRegisterForm from "./ArtworkRegisterForm";
 import RatingForm from "./RatingForm";
 import Image from 'next/image'
-import Link from "next/link";
-import { GiPartyFlags } from "react-icons/gi";
-import { FaCirclePlus, FaPersonDotsFromLine, FaPlus } from "react-icons/fa6";
-import { RiBubbleChartFill } from "react-icons/ri";
+import { FaCirclePlus } from "react-icons/fa6";
 import EventRegisterForm from "./EventRegisterForm";
 import InviteRegisterForm from "./InviteRegisterForm copy";
 
 const FloatingMenuButton = () => {
-  const { role } = useGlobalContext();
+  const { role } = useAuth();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);  
   const [currentAction, setCurrentAction] = useState('');
@@ -142,7 +139,7 @@ const FloatingMenuButton = () => {
       <CustomModal
         isOpen={isUserModalOpen}
         onClose={closeUserModal}
-        height="90%" // Custom height
+        height="85%" // Custom height
       >
         <div className="modal-title-centered">
             <b>Anímate a descubrir tu Artista Interior</b>

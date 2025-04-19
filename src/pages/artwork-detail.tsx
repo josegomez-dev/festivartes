@@ -72,18 +72,22 @@ const ArtworkDetail = () => {
 
       <div className='project-detail-wrapper'>
         <div className="project-detail-container">
-          <h1>{project.name}</h1>
+          <h1>{project.title}</h1>
           <br />
           {project.thumbnail ? (
-            <img src={project.thumbnail} alt={project.name} className='project-thumbnail-wrapper' />
+            <img src={project.thumbnail} alt={project.title} className='project-thumbnail-wrapper' />
           ) : (
-            <img src='https://getuikit.com/v2/docs/images/placeholder_600x400.svg' alt={project.name} className='project-thumbnail-wrapper' />
+            <img src='https://getuikit.com/v2/docs/images/placeholder_600x400.svg' alt={project.title} className='project-thumbnail-wrapper' />
           )}
           <br />
           <div>
             <p><b>Categoría de la Obra</b></p>
-            <span className='bolder-text'>{project?.category}</span> 
+            <p className='bolder-text'>{project?.category}</p> 
             <br />
+            <p className='bolder-text overflow-area'>{project?.description}</p> 
+            <br />
+            <p><b>Compositor o Artista</b></p>
+            <p className='bolder-text'>{project?.artist}</p> 
             <br />
             {project?.audio && (
               <div className='links-spaced'>
@@ -117,7 +121,7 @@ const ArtworkDetail = () => {
 
             {/* Tab Content */}
             <div className="tab-content">
-              {activeTab === 'document' && <DocumentEditor title={project.name} />}
+              {activeTab === 'document' && <DocumentEditor title={project.title} />}
               {activeTab === 'video' && (
                 <div className="carousel">
                   <VideoPlayer src={videos[currentIndex].src} title={videos[currentIndex].title} />

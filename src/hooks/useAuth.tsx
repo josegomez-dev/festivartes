@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { useGlobalContext } from '../context/GlobalContext'
+import { useAuth as _useAuth } from '@/context/AuthContext'
 
 const useAuth = (requiredRole?: string) => {
-  const { authenticated, role } = useGlobalContext()
+  const { authenticated, role } = _useAuth()
   const router = useRouter()
 
   useEffect(() => {

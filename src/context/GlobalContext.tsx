@@ -5,10 +5,6 @@ import { createContext, ReactNode, useContext, useState } from 'react'
 interface GlobalContextProps {
   state: string
   setState: React.Dispatch<React.SetStateAction<string>>
-  role: string
-  setRole: React.Dispatch<React.SetStateAction<string>>
-  authenticated: boolean
-  setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 // Create the context with default values
@@ -17,17 +13,11 @@ const GlobalContext = createContext<GlobalContextProps | undefined>(undefined)
 // Provider component to wrap your application or part of it
 export const GlobalProvider = ({ children }: { children: ReactNode }) => {
   const [state, setState] = useState<string>('default value')
-  const [role, setRole] = useState<string>('user')
-  const [authenticated, setAuthenticated] = useState<boolean>(false)
 
   return (
     <GlobalContext.Provider value={{
       state,
       setState,
-      role,
-      setRole,
-      authenticated,
-      setAuthenticated,
     }}>
       {children}
     </GlobalContext.Provider>

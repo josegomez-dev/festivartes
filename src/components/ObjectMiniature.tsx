@@ -39,7 +39,7 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type }) =>
           {type === 'artwork' ? 
           <>
             <span>
-              <p className='small-text-size artwork-miniature-title'>{project.name}</p>
+              <p className='small-text-size artwork-miniature-title'>{project.title}</p>
               {project.author === 123 ? 
               <div className='image-container-author'>
                 <Image

@@ -1,6 +1,6 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
 import UnauthorizedMessage from '@/components/UnauthorizedMessage';
-import { useGlobalContext } from '@/context/GlobalContext';
+import { useAuth } from '@/context/AuthContext';
 import FloatingMenuButton from '@/components/FloatingMenuButton';
 import CoreSectionFestivartes from '@/components/CoreSectionFestivartes';
 import CoreSectionArtworks from '@/components/CoreSectionArtworks';
@@ -9,7 +9,7 @@ import BannerFooter from '@/components/BannerFooter';
 import SubMenu from '@/components/SubMenu';
 
 export default function Dashboard() {
-  const { role, authenticated } = useGlobalContext()
+  const { role, authenticated } = useAuth()
 
   if (!authenticated) {
     // Redirect to login if not admin or not authenticated

@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { useGlobalContext } from '../context/GlobalContext'
+import { useAuth } from '../context/AuthContext'
 import Nav from './Nav'
 
 interface LayoutProps {
@@ -7,7 +7,7 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const { authenticated, role } = useGlobalContext()
+  const { authenticated } = useAuth()
 
   return (
       <>

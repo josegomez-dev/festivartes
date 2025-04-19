@@ -1,12 +1,12 @@
 import { useState } from "react";
 import styles from '@/app/assets/styles/AdminIndex.module.css';
 import UnauthorizedMessage from '@/components/UnauthorizedMessage';
-import { useGlobalContext } from '@/context/GlobalContext';
+import { useAuth } from '@/context/AuthContext';
 import SidebarMenu from '@/components/Sidebar-menu';
 import SubMenu from '@/components/SubMenu';
 
 export default function Settings() {
-  const { role, authenticated } = useGlobalContext();
+  const { authenticated } = useAuth();
   const [activeTab, setActiveTab] = useState("general");
   const [darkMode, setDarkMode] = useState(false);
   const [language, setLanguage] = useState("en");

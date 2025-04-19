@@ -1,13 +1,11 @@
-import stylesChat from "./../app/assets/styles/ChatSidebar.module.css";
 import { useAuth } from "@/context/AuthContext";
 import styles from '@/app/assets/styles/AdminIndex.module.css';
 import UnauthorizedMessage from '@/components/UnauthorizedMessage';
-import { useGlobalContext } from '@/context/GlobalContext';
 import { useState } from 'react';
 import { FaFacebook, FaInstagramSquare, FaTiktok, FaYoutube, FaPinterestSquare, FaMedium, FaLinkedin, FaGithub, FaDiscord, FaSoundcloud } from "react-icons/fa";
 
 export default function __ProfileTmp() {
-  const { role, authenticated } = useGlobalContext();
+  const { authenticated } = useAuth();
   const { user } = useAuth();
   
   if (!authenticated) {

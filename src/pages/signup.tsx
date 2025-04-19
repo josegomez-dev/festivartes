@@ -1,13 +1,10 @@
 // pages/signup.tsx
-import { useGlobalContext } from '@/context/GlobalContext';
 import { useAuth } from "@/context/AuthContext";
-import { EMPTY_USER } from '@/types/userTypes';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 const SignUp = () => {
-  const { setAuthenticated, setRole } = useGlobalContext()
   const { user, signUp } = useAuth()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -22,8 +19,6 @@ const SignUp = () => {
     }
     try {
       await signUp(email, password)      
-      setRole('user')
-      setAuthenticated(true)
       router.push('/onboarding')  
     } catch (error) {
       setErrorMessage((error as Error).message)
@@ -32,7 +27,6 @@ const SignUp = () => {
       }, 3000)
       return
     }
-
   }
 
   return (
