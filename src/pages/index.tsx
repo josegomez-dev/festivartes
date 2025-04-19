@@ -16,7 +16,8 @@ const Home = () => {
   };
 
   useEffect(() => {
-    document.body.classList.add('prevent-scroll');    
+    redirectToLogin();
+    document.body.classList.add('prevent-scroll');
   }, []);
 
   const redirectToLogin = () => {

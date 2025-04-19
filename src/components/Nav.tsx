@@ -10,7 +10,7 @@ import ChatSidebar from './ChatSidebar'
 import { MdDashboardCustomize } from "react-icons/md";
 
 export default function Nav() {
-  const { role, authenticated, setAuthenticated, setRole, loggedUser, setLoggedUser } = useGlobalContext()
+  const { role, authenticated, setAuthenticated, setRole } = useGlobalContext()
   
   const router = useRouter()
 
@@ -23,7 +23,6 @@ export default function Nav() {
   const handleLogout = () => {
     setAuthenticated(false)
     setRole('user') // Reset the role to default
-    setLoggedUser(EMPTY_USER)
     router.push('/')
   }
 

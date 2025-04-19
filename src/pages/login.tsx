@@ -9,8 +9,8 @@ import { use, useEffect, useRef, useState } from 'react';
 import { FaGoogle } from 'react-icons/fa';
 
 const LoginPage = () => {
-  const { setAuthenticated, setRole, setLoggedUser, loggedUser } = useGlobalContext();
-  const { user, signInWithGoogle, signIn, logout } = useAuth();
+  const { setAuthenticated, setRole } = useGlobalContext();
+  const { user, signInWithGoogle, signIn, logout, resetPassword } = useAuth();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
@@ -43,10 +43,6 @@ const LoginPage = () => {
       const response = await signIn(email, password);
       console.log(response);
       setRole('user');
-      setLoggedUser({ 
-        ...EMPTY_USER, 
-        email,
-      });
       setAuthenticated(true);
       playAudio();
       router.push('/dashboard');
@@ -69,13 +65,6 @@ const LoginPage = () => {
   
   return (
     <>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
       <div style={{ display: 'none' }}>
         <audio ref={audioRef} src="https://cdn.freesound.org/previews/784/784433_4468658-lq.mp3" />
         <button id="playBtn" onClick={playAudio}>Play</button>
@@ -92,6 +81,13 @@ const LoginPage = () => {
           </p>}
           <br />
           <button type="submit" onClick={() => handleLogin()} className="auth-button">Iniciar sesión</button>
+          <a onClick={() => {
+            email !== '' ? resetPassword(email) : setErrorMessage('Por favor, ingresa tu correo electrónico');
+          }}>
+            <p className='auth-link' style={{ color: 'orange' }}>
+              ¿Olvidaste tu contraseña?
+            </p>
+          </a>
           <br />
           <p>
             Tambien puedes usar el boton de <strong>Google</strong> para acceder a la plataforma. <br /> 
@@ -104,11 +100,6 @@ const LoginPage = () => {
                   <FaGoogle style={{ marginTop: '8px' }} onClick={async () => {
                     await signInWithGoogle();
                     setRole('user');
-                    setLoggedUser({
-                      ...EMPTY_USER,
-                      email: _userEmail || '',
-                      displayName: _userDisplayName || '',
-                    });
                     setAuthenticated(true);
                     playAudio();
                     router.push('/dashboard');

@@ -9,7 +9,7 @@ import BannerFooter from '@/components/BannerFooter';
 import SubMenu from '@/components/SubMenu';
 
 export default function Dashboard() {
-  const { role, authenticated, loggedUser } = useGlobalContext()
+  const { role, authenticated } = useGlobalContext()
 
   if (!authenticated) {
     // Redirect to login if not admin or not authenticated

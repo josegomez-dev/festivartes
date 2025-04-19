@@ -9,8 +9,6 @@ interface GlobalContextProps {
   setRole: React.Dispatch<React.SetStateAction<string>>
   authenticated: boolean
   setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
-  loggedUser: User
-  setLoggedUser: React.Dispatch<React.SetStateAction<User>>
 }
 
 // Create the context with default values
@@ -19,9 +17,8 @@ const GlobalContext = createContext<GlobalContextProps | undefined>(undefined)
 // Provider component to wrap your application or part of it
 export const GlobalProvider = ({ children }: { children: ReactNode }) => {
   const [state, setState] = useState<string>('default value')
-  const [role, setRole] = useState<string>('user') // Change this to 'admin' to test admin view
+  const [role, setRole] = useState<string>('user')
   const [authenticated, setAuthenticated] = useState<boolean>(false)
-  const [loggedUser, setLoggedUser] = useState<User | any>()
 
   return (
     <GlobalContext.Provider value={{
@@ -31,8 +28,6 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
       setRole,
       authenticated,
       setAuthenticated,
-      loggedUser,
-      setLoggedUser,
     }}>
       {children}
     </GlobalContext.Provider>

@@ -1,5 +1,4 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
-import { MOCK_DATA_JUDGES } from '@/utils/constants';
 import ObjectMiniature from './ObjectMiniature';
 import Image from 'next/image';
 import { RiBubbleChartFill } from 'react-icons/ri';
@@ -33,8 +32,6 @@ const CoreSectionJudges = ({ filterBy }: CoreSectionJudgesProps) => {
   useEffect(() => {
     fetchEvents()
   }, []);
-  
-  // const data = filterBy ? MOCK_DATA_JUDGES.filter(item => filterBy.includes(item.id)) : MOCK_DATA_JUDGES;
 
   return (
     <div className={`${styles.card} top-spaced`}>

@@ -1,14 +1,10 @@
 import Link from 'next/link';
 import { IoSettings } from "react-icons/io5";
 import { useGlobalContext } from '../context/GlobalContext'
-import { FaPersonDotsFromLine } from 'react-icons/fa6';
-import { GiPartyFlags } from 'react-icons/gi';
-import { RiBubbleChartFill } from 'react-icons/ri';
 import Image from 'next/image';
-import { MdDashboardCustomize } from "react-icons/md";
 
 const SidebarMenu = () => {
-  const { role } = useGlobalContext()
+  // const { role } = useGlobalContext()
 
   return (
       <div className="sidebar">

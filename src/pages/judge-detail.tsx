@@ -1,6 +1,5 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
 import SubMenu from '@/components/SubMenu';
-import { MOCK_DATA_JUDGES } from '@/utils/constants';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
@@ -34,8 +33,6 @@ const JudgeDetail = ({ }) => {
   useEffect(() => {
     fetchEvents(id);
   }, []);
-
-  // const project = MOCK_DATA_JUDGES.find(p => p.id === parseInt(id as string, 10));
 
   if (!project) {
     return <div>Loading...</div>;

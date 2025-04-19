@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 const SignUp = () => {
-  const { setAuthenticated, setRole, setLoggedUser } = useGlobalContext()
+  const { setAuthenticated, setRole } = useGlobalContext()
   const { user, signUp } = useAuth()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -24,7 +24,6 @@ const SignUp = () => {
       await signUp(email, password)      
       setRole('user')
       setAuthenticated(true)
-      setLoggedUser({ ...EMPTY_USER, email })
       router.push('/onboarding')  
     } catch (error) {
       setErrorMessage((error as Error).message)
@@ -38,10 +37,6 @@ const SignUp = () => {
 
   return (
     <>
-      <br />
-      <br />
-      <br />
-      <br />
       <div className="auth-container">
         <div className="auth-form">
           <h2 className="auth-title">Crea tu cuenta en <b>FESTIVARTES</b></h2>

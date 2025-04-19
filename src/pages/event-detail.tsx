@@ -2,7 +2,6 @@ import styles from '@/app/assets/styles/AdminIndex.module.css';
 import CoreSectionArtworks from '@/components/CoreSectionArtworks';
 import CoreSectionJudges from '@/components/CoreSectionJudges';
 import SubMenu from '@/components/SubMenu';
-import { MOCK_DATA_EVENTS } from '@/utils/constants';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
