@@ -6,7 +6,13 @@ export interface User {
     bio: string;
     role: 'admin' | 'judge' | 'user'; // Could use an enum for roles too
     status: 'active' | 'inactive' | 'banned'; // Could use an enum for statuses too
-    profilePicture: string;
+    profilePic: string;
+    phone: string;
+    address: string;
+    website: string;
+    location: string;
+    updatedAt: string;
+    createdAt: string;
   }
   
   // Mock Data for an empty user
@@ -17,6 +23,12 @@ export interface User {
     bio: '',
     role: 'user',
     status: 'inactive',
-    profilePicture: '',
+    profilePic: '/blank-profile-picture.png',
+    phone: '',
+    address: '',
+    website: '',
+    location: '',
+    updatedAt: '',
+    createdAt: '',
   };
   

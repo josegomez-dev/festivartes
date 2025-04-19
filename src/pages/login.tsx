@@ -26,10 +26,10 @@ const LoginPage = () => {
   };
 
   useEffect(() => {
-    logout();
-    if (document.body.classList.contains('prevent-scroll')) {
-      document.body.classList.remove('prevent-scroll');
-    }
+    // logout();
+    // if (document.body.classList.contains('prevent-scroll')) {
+    //   document.body.classList.remove('prevent-scroll');
+    // }
   }, []);
 
   const handleLogin = async () => {
@@ -60,12 +60,15 @@ const LoginPage = () => {
     }    
   }
 
-  const _userEmail = user?.email
-  const _userDisplayName = user?.displayName
-  
+  if (user) {
+    setAuthenticated(true);
+    playAudio();
+    router.push('/dashboard');
+  }
+
   return (
     <>
-      <div style={{ display: 'none' }}>
+      <div style={{ display: 'none'}}>
         <audio ref={audioRef} src="https://cdn.freesound.org/previews/784/784433_4468658-lq.mp3" />
         <button id="playBtn" onClick={playAudio}>Play</button>
       </div>
@@ -83,6 +86,7 @@ const LoginPage = () => {
           <button type="submit" onClick={() => handleLogin()} className="auth-button">Iniciar sesión</button>
           <a onClick={() => {
             email !== '' ? resetPassword(email) : setErrorMessage('Por favor, ingresa tu correo electrónico');
+            alert('Si el correo electrónico existe, se enviará un enlace para restablecer la contraseña');
           }}>
             <p className='auth-link' style={{ color: 'orange' }}>
               ¿Olvidaste tu contraseña?
