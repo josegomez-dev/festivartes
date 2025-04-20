@@ -14,15 +14,18 @@ const CoreSectionJudges = ({ filterBy }: CoreSectionJudgesProps) => {
 
   const [data, setData] = useState<{ id: string; [key: string]: any }[]>([]);
 
-  const fetchEvents = async () => {
+  const fetchJudgesAccounts = async () => {
     try {
-      const querySnapshot = await getDocs(collection(db, 'judges'))
-      const events = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }))
-      setData(events);
-      return events
+      const querySnapshot = await getDocs(collection(db, 'accounts'))
+      // get only users account with role "judge"
+      const accounts = querySnapshot.docs
+        .map(doc => ({
+          id: doc.id,
+          ...(doc.data() as { role: string })
+        }))
+        .filter((account) => account.role === 'judge')
+      setData(accounts) 
+      return accounts
     } catch (error) {
       console.error('Error fetching events:', error)
       return []
@@ -30,7 +33,7 @@ const CoreSectionJudges = ({ filterBy }: CoreSectionJudgesProps) => {
   }
 
   useEffect(() => {
-    fetchEvents()
+    fetchJudgesAccounts()
   }, []);
 
   return (

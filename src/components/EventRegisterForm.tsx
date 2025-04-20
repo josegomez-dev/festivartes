@@ -1,15 +1,30 @@
 import React, { useState } from "react";
 import styles from "./../app/assets/styles/RegisterForm.module.css";
+import { useAuth } from "./../context/AuthContext";
+import { db, storage } from "./../../firebaseConfig";
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { setDoc, doc } from 'firebase/firestore';
+import Image from "next/image";
+import { v4 as uuidv4 } from 'uuid';
 
 const EventRegisterForm = () => {
-  const [formData, setFormData] = useState({
+  const { user } = useAuth();
+  const [formData, setFormData] = useState<{
+    name: string;
+    date: Date;
+    description: string;
+    location: string;
+    price: number;
+    thumbnail: string;
+    upcoming: boolean;
+  }>({
     name: "",
-    picture: null,
-    description: "",
-    date: "",
+    thumbnail: '/logo2.png',
+    date: new Date(),
     location: "",
-    priceNormal: "",
-    priceVIP: "",
+    description: "",
+    upcoming: false,
+    price: 0,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -20,39 +35,94 @@ const EventRegisterForm = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Add logic to send data to the backend or state management system
+
+  const uploadEventPhoto = async (file: File, userId: string) => {
+    try {
+      const storageRef = ref(storage, `events/${userId}/${file.name}`);
+      await uploadBytes(storageRef, file); // Upload the file
+      const downloadURL = await getDownloadURL(storageRef); // Get the download URL
+      return downloadURL;
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      throw error;
+    }
+  };
+  
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (user?.uid) {
+        uploadEventPhoto(file, user.uid).then((url) => {
+          setFormData((prevData) => ({
+            ...prevData,
+            thumbnail: url,
+          }));
+        }).catch((error) => {
+          console.error("Error uploading image:", error);
+        });
+      } else {
+        console.error("User ID is undefined. Cannot upload the image.");
+      }
+    }    
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();  
+  
+    if (!user) {
+      console.error("User is not logged in.");
+      return;
+    }
+
+    const _event = {
+      ...formData,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      createdBy: user.uid,
+      upcoming: new Date(formData.date) > new Date(),
+      stars: 0,
+      category: "TP",
+    };
+    
+    // Create associated account in Firestore
+    await setDoc(doc(db, "events", uuidv4()), _event);
+    alert("Evento registrado con éxito");
+
   };
 
   return (
     <>
       <form className={styles.form} onSubmit={handleSubmit}>
 
-        <label className={styles.label} htmlFor="title">
+        <label className={styles.label} htmlFor="name">
           Nombre del Evento
         </label>
         <input
           type="text"
-          id="title"
-          name="title"
+          id="name"
+          name="name"
           className={styles.input}
           value={formData.name}
           onChange={handleChange}
           required
         />
 
-        <label className={styles.label} htmlFor="image">
-          Foto o imagen
+        <label className={styles.label} htmlFor="thumbnail">
+          Foto o imagen del evento
+          <Image
+            src={formData.thumbnail}
+            alt="Artwork Picture"
+            width={100}
+            height={100}
+          />
         </label>
         <input
           type="file"
-          id="image"
-          name="image"
+          id="thumbnail"
+          name="thumbnail"
           className={styles.fileInput}
           accept="image/*"
-          //onChange={handleImageUpload}
+          onChange={handleImageUpload}
           required
         />
 
@@ -69,33 +139,46 @@ const EventRegisterForm = () => {
         ></textarea>
 
 
-        <label className={styles.label} htmlFor="artist">
+        <label className={styles.label} htmlFor="date">
           Fecha
         </label>
         <input
-          type="text"
-          id="artist"
-          name="artist"
+          type="date"
+          id="date"
+          name="date"
           className={styles.input}
-          value={formData.date}
+          value={formData.date.toString()}
           onChange={handleChange}
           required
         />
 
-        <label className={styles.label} htmlFor="artist">
-          Ubicacion
+        <label className={styles.label} htmlFor="location">
+          Ubicación 
         </label>
         <input
           type="text"
-          id="artist"
-          name="artist"
+          id="location"
+          name="location"
           className={styles.input}
           value={formData.location}
           onChange={handleChange}
           required
         />
 
-        <button type="submit" className={`${styles.submitButton} disabled`} disabled>
+        <label className={styles.label} htmlFor="price">
+          Precio 
+        </label>
+        <input
+          type="number"
+          id="price"
+          name="price"
+          className={styles.input}
+          value={formData.price}
+          onChange={handleChange}
+          required
+        />
+
+        <button type="submit" className={`${styles.submitButton}`}>
           <b>Enviar Formulario</b>
         </button>
       </form>

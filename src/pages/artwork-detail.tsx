@@ -7,6 +7,10 @@ import DocumentEditor from "@/components/DocumentEditor";
 import { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from './../../firebaseConfig';
+import CoreSectionJudges from '@/components/CoreSectionJudges';
+import InviteRegisterForm from '@/components/InviteRegisterForm';
+import CustomModal from '@/components/CustomModal';
+import { useAuth } from '@/context/AuthContext';
 
 const videos = [
   { id: 1, title: "Video 1", src: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4" },
@@ -18,6 +22,11 @@ const ArtworkDetail = () => {
   const { id } = router.query; // Dynamic route parameter
   const [currentIndex, setCurrentIndex] = useState(0);
   const [activeTab, setActiveTab] = useState('document'); // Active tab state
+  const { role } = useAuth();
+
+  const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
+  const openInviteModal = () => setIsInviteModalOpen(true);
+  const closeInviteModal = () =>setIsInviteModalOpen(false);
 
   const [data, setData] = useState<{ id: string; [key: string]: any }[]>([]);
   const [project, setProject] = useState<{ id: string; [key: string]: any } | null>(null);
@@ -70,9 +79,36 @@ const ArtworkDetail = () => {
     <div className={styles['full-view']}>
       <SubMenu />
 
+         
+      <CustomModal
+        isOpen={isInviteModalOpen}
+        onClose={closeInviteModal}
+        height="55%" // Custom height
+        // bgColor="black" // Custom background color
+      >
+        <div className="modal-title-centered">
+          <b>
+            <b>Invitar Jurado</b>
+          </b>
+        </div>
+        <div className="form-wrapper">
+          <InviteRegisterForm />
+        </div>
+      </CustomModal>
+
       <div className='project-detail-wrapper'>
         <div className="project-detail-container">
-          <h1>{project.title}</h1>
+          <ul className="options-menu">
+            <li>⭐</li>
+            <li onClick={() => {
+              role === 'judge' ? openInviteModal() : alert('Feature only for JUDGES')
+            }}><b className='disabled'>🖋️ Calificar</b></li>
+          </ul>
+          <br />
+          <br />
+          <br />
+
+          <h1>{project.title || 'Title'}</h1>
           <br />
           {project.thumbnail ? (
             <img src={project.thumbnail} alt={project.title} className='project-thumbnail-wrapper' />
@@ -84,8 +120,8 @@ const ArtworkDetail = () => {
             <p><b>Categoría de la Obra</b></p>
             <p className='bolder-text'>{project?.category}</p> 
             <br />
-            <p className='bolder-text overflow-area'>{project?.description}</p> 
-            <br />
+            {/* <p className='bolder-text overflow-area'>{project?.description}</p> 
+            <br /> */}
             <p><b>Compositor o Artista</b></p>
             <p className='bolder-text'>{project?.artist}</p> 
             <br />
@@ -94,33 +130,33 @@ const ArtworkDetail = () => {
                 <AudioPlayer src="https://file-examples.com/storage/fe46ad26fa67d4043a4b9e6/2017/11/file_example_MP3_700KB.mp3" title="Sample Track" />
               </div>
               )}
-            <p><b>Archivos de la Obra</b></p>
-            <br />
+            {/* <p><b>Archivos de la Obra</b></p>
+            <br /> */}
 
             {/* Tab Navigation */}
-            <div className="tabs">
+            {/* <div className="tabs">
               <button 
                 className={activeTab === 'document' ? 'active' : ''}
                 onClick={() => handleTabClick('document')}
               >
                 Editor de Documentos
               </button>
-              {/* <button 
+              <button 
                 className={activeTab === 'video' ? 'active' : ''}
                 onClick={() => handleTabClick('video')}
               >
                 Reproductor de Video
-              </button> */}
+              </button>
               <button 
                 className={activeTab === 'live' ? 'active' : ''}
                 onClick={() => handleTabClick('live')}
               >
                 LIVE
               </button>
-            </div>
+            </div> */}
 
             {/* Tab Content */}
-            <div className="tab-content">
+            {/* <div className="tab-content">
               {activeTab === 'document' && <DocumentEditor title={project.title} />}
               {activeTab === 'video' && (
                 <div className="carousel">
@@ -131,16 +167,16 @@ const ArtworkDetail = () => {
                   </div>
                 </div>
               )}
-              {activeTab === 'live' && <div>Live Content Here</div>} {/* Add live content or functionality */}
-            </div>
-
-            <br />
-            <hr />
-            <br />
-            <b>Letra & Música</b>
-            <div>Jose Alejandro Gomez Castro</div>
+              {activeTab === 'live' && <div>Live Content Here</div>}
+            </div> */}
           </div>
         </div>
+
+        <br />
+        <hr />
+
+        <CoreSectionJudges filterBy={project.judges} />
+
       </div>
 
       {/* Tab Styles */}

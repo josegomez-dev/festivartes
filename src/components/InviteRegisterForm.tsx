@@ -4,8 +4,7 @@ import styles from "./../app/assets/styles/RegisterForm.module.css";
 const InviteRegisterForm = () => {
   const [formData, setFormData] = useState({
     name: "",
-    picture: null,
-    description: '',
+    email: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -26,58 +25,33 @@ const InviteRegisterForm = () => {
     <>
       <form className={styles.form} onSubmit={handleSubmit}>
 
-        <label className={styles.label} htmlFor="title">
+        <label className={styles.label} htmlFor="name">
           Nombre del Jurado
         </label>
         <input
           type="text"
-          id="title"
-          name="title"
+          id="name"
+          name="name"
           className={styles.input}
           value={formData.name}
           onChange={handleChange}
           required
         />
 
-        <label className={styles.label} htmlFor="title">
+        <label className={styles.label} htmlFor="email">
           Correo electronico
         </label>
         <input
           type="text"
-          id="title"
-          name="title"
+          id="email"
+          name="email"
           className={styles.input}
           value={formData.name}
           onChange={handleChange}
           required
         />
 
-        <label className={styles.label} htmlFor="title">
-          Telefono
-        </label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          className={styles.input}
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-
-        <label className={styles.label} htmlFor="description">
-          Mensaje de Invitacion
-        </label>
-        <textarea
-          id="description"
-          name="description"
-          className={styles.textarea}
-          value={formData.description}
-          onChange={handleChange}
-          rows={4}
-        ></textarea>
-
-        <button type="submit" className={`${styles.submitButton} disabled`} disabled>
+        <button type="submit" className={`${styles.submitButton}`}>
           <b>Enviar Formulario</b>
         </button>
       </form>

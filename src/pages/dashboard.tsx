@@ -35,9 +35,9 @@ export default function Dashboard() {
         <br />
         <hr />
         <CoreSectionArtworks />
-        <br />
+        {/* <br />
         <hr />
-        <CoreSectionJudges />
+        <CoreSectionJudges /> */}
         <BannerFooter />
         <FloatingMenuButton />
       </div>

@@ -7,9 +7,8 @@ import CoreSectionFestivartes from '@/components/CoreSectionFestivartes';
 import SubMenu from '@/components/SubMenu';
 
 export default function Events() {
-  const { role, authenticated } = useAuth()
+  const { authenticated } = useAuth()
 
-  console.log(role);
   if (!authenticated) {
     // Redirect to login if not admin or not authenticated
     return <UnauthorizedMessage />

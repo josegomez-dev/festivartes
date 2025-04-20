@@ -53,9 +53,9 @@ const Home = () => {
               priority
             />
           </div>
-          <div onClick={redirectToLogin}>
+          {/* <div onClick={redirectToLogin}>
             <button className={authStyles['auth-button']}>Comenzar</button>
-          </div>
+          </div> */}
         </div>
       </div>
     </main>

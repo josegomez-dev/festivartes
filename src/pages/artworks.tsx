@@ -7,7 +7,7 @@ import CoreSectionArtworks from '@/components/CoreSectionArtworks';
 import SubMenu from '@/components/SubMenu';
 
 export default function Artworks() {
-  const { role, authenticated } = useAuth()
+  const { authenticated } = useAuth()
 
   if (!authenticated) {
     // Redirect to login if not admin or not authenticated

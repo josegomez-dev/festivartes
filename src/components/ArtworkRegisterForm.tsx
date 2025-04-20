@@ -6,6 +6,7 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { setDoc, doc } from 'firebase/firestore';
 import Image from "next/image";
 import { useAuth } from "./../context/AuthContext";
+import { v4 as uuidv4 } from 'uuid';
 
 const ArtworkRegisterForm = () => {
   const { user } = useAuth();
@@ -13,7 +14,6 @@ const ArtworkRegisterForm = () => {
   const [formData, setFormData] = useState<{
     title: string;
     artist: string;
-    stars: number;
     description: string;
     category: string;
     thumbnail: string;
@@ -21,7 +21,6 @@ const ArtworkRegisterForm = () => {
     title: "",
     artist: "",
     description: "",
-    stars: 0,
     category: "",
     thumbnail: '/logo2.png',
   });
@@ -73,28 +72,17 @@ const ArtworkRegisterForm = () => {
     }
 
     const _artwork = {
-      uid: user.uid,
+      ...formData,
       createdAt: new Date(),
       updatedAt: new Date(),
+      createdBy: user.uid,
+      stars: 0,
     };
 
     // Create associated account in Firestore
-    await setDoc(doc(db, "artworks", user.uid), {
-      ..._artwork,
-      ...formData,
-      createdAt: new Date(),
-      updatedAt: new Date(),        
-    });
-
+    await setDoc(doc(db, "artworks", uuidv4()), _artwork);
     alert("Obra de arte registrada con éxito");
-    setFormData({
-      title: "",
-      artist: "",
-      description: "",
-      stars: 0,
-      category: "",
-      thumbnail: '/logo2.png',
-    });    
+
   };
 
   return (
@@ -115,7 +103,7 @@ const ArtworkRegisterForm = () => {
         />
 
 
-        <label className={styles.label} htmlFor="image">
+        <label className={styles.label} htmlFor="thumbnail">
           <b>Foto o Imagen de la Obra</b>
           <Image
             src={formData.thumbnail}
@@ -126,8 +114,8 @@ const ArtworkRegisterForm = () => {
         </label>
         <input
           type="file"
-          id="image"
-          name="image"
+          id="thumbnail"
+          name="thumbnail"
           className={styles.fileInput}
           accept="image/*"
           onChange={handleImageUpload}
@@ -180,23 +168,6 @@ const ArtworkRegisterForm = () => {
           onChange={handleChange}
           rows={4}
         ></textarea>
-
-        {formData.category === "Musica" ? 
-        <>
-          <label className={styles.label} htmlFor="image">
-            <b>Secuencia o Base Rítmica</b>
-          </label>
-          <input
-            type="file"
-            id="image"
-            name="image"
-            className={styles.fileInput}
-            accept="image/*"
-            onChange={handleImageUpload}
-            required
-          />
-        </> : null}
-
 
         <button type="submit" className={`${styles.submitButton}`}>
           <b>Enviar Formulario</b>

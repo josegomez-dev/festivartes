@@ -1,13 +1,10 @@
 import { useAuth } from "@/context/AuthContext";
 import React, { useState } from "react";
-import { FiPlusCircle } from "react-icons/fi";
 import CustomModal from "./CustomModal";
 import ArtworkRegisterForm from "./ArtworkRegisterForm";
-import RatingForm from "./RatingForm";
 import Image from 'next/image'
 import { FaCirclePlus } from "react-icons/fa6";
 import EventRegisterForm from "./EventRegisterForm";
-import InviteRegisterForm from "./InviteRegisterForm copy";
 
 const FloatingMenuButton = () => {
   const { role } = useAuth();
@@ -19,10 +16,6 @@ const FloatingMenuButton = () => {
   const openUserModal = () => setIsUserModalOpen(true);
   const closeUserModal = () =>setIsUserModalOpen(false);
 
-  const [isJudgeModalOpen, setIsJudgeModalOpen] = useState(false);
-  const openJudgeModal = () => setIsJudgeModalOpen(true);
-  const closeJudgeModal = () =>setIsJudgeModalOpen(false);
-
   const [isRulesModalOpen, setIsRulesModalOpen] = useState(false);
   const openRulesModal = () => setIsRulesModalOpen(true);
   const closeRulesModal = () =>setIsRulesModalOpen(false);
@@ -31,14 +24,11 @@ const FloatingMenuButton = () => {
   const openEventModal = () => setIsEventModalOpen(true);
   const closeEventModal = () =>setIsEventModalOpen(false);
 
-  const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
-  const openInviteModal = () => setIsInviteModalOpen(true);
-  const closeInviteModal = () =>setIsInviteModalOpen(false);
 
   const menuOptions : any = {
-    admin: ["Registrar Evento", "Invitar Jurado"],
-    judge: ["Calificar Obra", "Consultar Reglamento"],
-    user: ["Registrar Nueva Obra"],
+    admin: ["Registrar Evento", "Registrar Nueva Obra", "Consultar Reglamento"],
+    judge: ["Registrar Nueva Obra", "Consultar Reglamento"],
+    user: ["Registrar Nueva Obra", "Consultar Reglamento"],
   };
 
   const options = menuOptions[role] || ["No options available"];
@@ -46,16 +36,12 @@ const FloatingMenuButton = () => {
   // Handle click function
   const handleOptionClick = (option: string) => {
     setCurrentAction(option);
-    if (option === 'Registrar Nueva Obra') { // user
+    if (option === 'Registrar Nueva Obra') { // admin, judge, user
       openUserModal();
-    } else if (option === 'Calificar Obra') { // judge
-      openJudgeModal();
-    } else if (option === 'Consultar Reglamento') { // judge
+    } else if (option === 'Consultar Reglamento') { // admin, judge, user
       openRulesModal();
-    } else if (option === 'Registrar Evento') { // admin
+    } else if (option === 'Registrar Evento') { // admin INTERNAL PANEL FEATURE
       openEventModal();
-    } else if (option === 'Invitar Jurado') { // admin
-      openInviteModal();
     }
     return;
   };
@@ -150,21 +136,6 @@ const FloatingMenuButton = () => {
       </CustomModal>
 
       <CustomModal
-        isOpen={isJudgeModalOpen}
-        onClose={closeJudgeModal}
-        height="90%" // Custom height
-      >
-        <div className="modal-title-centered">
-          <b>
-            &nbsp;Puntuación Final (0-10)&nbsp;
-          </b>
-        </div>
-        <div className="form-wrapper">
-          <RatingForm />
-        </div>
-      </CustomModal>
-
-      <CustomModal
         isOpen={isRulesModalOpen}
         onClose={closeRulesModal}
         height="90%" // Custom height
@@ -179,7 +150,7 @@ const FloatingMenuButton = () => {
       <CustomModal
         isOpen={isEventModalOpen}
         onClose={closeEventModal}
-        height="90%" // Custom height
+        height="80%" // Custom height
       >
         <div className="modal-title-centered">
           <b>
@@ -190,22 +161,7 @@ const FloatingMenuButton = () => {
           <EventRegisterForm />
         </div>
       </CustomModal>
-   
-      <CustomModal
-        isOpen={isInviteModalOpen}
-        onClose={closeInviteModal}
-        height="90%" // Custom height
-        // bgColor="black" // Custom background color
-      >
-        <div className="modal-title-centered">
-          <b>
-            <b>{currentAction}</b>
-          </b>
-        </div>
-        <div className="form-wrapper">
-          <InviteRegisterForm />
-        </div>
-      </CustomModal>
+
     </>
   );
 };

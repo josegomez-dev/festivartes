@@ -8,23 +8,18 @@ import Image from "next/image";
 import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { db, storage } from "./../../firebaseConfig"
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { EMPTY_USER } from "@/types/userTypes";
 
 export default function Profile() {
   const { user, role, authenticated } = useAuth();
   const [loading, setLoading] = useState(true);
-
   const [accountData, setAccountData] = useState({
+    ...EMPTY_USER,
     uid: user?.uid,
-    displayName: '',
+    userId: user?.uid,
     email: user?.email,
     role: role,
-    profilePic: '',
-    location: '',
-    phone: '',
-    address: '',
-    website: '',
   });
-
 
   useEffect(() => {
     const fetchAccountData = async () => {
@@ -136,7 +131,7 @@ export default function Profile() {
           </select> */}
         </div>
 
-        <div className="input-group">
+        {/* <div className="input-group">
           <label>Redes Sociales</label>
           <div className="social-media-icons">
             <FaFacebook /> &nbsp;
@@ -150,22 +145,22 @@ export default function Profile() {
             <FaDiscord /> &nbsp;
             <FaSoundcloud />
           </div>
-          {/* <input type="text" name="socialMedia" value={profile.socialMedia || ''} onChange={handleInputChange} placeholder="Facebook, Instagram, etc." /> */}
-        </div>
+          <input type="text" name="socialMedia" value={profile.socialMedia || ''} onChange={handleInputChange} placeholder="Facebook, Instagram, etc." />
+        </div> */}
         <div className="input-group">
-          <label>Ubicación</label>
+          <label>Ubicación (opcional)</label>
           <input type="text" name="location" value={accountData.location || ''} onChange={handleInputChange} />
         </div>
         <div className="input-group">
-          <label>Teléfono</label>
+          <label>Teléfono (opcional)</label>
           <input type="tel" name="phone" value={accountData.phone || ''} onChange={handleInputChange} />
         </div>
         <div className="input-group">
-          <label>Dirección</label>
+          <label>Dirección (opcional)</label>
           <input type="text" name="address" value={accountData.address || ''} onChange={handleInputChange} />
         </div>
         <div className="input-group">
-          <label>Website</label>
+          <label>Website (opcional)</label>
           <input type="url" name="website" value={accountData.website || ''} onChange={handleInputChange} />
         </div>  
 
@@ -173,11 +168,11 @@ export default function Profile() {
 
         <button className={`${authStyles['auth-button']}`} onClick={async () => {
             try {
-              if (!accountData.uid) {
+              if (!accountData.userId) {
                 console.error("Error: User UID is undefined.");
                 return;
               }
-              const accountRef = doc(db, "accounts", accountData.uid);
+              const accountRef = doc(db, "accounts", accountData.userId);
               await updateDoc(accountRef, accountData);
               alert("Account updated successfully.");
             } catch (error) {

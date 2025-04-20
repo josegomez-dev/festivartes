@@ -64,9 +64,9 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type }) =>
             {project.upcoming && <div className="upcoming-message">
                 <b className='medium-text-size'>Próximamente</b>
               </div>}
-            {project.thumbnail ? 
+            {project.thumbnail || project.profilePic ? 
             <img 
-              src={project.thumbnail} 
+              src={project.thumbnail || project.profilePic}
               alt={project.name} 
               className="project-thumbnail"
             /> : 
