@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from './../../firebaseConfig';
 import CustomModal from '@/components/CustomModal';
-import RatingForm from '@/components/RatingForm';
+import InviteRegisterForm from '@/components/InviteRegisterForm';
 
 const EventDetail = ({ }) => {
   const router = useRouter();
@@ -15,10 +15,9 @@ const EventDetail = ({ }) => {
   const [data, setData] = useState<{ id: string; [key: string]: any }[]>([]);
   const [project, setProject] = useState<{ id: string; [key: string]: any } | null>(null);
 
-  const [isJudgeModalOpen, setIsJudgeModalOpen] = useState(false);
-  const openJudgeModal = () => setIsJudgeModalOpen(true);
-  const closeJudgeModal = () =>setIsJudgeModalOpen(false);
-
+  const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
+  const openInviteModal = () => setIsInviteModalOpen(true);
+  const closeInviteModal = () =>setIsInviteModalOpen(false);
 
   const fetchEvents = async (id: string | string[] | undefined) => {
     try {
@@ -51,18 +50,20 @@ const EventDetail = ({ }) => {
     <div className={styles['full-view']}>
       <SubMenu />
 
+         
       <CustomModal
-        isOpen={isJudgeModalOpen}
-        onClose={closeJudgeModal}
-        height="90%" // Custom height
+        isOpen={isInviteModalOpen}
+        onClose={closeInviteModal}
+        height="55%" // Custom height
+        // bgColor="black" // Custom background color
       >
         <div className="modal-title-centered">
           <b>
-            &nbsp;Puntuación Final (0-10)&nbsp;
+            <b>Invitar Jurado</b>
           </b>
         </div>
         <div className="form-wrapper">
-          <RatingForm />
+          <InviteRegisterForm />
         </div>
       </CustomModal>
 
@@ -70,7 +71,7 @@ const EventDetail = ({ }) => {
         <div className="project-detail-container">
           <ul className="options-menu event-position">
             <li>⭐</li>
-            <li onClick={openJudgeModal}>👤</li>
+            <li onClick={openInviteModal}>👤</li>
           </ul>
           <br />
           <br />

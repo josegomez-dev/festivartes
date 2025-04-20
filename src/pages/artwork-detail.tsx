@@ -8,9 +8,9 @@ import { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from './../../firebaseConfig';
 import CoreSectionJudges from '@/components/CoreSectionJudges';
-import InviteRegisterForm from '@/components/InviteRegisterForm';
 import CustomModal from '@/components/CustomModal';
 import { useAuth } from '@/context/AuthContext';
+import RatingForm from '@/components/RatingForm';
 
 const videos = [
   { id: 1, title: "Video 1", src: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4" },
@@ -24,9 +24,9 @@ const ArtworkDetail = () => {
   const [activeTab, setActiveTab] = useState('document'); // Active tab state
   const { role } = useAuth();
 
-  const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
-  const openInviteModal = () => setIsInviteModalOpen(true);
-  const closeInviteModal = () =>setIsInviteModalOpen(false);
+  const [isJudgeModalOpen, setIsJudgeModalOpen] = useState(false);
+  const openJudgeModal = () => setIsJudgeModalOpen(true);
+  const closeJudgeModal = () =>setIsJudgeModalOpen(false);
 
   const [data, setData] = useState<{ id: string; [key: string]: any }[]>([]);
   const [project, setProject] = useState<{ id: string; [key: string]: any } | null>(null);
@@ -79,20 +79,18 @@ const ArtworkDetail = () => {
     <div className={styles['full-view']}>
       <SubMenu />
 
-         
       <CustomModal
-        isOpen={isInviteModalOpen}
-        onClose={closeInviteModal}
-        height="55%" // Custom height
-        // bgColor="black" // Custom background color
+        isOpen={isJudgeModalOpen}
+        onClose={closeJudgeModal}
+        height="90%" // Custom height
       >
         <div className="modal-title-centered">
           <b>
-            <b>Invitar Jurado</b>
+            &nbsp;Puntuación Final (0-10)&nbsp;
           </b>
         </div>
         <div className="form-wrapper">
-          <InviteRegisterForm />
+          <RatingForm />
         </div>
       </CustomModal>
 
@@ -101,7 +99,7 @@ const ArtworkDetail = () => {
           <ul className="options-menu">
             <li>⭐</li>
             <li onClick={() => {
-              role === 'judge' ? openInviteModal() : alert('Feature only for JUDGES')
+              role === 'judge' ? openJudgeModal() : alert('Feature only for JUDGES')
             }}><b className='disabled'>🖋️ Calificar</b></li>
           </ul>
           <br />
