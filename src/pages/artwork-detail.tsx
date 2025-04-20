@@ -117,13 +117,9 @@ const ArtworkDetail = () => {
           )}
           <br />
           <div>
-            <p><b>Categoría de la Obra</b></p>
-            <p className='bolder-text'>{project?.category}</p> 
             <br />
-            {/* <p className='bolder-text overflow-area'>{project?.description}</p> 
-            <br /> */}
-            <p><b>Compositor o Artista</b></p>
-            <p className='bolder-text'>{project?.artist}</p> 
+            <p ><b className='bolder-text'>Categoría:</b> {project?.category}</p>
+            <p ><b className='bolder-text'>Compositor o Artista:</b> {project?.artist}</p>      
             <br />
             {project?.audio && (
               <div className='links-spaced'>

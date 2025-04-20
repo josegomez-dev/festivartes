@@ -1115,3 +1115,9 @@ Down
   width: 170px;
   margin-top: -2px;
 }
+
+@media only screen and (max-width: 767px) {
+  .space-around {
+    margin-top: 80px;
+  }
+}

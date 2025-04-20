@@ -10,12 +10,16 @@
   flex: 1;
   padding: 20px;
   width: 80%;
+  
 }
 
 .full-view {
   padding: 20px;
   background-color: var(--background-end-rgb);
   min-height: 100vh;
+  
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .welcome-message {
