@@ -1,11 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styles from "./../app/assets/styles/RegisterForm.module.css";
+import emailjs from 'emailjs-com';
 
-const InviteRegisterForm = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
+interface FormData {
+  user_name: string;
+  user_email: string;
+  message: string;
+}
+
+interface InviteRegisterFormProps {
+  closeModal: () => void;
+}
+
+const InviteRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) => {
+  const [formData, setFormData] = useState<FormData>({
+    user_name: "",
+    user_email: "",
+    message: "",
   });
+
+  const formRef = useRef<HTMLFormElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -15,41 +29,69 @@ const InviteRegisterForm = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Add logic to send data to the backend or state management system
-  };
+    if (formRef.current) {
+      emailjs.sendForm('service_vgxzzks', 'template_uxr204w', formRef.current, '7r0MFDYv8obebfCn5')
+        .then((result) => {
+          console.log(result.text);
 
+          setFormData({
+            user_name: "",
+            user_email: "",
+            message: "",
+          });
+
+          closeModal();
+
+        }, (error) => {
+          console.log(error.text);
+        });
+    }
+  };
   return (
     <>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form ref={formRef} className={styles.form} onSubmit={handleSubmit}>
 
-        <label className={styles.label} htmlFor="name">
+        <label className={styles.label} htmlFor="user_name">
           Nombre del Jurado
         </label>
         <input
           type="text"
-          id="name"
-          name="name"
+          id="user_name"
+          name="user_name"
           className={styles.input}
-          value={formData.name}
+          value={formData.user_name}
           onChange={handleChange}
           required
         />
 
-        <label className={styles.label} htmlFor="email">
+        <label className={styles.label} htmlFor="user_email">
           Correo electronico
         </label>
         <input
           type="text"
-          id="email"
-          name="email"
+          id="user_email"
+          name="user_email"
           className={styles.input}
-          value={formData.name}
+          value={formData.user_email}
           onChange={handleChange}
           required
         />
+
+        <label className={styles.label} htmlFor="message">
+          Mensaje de Invitacion
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          className={styles.textarea}
+          value={formData.message}
+          onChange={handleChange}
+          rows={4}
+        ></textarea>
+
+
 
         <button type="submit" className={`${styles.submitButton}`}>
           <b>Enviar Formulario</b>

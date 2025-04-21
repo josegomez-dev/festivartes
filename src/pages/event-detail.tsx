@@ -8,12 +8,15 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from './../../firebaseConfig';
 import CustomModal from '@/components/CustomModal';
 import InviteRegisterForm from '@/components/InviteRegisterForm';
+import { useAuth } from '@/context/AuthContext';
 
 const EventDetail = ({ }) => {
   const router = useRouter();
   const { id } = router.query; // Dynamic route parameter
   const [data, setData] = useState<{ id: string; [key: string]: any }[]>([]);
   const [project, setProject] = useState<{ id: string; [key: string]: any } | null>(null);
+
+  const { role } = useAuth();
 
   const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
   const openInviteModal = () => setIsInviteModalOpen(true);
@@ -54,7 +57,7 @@ const EventDetail = ({ }) => {
       <CustomModal
         isOpen={isInviteModalOpen}
         onClose={closeInviteModal}
-        height="55%" // Custom height
+        height="70%" // Custom height
         // bgColor="black" // Custom background color
       >
         <div className="modal-title-centered">
@@ -63,7 +66,7 @@ const EventDetail = ({ }) => {
           </b>
         </div>
         <div className="form-wrapper">
-          <InviteRegisterForm />
+          <InviteRegisterForm closeModal={closeInviteModal} />
         </div>
       </CustomModal>
 
@@ -71,7 +74,9 @@ const EventDetail = ({ }) => {
         <div className="project-detail-container">
           <ul className="options-menu event-position">
             <li>⭐</li>
-            <li onClick={openInviteModal}>👤</li>
+            <li className='disabled' onClick={() => {
+              role === 'admin' ? openInviteModal() : alert('Feature only for ADMINS')
+            }}>👤</li>
           </ul>
           <br />
           <br />
