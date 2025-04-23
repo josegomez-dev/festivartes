@@ -34,17 +34,11 @@ const CoreSectionFestivartes = ({ }) => {
             <p>
               <span className='bolder-text'>
                 <RiBubbleChartFill color='gold'/> &nbsp;
-                <b>Festivartes &nbsp; 
-                  <Image
-                    src="/events-icon.png"
-                    alt="Catarsis Musical Logo"
-                    width={35}
-                    height={35}
-                    priority
-                  />
+                <b>Mis Creaciones en Festivartes &nbsp; 
+                
                 </b>
                 <p className='bolder-text small-text-size'>
-                  🌟 Lleva tu evento al siguiente nivel con nuestra app.
+                  ¡Elegí tu próximo escenario y hacé historia!
                 </p>
                 <br />
               </span>
@@ -58,6 +52,33 @@ const CoreSectionFestivartes = ({ }) => {
             </div> 
             : 
             <ObjectMiniature projects={data} type={'event'} />
+            }
+        </div>
+
+        <div className={styles.card}>
+            <p>
+              <span className='bolder-text'>
+                <RiBubbleChartFill color='gold'/> &nbsp;
+                <b> Catalogo completo de Festivartes &nbsp; 
+                🌍
+                </b>
+                <p className='bolder-text small-text-size'>
+                Lleva tu evento al siguiente nivel con nuestra app.
+                </p>
+                <br />
+              </span>
+            </p>
+            {data.length <= 0 ? 
+            <div className={styles.grid}>
+                <div className={styles.card}>
+                <h3>Registra tu primer Evento Calificado</h3>
+                <p>Evento con jurado y reglamento.</p>
+                </div> 
+            </div> 
+            : 
+            <div className='overflow--big-area'>
+              <ObjectMiniature projects={data.concat(data).concat(data).concat(data).concat(data).concat(data).concat(data).concat(data).concat(data).concat(data)} type={'event'} />
+            </div>
             }
         </div>
       </>

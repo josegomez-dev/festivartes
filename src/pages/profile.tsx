@@ -111,16 +111,6 @@ export default function Profile() {
         </label>
 
         <div className="input-group">
-          <label>Nombre</label>
-          <input type="text" name="displayName" value={accountData.displayName || ''} onChange={handleInputChange} />
-        </div>
-
-        <div className="input-group">
-          <label>Correo electronico</label>
-          <input type="email" name="email" value={accountData.email || ''} onChange={handleInputChange} />
-        </div>
-
-        <div className="input-group">
           <label>Rol de Usuario</label>
           <button onClick={requestRoleChange} className="role-change-button disabled" disabled>Solicitar Actualización</button>
           <input style={{maxWidth: '125px'}} type="text" name="role" value={accountData.role} disabled className="disabled" />
@@ -129,6 +119,16 @@ export default function Profile() {
             <option value="User">User</option>
             <option value="Moderator">Moderator</option>
           </select> */}
+        </div>
+
+        <div className="input-group">
+          <label>Nombre</label>
+          <input type="text" name="displayName" value={accountData.displayName || ''} onChange={handleInputChange} />
+        </div>
+
+        <div className="input-group">
+          <label>Correo electronico</label>
+          <input type="email" name="email" value={accountData.email || ''} onChange={handleInputChange} />
         </div>
 
         {/* <div className="input-group">
@@ -178,7 +178,9 @@ export default function Profile() {
             } catch (error) {
               console.error("Error updating account:", error);
             }
-         }}>Guardar Cambios</button>
+         }}>
+          <b>Guardar Cambios</b>
+         </button>
       </div>
     </div>
   );

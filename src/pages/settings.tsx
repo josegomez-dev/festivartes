@@ -3,7 +3,6 @@ import styles from '@/app/assets/styles/AdminIndex.module.css';
 import UnauthorizedMessage from '@/components/UnauthorizedMessage';
 import { useAuth } from '@/context/AuthContext';
 import SidebarMenu from '@/components/Sidebar-menu';
-import SubMenu from '@/components/SubMenu';
 
 export default function Settings() {
   const { authenticated } = useAuth();
@@ -20,10 +19,6 @@ export default function Settings() {
     <div className={styles['sidebar-menu-view']}>
       <SidebarMenu />
       <div className={styles['main-content']}>
-        <br />
-        <br />
-        <br />
-        <SubMenu />
         <div className={styles.grid}>
           <h3>Settings</h3>
           <div className={styles['settings-container']}>

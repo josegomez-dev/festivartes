@@ -1,4 +1,5 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
+import authStyles from '@/app/assets/styles/Auth.module.css';
 import SubMenu from '@/components/SubMenu';
 import { useRouter } from 'next/router';
 import AudioPlayer from "@/components/AudioPlayer";
@@ -11,6 +12,9 @@ import CoreSectionJudges from '@/components/CoreSectionJudges';
 import CustomModal from '@/components/CustomModal';
 import { useAuth } from '@/context/AuthContext';
 import RatingForm from '@/components/RatingForm';
+import ClapButton from '@/components/ClapButton';
+import StarRating from '@/components/StarRating';
+import SocialShareButton from '@/components/SocialShareButton';
 
 const videos = [
   { id: 1, title: "Video 1", src: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4" },
@@ -97,16 +101,27 @@ const ArtworkDetail = () => {
       <div className='project-detail-wrapper'>
         <div className="project-detail-container">
           <ul className="options-menu">
-            <li>⭐</li>
-            <li onClick={() => {
-              role === 'judge' ? openJudgeModal() : alert('Feature only for JUDGES')
-            }}><b className='disabled'>🖋️ Calificar</b></li>
+            <li>
+              <ClapButton />  
+            </li>
+            <li>
+              <StarRating />  
+            </li>
+            <li>
+              <SocialShareButton />
+            </li>
           </ul>
           <br />
           <br />
           <br />
+          <br />
+          <br />
 
-          <h1>{project.title || 'Title'}</h1>
+          <h1>
+            <b style={{ fontSize: '3rem' }}>
+            {project.title || 'Title'}
+            </b>
+          </h1>
           <br />
           {project.thumbnail ? (
             <img src={project.thumbnail} alt={project.title} className='project-thumbnail-wrapper' />
@@ -124,6 +139,10 @@ const ArtworkDetail = () => {
                 <AudioPlayer src="https://file-examples.com/storage/fe46ad26fa67d4043a4b9e6/2017/11/file_example_MP3_700KB.mp3" title="Sample Track" />
               </div>
               )}
+
+            <DocumentEditor title={project.title} />
+
+            <br />
             {/* <p><b>Archivos de la Obra</b></p>
             <br /> */}
 
@@ -164,7 +183,11 @@ const ArtworkDetail = () => {
               {activeTab === 'live' && <div>Live Content Here</div>}
             </div> */}
           </div>
+          <button className={`${authStyles['auth-button']}`} onClick={() => {
+              role === 'judge' ? openJudgeModal() : alert('Feature only for JUDGES')
+            }}><b className='disabled'>🖋️ Calificar Obra de Arte</b></button>
         </div>
+        
 
         <br />
         <hr />

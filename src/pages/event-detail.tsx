@@ -9,6 +9,10 @@ import { db } from './../../firebaseConfig';
 import CustomModal from '@/components/CustomModal';
 import InviteRegisterForm from '@/components/InviteRegisterForm';
 import { useAuth } from '@/context/AuthContext';
+import LikeDislike from '@/components/LikeDislikeButton';
+import StarRating from '@/components/StarRating';
+import ClapButton from '@/components/ClapButton';
+import SocialShareButton from '@/components/SocialShareButton';
 
 const EventDetail = ({ }) => {
   const router = useRouter();
@@ -17,10 +21,6 @@ const EventDetail = ({ }) => {
   const [project, setProject] = useState<{ id: string; [key: string]: any } | null>(null);
 
   const { role } = useAuth();
-
-  const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
-  const openInviteModal = () => setIsInviteModalOpen(true);
-  const closeInviteModal = () =>setIsInviteModalOpen(false);
 
   const fetchEvents = async (id: string | string[] | undefined) => {
     try {
@@ -53,35 +53,30 @@ const EventDetail = ({ }) => {
     <div className={styles['full-view']}>
       <SubMenu />
 
-         
-      <CustomModal
-        isOpen={isInviteModalOpen}
-        onClose={closeInviteModal}
-        height="70%" // Custom height
-        // bgColor="black" // Custom background color
-      >
-        <div className="modal-title-centered">
-          <b>
-            <b>Invitar Jurado</b>
-          </b>
-        </div>
-        <div className="form-wrapper">
-          <InviteRegisterForm closeModal={closeInviteModal} />
-        </div>
-      </CustomModal>
-
       <div className='project-detail-wrapper'>
         <div className="project-detail-container">
           <ul className="options-menu event-position">
-            <li>⭐</li>
-            <li className='disabled' onClick={() => {
-              role === 'admin' ? openInviteModal() : alert('Feature only for ADMINS')
-            }}>👤</li>
+            <li>
+              <ClapButton />  
+            </li>
+            <li>
+              <StarRating />  
+            </li>
+            <li>
+              <SocialShareButton />
+            </li>
           </ul>
           <br />
           <br />
           <br />
-          <h2>{project.name || 'Title'}</h2>
+          <br />
+          <br />
+
+          <h2>
+            <b style={{ fontSize: '3rem' }}>
+            {project.name || 'Title'}
+            </b>
+          </h2>
           <br />
           <img 
             src={project.thumbnail} 
@@ -104,6 +99,7 @@ const EventDetail = ({ }) => {
               } 
             </p>
           </div>
+          {/* <LikeDislike /> */}
           {/* Add more project details as needed */}
         </div>
 

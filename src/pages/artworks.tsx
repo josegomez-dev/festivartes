@@ -21,8 +21,6 @@ export default function Artworks() {
       {/* Main Content */}
       <div className={styles['main-content']}>
         <br />
-        <br />
-        <br />
         <SubMenu />
 
         <CoreSectionArtworks />

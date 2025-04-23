@@ -22,8 +22,6 @@ export default function Users() {
       {/* Main Content */}
       <div className={styles['main-content']}>
         <br />
-        <br />
-        <br />
         <SubMenu />
 
         <CoreSectionJudges />

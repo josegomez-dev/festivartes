@@ -34,22 +34,45 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
   }, []);
 
   return (
-      <div className=''>
+      <>
         <div className={`${styles.card} top-spaced`}>
           <p>
             <span className='bolder-text'>
               <RiBubbleChartFill color='gold'/> &nbsp;
-              <b>Obras Artísticas &nbsp; 
-                <Image
-                  src="/artworks-icon.png"
-                  alt="Catarsis Musical Logo"
-                  width={25}
-                  height={25}
-                  priority
-                />
+              <b>Mi Galería Creativa &nbsp; 
               </b>
               <p className='bolder-text small-text-size'>
-                 🌟 Transforma tu talento en una obra maestra.
+              Convertí tu inspiración en arte inmortal.
+              </p>
+            </span>
+          </p>
+          <br />
+
+          {data.length <= 0 ? 
+            <div className={styles.grid}>
+              <div className={styles.card}>
+                <h3>¡Ups! No hay obras registradas</h3>
+                <p>Aún no se han registrado obras en esta cuenta. Cuando se agregue una, aparecerá aquí automáticamente.</p>
+              </div> 
+            </div> 
+            : 
+            <div className=''>
+      
+              <ObjectMiniature projects={data} type={'artwork'} />
+              
+            </div>
+          }
+        </div>
+
+        <div className={`${styles.card} top-spaced`}>
+          <p>
+            <span className='bolder-text'>
+              <RiBubbleChartFill color='gold'/> &nbsp;
+              <b>Portafolio Artístico&nbsp; 
+              🌍
+              </b>
+              <p className='bolder-text small-text-size'>
+              Dale vida a tus ideas, compártelas con el mundo.
               </p>
             </span>
           </p>
@@ -65,12 +88,12 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
             : 
             <div className='overflow--big-area'>
       
-              <ObjectMiniature projects={data} type={'artwork'} />
+              <ObjectMiniature projects={data.concat(data).concat(data).concat(data).concat(data).concat(data).concat(data).concat(data).concat(data).concat(data)} type={'artwork'} />
               
             </div>
           }
         </div>
-      </div>
+      </>
   )
 }
 

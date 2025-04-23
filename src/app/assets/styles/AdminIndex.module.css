@@ -20,6 +20,7 @@
   
   max-width: 900px;
   margin: 0 auto;
+
 }
 
 .welcome-message {
@@ -28,6 +29,9 @@
   margin-bottom: 20px;
   color: orange;
   text-align: center;
+
+  animation: fadeIn 1s ease;
+
 }
 
 .slogan-text {
@@ -43,6 +47,8 @@
   text-justify: auto;
   filter: drop-shadow(0 0 0.1rem black);
   margin-top: 15px;
+
+  animation: fadeIn 1s ease;
 }
 
 .quick-links {
@@ -50,6 +56,7 @@
   gap: 5px;
   margin-bottom: 20px;
   justify-content: center;
+
 }
 
 .quick-links a {
@@ -86,6 +93,8 @@
   backdrop-filter: blur(100px); /* Apply the blur effect */
   border: 1px solid rgba(255, 255, 255, 0.2); /* Optional border for added style */
 
+  animation: fadeIn 1s ease;
+
   margin: 15px auto;
 
   padding: 20px;
@@ -102,6 +111,9 @@
 .card p {
   color: white;
 }
+
+
+
 
 
 
@@ -188,3 +200,18 @@
   color: white;
 }
 
+
+
+
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

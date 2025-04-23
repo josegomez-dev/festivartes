@@ -5,6 +5,8 @@ import ArtworkRegisterForm from "./ArtworkRegisterForm";
 import Image from 'next/image'
 import { FaCirclePlus } from "react-icons/fa6";
 import EventRegisterForm from "./EventRegisterForm";
+import InviteRegisterForm from "./InviteRegisterForm";
+import { RiBubbleChartFill } from "react-icons/ri";
 
 const FloatingMenuButton = () => {
   const { role } = useAuth();
@@ -24,9 +26,13 @@ const FloatingMenuButton = () => {
   const openEventModal = () => setIsEventModalOpen(true);
   const closeEventModal = () =>setIsEventModalOpen(false);
 
+  const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
+  const openInviteModal = () => setIsInviteModalOpen(true);
+  const closeInviteModal = () =>setIsInviteModalOpen(false);
+
 
   const menuOptions : any = {
-    admin: ["Registrar Evento", "Registrar Nueva Obra", "Consultar Reglamento"],
+    admin: ["Registrar Evento", "Registrar Nueva Obra", "Consultar Reglamento", "Invitar Jurado"],
     judge: ["Registrar Nueva Obra", "Consultar Reglamento"],
     user: ["Registrar Nueva Obra", "Consultar Reglamento"],
   };
@@ -42,6 +48,8 @@ const FloatingMenuButton = () => {
       openRulesModal();
     } else if (option === 'Registrar Evento') { // admin INTERNAL PANEL FEATURE
       openEventModal();
+    } else if (option === 'Invitar Jurado') { // admin
+      openInviteModal();
     }
     return;
   };
@@ -69,47 +77,7 @@ const FloatingMenuButton = () => {
         <div className="menu-dropdown">
           {options.map((option: string, index: number) => (
             <div key={index} className="menu-item" onClick={() => handleOptionClick(option)}>
-              {option === 'Registrar Evento' && 
-                <Image
-                  src="/events-icon.png"
-                  alt="Catarsis Musical Logo"
-                  width={25}
-                  height={25}
-                  priority
-                />}
-              {option === 'Invitar Jurado' && 
-                <Image
-                  src="/judges-icon.png"
-                  alt="Catarsis Musical Logo"
-                  width={25}
-                  height={25}
-                  priority
-                />}
-
-              {option === 'Calificar Obra' && 
-                <Image
-                  src="/judges-icon.png"
-                  alt="Catarsis Musical Logo"
-                  width={25}
-                  height={25}
-                  priority
-                />}
-              {option === 'Consultar Reglamento' && 
-                <Image
-                  src="/judges-icon.png"
-                  alt="Catarsis Musical Logo"
-                  width={25}
-                  height={25}
-                  priority
-                />}
-              {option === 'Registrar Nueva Obra' && 
-                <Image
-                  src="/artworks-icon.png"
-                  alt="Catarsis Musical Logo"
-                  width={25}
-                  height={25}
-                  priority
-                />}
+             <RiBubbleChartFill color='orange'/>
               &nbsp;
               &nbsp;
               {option}
@@ -144,6 +112,22 @@ const FloatingMenuButton = () => {
         <div className="form-wrapper">
           <br />
           <iframe src="https://www.mep.go.cr/sites/default/files/2023-05/reglamento-FEA-23.pdf" width={"100%"} height={"500px"}></iframe>
+        </div>
+      </CustomModal>
+
+      <CustomModal
+        isOpen={isInviteModalOpen}
+        onClose={closeInviteModal}
+        height="70%" // Custom height
+        // bgColor="black" // Custom background color
+      >
+        <div className="modal-title-centered">
+          <b>
+            <b>Invitar Jurado</b>
+          </b>
+        </div>
+        <div className="form-wrapper">
+          <InviteRegisterForm closeModal={closeInviteModal} />
         </div>
       </CustomModal>
 
