@@ -9,12 +9,58 @@ const ClapButton = ({ maxClaps = 50 }) => {
 
   const handleClapToggle = () => {
     if (hasClapped) {
+      const audio = unclapSoundRef.current;
+
+      if (audio) {
+        audio.volume = 0.8; // Start at full volume
+        audio.play().catch((e) => console.error('Clap sound error:', e));
+      
+        const fadeDuration = 2000; // Total fade time in ms
+        const fadeStep = 10; // How often to reduce volume (ms)
+        const fadeAmount = audio.volume / (fadeDuration / fadeStep); // Volume step
+      
+        const fadeInterval = setInterval(() => {
+          if (audio.volume - fadeAmount > 0) {
+            audio.volume -= fadeAmount;
+          } else {
+            audio.volume = 0;
+            clearInterval(fadeInterval);
+            audio.pause(); // Optional: pause when faded out
+            audio.currentTime = 0; // Reset to beginning
+            audio.volume = 0.8; // Reset volume for next play
+          }
+        }, fadeStep);
+      }    
+
       unclapSoundRef.current?.play().catch((e) => console.error('Unclap sound error:', e));
       setClaps((prev) => Math.max(prev - 1, 0));
       setReaction("sad");
     } else {
       if (claps < maxClaps) {
-        clapSoundRef.current?.play().catch((e) => console.error('Clap sound error:', e));
+        
+        const audio = clapSoundRef.current;
+
+        if (audio) {
+          audio.volume = 0.8; // Start at full volume
+          audio.play().catch((e) => console.error('Clap sound error:', e));
+        
+          const fadeDuration = 5500; // Total fade time in ms
+          const fadeStep = 10; // How often to reduce volume (ms)
+          const fadeAmount = audio.volume / (fadeDuration / fadeStep); // Volume step
+        
+          const fadeInterval = setInterval(() => {
+            if (audio.volume - fadeAmount > 0) {
+              audio.volume -= fadeAmount;
+            } else {
+              audio.volume = 0;
+              clearInterval(fadeInterval);
+              audio.pause(); // Optional: pause when faded out
+              audio.currentTime = 0; // Reset to beginning
+              audio.volume = 0.8; // Reset volume for next play
+            }
+          }, fadeStep);
+        }        
+
         setClaps((prev) => prev + 1);
         setReaction("happy");
       }
@@ -26,7 +72,7 @@ const ClapButton = ({ maxClaps = 50 }) => {
 
   return (
     <div style={{ textAlign: 'center', position: 'relative' }} onClick={handleClapToggle}>
-      <audio ref={clapSoundRef} src="https://cdn.freesound.org/previews/607/607207_7724198-lq.ogg" />
+      <audio ref={clapSoundRef} src="/sounds/spot.mp3" />
       <audio ref={unclapSoundRef} src="https://cdn.freesound.org/previews/687/687017_321967-lq.mp3" />
 
       {/* Reaction Face Animation */}

@@ -46,8 +46,8 @@ const CoreSectionFestivartes = ({ }) => {
             {data.length <= 0 ? 
             <div className={styles.grid}>
                 <div className={styles.card}>
-                <h3>Registra tu primer Evento Calificado</h3>
-                <p>Evento con jurado y reglamento.</p>
+                <h3 style={{ color: 'lightgray'}}><b>Registra tu primer Evento Calificado</b></h3>
+                <p>Registra tu Festival Artístico Oficial.</p>
                 </div> 
             </div> 
             : 
@@ -71,8 +71,8 @@ const CoreSectionFestivartes = ({ }) => {
             {data.length <= 0 ? 
             <div className={styles.grid}>
                 <div className={styles.card}>
-                <h3>Registra tu primer Evento Calificado</h3>
-                <p>Evento con jurado y reglamento.</p>
+                <h3 style={{ color: 'lightgray'}}>No se han registrado eventos</h3>
+                <p>¡Explora la app y crea el primero!</p>
                 </div> 
             </div> 
             : 

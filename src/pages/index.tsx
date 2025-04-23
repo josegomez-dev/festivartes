@@ -1,65 +1,91 @@
 import styles from "@/app/assets/styles/MainPage.module.css";
-import authStyles from "@/app/assets/styles/Auth.module.css";
-import mainStyles from "@/app/assets/styles/AdminIndex.module.css";
+import register_styles from "./../app/assets/styles/RegisterForm.module.css";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+
+const musicalQuotes = [
+  "Canta lo que el alma no sabe decir.",
+  "Toda herida guarda una canción.",
+  "Componer es recordar lo que aún no ha pasado.",
+  "Una melodía puede sostener un corazón.",
+  "El arte nace donde el dolor se vuelve luz.",
+  "Cada silencio es parte de la música.",
+  "Escribir canciones es hablar con el universo.",
+  "La emoción es la tinta del compositor.",
+  "El arte es un refugio donde la verdad no teme ser vista.",
+  "Una canción sincera vale más que mil palabras sabias."
+];
+
 
 const Home = () => {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  const playAudio = () => {
-    if (audioRef.current) {
-      audioRef.current.play().catch((error) => {
-        console.error("Playback failed:", error);
-      });
-    }
-  };
+  const [currentQuote, setCurrentQuote] = useState(musicalQuotes[0]);
 
   useEffect(() => {
-    redirectToLogin();
-    document.body.classList.add('prevent-scroll');
+    const interval = setInterval(() => {
+      const randomIndex = Math.floor(Math.random() * musicalQuotes.length);
+      setCurrentQuote(musicalQuotes[randomIndex]);
+      redirectToLogin();
+    }, 6000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const redirectToLogin = () => {
-    playAudio();
-    setTimeout(() => {
-      window.location.href = '/login';
-    }
-    , 1000);
+    window.location.href = '/login';
   }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const randomIndex = Math.floor(Math.random() * musicalQuotes.length);
+      setCurrentQuote(musicalQuotes[randomIndex]);
+    }, 6000); // Matches CSS timing
+  
+    return () => clearInterval(interval);
+  }, []);
+  
 
   return (
     <main className={styles.main}>
-      <div className={styles.center}>
-        <div className="logo-positioning-for-mobile">
-          <div style={{ display: 'none' }}>
-            <audio ref={audioRef} src="https://cdn.freesound.org/previews/784/784433_4468658-lq.mp3" />
-            <button id="playBtn" onClick={playAudio}>Play</button>
-          </div>
-          <h2>Bienvenido a <b style={{ fontSize: '1.8em'}}> FESTIVARTES</b></h2>
-          <br />
-          <p className={mainStyles['slogan-text']}>
-            Simplifica, automatiza y digitaliza todo tu festival cultural: registros, calificaciones y premiaciones. 
-            <br /><br /> 
-            <b style={{ filter: 'drop-shadow(0 0 0.2rem black)' }}>¡Todo en un solo lugar!</b>
-          </p>
-          <div>
-            <Image
-              className={styles.logo}
-              src="/logo2.png"
-              alt="Festivartes Main Logo"
-              width={300}
-              height={300}
-              priority
-            />
-          </div>
-          {/* <div onClick={redirectToLogin}>
-            <button className={authStyles['auth-button']}>Comenzar</button>
-          </div> */}
-        </div>
-      </div>
-    </main>
-  )
-}
 
-export default Home
+      <div key={currentQuote} className={styles.quote}>
+        {currentQuote}
+      </div>
+      <div className={styles.center}>
+        <Image
+          className={styles.logo}
+          src="/logo2.png"
+          alt="Festivartes Main Logo"
+          width={300}
+          height={300}
+          priority
+        />
+      </div>
+      <div className={styles.center}>
+        <h1 className={styles.title}><b style={{fontSize: '1.3em'}}>¡Bienvenido a Festivartes!</b></h1>
+        <br />
+        <p className={styles.description}>
+          ¡Explora, crea y comparte tu pasión por la música!
+        </p>
+
+        <button
+          id="start-button"
+          style={{
+            left: 0,
+            right: 0,
+            margin: '50px auto',
+            width: '100%',
+            maxWidth: '300px',
+            height: '80px',
+            zIndex: 999,
+          }}
+          className={`${register_styles.submitButton}`}
+        >
+          <b>Comenzar</b>
+        </button>
+
+        </div>
+    </main>
+  );
+};
+
+export default Home;

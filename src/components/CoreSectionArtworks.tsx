@@ -51,8 +51,8 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
           {data.length <= 0 ? 
             <div className={styles.grid}>
               <div className={styles.card}>
-                <h3>¡Ups! No hay obras registradas</h3>
-                <p>Aún no se han registrado obras en esta cuenta. Cuando se agregue una, aparecerá aquí automáticamente.</p>
+                <h3 style={{ color: 'lightgray'}}>¿Listo para mostrar tu talento?</h3>
+                <p>Tu galería aún está vacía</p>
               </div> 
             </div> 
             : 
@@ -81,8 +81,8 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
           {data.length <= 0 ? 
             <div className={styles.grid}>
               <div className={styles.card}>
-                <h3>¡Ups! No hay obras registradas</h3>
-                <p>Aún no se han registrado obras en esta cuenta. Cuando se agregue una, aparecerá aquí automáticamente.</p>
+                <h3 style={{ color: 'lightgray'}}>¡Ups! Todavía no hay obras</h3>
+                <p>Sube tu obra y compártela con el mundo desde aquí.</p>
               </div> 
             </div> 
             : 
