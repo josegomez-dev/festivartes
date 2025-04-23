@@ -68,6 +68,7 @@ const Home = () => {
         </p>
 
         <button
+          onClick={redirectToLogin}
           id="start-button"
           style={{
             left: 0,

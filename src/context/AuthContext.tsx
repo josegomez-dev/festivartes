@@ -24,7 +24,7 @@ interface AuthContextType {
   authenticated: boolean
   setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
 
-  signUp: (email: string, password: string) => Promise<void>;
+  signUp: (email: string, password: string, isJudge: boolean) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
   logout: () => Promise<void>;
@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return () => unsubscribe();
   }, []);
 
-  const signUp = async (email: string, password: string) => {
+  const signUp = async (email: string, password: string, isJudge: boolean) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
@@ -79,7 +79,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         uid: user.uid,
         email: user.email,
         displayName: user.displayName || "",
-        role: "user",
+        role: isJudge ? 'judge' : 'user',
         status: "",
         profilePic: "/blank-profile-picture.png",
         createdAt: new Date(),
@@ -95,7 +95,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   
       setUser(_user as any);
       setAuthenticated(true);
-      setRole(_user.role || "user");
+      setRole(_user.role);
 
       console.log("User and profile created successfully.");
     } catch (error) {
