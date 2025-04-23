@@ -36,7 +36,7 @@ const SignUp = () => {
       return
     }
     try {
-      await signUp(email, password)
+      await signUp(email, password, isJudge)
       router.push('/onboarding')
     } catch (error) {
       setErrorMessage((error as Error).message)

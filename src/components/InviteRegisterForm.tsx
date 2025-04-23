@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import styles from "./../app/assets/styles/RegisterForm.module.css";
 import emailjs from 'emailjs-com';
+import toast, { Toaster } from 'react-hot-toast';
 
 interface FormData {
   user_name: string;
@@ -43,7 +44,7 @@ const InviteRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) =
           });
 
           closeModal();
-
+          toast.success("🎉 Invitación enviada con éxito");
         }, (error) => {
           console.log(error.text);
         });
