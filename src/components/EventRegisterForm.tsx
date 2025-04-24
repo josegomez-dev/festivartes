@@ -6,9 +6,15 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { setDoc, doc } from 'firebase/firestore';
 import Image from "next/image";
 import { v4 as uuidv4 } from 'uuid';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
-const EventRegisterForm = () => {
+// define the interface for the props
+interface EventRegisterFormProps {
+  closeModal: () => void;
+}
+
+
+const EventRegisterForm: React.FC<EventRegisterFormProps> = ({ closeModal }) => {
   const { user } = useAuth();
   const [formData, setFormData] = useState<{
     name: string;
@@ -92,11 +98,11 @@ const EventRegisterForm = () => {
     // Create associated account in Firestore
     await setDoc(doc(db, "events", uuidv4()), _event);
     toast.success("Evento registrado con éxito");
+    closeModal();
   };
 
   return (
     <>
-     <Toaster position="top-center" reverseOrder={false} />
       <form className={styles.form} onSubmit={handleSubmit}>
 
         <label className={styles.label} htmlFor="name">

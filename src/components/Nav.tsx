@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { FaSignOutAlt } from "react-icons/fa"
 import ChatSidebar from './ChatSidebar'
 import { MdDashboardCustomize } from "react-icons/md";
+import { Toaster } from 'react-hot-toast'
 
 export default function Nav() {
   const { role, authenticated, logout } = useAuth()
@@ -25,6 +26,7 @@ export default function Nav() {
 
   return (
     <nav className={`${styles.navbar} bg-gray-800 text-white`}>
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="flex items-center">
         <Link href={`/dashboard`}>
           {authenticated && <MdDashboardCustomize color="gold" />}

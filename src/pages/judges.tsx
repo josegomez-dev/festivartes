@@ -5,6 +5,7 @@ import SidebarMenu from '@/components/Sidebar-menu';
 import FloatingMenuButton from '@/components/FloatingMenuButton';
 import CoreSectionJudges from '@/components/CoreSectionJudges';
 import SubMenu from '@/components/SubMenu';
+import BannerFooter from '@/components/BannerFooter';
 
 
 export default function Users() {
@@ -27,6 +28,7 @@ export default function Users() {
         <CoreSectionJudges />
 
         <FloatingMenuButton />
+        <BannerFooter />
       </div>
     </div>
   )

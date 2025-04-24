@@ -1,5 +1,5 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
-import authStyles from '@/app/assets/styles/Auth.module.css';
+import registerForm from '@/app/assets/styles/RegisterForm.module.css';
 import SubMenu from '@/components/SubMenu';
 import { useRouter } from 'next/router';
 import AudioPlayer from "@/components/AudioPlayer";
@@ -15,7 +15,7 @@ import RatingForm from '@/components/RatingForm';
 import ClapButton from '@/components/ClapButton';
 import StarRating from '@/components/StarRating';
 import SocialShareButton from '@/components/SocialShareButton';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 const videos = [
   { id: 1, title: "Video 1", src: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4" },
@@ -83,7 +83,6 @@ const ArtworkDetail = () => {
   return (
     <div className={styles['full-view']}>
       <SubMenu />
-      <Toaster position="top-center" reverseOrder={false} />
 
       <CustomModal
         isOpen={isJudgeModalOpen}
@@ -130,71 +129,82 @@ const ArtworkDetail = () => {
           ) : (
             <img src='https://getuikit.com/v2/docs/images/placeholder_600x400.svg' alt={project.title} className='project-thumbnail-wrapper' />
           )}
-          <br />
           <div>
             <br />
             <p ><b className='bolder-text'>Categoría:</b> {project?.category}</p>
             <p ><b className='bolder-text'>Compositor o Artista:</b> {project?.artist}</p>      
             <br />
-            {project?.audio && (
-              <div className='links-spaced'>
-                <AudioPlayer src="https://file-examples.com/storage/fe46ad26fa67d4043a4b9e6/2017/11/file_example_MP3_700KB.mp3" title="Sample Track" />
-              </div>
-              )}
-
-            <DocumentEditor title={project.title} />
-
+            <p className='overflow-area'> {project?.description}</p>
             <br />
-            {/* <p><b>Archivos de la Obra</b></p>
-            <br /> */}
-
-            {/* Tab Navigation */}
-            {/* <div className="tabs">
-              <button 
-                className={activeTab === 'document' ? 'active' : ''}
-                onClick={() => handleTabClick('document')}
-              >
-                Editor de Documentos
-              </button>
-              <button 
-                className={activeTab === 'video' ? 'active' : ''}
-                onClick={() => handleTabClick('video')}
-              >
-                Reproductor de Video
-              </button>
-              <button 
-                className={activeTab === 'live' ? 'active' : ''}
-                onClick={() => handleTabClick('live')}
-              >
-                LIVE
-              </button>
-            </div> */}
-
-            {/* Tab Content */}
-            {/* <div className="tab-content">
-              {activeTab === 'document' && <DocumentEditor title={project.title} />}
-              {activeTab === 'video' && (
-                <div className="carousel">
-                  <VideoPlayer src={videos[currentIndex].src} title={videos[currentIndex].title} />
-                  <div className="controls">
-                    <button onClick={prevVideo} disabled={currentIndex === 0}>⬅️ Prev</button>
-                    <button onClick={nextVideo} disabled={currentIndex === videos.length - 1}>Next ➡️</button>
-                  </div>
-                </div>
-              )}
-              {activeTab === 'live' && <div>Live Content Here</div>}
-            </div> */}
           </div>
-          <button className={`${authStyles['auth-button']}`} onClick={() => {
+          <button className={`${registerForm['submitButton']}`} onClick={() => {
               role === 'judge' ? openJudgeModal() : toast.error('No tienes permisos para calificar esta obra de arte');
-            }}><b className='disabled'>🖋️ Calificar Obra de Arte</b></button>
-        </div>
-        
+            }}><b>🖋️ Calificar Obra de Arte</b></button>
+        </div>        
 
         <br />
         <hr />
+        <br />
+        {/* <p><b>Archivos de la Obra</b></p>
+        <br /> */}
 
-        <CoreSectionJudges filterBy={project.judges} />
+        {/* Tab Navigation */}
+        <div className="tabs">
+          <button 
+            className={activeTab === 'document' ? 'active' : ''}
+            onClick={() => handleTabClick('document')}
+          >
+            Editor de Documentos
+          </button>
+          <button 
+            className={activeTab === 'audio' ? 'active' : ''}
+            onClick={() => handleTabClick('audio')}
+          >
+            Reproductor de Audio
+          </button>
+          <button 
+            className={activeTab === 'video' ? 'active' : ''}
+            onClick={() => handleTabClick('video')}
+          >
+            Reproductor de Video
+          </button>
+          <button 
+            className={activeTab === 'live' ? 'active' : ''}
+            onClick={() => handleTabClick('live')}
+          >
+            LIVE
+          </button>
+        </div>
+
+        {/* Tab Content */}
+        <div className="tab-content">
+          {activeTab === 'audio' && (
+            <div className='links-spaced'>
+              <AudioPlayer src="https://file-examples.com/storage/fe46ad26fa67d4043a4b9e6/2017/11/file_example_MP3_700KB.mp3" title="Sample Track" />
+            </div>          
+          )}
+          {activeTab === 'document' && (
+            <DocumentEditor title={project.title} />
+          )}
+          {activeTab === 'video' && (
+            <div className="carousel">
+              <VideoPlayer src={videos[currentIndex].src} title={videos[currentIndex].title} />
+              <div className="controls">
+                <button onClick={prevVideo} disabled={currentIndex === 0}>⬅️ Prev</button>
+                <button onClick={nextVideo} disabled={currentIndex === videos.length - 1}>Next ➡️</button>
+              </div>
+            </div>
+          )}
+          {activeTab === 'live' && <div>
+            Live Content Here
+            </div>}
+        </div>
+        <br />
+        {/* <DocumentEditor title={project.title} />
+        <br />
+        <hr /> */}
+
+        <CoreSectionJudges />
 
       </div>
 

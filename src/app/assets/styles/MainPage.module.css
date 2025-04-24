@@ -64,3 +64,19 @@
     90% { opacity: 1; transform: translateY(0); }
   }
   
+.center {
+    position: relative;
+    z-index: 2;
+}
+
+.footer-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    font-size: 0.8rem;
+}

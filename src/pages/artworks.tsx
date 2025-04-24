@@ -5,9 +5,10 @@ import SidebarMenu from '@/components/Sidebar-menu';
 import FloatingMenuButton from '@/components/FloatingMenuButton';
 import CoreSectionArtworks from '@/components/CoreSectionArtworks';
 import SubMenu from '@/components/SubMenu';
+import BannerFooter from '@/components/BannerFooter';
 
 export default function Artworks() {
-  const { authenticated } = useAuth()
+  const { user, role, authenticated } = useAuth()
 
   if (!authenticated) {
     // Redirect to login if not admin or not authenticated
@@ -23,9 +24,17 @@ export default function Artworks() {
         <br />
         <SubMenu />
 
-        <CoreSectionArtworks />
+        <CoreSectionArtworks filterBy={user?.uid} />
 
         <FloatingMenuButton />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <BannerFooter />
       </div>
     </div>
   )

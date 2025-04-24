@@ -20,7 +20,7 @@ const EventDetail = ({ }) => {
   const [data, setData] = useState<{ id: string; [key: string]: any }[]>([]);
   const [project, setProject] = useState<{ id: string; [key: string]: any } | null>(null);
 
-  const { role } = useAuth();
+  const { user, role } = useAuth();
 
   const fetchEvents = async (id: string | string[] | undefined) => {
     try {
@@ -106,12 +106,12 @@ const EventDetail = ({ }) => {
         <br />
         <hr />
 
-        <CoreSectionJudges filterBy={project.judges} />
+        <CoreSectionJudges />
 
         <br />
         <hr />
 
-        <CoreSectionArtworks filterBy={project.artworks} />
+        <CoreSectionArtworks filterBy={user?.uid} />
 
       </div>
     </div>

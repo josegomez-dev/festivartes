@@ -7,9 +7,10 @@ import CoreSectionArtworks from '@/components/CoreSectionArtworks';
 import CoreSectionJudges from '@/components/CoreSectionJudges';
 import BannerFooter from '@/components/BannerFooter';
 import SubMenu from '@/components/SubMenu';
+import { Toaster } from 'react-hot-toast'
 
 export default function Dashboard() {
-  const { role, authenticated } = useAuth()
+  const { user, role, authenticated } = useAuth()
 
   if (!authenticated) {
     // Redirect to login if not admin or not authenticated
@@ -31,14 +32,17 @@ export default function Dashboard() {
       
       {/* Main Content */}
       <div>
-        <CoreSectionFestivartes />
+        <CoreSectionFestivartes filterBy={user?.uid} />
         <br />
         <hr />
-        <CoreSectionArtworks />
-        {/* <br />
-        <hr />
-        <CoreSectionJudges /> */}
+        <CoreSectionArtworks filterBy={user?.uid} />
         <BannerFooter />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <FloatingMenuButton />
       </div>
     </div>

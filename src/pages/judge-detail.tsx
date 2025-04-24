@@ -9,7 +9,7 @@ const JudgeDetail = ({ }) => {
   const router = useRouter();
   const { id } = router.query; // Dynamic route parameter
   const [data, setData] = useState<{ id: string; [key: string]: any }[]>([]);
-  const [project, setProject] = useState<{ id: string; [key: string]: any } | null>(null);
+  const [profile, setProfile] = useState<{ id: string; [key: string]: any } | null>(null);
 
   const fetchJudge = async (id: string | string[] | undefined) => {
     try {
@@ -21,9 +21,9 @@ const JudgeDetail = ({ }) => {
           ...(doc.data() as { role: string })
         }))
         .filter((account) => account.role === 'judge');
-      const selectedProject = accounts.find(account => account.id === id);
-      if (selectedProject) {
-        setProject(selectedProject);
+      const selectedJudge = accounts.find(account => account.id === id);
+      if (selectedJudge) {
+        setProfile(selectedJudge);
       }
       setData(accounts);
       return accounts;
@@ -37,7 +37,7 @@ const JudgeDetail = ({ }) => {
     fetchJudge(id);
   }, []);
 
-  if (!project) {
+  if (!profile) {
     return <div>Loading...</div>;
   }
 
@@ -47,27 +47,28 @@ const JudgeDetail = ({ }) => {
 
       <div className='project-detail-wrapper'>
         <div className="project-detail-container">
-          <h1>{project.name}</h1>
+          <h1>{profile.name}</h1>
           <br />
-          {project.thumbnail || project.profilePic ? 
-            <img src={project.thumbnail || project.profilePic} alt={project.name} className='project-thumbnail-judge' />
+          {profile.thumbnail || profile.profilePic ? 
+            <img src={profile.thumbnail || profile.profilePic} alt={profile.name} className='project-thumbnail-judge' />
           : 
-            <img src='https://cdn-icons-png.flaticon.com/512/149/149071.png' alt={project.name} className='project-thumbnail-judge' /> 
+            <img src='https://cdn-icons-png.flaticon.com/512/149/149071.png' alt={profile.name} className='project-thumbnail-judge' /> 
           }
-          <br />
           <div>
-            <p><b>Información de Contacto</b></p>
+            <p><b style={{ fontSize: '3rem' }}>{profile?.displayName}</b></p>
             <p className='bolder-text'>
-              {project?.name} | {project?.bio || 'Agrega una descripcion'}
+              {profile?.name} | {profile?.bio || 'Agrega una descripcion'}
             </p>
             <br />
-            <p>
-              Correo electronico: <br /> {project?.email || 'Agrega un correo electronico'}
-            </p>
-            <br />
-            <p>
-              Telefono:&nbsp;{project?.phone || 'Agrega un numero de telefono'}
-            </p>
+            <hr style={{ width: '300px', margin: '0 auto' }} />
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+              <p ><b className='bolder-text'>Email:</b> {profile.email}</p>
+              <p ><b className='bolder-text'>Teléfono:</b> {profile.phone}</p>      
+              <p ><b className='bolder-text'>Ubicación:</b> {profile.address}</p>      
+              <p ><b className='bolder-text'>Dirección:</b> {profile.location}</p>      
+              <p ><b className='bolder-text'>Sitio web:</b> {profile.website}</p>      
+            </div>
           </div>
           {/* Add more project details as needed */}
         </div>

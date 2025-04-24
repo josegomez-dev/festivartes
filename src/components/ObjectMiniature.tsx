@@ -25,15 +25,13 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type }) =>
 
           {type === 'judge' ? 
           <>
-            {project.type === 'musician' && 
-              <img className='judges-badge badge-orange' src="https://cdn3.iconfinder.com/data/icons/musician-and-rock-star/199/musician-rock-star-003-512.png" alt="" />
-            }
-            {project.type === 'painter' &&  
+            <img className='judges-badge badge-orange' src="https://cdn3.iconfinder.com/data/icons/musician-and-rock-star/199/musician-rock-star-003-512.png" alt="" />
+            {/* {project.type === 'painter' &&  
               <img className='judges-badge badge-blue' src="https://cdn2.iconfinder.com/data/icons/people-79/100/Brush-07-512.png" alt="" />
             }
             {project.type === 'dancer' && 
               <img className='judges-badge badge-white' src="https://cdn-icons-png.flaticon.com/512/40/40072.png" alt="" />
-            }
+            } */}
           </> :
           <></>}
           {type === 'artwork' ? 

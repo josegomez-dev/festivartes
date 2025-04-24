@@ -9,7 +9,7 @@ import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { db, storage } from "./../../firebaseConfig"
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { EMPTY_USER } from "@/types/userTypes";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 export default function Profile() {
   const { user, role, authenticated } = useAuth();
@@ -114,7 +114,6 @@ export default function Profile() {
 
   return (
     <div className={styles['full-view']} >
-      <Toaster position="top-center" reverseOrder={false} />
       <div className="profile-container">
         <label htmlFor="profile-pic" className="profile-pic-label">
           <Image
@@ -139,7 +138,7 @@ export default function Profile() {
         </label>
 
         <div className="input-group">
-          <label>Rol de Usuario</label>
+          <label>Rol de Usuario <span style={{ color: 'orange' }}>*</span></label>
           <button onClick={requestRoleChange} className="role-change-button disabled" disabled>Solicitar Actualización</button>
           <input style={{maxWidth: '125px'}} type="text" name="role" value={accountData.role} disabled className="disabled" />
           {/* <select name="role" value={profile.role} onChange={handleInputChange}>
@@ -150,13 +149,18 @@ export default function Profile() {
         </div>
 
         <div className="input-group">
-          <label>Nombre</label>
+          <label>Nombre <span style={{ color: 'orange' }}>*</span></label>
           <input type="text" name="displayName" value={accountData.displayName || ''} onChange={handleInputChange} />
         </div>
 
         <div className="input-group">
-          <label>Correo electronico</label>
+          <label>Correo electronico <span style={{ color: 'orange' }}>*</span></label>
           <input type="email" name="email" value={accountData.email || ''} onChange={handleInputChange} />
+        </div>
+
+        <div className="input-group">
+          <label>Bio <span style={{ color: 'orange' }}>*</span></label>
+          <input type="tel" name="phone" value={accountData.bio || ''} onChange={handleInputChange} />
         </div>
 
         {/* <div className="input-group">
@@ -175,20 +179,21 @@ export default function Profile() {
           </div>
           <input type="text" name="socialMedia" value={profile.socialMedia || ''} onChange={handleInputChange} placeholder="Facebook, Instagram, etc." />
         </div> */}
+
         <div className="input-group">
-          <label>Ubicación (opcional)</label>
+          <label>Ubicación <span style={{ color: 'orange' }}>*</span></label>
           <input type="text" name="location" value={accountData.location || ''} onChange={handleInputChange} />
         </div>
         <div className="input-group">
-          <label>Teléfono (opcional)</label>
-          <input type="tel" name="phone" value={accountData.phone || ''} onChange={handleInputChange} />
-        </div>
-        <div className="input-group">
-          <label>Dirección (opcional)</label>
+          <label>Dirección</label>
           <input type="text" name="address" value={accountData.address || ''} onChange={handleInputChange} />
         </div>
         <div className="input-group">
-          <label>Website (opcional)</label>
+          <label>Teléfono </label>
+          <input type="tel" name="phone" value={accountData.phone || ''} onChange={handleInputChange} />
+        </div>
+        <div className="input-group">
+          <label>Website</label>
           <input type="url" name="website" value={accountData.website || ''} onChange={handleInputChange} />
         </div>  
 

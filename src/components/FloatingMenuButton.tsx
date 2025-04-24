@@ -99,7 +99,7 @@ const FloatingMenuButton = () => {
             <b>Anímate a descubrir tu Artista Interior</b>
         </div>
         <div className="form-wrapper">
-          <ArtworkRegisterForm />
+          <ArtworkRegisterForm closeModal={closeUserModal} />
         </div>
       </CustomModal>
 
@@ -142,7 +142,7 @@ const FloatingMenuButton = () => {
           </b>
         </div>
         <div className="form-wrapper">
-          <EventRegisterForm />
+          <EventRegisterForm closeModal={closeEventModal} />
         </div>
       </CustomModal>
 

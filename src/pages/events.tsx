@@ -5,9 +5,10 @@ import SidebarMenu from '@/components/Sidebar-menu';
 import FloatingMenuButton from '@/components/FloatingMenuButton';
 import CoreSectionFestivartes from '@/components/CoreSectionFestivartes';
 import SubMenu from '@/components/SubMenu';
+import BannerFooter from '@/components/BannerFooter';
 
 export default function Events() {
-  const { authenticated } = useAuth()
+  const { user, role, authenticated } = useAuth()
 
   if (!authenticated) {
     // Redirect to login if not admin or not authenticated
@@ -23,9 +24,17 @@ export default function Events() {
         <br />
         <SubMenu />
 
-        <CoreSectionFestivartes />
+        <CoreSectionFestivartes filterBy={user?.uid} />
 
         <FloatingMenuButton />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <BannerFooter />
       </div>
     </div>
   )

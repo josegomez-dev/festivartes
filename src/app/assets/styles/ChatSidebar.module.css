@@ -43,7 +43,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 15px;
-    background-color: orange;
+    background: linear-gradient(135deg, #2c5364, #203a43, #0f2027);
     color: white;
   }
   
@@ -56,7 +56,7 @@
   .chatInput {
     display: flex;
     padding: 10px;
-    background-color: orange;
+    background: linear-gradient(135deg, #2c5364, #203a43, #0f2027);
     border-top: 1px solid #ccc;
   }
   
@@ -69,7 +69,7 @@
   }
     
   .chatInput button {
-    background-color: black;
+    background-color: orange;
     color: white;
     border: none;
     padding: 10px 15px;

@@ -7,30 +7,41 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from './../../firebaseConfig';
 
 interface CoreSectionArtworksProps {
-  filterBy?: any
+  filterBy?: string;
 }
 
 const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
   
-  const [data, setData] = useState<{ id: string; [key: string]: any }[]>([]);
+  const [data, setData] = useState<ARTWORK[]>([]);
+  const [dataFiltered, setDataFiltered] = useState<ARTWORK[]>([]);
 
-  const fetchEvents = async () => {
+  const fetchArtworks = async () => {
     try {
-      const querySnapshot = await getDocs(collection(db, 'artworks'))
-      const events = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }))
-      setData(events);
-      return events
+      const querySnapshot = await getDocs(collection(db, 'artworks'));
+      const artworks = querySnapshot.docs.map(doc => {
+        const { id, ...rest } = doc.data() as ARTWORK;
+        return {
+          id: doc.id,
+          ...rest
+        };
+      });
+  
+      setData(artworks);
+      
+      if (filterBy) {
+        const filteredArtworks = artworks.filter(artwork => {
+          return artwork.createdBy === filterBy;
+        });
+        setDataFiltered(filteredArtworks);
+      }
     } catch (error) {
-      console.error('Error fetching events:', error)
-      return []
+      console.error('Error fetching artwork:', error);
+      return [];
     }
-  }
+  };
 
   useEffect(() => {
-    fetchEvents()
+    fetchArtworks();
   }, []);
 
   return (
@@ -58,7 +69,7 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
             : 
             <div className=''>
       
-              <ObjectMiniature projects={data} type={'artwork'} />
+              <ObjectMiniature projects={dataFiltered} type={'artwork'} />
               
             </div>
           }
@@ -86,10 +97,8 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
               </div> 
             </div> 
             : 
-            <div className='overflow--big-area'>
-      
-              <ObjectMiniature projects={data.concat(data).concat(data).concat(data).concat(data).concat(data).concat(data).concat(data).concat(data).concat(data)} type={'artwork'} />
-              
+            <div>
+              <ObjectMiniature projects={data} type={'artwork'} />              
             </div>
           }
         </div>

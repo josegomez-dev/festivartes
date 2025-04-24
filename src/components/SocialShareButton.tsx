@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 
 const ShareButton = () => {
@@ -13,7 +13,6 @@ const ShareButton = () => {
 
   return (
     <div style={{ textAlign: 'center', position: 'relative' }} onClick={() => setShowOptions(!showOptions)}>
-      <Toaster position="top-center" reverseOrder={false} />
       <div style={{ fontSize: '1rem', marginTop: '10px', color: '#fff' }}>
         Compartir
       </div>

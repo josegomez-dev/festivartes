@@ -58,7 +58,7 @@ const StarRating = ({ totalStars = 5, initialAverage = 3.8 }) => {
       {/* Default average */}
       {!userRating && !showFeedback && (
         <div style={{ fontSize: '1rem', color: '#fff', marginBottom: '6px' }}>
-          Promedio:<br /> {initialAverage.toFixed(1)} / {totalStars}
+          Promedio: {initialAverage.toFixed(1)} / {totalStars}
         </div>
       )}
 
@@ -74,7 +74,7 @@ const StarRating = ({ totalStars = 5, initialAverage = 3.8 }) => {
               onMouseLeave={() => setHover(null)}
               style={{
                 cursor: 'pointer',
-                fontSize: '1rem',
+                fontSize: '1.4rem',
                 color: starValue <= displayRating ? '#ffc107' : '#e4e5e9',
                 transition: 'color 0.2s ease',
               }}

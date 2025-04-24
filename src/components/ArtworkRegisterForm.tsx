@@ -7,9 +7,13 @@ import { setDoc, doc } from 'firebase/firestore';
 import Image from "next/image";
 import { useAuth } from "./../context/AuthContext";
 import { v4 as uuidv4 } from 'uuid';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
-const ArtworkRegisterForm = () => {
+interface InviteRegisterFormProps {
+  closeModal: () => void;
+}
+
+const ArtworkRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) => {
   const { user } = useAuth();
 
   const [formData, setFormData] = useState<{
@@ -93,11 +97,11 @@ const ArtworkRegisterForm = () => {
       category: "",
       thumbnail: '/logo2.png',
     });
+    closeModal();
   };
 
   return (
     <>
-      <Toaster position="top-center" reverseOrder={false} />
       <form className={styles.form} onSubmit={handleSubmit}>
 
         <label className={styles.label} htmlFor="title">

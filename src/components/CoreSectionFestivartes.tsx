@@ -6,18 +6,33 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from './../../firebaseConfig'; // update path if needed
 import { useEffect, useState } from 'react';
 
-const CoreSectionFestivartes = ({ }) => {
-  const [data, setData] = useState<{ id: string; [key: string]: any }[]>([]);
+interface CoreSectionFestivartesProps {
+  filterBy?: any;
+}
+
+const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
+  const [data, setData] = useState<EVENTS[]>([]);
+  const [dataFiltered, setDataFiltered] = useState<EVENTS[]>([]);
 
   const fetchEvents = async () => {
     try {
       const querySnapshot = await getDocs(collection(db, 'events'))
-      const events = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }))
+      const events = querySnapshot.docs.map(doc => {
+        const { id, ...rest } = doc.data() as EVENTS;
+        return {
+          id: doc.id,
+          ...rest
+        };
+      });
+  
       setData(events);
-      return events
+
+      if (filterBy) {
+        const filteredEvents = events.filter(event => {
+          return event.createdBy === filterBy;
+        });
+        setDataFiltered(filteredEvents);
+      }
     } catch (error) {
       console.error('Error fetching events:', error)
       return []
@@ -34,7 +49,7 @@ const CoreSectionFestivartes = ({ }) => {
             <p>
               <span className='bolder-text'>
                 <RiBubbleChartFill color='gold'/> &nbsp;
-                <b>Mis Creaciones en Festivartes &nbsp; 
+                <b>Mis Festivartes &nbsp; 
                 
                 </b>
                 <p className='bolder-text small-text-size'>
@@ -51,7 +66,7 @@ const CoreSectionFestivartes = ({ }) => {
                 </div> 
             </div> 
             : 
-            <ObjectMiniature projects={data} type={'event'} />
+            <ObjectMiniature projects={dataFiltered} type={'event'} />
             }
         </div>
 
@@ -77,7 +92,7 @@ const CoreSectionFestivartes = ({ }) => {
             </div> 
             : 
             <div className='overflow--big-area'>
-              <ObjectMiniature projects={data.concat(data).concat(data).concat(data).concat(data).concat(data).concat(data).concat(data).concat(data).concat(data)} type={'event'} />
+              <ObjectMiniature projects={data} type={'event'} />
             </div>
             }
         </div>
