@@ -102,87 +102,96 @@ const ArtworkRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) 
 
   return (
     <>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form className={`${styles.form} profile-container`} onSubmit={handleSubmit}>
 
-        <label className={styles.label} htmlFor="title">
-          <b>Título de la Obra</b>
-        </label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          className={styles.input}
-          value={formData.title}
-          onChange={handleChange}
-          required
-        />
-
-
-        <label className={styles.label} htmlFor="thumbnail">
-          <b>Foto o Imagen de la Obra</b>
-          <Image
-            src={formData.thumbnail}
-            alt="Artwork Picture"
-            width={100}
-            height={100}
+        <div className="input-group">
+          <label htmlFor="title">
+            Título de la Obra
+          </label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            className={styles.input}
+            value={formData.title}
+            onChange={handleChange}
+            required
           />
-        </label>
-        <input
-          type="file"
-          id="thumbnail"
-          name="thumbnail"
-          className={styles.fileInput}
-          accept="image/*"
-          onChange={handleImageUpload}
-          required
+        </div>
+
+        <div className="input-group">
+          <label htmlFor="thumbnail">
+            Foto o Imagen de la Obra
+          </label>
+          <input
+            type="file"
+            id="thumbnail"
+            name="thumbnail"
+            className={styles.fileInput}
+            accept="image/*"
+            onChange={handleImageUpload}
+            required
+          />
+        </div>
+
+        <Image
+          src={formData.thumbnail}
+          alt="Artwork Picture"
+          width={200}
+          height={200}
+          className="thumbnail-register"
         />
 
+        <div className="input-group">
+          <label className={styles.label} htmlFor="category">
+            Categoría
+          </label>
+          <select
+            id="category"
+            name="category"
+            className={styles.select}
+            value={formData.category}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Selecciona una categoría</option>
+            <option value="pintura">Pintura</option>
+            <option value="escultura">Escultura</option>
+            <option value="fotografia">Fotografía</option>
+            <option value="arte_digital">Arte Digital</option>
+            <option value="musica">Música</option>
+            <option value="baile">Baile o Danza</option>
+          </select>
+        </div>
 
-        <label className={styles.label} htmlFor="category">
-          <b>Categoría</b>
-        </label>
-        <select
-          id="category"
-          name="category"
-          className={styles.select}
-          value={formData.category}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Selecciona una categoría</option>
-          <option value="pintura">Pintura</option>
-          <option value="escultura">Escultura</option>
-          <option value="fotografia">Fotografía</option>
-          <option value="arte_digital">Arte Digital</option>
-          <option value="musica">Música</option>
-          <option value="baile">Baile o Danza</option>
-        </select>
+        <div className="input-group">
+          <label className={styles.label} htmlFor="artist">
+            Artista o Compositor
+          </label>
+          <input
+            type="text"
+            id="artist"
+            name="artist"
+            className={styles.input}
+            value={formData.artist}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-
-        <label className={styles.label} htmlFor="artist">
-          <b>Artista o Compositor</b>
-        </label>
-        <input
-          type="text"
-          id="artist"
-          name="artist"
-          className={styles.input}
-          value={formData.artist}
-          onChange={handleChange}
-          required
-        />
-
-        <label className={styles.label} htmlFor="description">
-          <b>Descripción</b>
-        </label>
-        <textarea
-          id="description"
-          name="description"
-          className={styles.textarea}
-          value={formData.description}
-          onChange={handleChange}
-          rows={4}
-        ></textarea>
+        <div className="input-group">
+          <label className={styles.label} htmlFor="description">
+            Descripción
+          </label>
+          <textarea
+            id="description"
+            name="description"
+            className={styles.textarea}
+            value={formData.description}
+            onChange={handleChange}
+            rows={4}
+          ></textarea>
+        </div>
 
         <button type="submit" className={`${styles.submitButton}`}>
           <b>Enviar Formulario</b>

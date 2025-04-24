@@ -5,6 +5,9 @@ import { RiBubbleChartFill } from 'react-icons/ri';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from './../../firebaseConfig'; // update path if needed
 import { useEffect, useState } from 'react';
+import { FaCirclePlus } from 'react-icons/fa6';
+import CustomModal from './CustomModal';
+import EventRegisterForm from './EventRegisterForm';
 
 interface CoreSectionFestivartesProps {
   filterBy?: any;
@@ -14,6 +17,10 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
   const [data, setData] = useState<EVENTS[]>([]);
   const [dataFiltered, setDataFiltered] = useState<EVENTS[]>([]);
 
+  const [isEventModalOpen, setIsEventModalOpen] = useState(false);
+  const openEventModal = () => setIsEventModalOpen(true);
+  const closeEventModal = () =>setIsEventModalOpen(false);
+  
   const fetchEvents = async () => {
     try {
       const querySnapshot = await getDocs(collection(db, 'events'))
@@ -45,6 +52,21 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
 
   return (
       <>
+        <CustomModal
+          isOpen={isEventModalOpen}
+          onClose={closeEventModal}
+          height="80%" // Custom height
+        >
+          <div className="modal-title-centered">
+            <b>
+              <b>Anímate a descubrir <br /> tu Artista Interior</b>
+            </b>
+          </div>
+          <div className="form-wrapper">
+            <EventRegisterForm closeModal={closeEventModal} />
+          </div>
+        </CustomModal>
+        
         <div className={styles.card}>
             <p>
               <span className='bolder-text'>
@@ -53,9 +75,17 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
                 
                 </b>
                 <p className='bolder-text small-text-size'>
-                  ¡Elegí tu próximo escenario y hacé historia!
+                  ¡Elegí tu próximo escenario y <br /> hacé historia!
                 </p>
                 <br />
+                <br />
+
+                <div className="register-button">
+                  <button className="menu-button" onClick={openEventModal}>
+                    <FaCirclePlus className="floating-menu-button" />
+                  </button>
+                </div>
+
               </span>
             </p>
             {data.length <= 0 ? 
@@ -70,15 +100,15 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
             }
         </div>
 
+        <br />
         <div className={styles.card}>
             <p>
               <span className='bolder-text'>
                 <RiBubbleChartFill color='gold'/> &nbsp;
-                <b> Catalogo completo de Festivartes &nbsp; 
-                🌍
+                <b> Catalogo de Festivartes &nbsp; 
                 </b>
                 <p className='bolder-text small-text-size'>
-                Lleva tu evento al siguiente nivel con nuestra app.
+                Lleva tu evento al siguiente nivel <br /> con nuestra app.
                 </p>
                 <br />
               </span>

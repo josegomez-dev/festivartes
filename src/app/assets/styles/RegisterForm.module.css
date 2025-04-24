@@ -8,9 +8,12 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   overflow-y: scroll; /* Ensures scrolling section */
   height: 420px; /* Takes the taller height */
-  background: #32acc0;
+
+  background: linear-gradient(135deg, #2c5364, #203a43, #0f2027);
+
   backdrop-filter: blur(100px); /* Apply the blur effect */
   border: 1px solid rgba(255, 255, 255, 0.2); /* Optional border for added style */
+  text-align: left;
 }
 
 .form-wrapper {

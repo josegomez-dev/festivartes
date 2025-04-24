@@ -5,6 +5,9 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from './../../firebaseConfig';
+import { FaCirclePlus } from 'react-icons/fa6';
+import CustomModal from './CustomModal';
+import ArtworkRegisterForm from './ArtworkRegisterForm';
 
 interface CoreSectionArtworksProps {
   filterBy?: string;
@@ -14,6 +17,10 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
   
   const [data, setData] = useState<ARTWORK[]>([]);
   const [dataFiltered, setDataFiltered] = useState<ARTWORK[]>([]);
+
+  const [isUserModalOpen, setIsUserModalOpen] = useState(false);  
+  const openUserModal = () => setIsUserModalOpen(true);
+  const closeUserModal = () =>setIsUserModalOpen(false);
 
   const fetchArtworks = async () => {
     try {
@@ -46,6 +53,18 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
 
   return (
       <>
+            <CustomModal
+              isOpen={isUserModalOpen}
+              onClose={closeUserModal}
+              height="85%" // Custom height
+            >
+              <div className="modal-title-centered">
+                  <b>Anímate a descubrir <br /> tu Artista Interior</b>
+              </div>
+              <div className="form-wrapper">
+                <ArtworkRegisterForm closeModal={closeUserModal} />
+              </div>
+            </CustomModal>
         <div className={`${styles.card} top-spaced`}>
           <p>
             <span className='bolder-text'>
@@ -53,8 +72,14 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
               <b>Mi Galería Creativa &nbsp; 
               </b>
               <p className='bolder-text small-text-size'>
-              Convertí tu inspiración en arte inmortal.
+              Convertí tu inspiración <br /> en arte inmortal.
               </p>
+              <br />
+              <div className="register-button">
+                <button className="menu-button" onClick={openUserModal}>
+                  <FaCirclePlus className="floating-menu-button" />
+                </button>
+              </div>
             </span>
           </p>
           <br />
@@ -80,7 +105,6 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
             <span className='bolder-text'>
               <RiBubbleChartFill color='gold'/> &nbsp;
               <b>Portafolio Artístico&nbsp; 
-              🌍
               </b>
               <p className='bolder-text small-text-size'>
               Dale vida a tus ideas, compártelas con el mundo.

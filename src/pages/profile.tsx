@@ -21,7 +21,7 @@ export default function Profile() {
     email: user?.email,
     role: role,
     displayName: user?.displayName,
-    profilePic: user?.photoURL,
+    profilePic: user?.photoURL || user?.photoURL || '/logo2.png',
   });
 
   useEffect(() => {
@@ -117,7 +117,7 @@ export default function Profile() {
       <div className="profile-container">
         <label htmlFor="profile-pic" className="profile-pic-label">
           <Image
-            src={accountData?.profilePic || '/logo2.png'}
+            src={accountData?.profilePic}
             alt="Profile Picture"
             width={100}
             height={100}

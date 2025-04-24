@@ -96,7 +96,7 @@ const FloatingMenuButton = () => {
         height="85%" // Custom height
       >
         <div className="modal-title-centered">
-            <b>Anímate a descubrir tu Artista Interior</b>
+            <b>Anímate a descubrir <br /> tu Artista Interior</b>
         </div>
         <div className="form-wrapper">
           <ArtworkRegisterForm closeModal={closeUserModal} />

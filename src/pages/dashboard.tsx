@@ -37,12 +37,6 @@ export default function Dashboard() {
         <hr />
         <CoreSectionArtworks filterBy={user?.uid} />
         <BannerFooter />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
         <FloatingMenuButton />
       </div>
     </div>

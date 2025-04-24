@@ -103,91 +103,105 @@ const EventRegisterForm: React.FC<EventRegisterFormProps> = ({ closeModal }) => 
 
   return (
     <>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form className={`${styles.form} profile-container`} onSubmit={handleSubmit}>
 
-        <label className={styles.label} htmlFor="name">
-          Nombre del Evento
-        </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          className={styles.input}
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-
-        <label className={styles.label} htmlFor="thumbnail">
-          Foto o imagen del evento
-          <Image
-            src={formData.thumbnail}
-            alt="Artwork Picture"
-            width={100}
-            height={100}
+        <div className="input-group">
+          <label htmlFor="name">
+            Nombre del Evento
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            className={`${styles.input}`}
+            value={formData.name}
+            onChange={handleChange}
+            required
           />
-        </label>
-        <input
-          type="file"
-          id="thumbnail"
-          name="thumbnail"
-          className={styles.fileInput}
-          accept="image/*"
-          onChange={handleImageUpload}
-          required
+        </div>
+
+        <div className="input-group">
+          <label htmlFor="thumbnail">
+            Foto o imagen del evento
+          </label>
+          <input
+            type="file"
+            id="thumbnail"
+            name="thumbnail"
+            className={styles.fileInput}
+            accept="image/*"
+            onChange={handleImageUpload}
+            required
+          />
+        </div>
+
+        <Image
+          src={formData.thumbnail}
+          alt="Artwork Picture"
+          className="thumbnail-register"
+          width={200}
+          height={200}
         />
 
-        <label className={styles.label} htmlFor="description">
-          Descripcion
-        </label>
-        <textarea
-          id="description"
-          name="description"
-          className={styles.textarea}
-          value={formData.description}
-          onChange={handleChange}
-          rows={4}
-        ></textarea>
+        <div className="input-group">
+          <label htmlFor="description">
+            Descripcion
+          </label>
+          <textarea
+            id="description"
+            name="description"
+            className={styles.textarea}
+            value={formData.description}
+            onChange={handleChange}
+            rows={4}
+          ></textarea>
+        </div>
 
 
-        <label className={styles.label} htmlFor="date">
-          Fecha
-        </label>
-        <input
-          type="date"
-          id="date"
-          name="date"
-          className={styles.input}
-          value={formData.date.toString()}
-          onChange={handleChange}
-          required
-        />
+        <div className="input-group">
+          <label className={styles.label} htmlFor="date">
+            Fecha
+          </label>
+          <input
+            type="date"
+            id="date"
+            name="date"
+            className={styles.input}
+            value={formData.date.toString()}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-        <label className={styles.label} htmlFor="location">
-          Ubicación 
-        </label>
-        <input
-          type="text"
-          id="location"
-          name="location"
-          className={styles.input}
-          value={formData.location}
-          onChange={handleChange}
-          required
-        />
+        <div className="input-group">
+          <label htmlFor="location">
+            Ubicación
+          </label>
+          <input
+            type="text"
+            id="location"
+            name="location"
+            className={styles.input}
+            value={formData.location}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-        <label className={styles.label} htmlFor="price">
-          Precio 
-        </label>
-        <input
-          type="number"
-          id="price"
-          name="price"
-          className={styles.input}
-          value={formData.price}
-          onChange={handleChange}
-          required
-        />
+        <div className="input-group">
+          <label htmlFor="price">
+            Precio
+          </label>
+          <input
+            type="number"
+            id="price"
+            name="price"
+            className={styles.input}
+            value={formData.price}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
         <button type="submit" className={`${styles.submitButton}`}>
           <b>Enviar Formulario</b>
