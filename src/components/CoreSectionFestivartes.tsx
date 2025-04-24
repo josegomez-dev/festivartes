@@ -47,7 +47,7 @@ const CoreSectionFestivartes = ({ }) => {
             <div className={styles.grid}>
                 <div className={styles.card}>
                 <h3 style={{ color: 'lightgray'}}>Registra tu primer Evento Calificado</h3>
-                <p>Registra tu Festival Artístico Oficial.</p>
+                <p style={{ color: 'black' }}>Registra tu Festival Artístico Oficial.</p>
                 </div> 
             </div> 
             : 
@@ -72,7 +72,7 @@ const CoreSectionFestivartes = ({ }) => {
             <div className={styles.grid}>
                 <div className={styles.card}>
                 <h3 style={{ color: 'lightgray'}}>No se han registrado eventos</h3>
-                <p>¡Explora la app y crea el primero!</p>
+                <p style={{ color: 'black' }}>¡Explora la app y crea el primero!</p>
                 </div> 
             </div> 
             : 

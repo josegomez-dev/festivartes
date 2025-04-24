@@ -96,6 +96,7 @@ const EventRegisterForm = () => {
 
   return (
     <>
+     <Toaster position="top-center" reverseOrder={false} />
       <form className={styles.form} onSubmit={handleSubmit}>
 
         <label className={styles.label} htmlFor="name">

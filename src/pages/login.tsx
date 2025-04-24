@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useRef, useState } from 'react';
 import { FaGoogle } from 'react-icons/fa';
+import toast, { Toaster } from 'react-hot-toast';
 
 const LoginPage = () => {
   const { user, signInWithGoogle, signIn, resetPassword } = useAuth();
@@ -12,50 +13,42 @@ const LoginPage = () => {
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
   const router = useRouter()
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  const playAudio = () => {
-    if (audioRef.current) {
-      audioRef.current.play().catch((error) => {
-        console.error("Playback failed:", error);
-      });
-    }
-  };
 
   const handleLogin = async () => {
     if (email === '' || password === '') {
       setErrorMessage('Por favor, rellena todos los campos');
+      toast.error("Por favor, rellena todos los campos");
       return;
     }
 
     try {
-      const response = await signIn(email, password);
-      console.log(response);
-      playAudio();
+      await signIn(email, password);
+      toast.success("🎉 Bienvenido a FESTIVARTES");
       router.push('/dashboard');
     }
     catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);
+        toast.error(error.message);
       } else {
         setErrorMessage('An unknown error occurred');
+        toast.error("An unknown error occurred");
       }
       setTimeout(() => {
         setErrorMessage('');
       }
       , 3000);
-    }    
+    }
   }
 
   if (user) {
-    playAudio();
     router.push('/dashboard');
   }
 
   return (
     <>
+      <Toaster position="top-center" reverseOrder={false} />
       <div style={{ display: 'none'}}>
-        <audio ref={audioRef} src="https://cdn.freesound.org/previews/784/784433_4468658-lq.mp3" />
         <button id="playBtn" onClick={playAudio}>Play</button>
       </div>
       <div className="auth-container">
@@ -70,14 +63,15 @@ const LoginPage = () => {
           </p>}
           <br />
           <button type="submit" onClick={() => handleLogin()} className="auth-button">Iniciar sesión</button>
-          <a onClick={() => {
+          <br />
+          <p style={{ textAlign: 'center', border: '1px solid gray', borderRadius: '25px', padding: '5px', width: '200px', margin: '0 auto' }} onClick={() => {
             email !== '' ? resetPassword(email) : setErrorMessage('Por favor, ingresa tu correo electrónico');
-            alert('Si el correo electrónico existe, se enviará un enlace para restablecer la contraseña');
+            toast.success("Si el correo electrónico existe, se enviará un enlace para restablecer la contraseña");
           }}>
-            <p className='auth-link' style={{ color: 'orange' }}>
+            <span style={{ color: 'white', textDecoration: 'none', cursor: 'pointer' }}>
               ¿Olvidaste tu contraseña?
-            </p>
-          </a>
+            </span>
+          </p>
           {/* <br />
           <p>
             Tambien puedes usar el boton de <strong>Google</strong> para acceder a la plataforma. <br /> 

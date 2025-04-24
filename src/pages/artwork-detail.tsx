@@ -15,6 +15,7 @@ import RatingForm from '@/components/RatingForm';
 import ClapButton from '@/components/ClapButton';
 import StarRating from '@/components/StarRating';
 import SocialShareButton from '@/components/SocialShareButton';
+import toast, { Toaster } from 'react-hot-toast';
 
 const videos = [
   { id: 1, title: "Video 1", src: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4" },
@@ -82,6 +83,7 @@ const ArtworkDetail = () => {
   return (
     <div className={styles['full-view']}>
       <SubMenu />
+      <Toaster position="top-center" reverseOrder={false} />
 
       <CustomModal
         isOpen={isJudgeModalOpen}
@@ -184,7 +186,7 @@ const ArtworkDetail = () => {
             </div> */}
           </div>
           <button className={`${authStyles['auth-button']}`} onClick={() => {
-              role === 'judge' ? openJudgeModal() : alert('Feature only for JUDGES')
+              role === 'judge' ? openJudgeModal() : toast.error('No tienes permisos para calificar esta obra de arte');
             }}><b className='disabled'>🖋️ Calificar Obra de Arte</b></button>
         </div>
         

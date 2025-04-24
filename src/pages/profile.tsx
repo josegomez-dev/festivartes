@@ -9,6 +9,7 @@ import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { db, storage } from "./../../firebaseConfig"
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { EMPTY_USER } from "@/types/userTypes";
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function Profile() {
   const { user, role, authenticated } = useAuth();
@@ -19,6 +20,8 @@ export default function Profile() {
     userId: user?.uid,
     email: user?.email,
     role: role,
+    displayName: user?.displayName,
+    profilePic: user?.photoURL,
   });
 
   useEffect(() => {
@@ -30,12 +33,12 @@ export default function Profile() {
           setAccountData(accountDoc.data() as typeof accountData);
         } else {
           console.log("No such document!");
+          toast.error("No account data found.");
         }
+        setLoading(false);
       }
-      setLoading(false);
-    };
-
-    fetchAccountData();
+    }; 
+    fetchAccountData();   
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,6 +58,7 @@ export default function Profile() {
       return url;
     } catch (error) {
       console.error("Error uploading file:", error);
+      toast.error("Error uploading image");
       throw error;
     }
   };
@@ -62,35 +66,59 @@ export default function Profile() {
   const handleImageChange = async (file: File) => {
     if (!user || !user.uid) {
       console.error("Error: User is not authenticated or UID is undefined.");
+      toast.error("User is not authenticated.");
       return;
     }
-    const url = await uploadProfilePhoto(file, user.uid); // user.uid from Firebase Auth
-    // Now save `url` to Firestore under the user's document
-    await updateDoc(doc(db, "accounts", user.uid), {
-      profilePic: url,
-      updatedAt: new Date(),
-    });
+    const url = await uploadProfilePhoto(file, user.uid); 
+
     setAccountData((prevState) => ({
       ...prevState,
       profilePic: url,
     }));
-    alert("Profile picture updated successfully.");
+
+    await updateDoc(doc(db, "accounts", user.uid), {
+      profilePic: url,
+      updatedAt: new Date(),
+    });
+    toast.success("Profile picture updated successfully.");
   };
 
-  if (!authenticated) {
+  if (!authenticated || !user) {
     return <UnauthorizedMessage />;
   }
 
   const requestRoleChange = () => {
-    alert('Role change requested');
+    toast.success("Role change requested");
   };
+
+  const handleSaveChanges = async () => {
+    try {
+      if (!accountData.uid) {
+        console.error("Error: User UID is undefined.");
+        toast.error("User UID is undefined.");
+        return;
+      }
+      const accountRef = doc(db, "accounts", accountData.uid);
+      await updateDoc(accountRef, accountData);
+      toast.success("Account updated successfully.");
+    } catch (error) {
+      console.error("Error updating account:", error);
+    }
+  }
   
+
+  //return if not find the user
+  if (!user) {
+    return <UnauthorizedMessage />;
+  }
+
   return (
-    <div className={styles['full-view']}>
+    <div className={styles['full-view']} >
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="profile-container">
         <label htmlFor="profile-pic" className="profile-pic-label">
           <Image
-            src={accountData?.profilePic}
+            src={accountData?.profilePic || '/logo2.png'}
             alt="Profile Picture"
             width={100}
             height={100}
@@ -166,19 +194,7 @@ export default function Profile() {
 
         <br />
 
-        <button className={`${authStyles['auth-button']}`} onClick={async () => {
-            try {
-              if (!accountData.userId) {
-                console.error("Error: User UID is undefined.");
-                return;
-              }
-              const accountRef = doc(db, "accounts", accountData.userId);
-              await updateDoc(accountRef, accountData);
-              alert("Account updated successfully.");
-            } catch (error) {
-              console.error("Error updating account:", error);
-            }
-         }}>
+        <button className={`${authStyles['auth-button']}`} onClick={handleSaveChanges}>
           <b>Guardar Cambios</b>
          </button>
       </div>

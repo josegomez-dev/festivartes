@@ -54,6 +54,7 @@ const InviteRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) =
   };
   return (
     <>
+      <Toaster position="top-center" reverseOrder={false} />
       <form ref={formRef} className={styles.form} onSubmit={handleSubmit}>
 
         <label className={styles.label} htmlFor="user_name">

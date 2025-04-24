@@ -85,7 +85,7 @@ const ArtworkRegisterForm = () => {
 
     // Create associated account in Firestore
     await setDoc(doc(db, "artworks", uuidv4()), _artwork);
-    alert("Obra de arte registrada con éxito");
+    toast.success("Obra de arte registrada con éxito");
     setFormData({
       title: "",
       artist: "",
@@ -93,11 +93,11 @@ const ArtworkRegisterForm = () => {
       category: "",
       thumbnail: '/logo2.png',
     });
-    toast.success("Obra de arte registrada con éxito");
   };
 
   return (
     <>
+      <Toaster position="top-center" reverseOrder={false} />
       <form className={styles.form} onSubmit={handleSubmit}>
 
         <label className={styles.label} htmlFor="title">
