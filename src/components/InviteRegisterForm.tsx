@@ -14,6 +14,7 @@ interface InviteRegisterFormProps {
 }
 
 const InviteRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     user_name: "",
     user_email: "",
@@ -32,6 +33,7 @@ const InviteRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) =
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     if (formRef.current) {
       emailjs.sendForm('service_vgxzzks', 'template_uxr204w', formRef.current, '7r0MFDYv8obebfCn5')
         .then((result) => {
@@ -46,9 +48,12 @@ const InviteRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) =
               message: "",
             });
             closeModal();
+            setIsLoading(false);
           }, 2000);
         }, (error) => {
           console.log(error.text);
+          toast.error("Error al enviar la invitación");
+          setIsLoading(false);
         });
     }
   };
