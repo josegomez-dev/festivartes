@@ -8,6 +8,8 @@ import Image from "next/image";
 import { useAuth } from "./../context/AuthContext";
 import { v4 as uuidv4 } from 'uuid';
 import toast from 'react-hot-toast';
+import Preloader from "./Preloader";
+import { ARTWORK, EMPTY_ARTWORK } from "@/types/artworks.types";
 
 interface InviteRegisterFormProps {
   closeModal: () => void;
@@ -15,20 +17,10 @@ interface InviteRegisterFormProps {
 
 const ArtworkRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) => {
   const { user } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isImageLoading, setIsImageLoading] = useState(false);
 
-  const [formData, setFormData] = useState<{
-    title: string;
-    artist: string;
-    description: string;
-    category: string;
-    thumbnail: string;
-  }>({
-    title: "",
-    artist: "",
-    description: "",
-    category: "",
-    thumbnail: '/logo2.png',
-  });
+  const [formData, setFormData] = useState<ARTWORK>(EMPTY_ARTWORK);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -40,13 +32,16 @@ const ArtworkRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) 
 
   const uploadArtworksPhoto = async (file: File, userId: string) => {
     try {
+      setIsImageLoading(true);
       const storageRef = ref(storage, `artworks/${userId}/${file.name}`);
       await uploadBytes(storageRef, file); // Upload the file
       const downloadURL = await getDownloadURL(storageRef); // Get the download URL
+      setIsImageLoading(false);    
       return downloadURL;
     } catch (error) {
       console.error("Error uploading file:", error);
       toast.error("Error uploading image");
+      setIsImageLoading(false);   
       throw error;
     }
   };
@@ -66,11 +61,13 @@ const ArtworkRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) 
         });
       } else {
         console.error("User ID is undefined. Cannot upload the image.");
+        toast.error("User ID is undefined. Cannot upload the image.");
       }
-    }    
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    setIsLoading(true);
     e.preventDefault();
     
     if (!user) {
@@ -90,14 +87,10 @@ const ArtworkRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) 
     // Create associated account in Firestore
     await setDoc(doc(db, "artworks", uuidv4()), _artwork);
     toast.success("Obra de arte registrada con éxito");
-    setFormData({
-      title: "",
-      artist: "",
-      description: "",
-      category: "",
-      thumbnail: '/logo2.png',
-    });
+    setFormData(EMPTY_ARTWORK);
     closeModal();
+    setIsLoading(false);
+    window.location.reload();
   };
 
   return (
@@ -119,28 +112,33 @@ const ArtworkRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) 
           />
         </div>
 
-        <div className="input-group">
-          <label htmlFor="thumbnail">
-            Foto o Imagen de la Obra
-          </label>
-          <input
-            type="file"
-            id="thumbnail"
-            name="thumbnail"
-            className={styles.fileInput}
-            accept="image/*"
-            onChange={handleImageUpload}
-            required
-          />
-        </div>
+       {!isImageLoading ? (
+        <>
+          <div className="input-group">
+            <label htmlFor="thumbnail">
+              Foto o Imagen de la Obra
+            </label>
+            <input
+              type="file"
+              id="thumbnail"
+              name="thumbnail"
+              className={styles.fileInput}
+              accept="image/*"
+              onChange={handleImageUpload}
+            />
+          </div>
 
-        <Image
-          src={formData.thumbnail}
-          alt="Artwork Picture"
-          width={200}
-          height={200}
-          className="thumbnail-register"
-        />
+          <Image
+            src={formData.thumbnail}
+            alt="Artwork Picture"
+            width={200}
+            height={200}
+            className="thumbnail-register"
+          />
+        </>
+        ) : (
+          <Preloader message="Subiendo imagen..." />
+        )}
 
         <div className="input-group">
           <label className={styles.label} htmlFor="category">
@@ -193,9 +191,13 @@ const ArtworkRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) 
           ></textarea>
         </div>
 
-        <button type="submit" className={`${styles.submitButton}`}>
-          <b>Enviar Formulario</b>
-        </button>
+        {!isLoading ? (
+          <button type="submit" className={`${styles.submitButton}`}>
+            <b>Enviar Formulario</b>
+          </button>
+          ) : (
+          <Preloader message="Subiendo obra de arte..." />
+          )}
       </form>
     </>
   );

@@ -7,6 +7,8 @@ import { setDoc, doc } from 'firebase/firestore';
 import Image from "next/image";
 import { v4 as uuidv4 } from 'uuid';
 import toast from 'react-hot-toast';
+import { EMPTY_EVENT, EVENTS } from "@/types/events.types";
+import Preloader from "./Preloader";
 
 // define the interface for the props
 interface EventRegisterFormProps {
@@ -16,23 +18,9 @@ interface EventRegisterFormProps {
 
 const EventRegisterForm: React.FC<EventRegisterFormProps> = ({ closeModal }) => {
   const { user } = useAuth();
-  const [formData, setFormData] = useState<{
-    name: string;
-    date: Date;
-    description: string;
-    location: string;
-    price: number;
-    thumbnail: string;
-    upcoming: boolean;
-  }>({
-    name: "",
-    thumbnail: '/logo2.png',
-    date: new Date(),
-    location: "",
-    description: "",
-    upcoming: false,
-    price: 0,
-  });
+  const [formData, setFormData] = useState<EVENTS>(EMPTY_EVENT);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isImageLoading, setIsImageLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -45,13 +33,16 @@ const EventRegisterForm: React.FC<EventRegisterFormProps> = ({ closeModal }) => 
 
   const uploadEventPhoto = async (file: File, userId: string) => {
     try {
+      setIsImageLoading(true);
       const storageRef = ref(storage, `events/${userId}/${file.name}`);
       await uploadBytes(storageRef, file); // Upload the file
       const downloadURL = await getDownloadURL(storageRef); // Get the download URL
+      setIsImageLoading(false);
       return downloadURL;
     } catch (error) {
       console.error("Error uploading file:", error);
       toast.error("Error uploading image");
+      setIsImageLoading(false);
       throw error;
     }
   };
@@ -78,7 +69,9 @@ const EventRegisterForm: React.FC<EventRegisterFormProps> = ({ closeModal }) => 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();  
-  
+
+    setIsLoading(true);
+
     if (!user) {
       console.error("User is not logged in.");
       toast.error("User is not logged in.");
@@ -92,13 +85,14 @@ const EventRegisterForm: React.FC<EventRegisterFormProps> = ({ closeModal }) => 
       createdBy: user.uid,
       upcoming: new Date(formData.date) > new Date(),
       stars: 0,
-      category: "TP",
     };
     
     // Create associated account in Firestore
     await setDoc(doc(db, "events", uuidv4()), _event);
     toast.success("Evento registrado con éxito");
     closeModal();
+    setIsLoading(false);
+    window.location.reload();
   };
 
   return (
@@ -120,28 +114,32 @@ const EventRegisterForm: React.FC<EventRegisterFormProps> = ({ closeModal }) => 
           />
         </div>
 
-        <div className="input-group">
-          <label htmlFor="thumbnail">
-            Foto o imagen del evento
-          </label>
-          <input
-            type="file"
-            id="thumbnail"
-            name="thumbnail"
-            className={styles.fileInput}
-            accept="image/*"
-            onChange={handleImageUpload}
-            required
-          />
-        </div>
+        {!isImageLoading ? (
+          <>
+            <div className="input-group">
+              <label htmlFor="thumbnail">
+                Foto o imagen del evento
+              </label>
+              <input
+                type="file"
+                id="thumbnail"
+                name="thumbnail"
+                className={styles.fileInput}
+                accept="image/*"
+                onChange={handleImageUpload}
+              />
+            </div>
 
-        <Image
-          src={formData.thumbnail}
-          alt="Artwork Picture"
-          className="thumbnail-register"
-          width={200}
-          height={200}
-        />
+            <Image
+              src={formData.thumbnail}
+              alt="Artwork Picture"
+              className="thumbnail-register"
+              width={200}
+              height={200}
+            />
+          </>) : (
+            <Preloader message="Subiendo imagen..." />
+          )}
 
         <div className="input-group">
           <label htmlFor="description">
@@ -203,9 +201,13 @@ const EventRegisterForm: React.FC<EventRegisterFormProps> = ({ closeModal }) => 
           />
         </div>
 
-        <button type="submit" className={`${styles.submitButton}`}>
+        {!isLoading ? (
+          <button type="submit" className={`${styles.submitButton}`}>
           <b>Enviar Formulario</b>
         </button>
+        ): (
+          <Preloader message="Subiendo evento..." />
+        )}
       </form>
     </>
   );

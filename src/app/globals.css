@@ -269,8 +269,8 @@ b {
 .project-miniature-container {
   display: flex;
   flex-direction: row;
-  gap: 5px;
-  max-height: 400px;
+  gap: 6px;
+  max-height: 300px;
 
   overflow-x: auto;
   overflow-y: hidden;
@@ -278,7 +278,7 @@ b {
 
 .project-miniature {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   border: 2px solid #32acc0;
   border-radius: 8px;
   width: 100px;
@@ -318,15 +318,17 @@ b {
   border-radius: 4px;
 }
 .project-thumbnail-wrapper {
-  max-width: 200px; 
+  max-width: 200px;
   border: 1px solid #32acc0;
   padding: 10px;
-  max-height: 200px;
+  max-height: 300px;
+  background: linear-gradient(135deg, #2c5364, #203a43, #0f2027);
 }
 .project-thumbnail-judge {
   max-width: 200px;
   max-height: 200px; 
   border: 1px solid #32acc0;
+  
 }
 
 .project-name {
@@ -439,6 +441,7 @@ b {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Adjust column width */
   overflow: auto; /* Enables both horizontal and vertical scrolling if needed */
+  height: 165px;
 }
 
 
@@ -631,7 +634,9 @@ b {
   color: orange;
 }
 .overflow--big-area {
-  background-color: rgba(0, 0, 0, 0.724);
+  
+  background: linear-gradient(135deg, #2c5364, #203a43, #0f2027);
+
   background-size: 400% 400%;
   background-attachment: fixed;
 
@@ -645,21 +650,21 @@ b {
   overflow-y: auto;
   padding: 10px 20px;
   font-size: 14px;
+  
 }
 
 .overflow-area {
   background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
   backdrop-filter: blur(100px); /* Apply the blur effect */
   border: 1px solid rgba(255, 255, 255, 0.2); /* Optional border for added style */
-
-
   border-radius: 12px; 
   color: white; 
   border: 1px solid rgba(255, 255, 255, 0.2); 
   width: 100%; 
   max-width: 300px; 
   margin: 0 auto; 
-  height: 80px;
+  height: 100%;
+  max-height: 50px;
   overflow-y: auto; 
   padding: 5px 10px;
   font-size: 14px;
@@ -750,12 +755,14 @@ b {
 }
 
 .artwork-miniature-title {
-  position: absolute;
-  margin-top: 80px;
-  margin-left: 5px;
-  width: 90px;
-  background-color: orange;
-  border-radius: 4px;
+  width: 97%;
+  margin: 0 auto;
+  margin-bottom: -15px;
+  position: relative;
+  z-index: 1px;
+  background: linear-gradient(135deg, #2c5364, #203a43, #0f2027);
+  border-top-right-radius: 7px;
+  border-top-left-radius: 7px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1243,7 +1250,7 @@ Down
 
 .input-group {
   position: relative;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
   padding: 2px 0;
   width: 100%;
   max-width: 300px;
@@ -1296,7 +1303,43 @@ Down
   width: 200px;
   height: auto;
   margin-bottom: 35px;
-  margin-top: -35px;
+  margin-top: -5px;
   border: 1px solid #32acc0;
   padding: 15px;
+}
+
+.modal-content {
+  background: linear-gradient(135deg, #2c5364, #203a43, #0f2027);
+}
+
+.artworks-miniature-panel .project-miniature, .artworks-miniature-panel .project-thumbnail {
+  width: 50px;
+  height: 50px; 
+}
+
+.artworks-miniature-panel {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap; /* optional, but helps maintain horizontal flow */
+  height: auto; /* or set a fixed height if needed */
+}
+
+.festivartes-miniature-panel .project-miniature, .festivartes-miniature-panel .project-thumbnail {
+  width: 100px;
+  height: 100px; 
+}
+
+.festivartes-miniature-panel {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap; /* optional, but helps maintain horizontal flow */
+  height: auto; /* or set a fixed height if needed */
+}
+
+.artworks-miniature-panel .artwork-miniature-title {
+  display: none;
 }

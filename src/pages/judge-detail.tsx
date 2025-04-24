@@ -47,28 +47,25 @@ const JudgeDetail = ({ }) => {
 
       <div className='project-detail-wrapper'>
         <div className="project-detail-container">
-          <h1>{profile.name}</h1>
+          <h1><b style={{ fontSize: '3rem' }}>{profile.displayName}</b></h1>          
+          <p className='bolder-text'>
+            {profile?.name} | {profile?.bio || 'Agrega una descripcion'}
+          </p>
           <br />
+
           {profile.thumbnail || profile.profilePic ? 
-            <img src={profile.thumbnail || profile.profilePic} alt={profile.name} className='project-thumbnail-judge' />
+            <img src={profile.thumbnail || profile.profilePic} alt={profile.name} className='project-thumbnail-wrapper' />
           : 
             <img src='https://cdn-icons-png.flaticon.com/512/149/149071.png' alt={profile.name} className='project-thumbnail-judge' /> 
           }
-          <div>
-            <p><b style={{ fontSize: '3rem' }}>{profile?.displayName}</b></p>
-            <p className='bolder-text'>
-              {profile?.name} | {profile?.bio || 'Agrega una descripcion'}
-            </p>
-            <br />
-            <hr style={{ width: '300px', margin: '0 auto' }} />
+          <br />
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-              <p ><b className='bolder-text'>Email:</b> {profile.email}</p>
-              <p ><b className='bolder-text'>Teléfono:</b> {profile.phone}</p>      
-              <p ><b className='bolder-text'>Ubicación:</b> {profile.address}</p>      
-              <p ><b className='bolder-text'>Dirección:</b> {profile.location}</p>      
-              <p ><b className='bolder-text'>Sitio web:</b> {profile.website}</p>      
-            </div>
+          <div>
+            <p ><b className='bolder-text'>Email:</b> {profile.email}</p>
+            <p ><b className='bolder-text'>Teléfono:</b> {profile.phone}</p>      
+            <p ><b className='bolder-text'>Ubicación:</b> {profile.address}</p>      
+            <p ><b className='bolder-text'>Dirección:</b> {profile.location}</p>      
+            <p ><b className='bolder-text'>Sitio web:</b> {profile.website}</p>      
           </div>
           {/* Add more project details as needed */}
         </div>

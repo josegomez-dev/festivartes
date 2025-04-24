@@ -1,4 +1,4 @@
-interface EVENTS {
+export interface EVENTS {
     id: string;
     createdBy: string;
     name: string;
@@ -14,3 +14,20 @@ interface EVENTS {
     type: string; // Could use an enum for types too
     upcoming: boolean; // Indicates if the event is upcoming or not
 }
+
+export const EMPTY_EVENT: EVENTS = {
+    id: "",
+    name: "",
+    thumbnail: '/logo2.png',
+    date: new Date(),
+    location: "",
+    description: "",
+    upcoming: false,
+    price: 0,
+    createdBy: "",
+    stars: 0,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    status: "active", // Add default value for status
+    type: "general"    // Add default value for type
+};

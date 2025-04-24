@@ -8,6 +8,7 @@ import { db } from './../../firebaseConfig';
 import { FaCirclePlus } from 'react-icons/fa6';
 import CustomModal from './CustomModal';
 import ArtworkRegisterForm from './ArtworkRegisterForm';
+import { ARTWORK } from '@/types/artworks.types';
 
 interface CoreSectionArtworksProps {
   filterBy?: string;
@@ -65,7 +66,7 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
                 <ArtworkRegisterForm closeModal={closeUserModal} />
               </div>
             </CustomModal>
-        <div className={`${styles.card} top-spaced`}>
+        <div className={`${styles.card}`}>
           <p>
             <span className='bolder-text'>
               <RiBubbleChartFill color='gold'/> &nbsp;
@@ -92,7 +93,7 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
               </div> 
             </div> 
             : 
-            <div className=''>
+            <div style={{ marginTop: '-25px' }}>
       
               <ObjectMiniature projects={dataFiltered} type={'artwork'} />
               
@@ -100,7 +101,7 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
           }
         </div>
 
-        <div className={`${styles.card} top-spaced`}>
+        <div className={`${styles.card} `}>
           <p>
             <span className='bolder-text'>
               <RiBubbleChartFill color='gold'/> &nbsp;
@@ -121,8 +122,8 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
               </div> 
             </div> 
             : 
-            <div>
-              <ObjectMiniature projects={data} type={'artwork'} />              
+            <div style={{ marginTop: '-10px' }}>
+              <ObjectMiniature projects={data} customClass={'artworks-miniature-panel'} type={'artwork'} />              
             </div>
           }
         </div>

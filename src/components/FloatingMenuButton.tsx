@@ -118,13 +118,11 @@ const FloatingMenuButton = () => {
       <CustomModal
         isOpen={isInviteModalOpen}
         onClose={closeInviteModal}
-        height="70%" // Custom height
+        height="75%" // Custom height
         // bgColor="black" // Custom background color
       >
         <div className="modal-title-centered">
-          <b>
             <b>Invitar Jurado</b>
-          </b>
         </div>
         <div className="form-wrapper">
           <InviteRegisterForm closeModal={closeInviteModal} />

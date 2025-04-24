@@ -32,10 +32,10 @@ export default function Dashboard() {
       
       {/* Main Content */}
       <div>
-        <CoreSectionFestivartes filterBy={user?.uid} />
+        <CoreSectionArtworks filterBy={user?.uid} />
         <br />
         <hr />
-        <CoreSectionArtworks filterBy={user?.uid} />
+        <CoreSectionFestivartes filterBy={user?.uid} />
         <BannerFooter />
         <FloatingMenuButton />
       </div>

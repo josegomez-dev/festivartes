@@ -54,49 +54,53 @@ const InviteRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) =
   };
   return (
     <>
-      <form ref={formRef} className={styles.form} onSubmit={handleSubmit}>
+      <form ref={formRef} className={`${styles.form} profile-container`} onSubmit={handleSubmit}>
 
-        <label className={styles.label} htmlFor="user_name">
-          Nombre del Jurado
-        </label>
-        <input
-          type="text"
-          id="user_name"
-          name="user_name"
-          className={styles.input}
-          value={formData.user_name}
-          onChange={handleChange}
-          required
-        />
+        <div className="input-group">
+          <label htmlFor="user_name">
+            Nombre del Jurado
+          </label>
+          <input
+            type="text"
+            id="user_name"
+            name="user_name"
+            className={styles.input}
+            value={formData.user_name}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-        <label className={styles.label} htmlFor="user_email">
-          Correo electronico
-        </label>
-        <input
-          type="text"
-          id="user_email"
-          name="user_email"
-          className={styles.input}
-          value={formData.user_email}
-          onChange={handleChange}
-          required
-        />
+        <div className="input-group">
+          <label htmlFor="user_email">
+            Correo electronico
+          </label>
+          <input
+            type="text"
+            id="user_email"
+            name="user_email"
+            className={styles.input}
+            value={formData.user_email}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-        <label className={styles.label} htmlFor="message">
-          Mensaje de Invitacion
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          className={styles.textarea}
-          value={formData.message}
-          onChange={handleChange}
-          rows={4}
-        ></textarea>
+        <div className="input-group">
+          <label htmlFor="message">
+            Mensaje de Invitacion
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            className={styles.textarea}
+            value={formData.message}
+            onChange={handleChange}
+            rows={4}
+          ></textarea>
+        </div>
 
-
-
-        <button type="submit" className={`${styles.submitButton}`}>
+        <button type="submit" className={`${styles.submitButton}`} style={{ marginTop: '-15px' }}>
           <b>Enviar Formulario</b>
         </button>
       </form>

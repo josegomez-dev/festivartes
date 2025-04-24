@@ -80,11 +80,6 @@
   background-color: #32acc0;
 }
 
-.dashboard {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-}
 
 .card {
   text-align: center;
@@ -97,7 +92,7 @@
 
   margin: 15px auto;
 
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
   box-shadow: 0 3px 5px black;
 }

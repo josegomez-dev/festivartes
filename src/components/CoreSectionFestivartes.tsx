@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { FaCirclePlus } from 'react-icons/fa6';
 import CustomModal from './CustomModal';
 import EventRegisterForm from './EventRegisterForm';
+import { EVENTS } from '@/types/events.types';
 
 interface CoreSectionFestivartesProps {
   filterBy?: any;
@@ -96,7 +97,9 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
                 </div> 
             </div> 
             : 
-            <ObjectMiniature projects={dataFiltered} type={'event'} />
+            <div style={{ marginTop: '-25px' }}>
+              <ObjectMiniature projects={dataFiltered} type={'event'} />
+            </div>
             }
         </div>
 
@@ -121,8 +124,8 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
                 </div> 
             </div> 
             : 
-            <div className='overflow--big-area'>
-              <ObjectMiniature projects={data} type={'event'} />
+            <div className='' style={{ marginTop: '-5px' }}>
+              <ObjectMiniature projects={data} customClass={'festivartes-miniature-panel'} type={'event'} />
             </div>
             }
         </div>
