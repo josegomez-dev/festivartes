@@ -46,7 +46,7 @@ const CoreSectionFestivartes = ({ }) => {
             {data.length <= 0 ? 
             <div className={styles.grid}>
                 <div className={styles.card}>
-                <h3 style={{ color: 'lightgray'}}><b>Registra tu primer Evento Calificado</b></h3>
+                <h3 style={{ color: 'lightgray'}}>Registra tu primer Evento Calificado</h3>
                 <p>Registra tu Festival Artístico Oficial.</p>
                 </div> 
             </div> 
