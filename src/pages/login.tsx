@@ -48,9 +48,6 @@ const LoginPage = () => {
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
-      <div style={{ display: 'none'}}>
-        <button id="playBtn" onClick={playAudio}>Play</button>
-      </div>
       <div className="auth-container">
         <div className="auth-form space-around">
           <h2 className="auth-title">Bienvenido a <b>FESTIVARTES</b></h2>
