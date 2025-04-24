@@ -7,6 +7,7 @@ import { setDoc, doc } from 'firebase/firestore';
 import Image from "next/image";
 import { useAuth } from "./../context/AuthContext";
 import { v4 as uuidv4 } from 'uuid';
+import toast, { Toaster } from 'react-hot-toast';
 
 const ArtworkRegisterForm = () => {
   const { user } = useAuth();
@@ -41,6 +42,7 @@ const ArtworkRegisterForm = () => {
       return downloadURL;
     } catch (error) {
       console.error("Error uploading file:", error);
+      toast.error("Error uploading image");
       throw error;
     }
   };
@@ -56,6 +58,7 @@ const ArtworkRegisterForm = () => {
           }));
         }).catch((error) => {
           console.error("Error uploading image:", error);
+          toast.error("Error uploading image");
         });
       } else {
         console.error("User ID is undefined. Cannot upload the image.");
@@ -68,6 +71,7 @@ const ArtworkRegisterForm = () => {
     
     if (!user) {
       console.error("User is not logged in.");
+      toast.error("User is not logged in.");
       return;
     }
 
@@ -82,7 +86,14 @@ const ArtworkRegisterForm = () => {
     // Create associated account in Firestore
     await setDoc(doc(db, "artworks", uuidv4()), _artwork);
     alert("Obra de arte registrada con éxito");
-
+    setFormData({
+      title: "",
+      artist: "",
+      description: "",
+      category: "",
+      thumbnail: '/logo2.png',
+    });
+    toast.success("Obra de arte registrada con éxito");
   };
 
   return (
