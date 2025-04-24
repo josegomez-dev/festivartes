@@ -37,14 +37,16 @@ const InviteRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) =
         .then((result) => {
           console.log(result.text);
 
-          setFormData({
-            user_name: "",
-            user_email: "",
-            message: "",
-          });
-
-          closeModal();
           toast.success("🎉 Invitación enviada con éxito");
+          
+          setTimeout(() => {
+            setFormData({
+              user_name: "",
+              user_email: "",
+              message: "",
+            });
+            closeModal();
+          }, 2000);
         }, (error) => {
           console.log(error.text);
         });
