@@ -1,4 +1,5 @@
 import styles from "@/app/assets/styles/MainPage.module.css";
+import Preloader from "@/components/Preloader";
 import Image from "next/image";
 import { useEffect } from "react";
 
@@ -15,6 +16,7 @@ const Home = () => {
   return (
     <main className={styles.main}>
       <div className={styles.center}>
+        <Preloader message="Cargando..." />
         <Image
           className={styles.logo}
           src="/logo2.png"

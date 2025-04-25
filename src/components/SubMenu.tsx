@@ -9,7 +9,7 @@ const SubMenu = ({ }) => {
             <Link href={`/artworks`}>
                 <Image
                   src="/artworks-icon.png"
-                  alt="Catarsis Musical Logo"
+                  alt="artworks-icon"
                   width={50}
                   height={50}
                   priority
@@ -19,7 +19,7 @@ const SubMenu = ({ }) => {
             <Link href={`/events`}>  
               <Image
                 src="/events-icon.png"
-                alt="Catarsis Musical Logo"
+                alt="events-icon"
                 width={50}
                 height={50}
                 priority
@@ -29,7 +29,7 @@ const SubMenu = ({ }) => {
             {<Link href={`/judges`}>
               <Image
                 src="/judges-icon.png"
-                alt="Catarsis Musical Logo"
+                alt="judges-icon"
                 width={50}
                 height={50}
                 priority

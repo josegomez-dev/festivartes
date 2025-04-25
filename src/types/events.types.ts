@@ -6,7 +6,8 @@ export interface EVENTS {
     location: string;
     thumbnail: string;
     date: Date;
-    stars: number;
+    stars: Array<{ userIdentifier: string; rating: number }>;
+    claps: number;
     price: number;
     createdAt: Date;
     updatedAt: Date;
@@ -25,7 +26,13 @@ export const EMPTY_EVENT: EVENTS = {
     upcoming: false,
     price: 0,
     createdBy: "",
-    stars: 0,
+    claps: 0,
+    stars: [
+        // {
+        //     userIdentifier: "",
+        //     rating: 3.5
+        // }
+    ],
     createdAt: new Date(),
     updatedAt: new Date(),
     status: "active", // Add default value for status

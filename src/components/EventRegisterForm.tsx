@@ -84,7 +84,6 @@ const EventRegisterForm: React.FC<EventRegisterFormProps> = ({ closeModal }) => 
       updatedAt: new Date(),
       createdBy: user.uid,
       upcoming: new Date(formData.date) > new Date(),
-      stars: 0,
     };
     
     // Create associated account in Firestore

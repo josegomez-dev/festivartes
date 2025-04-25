@@ -33,8 +33,6 @@ export default function Dashboard() {
       {/* Main Content */}
       <div>
         <CoreSectionArtworks filterBy={user?.uid} />
-        <br />
-        <hr />
         <CoreSectionFestivartes filterBy={user?.uid} />
         <BannerFooter />
         <FloatingMenuButton />

@@ -81,7 +81,6 @@ const ArtworkRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) 
       createdAt: new Date(),
       updatedAt: new Date(),
       createdBy: user.uid,
-      stars: 0,
     };
 
     // Create associated account in Firestore

@@ -1,50 +1,71 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
-import "react-quill/dist/quill.snow.css"; // Editor styles
+import "react-quill/dist/quill.snow.css";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-
 interface DocumentEditorProps {
   initialContent?: string;
   title: string;
+  placeholder?: string;
+  readOnly?: boolean;
+  onSave?: (content: string) => void;
+  theme?: "snow" | "bubble";
+  height?: string;
+  toolbarOptions?: string[];
 }
 
-const DocumentEditor = ({ initialContent = "", title }: DocumentEditorProps) => {
-  const [content, setContent] = useState(initialContent);
+const DocumentEditor = ({
+  initialContent = `
+  <h1>Ópera Cultural: "Ecos del Valle"</h1>
+  <h2>Sinopsis</h2>
+  <p>Una obra que fusiona danza contemporánea, música folklórica en vivo y narrativa teatral para contar la historia de un pequeño pueblo que lucha por mantener vivas sus tradiciones.</p>
 
-  const handleSave = () => {
-    localStorage.setItem("document", content);
-    alert("Document saved!");
-  };
+  <h2>Escenas</h2>
+
+  <h3>1. Amanecer en el Valle</h3>
+  <ul>
+    <li><b>Danza:</b> Ballet folklórico con ritmos suaves.</li>
+    <li><b>Música:</b> Instrumentación con marimba y guitarras cálidas.</li>
+    <li><b>Narrativa:</b> Introducción del pueblo y sus personajes principales.</li>
+  </ul>
+
+  <br />
+
+  <p>✨ <i>Escribe aquí tu propia obra cultural inspirada en tus tradiciones.</i></p>
+`,
+  title,
+}: DocumentEditorProps) => {
+  const [content, setContent] = useState(initialContent);
 
   return (
     <div className="editor-container">
       <h2>📄 <b>{title}</b></h2>
       <br />
-      <ReactQuill value={content} onChange={setContent} />
-      <button onClick={handleSave}>💾 <b>Guardar Documento</b></button>
+      <ReactQuill theme="snow" value={content} onChange={setContent} className="quill-editor"/>
+      <br />
       <style jsx>{`
         .editor-container {
-          max-width: 800px;
-          margin: auto;
-          padding: 20px 0;
-
-          border: 1px solid #ccc;
-              
-          background: #31697a;  /* fallback for old browsers */
-          background: -webkit-linear-gradient(to right, #4b9fb2, #31697a);  /* Chrome 10-25, Safari 5.1-6 */
-          background: linear-gradient(to right, #4b9fb2, #31697a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-          border-radius: 10px;
+          width: 100%;
+          border-radius: 16px;
+          overflow: hidden;
         }
-        button {
-          margin-top: 20px;
-          padding: 10px 15px;
-          background: orange;
-          color: white;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
+
+        .quill-editor {
+          height: 400px;
+          background: #fff;
+          border-radius: 10px;
+          overflow: hidden;
+        }
+
+        :global(.ql-toolbar.ql-snow) {
+          border-radius: 10px 10px 0 0;
+          background: #f0f0f0;
+        }
+
+        :global(.ql-container.ql-snow) {
+          border-radius: 0 0 10px 10px;
+          font-family: 'Arial', sans-serif;
+          font-size: 16px;
         }
       `}</style>
     </div>

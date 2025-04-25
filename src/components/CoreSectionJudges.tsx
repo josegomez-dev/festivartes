@@ -44,7 +44,7 @@ const CoreSectionJudges = ({ filterBy }: CoreSectionJudgesProps) => {
           <b>Jurado Seleccionador &nbsp;
             <Image
               src="/judges-icon.png"
-              alt="Catarsis Musical Logo"
+              alt="judges-icon"
               width={25}
               height={25}
               priority />

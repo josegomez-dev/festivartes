@@ -11,7 +11,7 @@ export default function UnauthorizedMessage() {
           <Link href="/login">
             <Image
               src="/logo2.png"
-              alt="Catarsis Musical Logo"
+              alt="festivartes-logo"
               width={250}
               height={250}
               priority

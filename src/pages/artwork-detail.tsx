@@ -90,122 +90,181 @@ const ArtworkDetail = () => {
         height="90%" // Custom height
       >
         <div className="modal-title-centered">
-          <b>
-            &nbsp;Puntuación Final (0-10)&nbsp;
-          </b>
+          <b>&nbsp;Puntuación Final (0-10)&nbsp;</b>
         </div>
         <div className="form-wrapper">
           <RatingForm />
         </div>
       </CustomModal>
 
-      <div className='project-detail-wrapper'>
+
+      <div className="project-detail-wrapper">
         <div className="project-detail-container">
           <ul className="options-menu">
-            <li>
-              <ClapButton />  
-            </li>
-            <li>
-              <StarRating />  
-            </li>
-            <li>
-              <SocialShareButton />
-            </li>
+            <li><ClapButton /></li>
+            <li><StarRating /></li>
+            <li><SocialShareButton /></li>
           </ul>
+
           <br />
           <br />
           <br />
           <br />
           <br />
 
-          <h1>
-            <b style={{ fontSize: '3rem' }}>
-            {project.title || 'Title'}
-            </b>
-          </h1>
-          <br />
-          {project.thumbnail ? (
-            <img src={project.thumbnail} alt={project.title} className='project-thumbnail-wrapper' />
-          ) : (
-            <img src='https://getuikit.com/v2/docs/images/placeholder_600x400.svg' alt={project.title} className='project-thumbnail-wrapper' />
-          )}
-          <div>
-            <br />
-            <p ><b className='bolder-text'>Categoría:</b> {project?.category}</p>
-            <p ><b className='bolder-text'>Compositor o Artista:</b> {project?.artist}</p>      
-            <br />
-            <p className='overflow-area'> {project?.description}</p>
-            <br />
+          {/* Tab Navigation */}
+          <div className="tabs">
+            <button
+              className={activeTab === 'info' ? 'active' : ''}
+              onClick={() => handleTabClick('info')}
+            >
+              🖼️
+            </button>
+            <button
+              className={activeTab === 'document' ? 'active' : ''}
+              onClick={() => handleTabClick('document')}
+            >
+              📄
+            </button>
+            <button
+              className={activeTab === 'audio' ? 'active' : ''}
+              onClick={() => handleTabClick('audio')}
+            >
+              🔊
+            </button>
+            <button
+              className={activeTab === 'video' ? 'active' : ''}
+              onClick={() => handleTabClick('video')}
+            >
+              🎥
+            </button>
+            <button
+              className={activeTab === 'live' ? 'active' : ''}
+              onClick={() => handleTabClick('live')}
+            >
+              LIVE
+            </button>
           </div>
-          <button className={`${registerForm['submitButton']}`} onClick={() => {
-              role === 'judge' ? openJudgeModal() : toast.error('No tienes permisos para calificar esta obra de arte');
-            }}><b>🖋️ Calificar Obra de Arte</b></button>
-        </div>        
 
-        <br />
-        <hr />
-        <br />
-        {/* <p><b>Archivos de la Obra</b></p>
-        <br /> */}
+          {/* Tab Content */}
+          <div className="tab-content">
+            {activeTab === 'audio' && (
+              <>
+                <h2><b>🔊 Reproductor de Audio</b></h2>
+                <br />
+                {project.thumbnail ? (
+                  <img
+                    src={project.thumbnail}
+                    alt={project.title}
+                    className="project-thumbnail-wrapper"
+                    style={{ width: '120px' }}
+                  />
+                ) : (
+                  <img
+                    src="https://getuikit.com/v2/docs/images/placeholder_600x400.svg"
+                    alt={project.title}
+                    className="project-thumbnail-wrapper"
+                  />
+                )}
+                <br />
+                <br />
+                <div className="links-spaced">
+                  <AudioPlayer
+                    src="https://file-examples.com/storage/fe46ad26fa67d4043a4b9e6/2017/11/file_example_MP3_700KB.mp3"
+                    title="Sample Track"
+                  />
+                </div>
+              </>
+            )}
 
-        {/* Tab Navigation */}
-        <div className="tabs">
-          <button 
-            className={activeTab === 'document' ? 'active' : ''}
-            onClick={() => handleTabClick('document')}
-          >
-            Editor de Documentos
-          </button>
-          <button 
-            className={activeTab === 'audio' ? 'active' : ''}
-            onClick={() => handleTabClick('audio')}
-          >
-            Reproductor de Audio
-          </button>
-          <button 
-            className={activeTab === 'video' ? 'active' : ''}
-            onClick={() => handleTabClick('video')}
-          >
-            Reproductor de Video
-          </button>
-          <button 
-            className={activeTab === 'live' ? 'active' : ''}
-            onClick={() => handleTabClick('live')}
-          >
-            LIVE
-          </button>
-        </div>
+            {activeTab === 'info' && (
+              <>
+                <h1>
+                  <b style={{ fontSize: '3rem' }}>{project.title || 'Title'}</b>
+                </h1>
+                {project.thumbnail ? (
+                  <img
+                    src={project.thumbnail}
+                    alt={project.title}
+                    className="project-thumbnail-wrapper"
+                  />
+                ) : (
+                  <img
+                    src="https://getuikit.com/v2/docs/images/placeholder_600x400.svg"
+                    alt={project.title}
+                    className="project-thumbnail-wrapper"
+                  />
+                )}
+                <div>
+                  <p><b className="bolder-text">Categoría:</b> {project?.category}</p>
+                  <p><b className="bolder-text">Compositor o Artista:</b> {project?.artist}</p>
+                  <br />
+                  <p className="overflow-area">{project?.description}</p>
+                  <br />
+                </div>
+                <button
+                  className={registerForm['submitButton']}
+                  onClick={() => {
+                    role === 'judge'
+                      ? openJudgeModal()
+                      : toast.error('No tienes permisos para calificar esta obra de arte');
+                  }}
+                >
+                  <b>🖋️ Calificar Obra de Arte</b>
+                </button>
+              </>
+            )}
 
-        {/* Tab Content */}
-        <div className="tab-content">
-          {activeTab === 'audio' && (
-            <div className='links-spaced'>
-              <AudioPlayer src="https://file-examples.com/storage/fe46ad26fa67d4043a4b9e6/2017/11/file_example_MP3_700KB.mp3" title="Sample Track" />
-            </div>          
-          )}
-          {activeTab === 'document' && (
-            <DocumentEditor title={project.title} />
-          )}
-          {activeTab === 'video' && (
-            <div className="carousel">
-              <VideoPlayer src={videos[currentIndex].src} title={videos[currentIndex].title} />
-              <div className="controls">
-                <button onClick={prevVideo} disabled={currentIndex === 0}>⬅️ Prev</button>
-                <button onClick={nextVideo} disabled={currentIndex === videos.length - 1}>Next ➡️</button>
+            {activeTab === 'document' && (
+              <>
+                <DocumentEditor
+                  title="Editor de Documentos"
+                  placeholder="Empieza a escribir tu historia aquí..."
+                  readOnly={false}
+                  onSave={(content) => console.log('Saving:', content)}
+                  theme="snow"
+                  height="500px"
+                />
+                <button className={registerForm['submitButton']}>
+                  💾 <b>Guardar Documento</b>
+                </button>
+              </>
+            )}
+
+            {activeTab === 'video' && (
+              <>
+                <h2><b>🔊 Reproductor de Video</b></h2>
+                <br />
+                <div className="carousel">
+                <VideoPlayer
+                  src={videos[currentIndex].src}
+                  title={videos[currentIndex].title}
+                />
+                <div className="controls">
+                  <button
+                    onClick={prevVideo}
+                    disabled={currentIndex === 0}
+                  >
+                    ⬅️ Prev
+                  </button>
+                  <button
+                    onClick={nextVideo}
+                    disabled={currentIndex === videos.length - 1}
+                  >
+                    Next ➡️
+                  </button>
+                </div>
               </div>
-            </div>
-          )}
-          {activeTab === 'live' && <div>
-            Live Content Here
-            </div>}
+              </>
+            )}
+
+            {activeTab === 'live' && (
+              <div>
+                Live Content Here
+              </div>
+            )}
+          </div>
         </div>
-        <br />
-        {/* <DocumentEditor title={project.title} />
-        <br />
-        <hr /> */}
-
-        <CoreSectionJudges />
-
       </div>
 
       {/* Tab Styles */}
@@ -213,28 +272,35 @@ const ArtworkDetail = () => {
         .tabs {
           display: flex;
           gap: 10px;
-          margin-bottom: 20px;
-          overflow-x: auto;
-            filter: drop-shadow(0 0 0.1rem black);
+          justify-content: center;
         }
         .tabs button {
-          padding: 10px 20px;
+          padding: 5px 10px;
           font-size: 16px;
           cursor: pointer;
           border: 1px solid #ccc;
           border-radius: 5px;
+          background: linear-gradient(135deg, #2c5364, #203a43, #0f2027);
+          backdrop-filter: blur(100px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          color: white;
+        }
+        .tabs button:hover {
+          transition: all 0.5s;
+          background: orange;
         }
         .tabs button.active {
-          background-color: orange;
+          transition: all 0.5s;
+          transform: scale(1.15);
+          background: orange;
           color: white;
         }
         .tab-content {
-          padding: 20px;
-          border: 1px solid #ccc;
+          padding: 10px 0;
           border-radius: 5px;
-            background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
-            backdrop-filter: blur(100px); /* Apply the blur effect */
-            border: 1px solid rgba(255, 255, 255, 0.2); /* Optional border for added style */
+          height: 100%;
+          min-height: 350px;
+          width: 100%;
         }
         .carousel {
           text-align: center;
@@ -248,15 +314,6 @@ const ArtworkDetail = () => {
           display: flex;
           justify-content: center;
           gap: 5px;
-        }
-        button {
-          background: #444;
-          color: white;
-          border: none;
-          padding: 10px 20px;
-          border-radius: 5px;
-          cursor: pointer;
-          font-size: 16px;
         }
         button:disabled {
           opacity: 0.5;

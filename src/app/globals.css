@@ -366,6 +366,7 @@ b {
 .options-menu li:hover {
   transition: all 0.5s;
   transform: scale(1.15);
+  background: orange;
 }
 
 .options-menu li {
@@ -377,12 +378,8 @@ b {
   border-radius: 6px;
 }
 
-.options-menu li:hover {
-  background: orange;
-}
-
 .project-detail-container {
-  padding: 20px;
+  padding: 10px;
 
   background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
   backdrop-filter: blur(100px); /* Apply the blur effect */
@@ -512,6 +509,7 @@ b {
 
 .sidebar {
   width: 75px;
+  min-height: 750px; 
 
   background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
   backdrop-filter: blur(100px); /* Apply the blur effect */
@@ -596,7 +594,6 @@ b {
 
 .project-miniature-link {
   text-decoration: none;
-  padding: 5px 0;
 }
 
 .banner-title {
@@ -752,37 +749,6 @@ b {
   white-space: nowrap; /* Prevents text from wrapping to the next line */
   overflow: hidden;    /* Hides the overflowing text */
   text-overflow: ellipsis; 
-}
-
-.artwork-miniature-title {
-  width: 97%;
-  margin: 0 auto;
-  margin-bottom: -15px;
-  position: relative;
-  z-index: 1px;
-  background: linear-gradient(135deg, #2c5364, #203a43, #0f2027);
-  border-top-right-radius: 7px;
-  border-top-left-radius: 7px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.event-miniature-title {
-  position: absolute;
-  margin-top: 120px;
-  margin-left: 5px;
-  width: 110px;
-  color: white !important;
-  filter: drop-shadow(0 0 0.2rem black);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 16px;
-
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center;    /* Center vertically */
-  height: 55px;   
 }
 
 .judges-badge {
@@ -1250,7 +1216,7 @@ Down
 
 .input-group {
   position: relative;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   padding: 2px 0;
   width: 100%;
   max-width: 300px;
@@ -1338,8 +1304,4 @@ Down
   overflow-y: hidden;
   white-space: nowrap; /* optional, but helps maintain horizontal flow */
   height: auto; /* or set a fixed height if needed */
-}
-
-.artworks-miniature-panel .artwork-miniature-title {
-  display: none;
 }

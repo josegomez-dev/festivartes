@@ -11,7 +11,7 @@ import EventRegisterForm from './EventRegisterForm';
 import { EVENTS } from '@/types/events.types';
 
 interface CoreSectionFestivartesProps {
-  filterBy?: any;
+  filterBy?: string;
 }
 
 const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
@@ -98,12 +98,11 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
             </div> 
             : 
             <div style={{ marginTop: '-25px' }}>
-              <ObjectMiniature projects={dataFiltered} type={'event'} />
+              <ObjectMiniature projects={dataFiltered.concat(data).concat(data).concat(data)} type={'event'} />
             </div>
             }
         </div>
 
-        <br />
         <div className={styles.card}>
             <p>
               <span className='bolder-text'>
