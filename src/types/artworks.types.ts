@@ -7,7 +7,8 @@ export interface ARTWORK {
     category: string;
     thumbnail: string;
     date: Date;
-    stars: number;
+    stars: Array<{ userIdentifier: string; rating: number }>;
+    claps: Array<{ userIdentifier: string; clap: boolean }>;
     location: string;
     price: number;
     createdAt: Date;
@@ -28,7 +29,8 @@ export const EMPTY_ARTWORK: ARTWORK = {
     category: "",
     price: 0,
     createdBy: "",
-    stars: 0,
+    claps: [],
+    stars: [],
     createdAt: new Date(),
     updatedAt: new Date(),
     status: "active", // Add default value for status

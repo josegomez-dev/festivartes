@@ -179,7 +179,7 @@ b {
   border: none;
   cursor: pointer;
   transition: all 0.1s;
-
+  
   border: 2px solid white;
   border-radius: 50%;
 
@@ -283,6 +283,8 @@ b {
   border-radius: 8px;
   width: 100px;
   height: 100px;
+
+  margin-top: 20px;
 
   transition: all 0.2s;
 }
@@ -432,15 +434,16 @@ b {
 }
 .project-miniature-custom-artwork .project-thumbnail {
   width: 98px;
-}
-.project-miniature-custom-artwork {
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Adjust column width */
-  overflow: auto; /* Enables both horizontal and vertical scrolling if needed */
-  height: 165px;
+  height: 94px;
 }
 
+.project-miniature-custom-artwork {
+  display: flex; /* Use flex instead of grid for horizontal flow */
+  overflow-x: auto; /* Only horizontal scroll */
+  overflow-y: hidden; /* Prevent vertical scroll */
+  height: 118px; /* Fixed height */
+  gap: 10px; /* Optional: spacing between items */
+}
 
 .upcoming-message {
   padding: 10px;
@@ -654,7 +657,7 @@ b {
   background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
   backdrop-filter: blur(100px); /* Apply the blur effect */
   border: 1px solid rgba(255, 255, 255, 0.2); /* Optional border for added style */
-  border-radius: 12px; 
+  border-radius: 10px; 
   color: white; 
   border: 1px solid rgba(255, 255, 255, 0.2); 
   width: 100%; 
@@ -743,8 +746,21 @@ b {
   width: 80px;
   font-size: 12px;
   height: 15px;
-  margin-top: 10px;
-  margin-left: 10px;
+  margin-top: -17px;
+  margin-left: 0px;
+  text-align: left;
+  white-space: nowrap; /* Prevents text from wrapping to the next line */
+  overflow: hidden;    /* Hides the overflowing text */
+  text-overflow: ellipsis; 
+}
+
+.claps-container {
+  position: fixed;
+  width: 80px;
+  font-size: 12px;
+  height: 15px;
+  margin-top: -20px;
+  margin-left: -25px;
   text-align: left;
   white-space: nowrap; /* Prevents text from wrapping to the next line */
   overflow: hidden;    /* Hides the overflowing text */
@@ -1279,8 +1295,8 @@ Down
 }
 
 .artworks-miniature-panel .project-miniature, .artworks-miniature-panel .project-thumbnail {
-  width: 50px;
-  height: 50px; 
+  width: 60px;
+  height: 60px; 
 }
 
 .artworks-miniature-panel {
@@ -1293,7 +1309,7 @@ Down
 }
 
 .festivartes-miniature-panel .project-miniature, .festivartes-miniature-panel .project-thumbnail {
-  width: 100px;
+  width: 70px;
   height: 100px; 
 }
 

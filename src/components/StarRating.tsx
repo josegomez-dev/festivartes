@@ -1,6 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-const StarRating = ({ totalStars = 5, initialAverage = 3.8 }) => {
+interface StarRatingProps {
+  totalStars?: number;
+  initialAverage?: number;
+  handleRating?: (rating: number) => void;
+  myRating?: number;
+}
+
+const StarRating = ({ totalStars = 5, initialAverage = 0, handleRating, myRating }: StarRatingProps) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [userRating, setUserRating] = useState<number | null>(null);
   const [hover, setHover] = useState<number | null>(null);
@@ -50,15 +57,16 @@ const StarRating = ({ totalStars = 5, initialAverage = 3.8 }) => {
         {userRating && (
           <>
             Tu calificación <br />
-            {userRating} / {totalStars}
+            {userRating}
           </>
           )}
       </div>
 
       {/* Default average */}
       {!userRating && !showFeedback && (
-        <div style={{ fontSize: '1rem', color: '#fff', marginBottom: '6px' }}>
-          Promedio: {initialAverage.toFixed(1)} / {totalStars}
+        <div style={{ fontSize: '0.8rem', color: '#fff', marginBottom: '6px' }}>
+          Promedio: {initialAverage.toFixed(1)} / {totalStars} <br />
+          Tu calificación {myRating !== undefined ? `: ${myRating}` : ' (no calificado)'}
         </div>
       )}
 
@@ -69,12 +77,15 @@ const StarRating = ({ totalStars = 5, initialAverage = 3.8 }) => {
           return (
             <span
               key={index}
-              onClick={() => setUserRating(starValue)}
+              onClick={() => {
+                setUserRating(starValue);
+                handleRating && handleRating(starValue);
+              }}
               onMouseEnter={() => setHover(starValue)}
               onMouseLeave={() => setHover(null)}
               style={{
                 cursor: 'pointer',
-                fontSize: '1.4rem',
+                fontSize: '1rem',
                 color: starValue <= displayRating ? '#ffc107' : '#e4e5e9',
                 transition: 'color 0.2s ease',
               }}

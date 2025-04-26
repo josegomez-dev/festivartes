@@ -29,14 +29,14 @@ const ShareButton = () => {
         <div
           style={{
             marginTop: '10px',
-            backgroundColor: '#222',
+            background: 'linear-gradient(135deg, #2c5364, #203a43, #0f2027)',
             fontSize: '1rem',
             color: '#fff',
             padding: '10px 15px',
             borderRadius: '8px',
             boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
             position: 'absolute',
-            top: '60px',
+            top: '65px',
             left: '50%',
             transform: 'translateX(-50%)',
             zIndex: 10,

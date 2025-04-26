@@ -62,7 +62,7 @@
 .profile-picture {
   position: absolute; 
   right: 45px; 
-  top: 25px; 
+  top: 8px; 
   border-radius: 50%; 
   z-index: 2000;
 }
@@ -70,6 +70,6 @@
 .profile-role {
   position: absolute; 
   top: 5px; 
-  right: 85px; 
+  right: 95px; 
   font-size: 18px;
 }

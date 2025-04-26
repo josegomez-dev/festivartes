@@ -7,8 +7,13 @@ import { FaCirclePlus } from "react-icons/fa6";
 import EventRegisterForm from "./EventRegisterForm";
 import InviteRegisterForm from "./InviteRegisterForm";
 import { RiBubbleChartFill } from "react-icons/ri";
+import { AiOutlineMenu } from "react-icons/ai";
 
-const FloatingMenuButton = () => {
+interface FloatingMenuButtonProps {
+  mainBtn?: boolean;
+}
+
+const FloatingMenuButton: React.FC<FloatingMenuButtonProps> = ({ mainBtn }) => {
   const { role } = useAuth();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);  
@@ -85,9 +90,15 @@ const FloatingMenuButton = () => {
           ))}
         </div>
         <br />
+        {!mainBtn ? (
         <button className="menu-button" onClick={() => openDropdown()}>
           <FaCirclePlus className="floating-menu-button" />
         </button>
+        ) : (
+          <div style={{ background: 'orange', borderRadius: '50%', padding: '10px', border: '2px solid white' }} onClick={() => openDropdown()}>
+            <AiOutlineMenu className="menu-button floating-menu-button" />
+          </div>
+        )}
       </div>
 
       <CustomModal

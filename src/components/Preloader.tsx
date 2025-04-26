@@ -1,6 +1,13 @@
 import React from 'react';
 
-const Preloader = ({ message = "Cargando..." }: { message?: string }) => {
+interface PreloaderProps {
+  message?: string;
+  small?: boolean;
+}
+
+
+
+const Preloader = ({ message = "Cargando...", small }: PreloaderProps) => {
   return (
     <div className="preloader-wrapper">
       <div className="spinner" />
@@ -12,14 +19,14 @@ const Preloader = ({ message = "Cargando..." }: { message?: string }) => {
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          padding: 20px;
+          padding-top: 20px;
         }
 
         .spinner {
-          width: 50px;
-          height: 50px;
+          width: ${small ? '30px' : '50px'};
+          height: ${small ? '30px' : '50px'};
           border: 6px solid rgba(0, 0, 0, 0.1);
-          border-left-color: #00c3ff;
+          border-left-color: orange;
           border-radius: 50%;
           animation: spin 1s linear infinite;
         }

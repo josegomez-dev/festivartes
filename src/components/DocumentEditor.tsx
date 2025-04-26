@@ -16,21 +16,10 @@ interface DocumentEditorProps {
 
 const DocumentEditor = ({
   initialContent = `
-  <h1>Ópera Cultural: "Ecos del Valle"</h1>
+  <h1>Titulo de tu obra: "Ecos del Valle"</h1>
   <h2>Sinopsis</h2>
-  <p>Una obra que fusiona danza contemporánea, música folklórica en vivo y narrativa teatral para contar la historia de un pequeño pueblo que lucha por mantener vivas sus tradiciones.</p>
-
-  <h2>Escenas</h2>
-
-  <h3>1. Amanecer en el Valle</h3>
-  <ul>
-    <li><b>Danza:</b> Ballet folklórico con ritmos suaves.</li>
-    <li><b>Música:</b> Instrumentación con marimba y guitarras cálidas.</li>
-    <li><b>Narrativa:</b> Introducción del pueblo y sus personajes principales.</li>
-  </ul>
-
+  <p>Una obra que fusiona música folklórica en vivo y la narrativa teatral para contar la historia de un pequeño pueblo que lucha por mantener vivas sus tradiciones.</p>
   <br />
-
   <p>✨ <i>Escribe aquí tu propia obra cultural inspirada en tus tradiciones.</i></p>
 `,
   title,

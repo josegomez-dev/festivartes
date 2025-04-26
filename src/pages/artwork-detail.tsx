@@ -1,14 +1,12 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
 import registerForm from '@/app/assets/styles/RegisterForm.module.css';
-import SubMenu from '@/components/SubMenu';
 import { useRouter } from 'next/router';
 import AudioPlayer from "@/components/AudioPlayer";
 import VideoPlayer from "@/components/VideoPlayer";
 import DocumentEditor from "@/components/DocumentEditor";
-import { useEffect, useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
+import { useEffect, useRef, useState } from 'react';
+import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
 import { db } from './../../firebaseConfig';
-import CoreSectionJudges from '@/components/CoreSectionJudges';
 import CustomModal from '@/components/CustomModal';
 import { useAuth } from '@/context/AuthContext';
 import RatingForm from '@/components/RatingForm';
@@ -16,6 +14,8 @@ import ClapButton from '@/components/ClapButton';
 import StarRating from '@/components/StarRating';
 import SocialShareButton from '@/components/SocialShareButton';
 import toast from 'react-hot-toast';
+import { ARTWORK, EMPTY_ARTWORK } from '@/types/artworks.types';
+import Preloader from '@/components/Preloader';
 
 const videos = [
   { id: 1, title: "Video 1", src: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4" },
@@ -25,30 +25,46 @@ const videos = [
 const ArtworkDetail = () => {
   const router = useRouter();
   const { id } = router.query; // Dynamic route parameter
+
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [activeTab, setActiveTab] = useState('document'); // Active tab state
-  const { role } = useAuth();
+  const [activeTab, setActiveTab] = useState('info'); // Active tab state
+  const { user, role } = useAuth();
 
   const [isJudgeModalOpen, setIsJudgeModalOpen] = useState(false);
   const openJudgeModal = () => setIsJudgeModalOpen(true);
   const closeJudgeModal = () =>setIsJudgeModalOpen(false);
 
-  const [data, setData] = useState<{ id: string; [key: string]: any }[]>([]);
-  const [project, setProject] = useState<{ id: string; [key: string]: any } | null>(null);
+  const [data, setData] = useState<ARTWORK[]>([]);
+  const [project, setProject] = useState<ARTWORK>(EMPTY_ARTWORK);
 
+  const [reaction, setReaction] = useState<"happy" | "sad" | null>(null);
+  const [hasClapped, setHasClapped] = useState(false);
 
-  const fetchEvents = async (id: string | string[] | undefined) => {
+  const clapSoundRef = useRef<HTMLAudioElement | null>(null);
+  const unclapSoundRef = useRef<HTMLAudioElement | null>(null);
+
+  const fetchArtworks = async (id: string | string[] | undefined) => {
+    const params = new URLSearchParams(document.location.search);
+    const _id = params.get('id');
+    const _shareLink = params.get('share-link');
+ 
+    if (_shareLink) {
+      localStorage.setItem('share-link', _shareLink);
+    } else {
+      localStorage.removeItem('share-link');
+    }
+    
     try {
       const querySnapshot = await getDocs(collection(db, 'artworks'));
       const events = querySnapshot.docs.map(doc => ({
+        ...doc.data(),
         id: doc.id,
-        ...doc.data()
       }));
-      const selectedProject = events.find(event => event.id === id);
+      const selectedProject = events.find(event => event.id === id || event.id === _id);
       if (selectedProject) {
-        setProject(selectedProject);
+        setProject(selectedProject as ARTWORK);
       }
-      setData(events);
+      setData(events as ARTWORK[]);
       return events;
     } catch (error) {
       console.error('Error fetching events:', error);
@@ -57,7 +73,7 @@ const ArtworkDetail = () => {
   };
 
   useEffect(() => {
-    fetchEvents(id);
+    fetchArtworks(id);
   }, []);
 
   if (!project) {
@@ -80,9 +96,101 @@ const ArtworkDetail = () => {
     setActiveTab(tab);
   };
 
+  const getCurrentClaps = () => {
+    let counter = 0;
+    project.claps.forEach((item) => {
+      if (item.clap) {
+        counter++;
+      }
+    });
+    return counter;
+  };
+
+  const handleClap = async () => {
+    setHasClapped(true);
+    const docRef = doc(db, 'artworks', project.id);
+
+    const updatedClaps = project.claps.map((item) => {
+      if (item.userIdentifier === user?.uid) {
+        return { ...item, clap: !item.clap }; // Toggle the clap state
+      } 
+      return item;
+    });
+
+    if (!updatedClaps.some((item) => item.userIdentifier === user?.uid)) {
+      updatedClaps.push({ userIdentifier: user?.uid || '', clap: true });
+    }
+
+    await updateDoc(docRef, {
+      claps: updatedClaps,
+    });
+
+    setProject((prevProject) => ({
+      ...prevProject,
+      claps: updatedClaps as { userIdentifier: string; clap: boolean; }[],
+    }));
+
+    const hasClapped = updatedClaps.some((item) => item.userIdentifier === user?.uid && item.clap);
+    if (hasClapped) {
+      if (clapSoundRef.current) {
+        clapSoundRef.current.play();
+      }
+      setReaction("happy");
+      toast.success('Clap added successfully!');
+    } else {
+      if (unclapSoundRef.current) {
+        unclapSoundRef.current.play();
+      }
+      setReaction("sad");
+      toast.error('Clap removed successfully!');
+    }
+
+    setTimeout(() => setReaction(null), 1500); // Hide face after 1.5s
+    setHasClapped(false);
+  };
+
+  const handleRates = async (rate: number) => {
+    const docRef = doc(db, 'artworks', project.id);
+    const updatedStars = project.stars.map((item) => {
+      if (item.userIdentifier === user?.uid) {
+        return { ...item, rating: rate }; // Update the rating
+      } 
+      return item;
+    });
+
+    if (!updatedStars.some((item) => item.userIdentifier === user?.uid)) {
+      updatedStars.push({ userIdentifier: user?.uid || '', rating: rate });
+    }
+
+    await updateDoc(docRef, {
+      stars: updatedStars,
+    });
+
+    setProject((prevProject) => ({
+      ...prevProject,
+      stars: updatedStars as { userIdentifier: string; rating: number; }[],
+    }));
+
+    toast.success('Rating added successfully!');
+  };  
+
+  const getFullRatingAverage = () => {
+    const totalStars = project.stars.length;
+    const totalRating = project.stars.reduce((acc, item) => acc + (item.rating || 0), 0);
+    const average = totalStars > 0 ? totalRating / totalStars : 0;
+    return average;
+  };
+
+  const getMyRating = () => {
+    const myRating = project.stars.find((item) => item.userIdentifier === user?.uid);
+    return myRating ? myRating.rating : 0;
+  };
+
   return (
     <div className={styles['full-view']}>
-      <SubMenu />
+      {/* <SubMenu /> */}
+      <audio ref={clapSoundRef} src="/sounds/spot.mp3" />
+      <audio ref={unclapSoundRef} src="https://cdn.freesound.org/previews/687/687017_321967-lq.mp3" />
 
       <CustomModal
         isOpen={isJudgeModalOpen}
@@ -101,8 +209,26 @@ const ArtworkDetail = () => {
       <div className="project-detail-wrapper">
         <div className="project-detail-container">
           <ul className="options-menu">
-            <li><ClapButton /></li>
-            <li><StarRating /></li>
+            <li>
+              {hasClapped ? (
+                <div style={{ textAlign: 'center', position: 'relative', width: '50px' }}>
+                  <Preloader message='' small />
+                </div>
+                ) : (
+                  <ClapButton 
+                    currentClaps={getCurrentClaps()} 
+                    handleClaps={handleClap} 
+                    reaction={reaction} 
+                  />  
+                )}
+            </li>
+            <li>
+              <StarRating 
+                handleRating={handleRates} 
+                initialAverage={getFullRatingAverage()} 
+                myRating={getMyRating()}
+              />
+            </li>
             <li><SocialShareButton /></li>
           </ul>
 
@@ -200,18 +326,7 @@ const ArtworkDetail = () => {
                   <p><b className="bolder-text">Compositor o Artista:</b> {project?.artist}</p>
                   <br />
                   <p className="overflow-area">{project?.description}</p>
-                  <br />
                 </div>
-                <button
-                  className={registerForm['submitButton']}
-                  onClick={() => {
-                    role === 'judge'
-                      ? openJudgeModal()
-                      : toast.error('No tienes permisos para calificar esta obra de arte');
-                  }}
-                >
-                  <b>🖋️ Calificar Obra de Arte</b>
-                </button>
               </>
             )}
 
@@ -265,6 +380,19 @@ const ArtworkDetail = () => {
             )}
           </div>
         </div>
+        
+        <br />
+        <button
+          className={registerForm['submitButton']}
+          onClick={() => {
+            role === 'judge'
+              ? openJudgeModal()
+              : toast.error('No tienes permisos para calificar esta obra de arte');
+          }}
+        >
+          <b>🖋️ Calificar Obra de Arte</b>
+        </button>
+
       </div>
 
       {/* Tab Styles */}

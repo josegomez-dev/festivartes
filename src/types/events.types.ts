@@ -7,7 +7,7 @@ export interface EVENTS {
     thumbnail: string;
     date: Date;
     stars: Array<{ userIdentifier: string; rating: number }>;
-    claps: number;
+    claps: Array<{ userIdentifier: string; clap: boolean }>;
     price: number;
     createdAt: Date;
     updatedAt: Date;
@@ -26,7 +26,7 @@ export const EMPTY_EVENT: EVENTS = {
     upcoming: false,
     price: 0,
     createdBy: "",
-    claps: 0,
+    claps: [],
     stars: [
         // {
         //     userIdentifier: "",

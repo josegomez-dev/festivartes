@@ -98,7 +98,7 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
             </div> 
             : 
             <div style={{ marginTop: '-25px' }}>
-              <ObjectMiniature projects={dataFiltered.concat(data).concat(data).concat(data)} type={'event'} />
+              <ObjectMiniature projects={dataFiltered} type={'event'} />
             </div>
             }
         </div>

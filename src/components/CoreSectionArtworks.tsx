@@ -83,7 +83,6 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
               </div>
             </span>
           </p>
-          <br />
 
           {data.length <= 0 ? 
             <div className={styles.grid}>
@@ -93,7 +92,7 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
               </div> 
             </div> 
             : 
-            <div style={{ marginTop: '-25px' }}>
+            <div style={{ marginTop: '-5px' }}>
       
               <ObjectMiniature projects={dataFiltered} type={'artwork'} />
               

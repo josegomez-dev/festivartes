@@ -3,10 +3,8 @@ import Link from 'next/link';
 import { FaStar } from "react-icons/fa";
 import Image from 'next/image';
 import { MdHideImage } from "react-icons/md";
-import { FaMusic } from "react-icons/fa";
-import { FaBrush } from "react-icons/fa";
-import { PiPersonSimpleTaiChiBold } from "react-icons/pi";
-import { FaPersonBooth } from "react-icons/fa6";
+import { ARTWORK } from '@/types/artworks.types';
+import { EVENTS } from '@/types/events.types';
 
 interface ObjectMiniatureProps {
   projects: any;
@@ -15,11 +13,30 @@ interface ObjectMiniatureProps {
 }
 
 const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type, customClass }) => {
+
+  const getStarsRaitingByProject = (project: ARTWORK | EVENTS) => {
+    const totalStars = project.stars.length;
+    const totalRating = project.stars.reduce((acc, item) => acc + (item.rating || 0), 0);
+    const average = totalStars > 0 ? totalRating / totalStars : 0;
+    // how to round to no decimal number
+    return Math.round(average-1);
+  };
+
+  const getCurrentProjectClaps = (project: ARTWORK | EVENTS) => {
+    let totalClaps = 0;
+    project.claps.forEach((item: any) => {
+      if (item.clap) {
+        totalClaps++;
+      }
+    });
+    return totalClaps;
+  }
+
   return (
     <div className={`project-miniature-container project-miniature-custom-${type} ${customClass}`}>
       {projects.map((project: any, index: number) => (
         <Link 
-          key={index + project.name + 'react-key'} 
+          key={index + project.name + document.location.search + 'react-key'} 
           href={`/${type}-detail?id=${project.id}`}
           className='project-miniature-link'
         >
@@ -50,11 +67,6 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type, cust
                 />
               </div> : 
               <></>}
-              <div className="stars-container">
-                {Array.from({ length: project.stars }).map((_, index) => (
-                  <FaStar key={index} className="star" color="gold" />
-                ))}
-              </div>
             </span>
           </> 
           : null}
@@ -74,6 +86,29 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type, cust
               </p>
               {(type === 'judge' || type === 'event') && <p className='small-text-size'>{project.name}</p>}
             </div>}
+
+            {type === 'artwork' || type === 'event' && (
+              <>
+                <div className="stars-container">
+                  {!customClass ? Array.from({ length: Math.min(getStarsRaitingByProject(project), 5) }).map((_, index) => (
+                    <FaStar key={index} className="star" color="gold" />
+                  )) : (
+                    <>
+                      <FaStar key={index} className="star" color="gold" />
+                      <span style={{ marginLeft: '2px', color: 'gold' }}>
+                        {getStarsRaitingByProject(project) < 0 ? 0 : getStarsRaitingByProject(project)}
+                      </span>
+                    </>
+                  )}
+                </div>
+                <div>
+                  <p className='claps-container' style={{ color: 'orange' }}>
+                    👏 {getCurrentProjectClaps(project)}
+                  </p>
+                </div>
+              </>
+            )}
+
           </div>
         </Link>
       ))}
