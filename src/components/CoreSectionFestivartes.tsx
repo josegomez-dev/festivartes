@@ -9,6 +9,7 @@ import { FaCirclePlus } from 'react-icons/fa6';
 import CustomModal from './CustomModal';
 import EventRegisterForm from './EventRegisterForm';
 import { EVENTS } from '@/types/events.types';
+import { AiOutlinePlus } from 'react-icons/ai';
 
 interface CoreSectionFestivartesProps {
   filterBy?: string;
@@ -21,6 +22,8 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
   const openEventModal = () => setIsEventModalOpen(true);
   const closeEventModal = () =>setIsEventModalOpen(false);
+
+  const [showAllData, setShowAllData] = useState(false);
   
   const fetchEvents = async () => {
     try {
@@ -72,6 +75,27 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
             <p>
               <span className='bolder-text'>
                 <RiBubbleChartFill color='gold'/> &nbsp;
+                
+                <button 
+                  onClick={() => setShowAllData(!showAllData)} 
+                  style={{ 
+                    position: 'absolute', 
+                    left: 0, 
+                    fontSize: '0.8rem', 
+                    textDecoration: 'none', 
+                    color: 'orange', 
+                    background: 'white', 
+                    padding: '5px', 
+                    borderTopRightRadius: '10px',
+                    borderBottomRightRadius: '10px',
+                    borderBottom: '1px solid orange', 
+                    borderRight: '1px solid orange', 
+                    borderTop: '1px solid orange'
+                  }}>
+                  <AiOutlinePlus className="" style={{ marginBottom: '-2px' }}/>
+                  {showAllData ? ' Ocultar' : ' Ver Todos'}
+                </button>
+                
                 <b>Mis Festivartes &nbsp; 
                 
                 </b>
@@ -103,31 +127,32 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
             }
         </div>
 
-        <div className={styles.card}>
-            <p>
-              <span className='bolder-text'>
-                <RiBubbleChartFill color='gold'/> &nbsp;
-                <b> Catalogo de Festivartes &nbsp; 
-                </b>
-                <p className='bolder-text small-text-size'>
-                Lleva tu evento al siguiente nivel <br /> con nuestra app.
-                </p>
-                <br />
-              </span>
-            </p>
-            {data.length <= 0 ? 
-            <div className={styles.grid}>
-                <div className={styles.card}>
-                <h3 style={{ color: 'lightgray'}}>No se han registrado eventos</h3>
-                <p style={{ color: 'black' }}>¡Explora la app y crea el primero!</p>
-                </div> 
-            </div> 
-            : 
-            <div className='' style={{ marginTop: '-5px' }}>
-              <ObjectMiniature projects={data} customClass={'festivartes-miniature-panel'} type={'event'} />
-            </div>
-            }
-        </div>
+        {showAllData && (
+          <div className={styles.card}>
+          <p>
+            <span className='bolder-text'>
+              <RiBubbleChartFill color='gold'/> &nbsp;
+              <b> Catalogo de Festivartes &nbsp; 
+              </b>
+              <p className='bolder-text small-text-size'>
+              Lleva tu evento al siguiente nivel <br /> con nuestra app.
+              </p>
+              <br />
+            </span>
+          </p>
+          {data.length <= 0 ? 
+          <div className={styles.grid}>
+              <div className={styles.card}>
+              <h3 style={{ color: 'lightgray'}}>No se han registrado eventos</h3>
+              <p style={{ color: 'black' }}>¡Explora la app y crea el primero!</p>
+              </div> 
+          </div> 
+          : 
+          <div className='' style={{ marginTop: '-5px' }}>
+            <ObjectMiniature projects={data} customClass={'festivartes-miniature-panel'} type={'event'} />
+          </div>
+          }
+      </div>)}
       </>
   )
 }

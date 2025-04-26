@@ -18,7 +18,6 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type, cust
     const totalStars = project.stars.length;
     const totalRating = project.stars.reduce((acc, item) => acc + (item.rating || 0), 0);
     const average = totalStars > 0 ? totalRating / totalStars : 0;
-    // how to round to no decimal number
     return Math.round(average-1);
   };
 
@@ -87,7 +86,7 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type, cust
               {(type === 'judge' || type === 'event') && <p className='small-text-size'>{project.name}</p>}
             </div>}
 
-            {type === 'artwork' || type === 'event' && (
+            {true && (
               <>
                 <div className="stars-container">
                   {!customClass ? Array.from({ length: Math.min(getStarsRaitingByProject(project), 5) }).map((_, index) => (

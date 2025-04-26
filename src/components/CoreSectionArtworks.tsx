@@ -9,7 +9,8 @@ import { FaCirclePlus } from 'react-icons/fa6';
 import CustomModal from './CustomModal';
 import ArtworkRegisterForm from './ArtworkRegisterForm';
 import { ARTWORK } from '@/types/artworks.types';
-
+// import react icons
+import { AiOutlinePlus } from 'react-icons/ai';
 interface CoreSectionArtworksProps {
   filterBy?: string;
 }
@@ -22,6 +23,8 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);  
   const openUserModal = () => setIsUserModalOpen(true);
   const closeUserModal = () =>setIsUserModalOpen(false);
+
+  const [showAllData, setShowAllData] = useState(false);
 
   const fetchArtworks = async () => {
     try {
@@ -70,6 +73,27 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
           <p>
             <span className='bolder-text'>
               <RiBubbleChartFill color='gold'/> &nbsp;
+              
+              <button 
+                onClick={() => setShowAllData(!showAllData)} 
+                style={{ 
+                  position: 'absolute', 
+                  left: 0, 
+                  fontSize: '0.8rem', 
+                  textDecoration: 'none', 
+                  color: 'orange', 
+                  background: 'white', 
+                  padding: '5px', 
+                  borderTopRightRadius: '10px',
+                  borderBottomRightRadius: '10px',
+                  borderBottom: '1px solid orange', 
+                  borderRight: '1px solid orange', 
+                  borderTop: '1px solid orange'
+                }}>
+                <AiOutlinePlus className="" style={{ marginBottom: '-2px' }}/>
+                {showAllData ? ' Ocultar' : ' Ver Todos'}
+              </button>
+
               <b>Mi Galería Creativa &nbsp; 
               </b>
               <p className='bolder-text small-text-size'>
@@ -100,7 +124,8 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
           }
         </div>
 
-        <div className={`${styles.card} `}>
+        {showAllData && (
+          <div className={`${styles.card} `}>
           <p>
             <span className='bolder-text'>
               <RiBubbleChartFill color='gold'/> &nbsp;
@@ -125,7 +150,7 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
               <ObjectMiniature projects={data} customClass={'artworks-miniature-panel'} type={'artwork'} />              
             </div>
           }
-        </div>
+        </div> )}
       </>
   )
 }
