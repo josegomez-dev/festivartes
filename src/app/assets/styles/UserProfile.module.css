@@ -3,12 +3,10 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    background-color: var(--background-end-rgb);
     min-height: 100vh;
   }
 
   .profile-card {
-    animation: gradient 15s ease infinite;
 
     background-size: 400% 400%;
     background-attachment: fixed;
@@ -20,21 +18,6 @@
     max-width: 600px;
     text-align: center;
   }
-
-
-  @keyframes gradient {
-    0% {
-        background-position: 0% 0%;
-    }
-    50% {
-        background-position: 100% 100%;
-    }
-    100% {
-        background-position: 0% 0%;
-    }
-  }
-
-
 
   .profile-picture {
     width: 100px;

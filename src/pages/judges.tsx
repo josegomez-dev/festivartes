@@ -27,7 +27,7 @@ export default function Users() {
 
         <CoreSectionJudges />
 
-        <FloatingMenuButton />
+        <FloatingMenuButton mainBtn={true} />
         <BannerFooter />
       </div>
     </div>

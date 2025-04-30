@@ -251,21 +251,33 @@ const ArtworkDetail = () => {
       </CustomModal>
 
     {role === 'judge' && (
-      <>
-        <br />
-        <button
-          className={registerForm['submitButton']}
-          style={{ position: 'fixed', bottom: '0', right: '0', zIndex: 30, animation: 'pulse 1.5s ease-in-out infinite' }}
-          type="button"
-          onClick={() => {
-            role === 'judge'
-              ? openJudgeModal()
-              : toast.error('No tienes permisos para calificar esta obra de arte');
-          }}
-        >
-          <b>🖋️ Calificar Obra de Arte</b>
-        </button>
-      </>
+      <div style={{ position: 'fixed', bottom: '0', right: '0', zIndex: 30, width: '100%' }}>
+        <div>
+          <button
+            className={registerForm['submitButton']}
+            style={{ animation: 'pulse 1.5s ease-in-out infinite' }}
+            type="button"
+            onClick={() => {
+              role === 'judge'
+                ? openJudgeModal()
+                : toast.error('No tienes permisos para calificar esta obra de arte');
+            }}
+          >
+            <b>🖋️ Calificar Obra de Arte</b>
+          </button>
+        </div>
+        <div>
+          {project?.audio && (
+            <div style={{ width: '100%' }} className="links-spaced">
+            <AudioPlayer
+              src={project.audio}
+              title=""
+              // className="project-thumbnail-wrapper"
+              // title={`[${project.title}]`}
+            />
+          </div>)}
+        </div>
+      </div>
     )}
 
 
@@ -412,15 +424,7 @@ const ArtworkDetail = () => {
                       onChange={handleAudioUpload}
                     />
                   </div>
-                  <br />
-                  {project?.audio && (
-                    <div style={{ width: '100%', margin: '0 auto' }} className="links-spaced">
-                    <AudioPlayer
-                      src={project.audio}
-                      title={`Escucha [${project.title}]`}
-                    />
-                  </div>
-                  )}
+                 
                 </div>
               </>
             )}

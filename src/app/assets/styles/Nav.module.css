@@ -32,7 +32,6 @@
   display: inherit;
   justify-content: inherit;
   align-items: inherit;
-  font-size: 25px;
   font-family: var(--font-mono);
 }
 
@@ -61,15 +60,94 @@
 
 .profile-picture {
   position: absolute; 
-  right: 45px; 
+  right: 5px; 
   top: 8px; 
   border-radius: 50%; 
   z-index: 2000;
+}
+.profile-picture-user-menu {
+  border-radius: 50%; 
+  width: 100px;
+  height: 100px;
 }
 
 .profile-role {
   position: absolute; 
   top: 5px; 
   right: 95px; 
+}
+
+.dropdownWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown {
+  position: absolute;
+  top: 60px;
+  right: 15px;
+  width: 250px;
+  background: linear-gradient(135deg, #2c5364, #203a43, #0f2027);
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  padding: 16px;
+  z-index: 2000;
+  font-family: sans-serif;
+
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.dropdownVisible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dropdownHidden {
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+
+.dropdownItem {
+  margin-bottom: 10px;
+}
+
+.dropdownActions {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid orange;
+  align-items: center;
+}
+.dropdownActions:last-child {
+  border-bottom: none;
+}
+
+.dropdownLink {
+  text-decoration: none;
+  color: orange;
   font-size: 18px;
+}
+
+.dropdownLink:hover {
+  text-decoration: underline;
+}
+
+.logoutButton {
+  background-color: transparent;
+  border: none;
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.logoutButton:hover {
+  color: darkred;
 }

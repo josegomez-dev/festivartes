@@ -26,7 +26,7 @@ export default function Artworks() {
 
         <CoreSectionArtworks filterBy={user?.uid} />
 
-        <FloatingMenuButton />
+        <FloatingMenuButton mainBtn={true} />
         <BannerFooter />
       </div>
     </div>

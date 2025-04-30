@@ -26,7 +26,7 @@ export default function Events() {
 
         <CoreSectionFestivartes filterBy={user?.uid} />
 
-        <FloatingMenuButton />
+        <FloatingMenuButton mainBtn={true} />
         <BannerFooter />
       </div>
     </div>

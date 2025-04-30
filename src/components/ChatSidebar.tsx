@@ -7,7 +7,7 @@ const ChatSidebar = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { sender: "admin", text: `Bienvenido, ${user?.displayName} al Chat General.` },
+    { sender: "admin", text: `Bienvenido(a), ${user?.displayName} al Chat General.` },
   ]);
   const [newMessage, setNewMessage] = useState("");
 

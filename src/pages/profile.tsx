@@ -123,6 +123,8 @@ export default function Profile() {
             height={100}
             className="profile-pic"
           />
+          <br />
+          <br />
           <input
             id="profile-pic"
             type="file"
