@@ -12,32 +12,34 @@ const YesOrNoQuestionForm: React.FC<YesOrNoQuestionProps> = ({ checked, title, i
   return (
     <div className={styles.formGroup}>
         <div className={styles['input-wrapper']}>
-        <label className={styles.label} htmlFor={idQuestion}>
-            <b>{title}</b>
-            {textContent}
-        </label>
-        <div className={styles['input-container-right']}>
-            <input
-            type="checkbox"
-            id={idQuestion}
-            name={idQuestion}
-            checked={checked}
-            onChange={handleToggleChange}
-            />
-            &nbsp;
-            <span className={styles.toggleLabel}>
-            {checked ? "Si" : "No"}
-            </span>
-        </div> 
-        <label className={styles.label} htmlFor={`${idQuestion}_comment`}>Observaciones: </label>
-        <textarea
-            id={`${idQuestion}_comment`}
-            name={`${idQuestion}_comment`}
-            className={styles.toggle}
-            onChange={handleToggleChange}
-        />
+          <div className={styles['input-container']}>
+              <input
+              type="checkbox"
+              id={idQuestion}
+              name={idQuestion}
+              checked={checked}
+              onChange={handleToggleChange}
+              />
+              &nbsp;
+              {/* <span className={styles.toggleLabel}>
+              {checked ? "Si" : "No"}
+              </span> */}
+          </div> 
+          <label className={styles.label} htmlFor={idQuestion}>
+              <i><u>{title}</u></i>&nbsp;
+              {textContent}
+          </label>
         </div>
-        <hr />
+        <div>
+          <label className={`${styles.label}`} htmlFor={`${idQuestion}_comment`}>Observaciones: </label>
+          <textarea
+              id={`${idQuestion}_comment`}
+              name={`${idQuestion}_comment`}
+              className={styles.toggle}
+              onChange={handleToggleChange}
+          />
+        </div>
+        <br />
     </div>
   )
 }

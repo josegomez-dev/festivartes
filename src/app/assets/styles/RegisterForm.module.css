@@ -4,13 +4,14 @@
   overflow-y: scroll; /* Ensures scrolling section */
   height: 65vh; /* Takes the taller height */
   background: transparent;
-  margin-top: -10px;
+  margin: 0 auto;
 }
 
 .form-wrapper {
   margin-top: 10px;
   width: 600px;
   margin: 0 auto;
+  max-width: 100%;
 }
 
 .label {
@@ -27,13 +28,15 @@
 .fileInput,
 .toggle {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
-  background-color: white;
-  color: white;
+  height: 80px;
+
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  backdrop-filter: blur(100px); /* Apply the blur effect */
+
+  color: orange;
   transition: border-color 0.3s ease;
 }
 
@@ -57,7 +60,6 @@
 
 .submitButton {
   width: 100%;
-  max-width: 300px;
   margin: 0 auto;
   padding: 10px;
   font-size: 18px;
@@ -80,6 +82,7 @@
 
 .formGroup {
   margin-bottom: 20px; /* From RatingForm */
+  margin: 0;
 }
 
 .toggleLabel {
@@ -93,14 +96,20 @@
 }
 
 .checkboxLabel {
-  margin-bottom: 8px;
+  margin-bottom: 18px;
   font-size: 14px;
   font-weight: bold;
   color: white; /* From RatingForm */
+  padding: 10px;
 }
 
-.input-container-right {
-  text-align: right;
-  margin-right: 50px;
-  margin-top: 10px;
+.input-wrapper {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+.input-container {
+  flex: 1;
+  margin-right: 20px;
+  margin-left: 0;
 }

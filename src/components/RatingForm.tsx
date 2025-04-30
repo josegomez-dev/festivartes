@@ -57,9 +57,9 @@ const RatingForm = () => {
   useEffect(() => {
     setFormData({
       question1: false,
-      question1_comment: "",
+      question1_comment: "asd",
       question2: false,
-      question2_comment: "",
+      question2_comment: "asdasdas",
       question3: false,
       question3_comment: "",
       question4: false,
@@ -72,6 +72,22 @@ const RatingForm = () => {
       }))
     });
   }, []);
+
+
+  const howManyChecked = (): number => {
+    let checkedCount = 0;
+    for (let i = 0; i < formData.multiCheckbox.length; i++) {
+      if (formData.multiCheckbox[i].checked) {
+        checkedCount++;
+      }
+    }
+    if (formData.question1) checkedCount++;
+    if (formData.question2) checkedCount++;
+    if (formData.question3) checkedCount++;
+    if (formData.question4) checkedCount++;
+    if (formData.question5) checkedCount++;
+    return checkedCount;
+  }
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -114,7 +130,7 @@ const RatingForm = () => {
   return (
     <>
       <div className="modal-title-centered">
-        <b>&nbsp;Puntuación Final (0-10)&nbsp;</b>
+        <b>&nbsp;Puntuación Final ({howManyChecked()}-10)&nbsp;</b>
       </div>
       <div className={styles['form-wrapper']}>
         <form className={styles.form} onSubmit={handleSubmit}>
@@ -127,9 +143,6 @@ const RatingForm = () => {
               handleChange={handleMultiCheckboxChange}
             />
           </div>
-          
-          <hr />
-          <br />
           
           <YesOrNoQuestionForm
             title="Letra de la canción: "
@@ -172,25 +185,7 @@ const RatingForm = () => {
             handleToggleChange={handleToggleChange}
           />
 
-          <div className={styles.formGroup}>
-            <label className={styles['label']}>
-            Editar Puntuación Final
-            </label>
-            <select
-              id="question4"
-              name="question4"
-              className={styles.select}
-              onChange={handleSelectChange}
-            >
-              {Array.from({ length: 11 }, (_, index) => (
-                <option key={index} value={index}>
-                  {index}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <button type="submit" className={`${styles.submitButton} disabled`} disabled>
+          <button className={`${styles.submitButton}`}>
             <b>Enviar Formulario</b>
           </button>
         </form>

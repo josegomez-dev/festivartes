@@ -6,7 +6,7 @@ import VideoPlayer from "@/components/VideoPlayer";
 import DocumentEditor from "@/components/DocumentEditor";
 import { useEffect, useRef, useState } from 'react';
 import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
-import { db } from './../../firebaseConfig';
+import { db, storage } from './../../firebaseConfig';
 import CustomModal from '@/components/CustomModal';
 import { useAuth } from '@/context/AuthContext';
 import RatingForm from '@/components/RatingForm';
@@ -16,6 +16,7 @@ import SocialShareButton from '@/components/SocialShareButton';
 import toast from 'react-hot-toast';
 import { ARTWORK, EMPTY_ARTWORK } from '@/types/artworks.types';
 import Preloader from '@/components/Preloader';
+import { uploadBytes, getDownloadURL, ref } from 'firebase/storage';
 
 const videos = [
   { id: 1, title: "Video 1", src: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4" },
@@ -36,6 +37,8 @@ const ArtworkDetail = () => {
 
   const [data, setData] = useState<ARTWORK[]>([]);
   const [project, setProject] = useState<ARTWORK>(EMPTY_ARTWORK);
+
+  const [loadingAudio, setLoadingAudio] = useState(false);
 
   const [reaction, setReaction] = useState<"happy" | "sad" | null>(null);
   const [hasClapped, setHasClapped] = useState(false);
@@ -174,6 +177,45 @@ const ArtworkDetail = () => {
     toast.success('Rating added successfully!');
   };  
 
+  const uploadAudioFile = async (file: File, userId: string) => {
+    try {
+      const storageRef = ref(storage, `audios/${userId}/${file.name}`);
+      await uploadBytes(storageRef, file);
+      return await getDownloadURL(storageRef);
+    } catch (error) {
+      console.error("Error uploading audio:", error);
+      toast.error("Error uploading audio");
+      throw error;
+    }
+  };
+  
+  const handleAudioUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoadingAudio(true);
+    const file = e.target.files?.[0];
+    if (!file) {
+      toast.error("No file selected");
+      return;
+    }
+    if (file && file.type.startsWith("audio/")) {
+      if (user?.uid) {
+        uploadAudioFile(file, user.uid).then((url) => {
+          const docRef = doc(db, 'artworks', project.id);
+          updateDoc(docRef, { audio: url });
+          setProject((prev) => ({ ...prev, audio: url }));
+          toast.success("Audio uploaded successfully!");
+        }).catch((error) => {
+          console.error("Error uploading audio:", error);
+          toast.error("Error uploading audio");
+        });
+      } else {
+        toast.error("User ID is undefined. Cannot upload the audio.");
+      }
+    } else {
+      toast.error("Please select a valid audio file.");
+    }
+    setLoadingAudio(false);
+  };
+
   const getFullRatingAverage = () => {
     const totalStars = project.stars.length;
     const totalRating = project.stars.reduce((acc, item) => acc + (item.rating || 0), 0);
@@ -208,14 +250,24 @@ const ArtworkDetail = () => {
         </div>
       </CustomModal>
 
-      {project?.audio && (
-        <div className="links-spaced" style={{ width: '100%', margin: '0 auto', position: 'fixed', bottom: '0px', left: '50%', right: '50%', transform: 'translateX(-50%)', zIndex: 30,  }}>
-        <AudioPlayer
-          src="https://file-examples.com/storage/fe46ad26fa67d4043a4b9e6/2017/11/file_example_MP3_700KB.mp3"
-          title={`Escucha [${project.title}]`}
-        />
-      </div>
-      )}
+    {role === 'judge' && (
+      <>
+        <br />
+        <button
+          className={registerForm['submitButton']}
+          style={{ position: 'fixed', bottom: '0', right: '0', zIndex: 30, animation: 'pulse 1.5s ease-in-out infinite' }}
+          type="button"
+          onClick={() => {
+            role === 'judge'
+              ? openJudgeModal()
+              : toast.error('No tienes permisos para calificar esta obra de arte');
+          }}
+        >
+          <b>🖋️ Calificar Obra de Arte</b>
+        </button>
+      </>
+    )}
+
 
 
       <div className="project-detail-wrapper">
@@ -320,21 +372,7 @@ const ArtworkDetail = () => {
                 <h1>
                   <b style={{ fontSize: '3rem' }}>{project.title || 'Title'}</b>
                 </h1>
-                <br />
-                <div className="input-group" style={{ margin: '0 auto'}}>
-                  <label htmlFor="thumbnail">
-                    Subir archivo mp3 de la obra de arte
-                  </label>
-                  <input
-                    type="file"
-                    id="thumbnail"
-                    name="thumbnail"
-                    className={styles.fileInput}
-                    accept="image/*"
-                    //onChange={handleImageUpload}
-                  />
-                </div>
-                <br />
+
                 <div style={{ width: '300px', margin: '0 auto', color: 'lightgray'  }}>
                   <p style={{ fontSize: '12px' }}>
                   🎨: {project?.category} 
@@ -359,31 +397,31 @@ const ArtworkDetail = () => {
                 <div>
                   <br />
                   <p className="overflow-area">{project?.description}</p>
+                  <br />
+                  <br />
+                  <div className="input-group" style={{ margin: '0 auto'}}>
+                    <label htmlFor="audio">
+                      Subir archivo mp3 de la obra de arte
+                    </label>
+                    <input
+                      type="file"
+                      id="audio"
+                      name="audio"
+                      className={styles.fileInput}
+                      accept="audio/*" 
+                      onChange={handleAudioUpload}
+                    />
+                  </div>
+                  <br />
+                  {project?.audio && (
+                    <div style={{ width: '100%', margin: '0 auto' }} className="links-spaced">
+                    <AudioPlayer
+                      src={project.audio}
+                      title={`Escucha [${project.title}]`}
+                    />
+                  </div>
+                  )}
                 </div>
-
-                {project?.audio && (
-                  <>
-                    <br />
-                    <br />
-                  </>
-                )}
-                
-                {role === 'judge' && (
-                  <>
-                    <br />
-                    <button
-                      className={registerForm['submitButton']}
-                      onClick={() => {
-                        role === 'judge'
-                          ? openJudgeModal()
-                          : toast.error('No tienes permisos para calificar esta obra de arte');
-                      }}
-                    >
-                      <b>🖋️ Calificar Obra de Arte</b>
-                    </button>
-                  </>
-                )}
-
               </>
             )}
 
@@ -446,6 +484,11 @@ const ArtworkDetail = () => {
           </div>
         </div>
         
+        <br />
+        <br />
+        <br />
+        <br />
+
       </div>
 
       {/* Tab Styles */}
