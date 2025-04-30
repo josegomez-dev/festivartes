@@ -7,10 +7,12 @@ export interface ARTWORK {
     category: string;
     thumbnail: string;
     date: Date;
+    document: string; // HTML content
     stars: Array<{ userIdentifier: string; rating: number }>;
     claps: Array<{ userIdentifier: string; clap: boolean }>;
     location: string;
     price: number;
+    audio: string; // URL to the audio file
     createdAt: Date;
     updatedAt: Date;
     status: 'active' | 'inactive' | 'banned'; // Could use an enum for statuses too
@@ -24,6 +26,8 @@ export const EMPTY_ARTWORK: ARTWORK = {
     artist: "",
     thumbnail: '/logo2.png',
     date: new Date(),
+    document: "",
+    audio: "",
     location: "",
     description: "",
     category: "",

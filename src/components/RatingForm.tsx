@@ -112,85 +112,90 @@ const RatingForm = () => {
   };
 
   return (
-    <div className={styles['form-wrapper']}>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <div className={styles.formGroup}>
-          <p className="bolder-text">Desglose de valoracion de aspectos formativos de la propuesta artistica:</p>
+    <>
+      <div className="modal-title-centered">
+        <b>&nbsp;Puntuación Final (0-10)&nbsp;</b>
+      </div>
+      <div className={styles['form-wrapper']}>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={styles.formGroup}>
+            <p className="bolder-text">Desglose de valoracion de aspectos formativos de la propuesta artistica:</p>
+            <br />
+            <MultiCheckBoxQuestionForm
+              multiCheckboxOptions={multiCheckboxOptions}
+              formData={formData}
+              handleChange={handleMultiCheckboxChange}
+            />
+          </div>
+          
+          <hr />
           <br />
-          <MultiCheckBoxQuestionForm
-            multiCheckboxOptions={multiCheckboxOptions}
-            formData={formData}
-            handleChange={handleMultiCheckboxChange}
+          
+          <YesOrNoQuestionForm
+            title="Letra de la canción: "
+            textContent="¿Se toma en cuenta el contenido y el mensaje de la letra, de acuerdo con lo que estipula el artículo 3 del Reglamento del Festival Estudiantil de las Artes 2025?"
+            idQuestion={"question1"}
+            checked={formData.question1}
+            handleToggleChange={handleToggleChange}
           />
-        </div>
-        
-        <hr />
-        <br />
-        
-        <YesOrNoQuestionForm
-          title="Letra de la canción: "
-          textContent="¿Se toma en cuenta el contenido y el mensaje de la letra, de acuerdo con lo que estipula el artículo 3 del Reglamento del Festival Estudiantil de las Artes 2025?"
-          idQuestion={"question1"}
-          checked={formData.question1}
-          handleToggleChange={handleToggleChange}
-        />
 
-        <YesOrNoQuestionForm
-          title="Entonación y afinación: "
-          textContent="¿La voz de la persona participante presenta una afinación y entonación precisa y correcta de acuerdo con los instrumentos musicales que lo acompañan? En caso de ser a capella, ¿mantiene la entonación y afinación, por lo que se tomará en cuenta la tonalidad con la que inicie la canción?"
-          idQuestion={"question2"}
-          checked={formData.question2}
-          handleToggleChange={handleToggleChange}
-        />
+          <YesOrNoQuestionForm
+            title="Entonación y afinación: "
+            textContent="¿La voz de la persona participante presenta una afinación y entonación precisa y correcta de acuerdo con los instrumentos musicales que lo acompañan? En caso de ser a capella, ¿mantiene la entonación y afinación, por lo que se tomará en cuenta la tonalidad con la que inicie la canción?"
+            idQuestion={"question2"}
+            checked={formData.question2}
+            handleToggleChange={handleToggleChange}
+          />
 
-        <YesOrNoQuestionForm
-          title="Dicción:"
-          textContent="¿Se refiere a una pronunciación correcta de las palabras? ¿Las cantantes o los cantantes utilizan una dicción clara y limpia? ¿Utiliza pronunciación correcta?"
-          idQuestion={"question3"}
-          checked={formData.question3}
-          handleToggleChange={handleToggleChange}
-        />
+          <YesOrNoQuestionForm
+            title="Dicción:"
+            textContent="¿Se refiere a una pronunciación correcta de las palabras? ¿Las cantantes o los cantantes utilizan una dicción clara y limpia? ¿Utiliza pronunciación correcta?"
+            idQuestion={"question3"}
+            checked={formData.question3}
+            handleToggleChange={handleToggleChange}
+          />
 
-        <YesOrNoQuestionForm
-          title="Precisión en la ejecución vocal y estabilidad en el ritmo: "
-          textContent="¿El tempo, compás y ritmo son constantes y puntuales a la hora de cantar? ¿Mantienen concordancia con la línea melódica que emite la voz?"
-          idQuestion={"question4"}
-          checked={formData.question4}
-          handleToggleChange={handleToggleChange}
-        />
+          <YesOrNoQuestionForm
+            title="Precisión en la ejecución vocal y estabilidad en el ritmo: "
+            textContent="¿El tempo, compás y ritmo son constantes y puntuales a la hora de cantar? ¿Mantienen concordancia con la línea melódica que emite la voz?"
+            idQuestion={"question4"}
+            checked={formData.question4}
+            handleToggleChange={handleToggleChange}
+          />
 
-        <p className="bolder-text">Desgloce de valoracion de aspectos tecnico-artisticos (Observaciones de la valoracion integral de la obra).</p>
+          <p className="bolder-text">Desgloce de valoracion de aspectos tecnico-artisticos (Observaciones de la valoracion integral de la obra).</p>
 
-        <YesOrNoQuestionForm
-          textContent="¿Propongo esta obra artística para ser considerada en la deliberación con posibilidad de ser seleccionada?"
-          idQuestion={"question5"}
-          checked={formData.question5}
-          handleToggleChange={handleToggleChange}
-        />
+          <YesOrNoQuestionForm
+            textContent="¿Propongo esta obra artística para ser considerada en la deliberación con posibilidad de ser seleccionada?"
+            idQuestion={"question5"}
+            checked={formData.question5}
+            handleToggleChange={handleToggleChange}
+          />
 
-        <div className={styles.formGroup}>
-          <label className={styles['label']}>
-           Editar Puntuación Final
-          </label>
-          <select
-            id="question4"
-            name="question4"
-            className={styles.select}
-            onChange={handleSelectChange}
-          >
-            {Array.from({ length: 11 }, (_, index) => (
-              <option key={index} value={index}>
-                {index}
-              </option>
-            ))}
-          </select>
-        </div>
+          <div className={styles.formGroup}>
+            <label className={styles['label']}>
+            Editar Puntuación Final
+            </label>
+            <select
+              id="question4"
+              name="question4"
+              className={styles.select}
+              onChange={handleSelectChange}
+            >
+              {Array.from({ length: 11 }, (_, index) => (
+                <option key={index} value={index}>
+                  {index}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <button type="submit" className={`${styles.submitButton} disabled`} disabled>
-          <b>Enviar Formulario</b>
-        </button>
-      </form>
-    </div>
+          <button type="submit" className={`${styles.submitButton} disabled`} disabled>
+            <b>Enviar Formulario</b>
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 

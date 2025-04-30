@@ -185,6 +185,12 @@ const ArtworkDetail = () => {
     const myRating = project.stars.find((item) => item.userIdentifier === user?.uid);
     return myRating ? myRating.rating : 0;
   };
+  
+  const getTodayDate = () => {
+    const now = new Date();
+    const formatted = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth()+1).toString().padStart(2, '0')}/${now.getFullYear()}`;  
+    return formatted;
+  }
 
   return (
     <div className={styles['full-view']}>
@@ -195,15 +201,21 @@ const ArtworkDetail = () => {
       <CustomModal
         isOpen={isJudgeModalOpen}
         onClose={closeJudgeModal}
-        height="90%" // Custom height
+        height="80%" // Custom height
       >
-        <div className="modal-title-centered">
-          <b>&nbsp;Puntuación Final (0-10)&nbsp;</b>
-        </div>
         <div className="form-wrapper">
           <RatingForm />
         </div>
       </CustomModal>
+
+      {project?.audio && (
+        <div className="links-spaced" style={{ width: '100%', margin: '0 auto', position: 'fixed', bottom: '0px', left: '50%', right: '50%', transform: 'translateX(-50%)', zIndex: 30,  }}>
+        <AudioPlayer
+          src="https://file-examples.com/storage/fe46ad26fa67d4043a4b9e6/2017/11/file_example_MP3_700KB.mp3"
+          title={`Escucha [${project.title}]`}
+        />
+      </div>
+      )}
 
 
       <div className="project-detail-wrapper">
@@ -252,29 +264,29 @@ const ArtworkDetail = () => {
             >
               📄
             </button>
-            <button
+            {/* <button
               className={activeTab === 'audio' ? 'active' : ''}
               onClick={() => handleTabClick('audio')}
             >
               🔊
-            </button>
-            <button
+            </button> */}
+            {/* <button
               className={activeTab === 'video' ? 'active' : ''}
               onClick={() => handleTabClick('video')}
             >
               🎥
-            </button>
-            <button
+            </button> */}
+            {/* <button
               className={activeTab === 'live' ? 'active' : ''}
               onClick={() => handleTabClick('live')}
             >
               LIVE
-            </button>
+            </button> */}
           </div>
 
           {/* Tab Content */}
           <div className="tab-content">
-            {activeTab === 'audio' && (
+            {/* {activeTab === 'audio' && (
               <>
                 <h2><b>🔊 Reproductor de Audio</b></h2>
                 <br />
@@ -301,13 +313,36 @@ const ArtworkDetail = () => {
                   />
                 </div>
               </>
-            )}
+            )} */}
 
             {activeTab === 'info' && (
               <>
                 <h1>
                   <b style={{ fontSize: '3rem' }}>{project.title || 'Title'}</b>
                 </h1>
+                <br />
+                <div className="input-group" style={{ margin: '0 auto'}}>
+                  <label htmlFor="thumbnail">
+                    Subir archivo mp3 de la obra de arte
+                  </label>
+                  <input
+                    type="file"
+                    id="thumbnail"
+                    name="thumbnail"
+                    className={styles.fileInput}
+                    accept="image/*"
+                    //onChange={handleImageUpload}
+                  />
+                </div>
+                <br />
+                <div style={{ width: '300px', margin: '0 auto', color: 'lightgray'  }}>
+                  <p style={{ fontSize: '12px' }}>
+                  🎨: {project?.category} 
+                  &nbsp;
+                  &nbsp;
+                  👨🏻‍🎤: {project?.artist}
+                  </p>
+                </div>
                 {project.thumbnail ? (
                   <img
                     src={project.thumbnail}
@@ -322,11 +357,33 @@ const ArtworkDetail = () => {
                   />
                 )}
                 <div>
-                  <p><b className="bolder-text">Categoría:</b> {project?.category}</p>
-                  <p><b className="bolder-text">Compositor o Artista:</b> {project?.artist}</p>
                   <br />
                   <p className="overflow-area">{project?.description}</p>
                 </div>
+
+                {project?.audio && (
+                  <>
+                    <br />
+                    <br />
+                  </>
+                )}
+                
+                {role === 'judge' && (
+                  <>
+                    <br />
+                    <button
+                      className={registerForm['submitButton']}
+                      onClick={() => {
+                        role === 'judge'
+                          ? openJudgeModal()
+                          : toast.error('No tienes permisos para calificar esta obra de arte');
+                      }}
+                    >
+                      <b>🖋️ Calificar Obra de Arte</b>
+                    </button>
+                  </>
+                )}
+
               </>
             )}
 
@@ -336,17 +393,25 @@ const ArtworkDetail = () => {
                   title="Editor de Documentos"
                   placeholder="Empieza a escribir tu historia aquí..."
                   readOnly={false}
-                  onSave={(content) => console.log('Saving:', content)}
+                  // onSave={(content) => console.log('Saving:', content)}
                   theme="snow"
                   height="500px"
+                  artworkIdentifier={project.id}
+                  initialContent={project.document || `
+                      <h1>
+                        <b>${project.title || 'Título de la Obra'}</b>
+                      </h1>
+                      <br/>
+                      <p>Descripción: ${project.description}</p>
+                      <br/>
+                      <p>🎨 Esta es una obra de arte creada por <b>${project.artist}</b>.</p>
+                      <p>📅 Fecha: ${getTodayDate()}</p>
+                    `}
                 />
-                <button className={registerForm['submitButton']}>
-                  💾 <b>Guardar Documento</b>
-                </button>
               </>
             )}
 
-            {activeTab === 'video' && (
+            {/* {activeTab === 'video' && (
               <>
                 <h2><b>🔊 Reproductor de Video</b></h2>
                 <br />
@@ -371,7 +436,7 @@ const ArtworkDetail = () => {
                 </div>
               </div>
               </>
-            )}
+            )} */}
 
             {activeTab === 'live' && (
               <div>
@@ -381,18 +446,6 @@ const ArtworkDetail = () => {
           </div>
         </div>
         
-        <br />
-        <button
-          className={registerForm['submitButton']}
-          onClick={() => {
-            role === 'judge'
-              ? openJudgeModal()
-              : toast.error('No tienes permisos para calificar esta obra de arte');
-          }}
-        >
-          <b>🖋️ Calificar Obra de Arte</b>
-        </button>
-
       </div>
 
       {/* Tab Styles */}

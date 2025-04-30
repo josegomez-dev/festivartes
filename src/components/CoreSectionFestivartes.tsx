@@ -83,8 +83,8 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
                     left: 0, 
                     fontSize: '0.8rem', 
                     textDecoration: 'none', 
-                    color: 'orange', 
-                    background: 'white', 
+                    color: 'white', 
+                    background: 'orange', 
                     padding: '5px', 
                     borderTopRightRadius: '10px',
                     borderBottomRightRadius: '10px',
@@ -92,8 +92,15 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
                     borderRight: '1px solid orange', 
                     borderTop: '1px solid orange'
                   }}>
-                  <AiOutlinePlus className="" style={{ marginBottom: '-2px' }}/>
-                  {showAllData ? ' Ocultar' : ' Ver Todos'}
+                    {showAllData ? ' Ocultar' : (
+                      <Image
+                        src="/events-icon.png"
+                        alt="events-icon"
+                        width={25}
+                        height={25}
+                        priority
+                      />
+                    )}
                 </button>
                 
                 <b>Mis Festivartes &nbsp; 

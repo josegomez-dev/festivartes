@@ -2,13 +2,15 @@
 
 .form {
   overflow-y: scroll; /* Ensures scrolling section */
-  height: 400px; /* Takes the taller height */
+  height: 65vh; /* Takes the taller height */
   background: transparent;
   margin-top: -10px;
 }
 
 .form-wrapper {
   margin-top: 10px;
+  width: 600px;
+  margin: 0 auto;
 }
 
 .label {
@@ -16,7 +18,7 @@
   font-weight: bold;
   
   font-size: 14px;
-  color: #555; /* From RatingForm */
+  color: white; /* From RatingForm */
 }
 
 .input,
@@ -31,7 +33,7 @@
   border-radius: 4px;
   font-size: 16px;
   background-color: white;
-  color: #555;
+  color: white;
   transition: border-color 0.3s ease;
 }
 
@@ -94,7 +96,7 @@
   margin-bottom: 8px;
   font-size: 14px;
   font-weight: bold;
-  color: #555; /* From RatingForm */
+  color: white; /* From RatingForm */
 }
 
 .input-container-right {

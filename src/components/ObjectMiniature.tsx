@@ -15,19 +15,27 @@ interface ObjectMiniatureProps {
 const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type, customClass }) => {
 
   const getStarsRaitingByProject = (project: ARTWORK | EVENTS) => {
+    let average = 0;
+
+    if (!project.stars || project.stars.length === 0) {
+      return 0;
+    }
+   
     const totalStars = project.stars.length;
     const totalRating = project.stars.reduce((acc, item) => acc + (item.rating || 0), 0);
-    const average = totalStars > 0 ? totalRating / totalStars : 0;
-    return Math.round(average-1);
+    average = totalStars > 0 ? totalRating / totalStars : 0;
+    return Math.round(average);
   };
 
   const getCurrentProjectClaps = (project: ARTWORK | EVENTS) => {
     let totalClaps = 0;
-    project.claps.forEach((item: any) => {
-      if (item.clap) {
-        totalClaps++;
-      }
-    });
+    if (project.claps && project.claps.length > 0) {
+      project.claps.forEach((item: any) => {
+        if (item.clap) {
+          totalClaps++;
+        }
+      });
+    }
     return totalClaps;
   }
 
@@ -83,10 +91,10 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type, cust
               <p className='small-text-size'>
                 <MdHideImage className='medium-text-size' />
               </p>
-              {(type === 'judge' || type === 'event') && <p className='small-text-size'>{project.name}</p>}
+              <p className='small-text-size'>{project.name}</p>
             </div>}
-
-            {true && (
+            
+            {type !== 'judge'  && (
               <>
                 <div className="stars-container">
                   {!customClass ? Array.from({ length: Math.min(getStarsRaitingByProject(project), 5) }).map((_, index) => (
