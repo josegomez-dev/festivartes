@@ -62,7 +62,7 @@ const CoreSectionJudges = ({ filterBy }: CoreSectionJudgesProps) => {
           </div>
         </div>
         :
-        <ObjectMiniature projects={data} type="judge" />}
+        <ObjectMiniature projects={data.concat(data).concat(data).concat(data).concat(data).concat(data).concat(data)} type="judge" />}
         <Image
           width={50}
           height={50}

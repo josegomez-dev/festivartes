@@ -11,7 +11,7 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
       <>
-        <Nav />
+        {authenticated && <Nav />}
         <main className="p-4">
             {authenticated && <div className='custom-nav-spacer' />}
             {children}

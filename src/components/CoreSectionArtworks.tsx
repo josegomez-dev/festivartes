@@ -131,17 +131,15 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
         </div>
 
         {showAllData && (
-          <div className={`${styles.card} `}>
+          <div className={`${styles.card} `} style={{ textAlign: 'left' }}>
           <p>
             <span className='bolder-text'>
-              <div style={{ color: 'red', left: 0, position: 'absolute'}}>
+              <div>
                 &nbsp;
                 &nbsp;
                 <RiBubbleChartFill color='gold'/> &nbsp;
                 <b>Portafolio Artístico&nbsp; </b>
               </div>
-              <br />
-              <br />
               <p className='bolder-text small-text-size'>
               Dale vida a tus ideas, compártelas con el mundo.
               </p>

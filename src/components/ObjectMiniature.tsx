@@ -69,7 +69,7 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type, cust
               />
             }
 
-            {project.type === 'photography' &&  
+            {project.type === 'fotografia' &&  
               <Image
                 width={50}
                 height={50}
@@ -89,7 +89,7 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type, cust
               />
             }
             
-            {project.type === 'dance' &&  
+            {project.type === 'baile' &&  
               <Image
                 width={50}
                 height={50}
@@ -99,7 +99,7 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type, cust
               />
             }
             
-            {project.type === 'digital' &&  
+            {project.type === 'arte_digital' &&  
               <Image
                 width={50}
                 height={50}
@@ -148,8 +148,11 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type, cust
           : null}
           <div className="project-miniature">
             {project.upcoming && <div className="upcoming-message">
-                <b className='medium-text-size'>Próximamente</b>
-              </div>}
+              <b className='small-text-size'>Próximamente</b>
+              <br />
+              <br />
+              ⏰
+            </div>}
             {project.thumbnail || project.profilePic ? 
             <img 
               src={project.thumbnail || project.profilePic}

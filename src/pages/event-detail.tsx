@@ -12,6 +12,8 @@ import SocialShareButton from '@/components/SocialShareButton';
 import { EMPTY_EVENT, EVENTS } from '@/types/events.types';
 import { toast } from 'react-hot-toast';
 import Preloader from '@/components/Preloader';
+import CoreSectionSelectedArtworks from '@/components/CoreSectionSelectedArtworks';
+import Image from 'next/image';
 
 const EventDetail = ({ }) => {
   const router = useRouter();
@@ -173,6 +175,7 @@ const EventDetail = ({ }) => {
 
       <div className='project-detail-wrapper'>
         <div className="project-detail-container">
+          
           <ul className="options-menu event-position">
             <li>
               {hasClapped ? (
@@ -188,11 +191,20 @@ const EventDetail = ({ }) => {
                 )}
             </li>
             <li>
-              <StarRating 
-                handleRating={handleRates} 
-                initialAverage={getFullRatingAverage()} 
-                myRating={getMyRating()}
-              />
+              {!project.upcoming ? (
+                <StarRating 
+                  handleRating={handleRates} 
+                  initialAverage={getFullRatingAverage()} 
+                  myRating={getMyRating()}
+                />
+              ) : (
+                <p
+                  style={{ cursor: 'pointer', textAlign: 'center', marginTop: '20px' }}
+                  onClick={() => toast.error('No puedes calificar un evento que aún no ha ocurrido.')}
+                >
+                  <b>⏰ Guardar en el Calendario</b>
+                </p>
+              )}
             </li>
             <li>
               <SocialShareButton />
@@ -208,7 +220,25 @@ const EventDetail = ({ }) => {
             <b style={{ fontSize: '3rem' }}>
             {project.name || 'Title'}
             </b>
+            <div>
+              <Image
+                src="/artworks-icon.png"
+                alt="artworks-icon"
+                width={35}
+                height={35}
+                priority />
+                <span>{project.selectedArtworks?.length || 0}</span>
+            </div>
           </h2>
+          
+          <br />
+
+          <p>
+            {project.price <= 0 ? 
+              <span className='bolder-text price-text'>Entrada libre y para toda la familia.</span> : 
+              <span className='bolder-text price-text'>Costo de la entrada: ₡{project.price}</span>
+            } 
+          </p>
           <br />
           <img 
             src={project.thumbnail} 
@@ -222,15 +252,6 @@ const EventDetail = ({ }) => {
           <p className='overflow-area'>
             {project.description}
           </p>
-          <div>
-            <br />
-            <p>
-              {project.price <= 0 ? 
-                <span className='bolder-text price-text'>Entrada libre y para toda la familia.</span> : 
-                <span className='bolder-text price-text'>Costo de la entrada: ₡{project.price}</span>
-              } 
-            </p>
-          </div>
           {/* <LikeDislike /> */}
           {/* Add more project details as needed */}
         </div>
@@ -240,7 +261,7 @@ const EventDetail = ({ }) => {
 
         <CoreSectionJudges /> */}
 
-        <CoreSectionArtworks filterBy={user?.uid} />
+        <CoreSectionSelectedArtworks selectedArtworks={project?.selectedArtworks} />
 
       </div>
     </div>

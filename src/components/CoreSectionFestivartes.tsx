@@ -134,7 +134,7 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
         </div>
 
         {showAllData && (
-          <div className={styles.card}>
+          <div className={styles.card} style={{ textAlign: 'left' }}>
           <p>
             <span className='bolder-text'>
               <div style={{ color: 'red', left: 0, position: 'absolute'}}>

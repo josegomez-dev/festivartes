@@ -46,7 +46,7 @@ export default function Nav() {
 
   const handleLogout = () => {
     logout();
-    router.push('/')
+    router.push('/');
   }
 
   useEffect(() => {
@@ -119,6 +119,9 @@ export default function Nav() {
             &nbsp;
             &nbsp;
             &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
             
             {showNotifications && (
               <div className={styles['notification-dropdown']}>
@@ -155,6 +158,9 @@ export default function Nav() {
                 alt="Profile Picture"
                 className={styles['profile-picture']}
               />
+                <button onClick={handleLogout} className={styles.logoutButton}>
+                  <FaSignOutAlt />
+                </button>
             </button>
             
 
@@ -184,46 +190,9 @@ export default function Nav() {
                 <p className={styles.dropdownItem}>{user?.email}</p>
                 <p className={styles.dropdownItem}>🛡️ Rol: <b>{role}</b></p>
 
-                {/* <br />
-
-                <div className={styles.dropdownActions}>
-
-                  <Link href="/artworks" className={styles.dropdownLink}>
-                    <Image
-                      src="/artworks-icon.png"
-                      alt="artworks-icon"
-                      width={30}
-                      height={30}
-                      priority
-                    />
-                   Galeria Creativa</Link>
-                   </div>
-                <div className={styles.dropdownActions}>
-                  <Link href="/events" className={styles.dropdownLink}>
-                    <Image
-                      src="/events-icon.png"
-                      alt="events-icon"
-                      width={30}
-                      height={30}
-                      priority
-                    />
-                   Festivartes</Link>
-
-                </div>
-                <div className={styles.dropdownActions}>
-                <Link href="/judges" className={styles.dropdownLink}>
-                    <Image
-                      src="/judges-icon.png"
-                      alt="judges-icon"
-                      width={30}
-                      height={30}
-                      priority
-                    />
-                   Jurados</Link>
-                </div> */}
                 <div className={styles.dropdownActions}>
                   <br />
-                  <Link href="/events" className={styles.dropdownLink} style={{ color: 'white' }}>Cerrar Sesion</Link>
+                  <p className={styles.dropdownLink} style={{ color: 'white' }}>Cerrar Sesion</p>
                   <button onClick={handleLogout} className={styles.logoutButton}>
                     <FaSignOutAlt /> Cerrar Sesión
                   </button>

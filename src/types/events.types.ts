@@ -6,6 +6,7 @@ export interface EVENTS {
     location: string;
     thumbnail: string;
     date: Date;
+    selectedArtworks: Array<string>; // Array of artwork IDs
     stars: Array<{ userIdentifier: string; rating: number }>;
     claps: Array<{ userIdentifier: string; clap: boolean }>;
     price: number;
@@ -26,6 +27,7 @@ export const EMPTY_EVENT: EVENTS = {
     upcoming: false,
     price: 0,
     createdBy: "",
+    selectedArtworks: [],
     claps: [],
     stars: [
         // {

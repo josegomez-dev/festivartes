@@ -381,14 +381,14 @@ const ArtworkDetail = () => {
                 <h1>
                   <b style={{ fontSize: '3rem' }}>{project.title || 'Title'}</b>
                 </h1>
-                <div style={{ position: 'absolute', top: '100px', right: '-140px', zIndex: 30, width: '100%' }}>
-                <Image
-                  src="/judges-icon.png"
-                  alt="judges-icon"
-                  width={35}
-                  height={35}
-                  priority />
-                  <span>{project.rates.length || 0}</span>
+                <div style={{ position: 'absolute', top: '100px', left: '-135px', zIndex: 30, width: '100%' }}>
+                  <Image
+                    src="/judges-icon.png"
+                    alt="judges-icon"
+                    width={35}
+                    height={35}
+                    priority />
+                    <span>{project.rates.length || 0}</span>
                 </div>
                 <div style={{ width: '300px', margin: '0 auto', color: 'lightgray'  }}>
                   <p style={{ fontSize: '12px' }}>
