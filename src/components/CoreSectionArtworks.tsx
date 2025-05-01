@@ -24,7 +24,7 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
   const openUserModal = () => setIsUserModalOpen(true);
   const closeUserModal = () =>setIsUserModalOpen(false);
 
-  const [showAllData, setShowAllData] = useState(false);
+  const [showAllData, setShowAllData] = useState(true);
 
   const fetchArtworks = async () => {
     try {
@@ -84,15 +84,19 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
                   background: 'transparent',
                   border: 'none',
                 }}>
-                {showAllData ? ' Ocultar' : (
-                  <Image
-                    src="/artworks-icon.png"
-                    alt="events-icon"
-                    width={35}
-                    height={35}
-                    priority
-                    style={{ animation: 'pulseGlow 1s infinite', marginTop: '15px', marginLeft: '25px' }}
-                  />
+                {!showAllData && (
+                  <> &nbsp;
+                  <span style={{ fontSize: '12px', color: 'orange' }}>Ver Todos</span>
+                   <br />
+                    <Image
+                      src="/artworks-icon.png"
+                      alt="artworks-icon"
+                      width={35}
+                      height={35}
+                      priority
+                      style={{ animation: 'pulseGlow 1s infinite', marginTop: '15px', marginLeft: '35px' }}
+                    />
+                  </>
                 )}
               </button>
 
@@ -130,16 +134,35 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
           <div className={`${styles.card} `}>
           <p>
             <span className='bolder-text'>
-              <RiBubbleChartFill color='gold'/> &nbsp;
-              <b>Portafolio Artístico&nbsp; 
-              </b>
+              <div style={{ color: 'red', left: 0, position: 'absolute'}}>
+                &nbsp;
+                &nbsp;
+                <RiBubbleChartFill color='gold'/> &nbsp;
+                <b>Portafolio Artístico&nbsp; </b>
+              </div>
+              <br />
+              <br />
               <p className='bolder-text small-text-size'>
               Dale vida a tus ideas, compártelas con el mundo.
               </p>
             </span>
           </p>
           <br />
-
+          <button 
+            onClick={() => setShowAllData(!showAllData)} 
+            style={{ 
+              position: 'absolute', 
+              right: '10px', 
+              top: '10px',
+              textDecoration: 'none', 
+              color: 'white', 
+              background: 'transparent',
+              border: 'none',
+            }}>
+            {showAllData && (
+              <span>X Ocultar</span>
+            )}
+          </button>
           {data.length <= 0 ? 
             <div className={styles.grid}>
               <div className={styles.card}>

@@ -9,6 +9,7 @@ import ChatSidebar from './ChatSidebar'
 import { MdDashboardCustomize } from "react-icons/md";
 import { Toaster } from 'react-hot-toast'
 import { useEffect, useState } from "react";
+import { FaBell } from "react-icons/fa";
 
 export default function Nav() {
   const { role, authenticated, logout } = useAuth()
@@ -16,6 +17,26 @@ export default function Nav() {
  
   const [showDropdown, setShowDropdown] = useState(false)
   const [renderDropdown, setRenderDropdown] = useState(false);
+
+
+  const handleNotificationClick = (id: number) => {
+    setNotifications((prev) =>
+      prev.map((n) =>
+        n.id === id ? { ...n, visited: true } : n
+      )
+    );
+    setShowNotifications(false);
+  };
+
+  // Inside the Nav component state:
+  const [showNotifications, setShowNotifications] = useState(true);
+  const [notifications, setNotifications] = useState([
+    { id: 1, text: "🎨 Nuevo proyecto agregado", link: "/artworks", visited: true },
+    { id: 2, text: "📅 Nuevo evento disponible", link: "/events", visited: false },
+    { id: 3, text: "🧑‍⚖️ Nuevo jurado asignado", link: "/judges", visited: true },
+    { id: 4, text: "📥 Tienes un nuevo mensaje", link: "/chat", visited: false },
+    { id: 5, text: "📢 Se publicó un nuevo blog", link: "/news", visited: true },
+  ]);
 
   const router = useRouter()
 
@@ -37,10 +58,16 @@ export default function Nav() {
     }
   }, [showDropdown]);
 
+  // Handle outside click to close notifications too
   const handleClickOutside = (event: MouseEvent) => {
     const target = event.target as HTMLElement;
-    if (!target.closest(`.${styles.dropdown}`) && !target.closest(`.${styles['profile-picture']}`)) {
+    if (
+      !target.closest(`.${styles.dropdown}`) &&
+      !target.closest(`.${styles['profile-picture']}`) &&
+      !target.closest(`.${styles['notification-bell']}`)
+    ) {
       setShowDropdown(false);
+      setShowNotifications(false);
     }
   };
 
@@ -70,9 +97,57 @@ export default function Nav() {
             </button>
           </li>
         )} */}
+
+          {authenticated && (
+            <div className="relative mr-4">
+              <button
+                onClick={() => {
+                  setShowNotifications(!showNotifications);
+                }}
+                className={styles['notification-bell']}
+              >
+                {/* <FaBell /> */}
+                {notifications.length > 0 && (
+                  <span className={styles['notification-badge']}>{notifications.filter(n => n.visited).length}</span>
+                )}
+                <strong >🔔 </strong>
+              </button>
+
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            
+            {showNotifications && (
+              <div className={styles['notification-dropdown']}>
+                <div style={{ position: 'fixed', background: 'linear-gradient(135deg, #2c5364, #203a43, #0f2027)', padding: '10px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px', color: 'white', marginTop: '-10px', marginLeft: '-10px', width: '320px' }}> 
+                  🔔 Tienes <span style={{ color: 'orange'}}>{notifications.filter(n => n.visited).length}</span> notificaciones sin leer...
+                </div>
+                <br />
+                <br />
+                <ul>
+                  {notifications.map((note) => (
+                    <li key={note.id}>
+                      <Link
+                        href={note.link}
+                        onClick={() => handleNotificationClick(note.id)}
+                        style={{ opacity: note.visited ? 0.3 : 1, fontSize: '14px' }}
+                      >
+                        {note.text}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>          
+          )}
+
         {authenticated && (
           <div className="relative">
-            <button className="flex items-center gap-2 focus:outline-none" onClick={() => setShowDropdown(!showDropdown)}>
+            <button className="flex items-center gap-2 focus:outline-none" style={{ cursor: 'pointer' }} onClick={() => setShowDropdown(!showDropdown)}>
               <Image
                 width={50}
                 height={50}
@@ -87,7 +162,10 @@ export default function Nav() {
               <div
                 className={`${styles.dropdown} ${showDropdown ? styles.dropdownVisible : styles.dropdownHidden}`}
               >
-                <label htmlFor="profile-pic" className="profile-pic-label-2">
+                <br />
+                <br />
+                <br />
+                <label htmlFor="profile-pic" style={{ textAlign: 'center', cursor: 'pointer', margin: '0 auto', left: '0px', right: '0px', display: 'block' }}>
                   <Image
                     src={user?.profilePic}
                     alt="Profile Picture"
@@ -97,18 +175,19 @@ export default function Nav() {
                   />
                 </label>
 
-                <div style={{ position: 'absolute', top: '10px', right: '10px' }} >
+                <div style={{ position: 'absolute', top: '0px', right: '0px', borderTopRightRadius: '10px', borderTopLeftRadius: '10px', padding: '10px',  background: 'linear-gradient(135deg, #2c5364, #203a43, #0f2027)', width: '100%' }} >
                   <Link href="/profile" className={styles.dropdownLink}>⚙️ Ir al Perfil</Link>
                 </div>
 
-                <br />
                 <br />
                 <p className={styles.dropdownItem}><strong>{user?.displayName || 'Usuario'}</strong></p>
                 <p className={styles.dropdownItem}>{user?.email}</p>
                 <p className={styles.dropdownItem}>🛡️ Rol: <b>{role}</b></p>
 
+                {/* <br />
+
                 <div className={styles.dropdownActions}>
-                  <br />
+
                   <Link href="/artworks" className={styles.dropdownLink}>
                     <Image
                       src="/artworks-icon.png"
@@ -118,10 +197,8 @@ export default function Nav() {
                       priority
                     />
                    Galeria Creativa</Link>
-                   <br />
                    </div>
                 <div className={styles.dropdownActions}>
-                  <br />
                   <Link href="/events" className={styles.dropdownLink}>
                     <Image
                       src="/events-icon.png"
@@ -131,11 +208,9 @@ export default function Nav() {
                       priority
                     />
                    Festivartes</Link>
-                   <br />
 
                 </div>
                 <div className={styles.dropdownActions}>
-                <br />
                 <Link href="/judges" className={styles.dropdownLink}>
                     <Image
                       src="/judges-icon.png"
@@ -145,10 +220,8 @@ export default function Nav() {
                       priority
                     />
                    Jurados</Link>
-                   <br />
-                </div>
+                </div> */}
                 <div className={styles.dropdownActions}>
-                  <br />
                   <br />
                   <Link href="/events" className={styles.dropdownLink} style={{ color: 'white' }}>Cerrar Sesion</Link>
                   <button onClick={handleLogout} className={styles.logoutButton}>

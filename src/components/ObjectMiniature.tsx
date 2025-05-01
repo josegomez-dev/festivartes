@@ -53,16 +53,73 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type, cust
           <>
             {ratingException && (
               project?.rate && (
-                <p style={{ marginBottom: '-10px' }}>
+                <p style={{ marginBottom: '-20px' }}>
                   {project?.rate} 🖋️
                 </p>
               )
             )}
 
-            {/* 
-            {project.type === 'music' &&  
-              <img className='judges-badge badge-orange' src="https://cdn3.iconfinder.com/data/icons/musician-and-rock-star/199/musician-rock-star-003-512.png" alt="" />
+            {project.type === 'escultura' &&  
+              <Image
+                width={50}
+                height={50}
+                className='judges-badge badge-orange' 
+                src="/icons-sculture.png" 
+                alt="" 
+              />
             }
+
+            {project.type === 'photography' &&  
+              <Image
+                width={50}
+                height={50}
+                className='judges-badge badge-orange' 
+                src="/icons-photography.png" 
+                alt="" 
+              />
+            }
+
+            {project.type === 'musica' &&  
+              <Image
+                width={50}
+                height={50}
+                className='judges-badge badge-orange' 
+                src="/icons-music.png" 
+                alt="" 
+              />
+            }
+            
+            {project.type === 'dance' &&  
+              <Image
+                width={50}
+                height={50}
+                className='judges-badge badge-orange' 
+                src="/icons-dance.png" 
+                alt="" 
+              />
+            }
+            
+            {project.type === 'digital' &&  
+              <Image
+                width={50}
+                height={50}
+                className='judges-badge badge-orange' 
+                src="/icons-digital.png" 
+                alt="" 
+              />
+            }
+            
+            {project.type === 'normal' &&  
+              <Image
+                width={50}
+                height={50}
+                className='judges-badge badge-white' 
+                src="/icons-sculture.png" 
+                alt="" 
+              />
+            }
+
+            {/* 
             {project.type === 'painter' &&  
               <img className='judges-badge badge-blue' src="https://cdn2.iconfinder.com/data/icons/people-79/100/Brush-07-512.png" alt="" />
             }

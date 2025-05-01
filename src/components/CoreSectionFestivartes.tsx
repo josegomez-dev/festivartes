@@ -23,7 +23,7 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
   const openEventModal = () => setIsEventModalOpen(true);
   const closeEventModal = () =>setIsEventModalOpen(false);
 
-  const [showAllData, setShowAllData] = useState(false);
+  const [showAllData, setShowAllData] = useState(true);
   
   const fetchEvents = async () => {
     try {
@@ -86,18 +86,20 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
                     background: 'transparent',
                     border: 'none',
                   }}>
-                    {showAllData ? ' Ocultar' : (
-                      <>
+                  {!showAllData && (
+                    <> &nbsp;
+                    <span style={{ fontSize: '12px', color: 'orange' }}>Ver Todos</span>
+                      <br />
                       <Image
                         src="/events-icon.png"
                         alt="events-icon"
                         width={35}
                         height={35}
                         priority
-                        style={{ animation: 'pulseGlow 1s infinite', marginTop: '15px', marginLeft: '25px' }}
+                        style={{ animation: 'pulseGlow 1s infinite', marginTop: '15px', marginLeft: '35px' }}
                       />
-                      </>
-                    )}
+                    </>
+                  )}
                 </button>
                 
                 <b>Mis Festivartes &nbsp; 
@@ -135,15 +137,36 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
           <div className={styles.card}>
           <p>
             <span className='bolder-text'>
-              <RiBubbleChartFill color='gold'/> &nbsp;
-              <b> Catalogo de Festivartes &nbsp; 
-              </b>
+              <div style={{ color: 'red', left: 0, position: 'absolute'}}>
+                &nbsp;
+                &nbsp;
+                <RiBubbleChartFill color='gold'/> &nbsp;
+                <b>Portafolio Artístico&nbsp; </b>
+              </div>
+              <br />
+              <br />
+
               <p className='bolder-text small-text-size'>
               Lleva tu evento al siguiente nivel <br /> con nuestra app.
               </p>
               <br />
             </span>
           </p>
+          <button 
+            onClick={() => setShowAllData(!showAllData)} 
+            style={{ 
+              position: 'absolute', 
+              right: '10px', 
+              top: '10px',
+              textDecoration: 'none', 
+              color: 'white', 
+              background: 'transparent',
+              border: 'none',
+            }}>
+            {showAllData && (
+              <span>X Ocultar</span>
+            )}
+          </button>
           {data.length <= 0 ? 
           <div className={styles.grid}>
               <div className={styles.card}>

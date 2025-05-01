@@ -6,11 +6,12 @@ import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
 import { db } from "./../../firebaseConfig";
 
 import "react-quill/dist/quill.snow.css";
+import { totalmem } from "os";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 interface DocumentEditorProps {
   initialContent?: string;
-  title: string;
+  title?: string;
   placeholder?: string;
   readOnly?: boolean;
   onSave?: (content: string) => void;
@@ -49,7 +50,9 @@ const DocumentEditor = ({
 
   return (
     <div className="editor-container">
-      <h2>📄 <b>{title}</b></h2>
+      <h2>
+        <b style={{ fontSize: '3rem' }}>  {title}</b>
+      </h2>
       <br />
       <ReactQuill theme="snow" value={content} onChange={setContent} className="quill-editor"/>
       <br />

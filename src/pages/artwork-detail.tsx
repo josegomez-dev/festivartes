@@ -19,6 +19,7 @@ import Preloader from '@/components/Preloader';
 import { uploadBytes, getDownloadURL, ref } from 'firebase/storage';
 import CoreSectionJudges from '@/components/CoreSectionJudges';
 import CoreSectionRatingJudges from '@/components/CoreSectionRatingJudges';
+import Image from 'next/image';
 
 const videos = [
   { id: 1, title: "Video 1", src: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4" },
@@ -310,25 +311,19 @@ const ArtworkDetail = () => {
             <li><SocialShareButton /></li>
           </ul>
 
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-
           {/* Tab Navigation */}
           <div className="tabs">
             <button
               className={activeTab === 'info' ? 'active' : ''}
               onClick={() => handleTabClick('info')}
             >
-              🖼️
+              Info 🖼️
             </button>
             <button
               className={activeTab === 'document' ? 'active' : ''}
               onClick={() => handleTabClick('document')}
             >
-              📄
+              Editor 📄
             </button>
             {/* <button
               className={activeTab === 'audio' ? 'active' : ''}
@@ -386,7 +381,15 @@ const ArtworkDetail = () => {
                 <h1>
                   <b style={{ fontSize: '3rem' }}>{project.title || 'Title'}</b>
                 </h1>
-
+                <div style={{ position: 'absolute', top: '100px', right: '-140px', zIndex: 30, width: '100%' }}>
+                <Image
+                  src="/judges-icon.png"
+                  alt="judges-icon"
+                  width={35}
+                  height={35}
+                  priority />
+                  <span>{project.rates.length || 0}</span>
+                </div>
                 <div style={{ width: '300px', margin: '0 auto', color: 'lightgray'  }}>
                   <p style={{ fontSize: '12px' }}>
                   🎨: {project?.category} 
@@ -447,7 +450,7 @@ const ArtworkDetail = () => {
             {activeTab === 'document' && (
               <>
                 <DocumentEditor
-                  title="Editor de Documentos"
+                  title="Editor"
                   placeholder="Empieza a escribir tu historia aquí..."
                   readOnly={false}
                   // onSave={(content) => console.log('Saving:', content)}
@@ -517,8 +520,10 @@ const ArtworkDetail = () => {
       <style jsx>{`
         .tabs {
           display: flex;
+          align-items: center;   /* Align items to the right */
+          margin: 0 auto;
+          margin-top: 100px;
           gap: 10px;
-          justify-content: center;
         }
         .tabs button {
           padding: 5px 10px;
