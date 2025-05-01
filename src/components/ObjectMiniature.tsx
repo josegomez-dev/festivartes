@@ -51,18 +51,19 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type, cust
 
           {type === 'judge' ? 
           <>
-            {ratingException ? (
+            {ratingException && (
               project?.rate && (
-                <p style={{ marginBottom: '-20px' }}>
+                <p style={{ marginBottom: '-10px' }}>
                   {project?.rate} 🖋️
                 </p>
               )
-            ) : (
-              <>
-                {/* <img className='judges-badge badge-orange' src="https://cdn3.iconfinder.com/data/icons/musician-and-rock-star/199/musician-rock-star-003-512.png" alt="" /> */}
-              </>
             )}
-            {/* {project.type === 'painter' &&  
+
+            {/* 
+            {project.type === 'music' &&  
+              <img className='judges-badge badge-orange' src="https://cdn3.iconfinder.com/data/icons/musician-and-rock-star/199/musician-rock-star-003-512.png" alt="" />
+            }
+            {project.type === 'painter' &&  
               <img className='judges-badge badge-blue' src="https://cdn2.iconfinder.com/data/icons/people-79/100/Brush-07-512.png" alt="" />
             }
             {project.type === 'dancer' && 

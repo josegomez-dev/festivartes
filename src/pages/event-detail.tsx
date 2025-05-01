@@ -238,12 +238,9 @@ const EventDetail = ({ }) => {
         {/* <br />
         <hr />
 
-        <CoreSectionJudges />
+        <CoreSectionJudges /> */}
 
-        <br />
-        <hr />
-
-        <CoreSectionArtworks filterBy={user?.uid} /> */}
+        <CoreSectionArtworks filterBy={user?.uid} />
 
       </div>
     </div>

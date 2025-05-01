@@ -503,7 +503,7 @@ const ArtworkDetail = () => {
           </div>
         </div>
         
-        <CoreSectionRatingJudges projectIdentifier={project.id} />
+        <CoreSectionRatingJudges />
 
         <br />
         <br />
