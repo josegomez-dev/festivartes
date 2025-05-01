@@ -139,27 +139,95 @@ const ArtworkRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) 
           <Preloader message="Subiendo imagen..." />
         )}
 
-        <div className="input-group">
-          <label className={styles.label} htmlFor="category">
-            Categoría
-          </label>
-          <select
-            id="category"
-            name="category"
-            className={styles.select}
-            value={formData.category}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Selecciona una categoría</option>
-            <option value="pintura">Pintura</option>
-            <option value="escultura">Escultura</option>
-            <option value="fotografia">Fotografía</option>
-            <option value="arte_digital">Arte Digital</option>
-            <option value="musica">Música</option>
-            <option value="baile">Baile o Danza</option>
-          </select>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+
+
+
+          <div className="input-group" style={{ marginTop: "-30px" }}>
+            {formData.category === "escultura" && (
+              <div>
+                <Image
+                  width={50}
+                  height={50}
+                  className='judges-badge badge-white' 
+                  src="/icons-sculture.png" 
+                  alt="" 
+                />
+              </div>
+              )}
+            {formData.category === "fotografia" && (
+              <div>
+                <Image
+                  width={50}
+                  height={50}
+                  className='judges-badge badge-white' 
+                  src="/icons-photography.png" 
+                  alt="" 
+                />
+              </div>
+              )}
+            {formData.category === "arte_digital" && (
+              <div>
+                <Image
+                  width={50}
+                  height={50}
+                  className='judges-badge badge-white' 
+                  src="/icons-digital.png" 
+                  alt="" 
+                />
+              </div>
+              )}
+            {formData.category === "musica" && (
+              <div>
+                <Image
+                  width={50}
+                  height={50}
+                  className='judges-badge badge-white' 
+                  src="/icons-music.png" 
+                  alt="" 
+                />
+              </div>
+              )}
+            {formData.category === "baile" && (
+              <div>
+                <Image
+                  width={50}
+                  height={50}
+                  className='judges-badge badge-white' 
+                  src="/icons-dance.png" 
+                  alt="" 
+                />
+              </div>
+              )}
+          </div>
+
+
+
+          <div className="input-group">
+            <div className="input-group">
+              <label className={styles.label} htmlFor="category">
+                Categoría
+              </label>
+              <select
+                id="category"
+                name="category"
+                className={styles.select}
+                value={formData.category}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Selecciona una categoría</option>
+                <option value="escultura">Escultura</option>
+                <option value="fotografia">Fotografía</option>
+                <option value="arte_digital">Arte Digital</option>
+                <option value="musica">Música</option>
+                <option value="baile">Baile o Danza</option>
+              </select>
+            </div>
+          </div>
+
         </div>
+                    
 
         <div className="input-group">
           <label className={styles.label} htmlFor="artist">

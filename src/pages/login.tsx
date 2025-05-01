@@ -65,7 +65,7 @@ const LoginPage = () => {
             email !== '' ? resetPassword(email) : setErrorMessage('Por favor, ingresa tu correo electrónico');
             toast.success("Si el correo electrónico existe, se enviará un enlace para restablecer la contraseña");
           }}>
-            <span style={{ color: 'white', textDecoration: 'none', cursor: 'pointer' }}>
+            <span style={{ color: 'white', textDecoration: 'none', cursor: 'pointer', padding: '5px' }}>
               ¿Olvidaste tu contraseña?
             </span>
           </p>

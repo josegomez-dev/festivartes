@@ -26,12 +26,15 @@
   text-decoration: none;
   padding: 0.5rem 1rem;
   transition: background-color 0.3s;
+  border-radius: 12px;
 }
 
 .nav-link a {
   display: inherit;
   justify-content: inherit;
   align-items: inherit;
+  font-size: 18px;
+  text-decoration: none;
 }
 
 .nav-link:hover {
@@ -230,7 +233,7 @@
 .notification-dropdown li a:hover {
   text-decoration: underline;
   opacity: 1 !important;
-  transform: scale(1.15);
+  transform: scale(1.05);
   margin-left: 15px;
   transition: transform 0.2s ease;
   text-decoration: none;

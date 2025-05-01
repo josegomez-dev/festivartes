@@ -10,6 +10,12 @@ import { MdDashboardCustomize } from "react-icons/md";
 import { Toaster } from 'react-hot-toast'
 import { useEffect, useState } from "react";
 import { FaBell } from "react-icons/fa";
+interface Notification {
+  id: number;
+  text: string;
+  link: string;
+  visited: boolean;
+}
 
 export default function Nav() {
   const { role, authenticated, logout } = useAuth()
@@ -18,6 +24,19 @@ export default function Nav() {
   const [showDropdown, setShowDropdown] = useState(false)
   const [renderDropdown, setRenderDropdown] = useState(false);
 
+  // Inside the Nav component state:
+  const [showNotifications, setShowNotifications] = useState(false);
+  // const [notifications, setNotifications] = useState([
+  //   { id: 1, text: "🎨 Nuevo proyecto agregado", link: "/artworks", visited: true },
+  //   { id: 2, text: "📅 Nuevo evento disponible", link: "/events", visited: false },
+  //   { id: 3, text: "🧑‍⚖️ Nuevo jurado asignado", link: "/judges", visited: true },
+  //   { id: 4, text: "📥 Tienes un nuevo mensaje", link: "/chat", visited: false },
+  //   { id: 5, text: "📢 Se publicó un nuevo blog", link: "/news", visited: true },
+  // ]);
+  
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+
+  const router = useRouter()
 
   const handleNotificationClick = (id: number) => {
     setNotifications((prev) =>
@@ -28,21 +47,6 @@ export default function Nav() {
     setShowNotifications(false);
   };
 
-  // Inside the Nav component state:
-  const [showNotifications, setShowNotifications] = useState(true);
-  const [notifications, setNotifications] = useState([
-    { id: 1, text: "🎨 Nuevo proyecto agregado", link: "/artworks", visited: true },
-    { id: 2, text: "📅 Nuevo evento disponible", link: "/events", visited: false },
-    { id: 3, text: "🧑‍⚖️ Nuevo jurado asignado", link: "/judges", visited: true },
-    { id: 4, text: "📥 Tienes un nuevo mensaje", link: "/chat", visited: false },
-    { id: 5, text: "📢 Se publicó un nuevo blog", link: "/news", visited: true },
-  ]);
-
-  const router = useRouter()
-
-  if (router.pathname === '/') {
-    return null
-  }
 
   const handleLogout = () => {
     logout();
@@ -78,6 +82,11 @@ export default function Nav() {
     };
   }, []);
 
+
+  if (router.pathname === '/') {
+    return null
+  }
+  
   return (
     <nav className={`${styles.navbar} bg-gray-800 text-white`}>
       <Toaster position="top-center" reverseOrder={false} />
@@ -98,6 +107,17 @@ export default function Nav() {
           </li>
         )} */}
 
+        {!authenticated && (
+          <>
+            <li className={styles['nav-link']}>
+              <Link href="/login">Iniciar sesión</Link>
+            </li>
+            <li className={styles['nav-link']}>
+              <Link href="/signup">Registrarse</Link>
+            </li>
+          </>
+          )}
+
           {authenticated && (
             <div className="relative mr-4">
               <button
@@ -107,9 +127,9 @@ export default function Nav() {
                 className={styles['notification-bell']}
               >
                 {/* <FaBell /> */}
-                {notifications.length > 0 && (
+                {notifications.length > 0 ? (
                   <span className={styles['notification-badge']}>{notifications.filter(n => n.visited).length}</span>
-                )}
+                ) : <span className={styles['notification-badge']}>0</span>}
                 <strong >🔔 </strong>
               </button>
 
@@ -192,7 +212,7 @@ export default function Nav() {
 
                 <div className={styles.dropdownActions}>
                   <br />
-                  <p className={styles.dropdownLink} style={{ color: 'white' }}>Cerrar Sesion</p>
+                  <p className={styles.dropdownLink} style={{ color: 'white', textDecoration: 'none' }}>Cerrar Sesion</p>
                   <button onClick={handleLogout} className={styles.logoutButton}>
                     <FaSignOutAlt /> Cerrar Sesión
                   </button>
@@ -206,7 +226,7 @@ export default function Nav() {
         )}
 
       </div>
-      {/* {authenticated && <ChatSidebar />} */}
+      {authenticated && <ChatSidebar />}
     </nav>
   )
 }

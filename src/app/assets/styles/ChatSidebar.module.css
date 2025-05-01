@@ -1,7 +1,7 @@
 .chatToggle {
     position: fixed;
     top: 5px;
-    right: 150px;
+    right: 170px;
     z-index: 500;
     background-color: orange;
     color: white;
