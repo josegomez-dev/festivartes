@@ -7,16 +7,18 @@ import { useRouter } from 'next/router'
 import { FaSignOutAlt } from "react-icons/fa"
 import ChatSidebar from './ChatSidebar'
 import { MdDashboardCustomize } from "react-icons/md";
-import { Toaster } from 'react-hot-toast'
-import { useEffect, useState } from "react";
+import toast, { Toaster } from 'react-hot-toast'
+import { use, useEffect, useState } from "react";
 import { FaBell } from "react-icons/fa";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from './../../firebaseConfig'
 interface Notification {
   id: number;
   text: string;
   link: string;
   visited: boolean;
 }
-
+  
 export default function Nav() {
   const { role, authenticated, logout } = useAuth()
   const { user } = useAuth() as any
@@ -24,26 +26,26 @@ export default function Nav() {
   const [showDropdown, setShowDropdown] = useState(false)
   const [renderDropdown, setRenderDropdown] = useState(false);
 
-  // Inside the Nav component state:
   const [showNotifications, setShowNotifications] = useState(false);
-  // const [notifications, setNotifications] = useState([
-  //   { id: 1, text: "🎨 Nuevo proyecto agregado", link: "/artworks", visited: true },
-  //   { id: 2, text: "📅 Nuevo evento disponible", link: "/events", visited: false },
-  //   { id: 3, text: "🧑‍⚖️ Nuevo jurado asignado", link: "/judges", visited: true },
-  //   { id: 4, text: "📥 Tienes un nuevo mensaje", link: "/chat", visited: false },
-  //   { id: 5, text: "📢 Se publicó un nuevo blog", link: "/news", visited: true },
-  // ]);
-  
-  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [notifications, setNotifications] = useState<Notification[]>(user?.notifications);
 
   const router = useRouter()
 
   const handleNotificationClick = (id: number) => {
+    alert(`Notificación: ${notifications.find((n) => n.id === id)?.text}`);
+
     setNotifications((prev) =>
       prev.map((n) =>
         n.id === id ? { ...n, visited: true } : n
       )
     );
+    const updatedNotifications = notifications.map((n) =>
+      n.id === id ? { ...n, visited: true } : n
+    );
+    setNotifications(updatedNotifications);
+
+    const notificationRef = doc(db, "accounts", user.uid);
+    setDoc(notificationRef, { notifications: updatedNotifications }, { merge: true })
     setShowNotifications(false);
   };
 
@@ -54,6 +56,16 @@ export default function Nav() {
   }
 
   useEffect(() => {
+      // update notifications state when user changes
+      if (user) {
+        setNotifications(user.notifications);
+      } else {
+        setNotifications([]);
+      }
+  }, [user]);
+
+  useEffect(() => {
+
     if (showDropdown) {
       setRenderDropdown(true);
     } else {
@@ -96,17 +108,6 @@ export default function Nav() {
         </Link>
       </div>
       <div className={`${styles['nav-list']}`}>
-        {/* {authenticated && (
-          <li>
-            <button
-              onClick={handleLogout}
-              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
-            >
-              <FaSignOutAlt />
-            </button>
-          </li>
-        )} */}
-
         {!authenticated && (
           <>
             <li className={styles['nav-link']}>
@@ -125,11 +126,13 @@ export default function Nav() {
                   setShowNotifications(!showNotifications);
                 }}
                 className={styles['notification-bell']}
+                style={{ animation: 'pulseGlow 1.5s ease-in-out infinite', position: 'absolute', top: '35px', right: '100px', cursor: 'pointer' }}
               >
-                {/* <FaBell /> */}
-                {notifications.length > 0 ? (
-                  <span className={styles['notification-badge']}>{notifications.filter(n => n.visited).length}</span>
-                ) : <span className={styles['notification-badge']}>0</span>}
+                {notifications && notifications?.filter((n: Notification) => !n.visited).length > 0 && (
+                  <span className={styles['notification-badge']}>
+                    {notifications.filter(n => !n.visited).length}
+                  </span>
+                )}
                 <strong >🔔 </strong>
               </button>
 
@@ -146,7 +149,10 @@ export default function Nav() {
             {showNotifications && (
               <div className={styles['notification-dropdown']}>
                 <div style={{ position: 'fixed', background: 'linear-gradient(135deg, #2c5364, #203a43, #0f2027)', padding: '10px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px', color: 'white', marginTop: '-10px', marginLeft: '-10px', width: '320px' }}> 
-                  🔔 Tienes <span style={{ color: 'orange'}}>{notifications.filter(n => n.visited).length}</span> notificaciones sin leer...
+                  🔔 Tienes &nbsp;
+                  <span style={{ color: 'orange'}}>{notifications.filter(n => !n.visited).length}</span> 
+                  &nbsp;
+                  notificaciones sin leer...
                 </div>
                 <br />
                 <br />

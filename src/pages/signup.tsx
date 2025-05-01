@@ -45,7 +45,8 @@ const SignUp = () => {
       return
     }
     try {
-      await signUp(email, password, isJudge)
+      await signUp(email, password, isJudge, name, category)
+      toast.success('¡Cuenta creada con éxito! 🎉')
       router.push('/onboarding')
     } catch (error) {
       setErrorMessage((error as Error).message)

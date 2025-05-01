@@ -10,6 +10,13 @@ export interface User {
     profilePic: string;
     phone: string;
     address: string;
+    notifications: Array<{
+      id: string;
+      text: string;
+      link: string;
+      visited: boolean;
+    }>;
+    category: string;
     website: string;
     location: string;
     updatedAt: Date;
@@ -23,6 +30,8 @@ export interface User {
     email: '',
     bio: '',
     role: 'user',
+    category: '',
+    notifications: [],
     type: 'normal',
     status: 'inactive',
     profilePic: '/blank-profile-picture.png',

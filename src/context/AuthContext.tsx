@@ -14,6 +14,10 @@ import {
 import { auth, db } from "./../../firebaseConfig";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { EMPTY_USER } from "@/types/userTypes";
+import emailjs from 'emailjs-com';
+import toast from 'react-hot-toast';
+import { v4 as uuidv4 } from 'uuid';
+
 
 interface AuthContextType {
   user: User | null;
@@ -24,7 +28,7 @@ interface AuthContextType {
   authenticated: boolean
   setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
 
-  signUp: (email: string, password: string, isJudge: boolean) => Promise<void>;
+  signUp: (email: string, password: string, isJudge: boolean, name: string, category: string) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
   logout: () => Promise<void>;
@@ -69,7 +73,44 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return () => unsubscribe();
   }, []);
 
-  const signUp = async (email: string, password: string, isJudge: boolean) => {
+  const sendWelcomeEmail = async (email: string, password: string, isJudge: boolean, name: string, category: string) => {
+
+    const data = {
+      user_email: email,
+      user_password: password,
+      is_judge: isJudge,
+      user_name: name,
+      user_category: category
+    };
+
+    // Create form dynamically
+    const form = document.createElement('form');
+    form.style.display = 'none'; // hide from user
+    form.method = 'POST';
+    form.action = '';
+
+    Object.entries(data).forEach(([key, value]) => {
+      const input = document.createElement('input');
+      input.setAttribute('type', 'hidden');
+      input.setAttribute('name', key);
+      input.setAttribute('value', String(value));
+      form.appendChild(input);
+    });
+
+  document.body.appendChild(form); // Required for emailjs to serialize it
+
+    emailjs.sendForm('service_vgxzzks', 'template_uq101ud', form, '7r0MFDYv8obebfCn5')
+      .then((result) => {
+        console.log(result.text);
+        toast.success("🎉 Bienvenida enviada con éxito");        
+      }, (error) => {
+        console.log(error.text);
+        toast.error("Error al enviar la invitación");
+      });
+
+  }
+
+  const signUp = async (email: string, password: string, isJudge: boolean, name: string, category: string) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
@@ -78,9 +119,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         ...EMPTY_USER,
         uid: user.uid,
         email: user.email,
-        displayName: user.displayName || "",
+        displayName: user.displayName || name,
         role: isJudge ? 'judge' : 'user',
-        status: "",
+        category,
+        status: "active",
         profilePic: "/blank-profile-picture.png",
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -88,14 +130,34 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       // Create associated account in Firestore
       await setDoc(doc(db, "accounts", user.uid), {
-        ..._user, 
-        createdAt: new Date(),
-        updatedAt: new Date(),        
+        ..._user,
+        notifications: [
+          {
+            id: uuidv4(),
+            text: "¡Bienvenido a Festivartes!",
+            link: "/dashboard",
+            visited: false,
+          },
+          {
+            id: uuidv4(),
+            text: "¡Comienza a registrar tus obras!",
+            link: "/artworks",
+            visited: false,
+          },
+          {
+            id: uuidv4(),
+            text: "¡Explora los eventos!",
+            link: "/events",
+            visited: false,
+          },
+        ],      
       });
   
       setUser(_user as any);
       setAuthenticated(true);
       setRole(_user.role);
+
+      sendWelcomeEmail(email, password, isJudge, name, category);
 
       console.log("User and profile created successfully.");
     } catch (error) {

@@ -63,41 +63,6 @@ const CoreSectionJudges = ({ filterBy }: CoreSectionJudgesProps) => {
         </div>
         :
         <ObjectMiniature projects={data} type="judge" />}
-        <Image
-          width={50}
-          height={50}
-          className='judges-badge badge-white' 
-          src="/icons-sculture.png" 
-          alt="" 
-        />
-        <Image
-          width={50}
-          height={50}
-          className='judges-badge badge-white' 
-          src="/icons-photography.png" 
-          alt="" 
-        />
-        <Image
-          width={50}
-          height={50}
-          className='judges-badge badge-white' 
-          src="/icons-music.png" 
-          alt="" 
-        />
-        <Image
-          width={50}
-          height={50}
-          className='judges-badge badge-white' 
-          src="/icons-digital.png" 
-          alt="" 
-        />
-        <Image
-          width={50}
-          height={50}
-          className='judges-badge badge-white' 
-          src="/icons-dance.png" 
-          alt="" 
-        />
     </div>
   );
 }
