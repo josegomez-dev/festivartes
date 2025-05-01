@@ -164,7 +164,7 @@ export default function Nav() {
         )}
 
       </div>
-      {authenticated && <ChatSidebar />}
+      {/* {authenticated && <ChatSidebar />} */}
     </nav>
   )
 }

@@ -2,8 +2,24 @@ import React, { useEffect, useState } from "react";
 import styles from "./../app/assets/styles/RegisterForm.module.css";
 import YesOrNoQuestionForm from "./YesOrNoQuestionForm";
 import MultiCheckBoxQuestionForm from "./MultiCheckBoxQuestionForm";
+import { db } from "./../../firebaseConfig";
+import { doc, updateDoc } from "firebase/firestore";
+import toast from "react-hot-toast";
+import { format } from "path";
+import { QUESTION_TYPES } from "@/types/questions.types";
 
-const RatingForm = () => {
+interface RatingFormProps {
+  artworkIdentifier?: string;
+  userIdentifier?: string;
+  closeModal?: () => void;
+}
+
+const RatingForm: React.FC<RatingFormProps> = ({ artworkIdentifier, userIdentifier, closeModal }) => {
+
+  const sectionTitle1 = "Desglose de valoración de aspectos formativos de la propuesta artistica";
+  const sectionTitle2 = "Desgloce de valoración de aspectos tecnico-artisticos";
+  const sectionTitle3 = "Observaciones de la valoración integral de la obra";
+
   const multiCheckboxOptions = [
     { 
       label: "¿La propuesta artística está acorde con el artículo 3 del Reglamento para la organización y ejecución del Festival Estudiantil de las Artes?", 
@@ -38,14 +54,19 @@ const RatingForm = () => {
   ];
   
   const [formData, setFormData] = useState({
+    question1_Label: "Letra de la canción: ¿Se toma en cuenta el contenido y el mensaje de la letra, de acuerdo con lo que estipula el artículo 3 del Reglamento del Festival Estudiantil de las Artes 2025?",
     question1: false,
     question1_comment: "",
+    question2_label: "Entonación y afinación: ¿La voz de la persona participante presenta una afinación y entonación precisa y correcta de acuerdo con los instrumentos musicales que lo acompañan? En caso de ser a capella, ¿mantiene la entonación y afinación, por lo que se tomará en cuenta la tonalidad con la que inicie la canción?",
     question2: false,
     question2_comment: "",
+    question3_Label: "Dicción: ¿Se refiere a una pronunciación correcta de las palabras? ¿Las cantantes o los cantantes utilizan una dicción clara y limpia? ¿Utiliza pronunciación correcta?",
     question3: false,
     question3_comment: "",
+    question4_Label: "Precisión en la ejecución vocal y estabilidad en el ritmo: ¿El tempo, compás y ritmo son constantes y puntuales a la hora de cantar? ¿Mantienen concordancia con la línea melódica que emite la voz?",
     question4: false,
     question4_comment: "",
+    question5_Label: "¿Propongo esta obra artística para ser considerada en la deliberación con posibilidad de ser seleccionada?",
     question5: false,
     question5_comment: "",
     multiCheckbox: multiCheckboxOptions.map(option => ({
@@ -53,26 +74,6 @@ const RatingForm = () => {
       checked: option.checked // Assuming 'checked' is part of 'option'
     }))
   });
-
-  useEffect(() => {
-    setFormData({
-      question1: false,
-      question1_comment: "asd",
-      question2: false,
-      question2_comment: "asdasdas",
-      question3: false,
-      question3_comment: "",
-      question4: false,
-      question4_comment: "",
-      question5: false,
-      question5_comment: "",
-      multiCheckbox: multiCheckboxOptions.map(option => ({
-        ...option, 
-        checked: option.checked
-      }))
-    });
-  }, []);
-
 
   const howManyChecked = (): number => {
     let checkedCount = 0;
@@ -86,16 +87,12 @@ const RatingForm = () => {
     if (formData.question3) checkedCount++;
     if (formData.question4) checkedCount++;
     if (formData.question5) checkedCount++;
+
+    if (checkedCount > 10) {
+      checkedCount = 10;
+    }
     return checkedCount;
   }
-
-  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
 
   const handleToggleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked, value } = e.target;
@@ -107,13 +104,10 @@ const RatingForm = () => {
 
   const handleMultiCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = e.target;
-  
     setFormData((prevData) => {
-      // Update the multiCheckboxOptions array by finding the item with the matching value and updating its checked property
       const updatedCheckboxes = prevData.multiCheckbox.map((item) =>
         item.value === value ? { ...item, checked } : item
-      );
-  
+      );  
       return {
         ...prevData,
         multiCheckbox: updatedCheckboxes, // Set the updated array back into the formData state
@@ -121,11 +115,117 @@ const RatingForm = () => {
     });
   };
   
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const transformRatingForm = (ratingForm: {
+    [x: string]: any;
+    question1_Label?: string;
+    question1?: boolean;
+    question1_comment?: string;
+    question2_label?: string;
+    question2?: boolean;
+    question2_comment?: string;
+    question3_Label?: string;
+    question3?: boolean;
+    question3_comment?: string;
+    question4_Label?: string;
+    question4?: boolean;
+    question4_comment?: string;
+    question5_Label: any;
+    question5: any;
+    question5_comment: any;
+    multiCheckbox: any;
+  }) => {
+    return [
+      {
+        sectionTitle: sectionTitle1,
+        items: ratingForm.multiCheckbox.map((item: QUESTION_TYPES) => ({
+          label: item.label,
+          checked: !!item.checked,
+          comments: '', // No comments field in multiCheckbox
+        })),
+      },
+      {
+        sectionTitle: sectionTitle2,
+        items: [1, 2, 3, 4].map((i) => ({
+          label: ratingForm[`question${i}_Label`] || ratingForm[`question${i}_label`] || '',
+          checked: !!ratingForm[`question${i}`],
+          comments: ratingForm[`question${i}_comment`] || '',
+        })),
+      },
+      {
+        sectionTitle: sectionTitle3,
+        items: [
+          {
+            label: ratingForm.question5_Label || '',
+            checked: !!ratingForm.question5,
+            comments: ratingForm.question5_comment || '',
+          },
+        ],
+      },
+    ];
+  }; 
+  
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
-  };
+    if (!artworkIdentifier) {
+      console.error("artworkIdentifier is undefined");
+      return;
+    }
+    const docRef = doc(db, 'artworks', artworkIdentifier);
+    
+    const updatedData = {
+      rates: [
+        {
+          userIdentifier: userIdentifier, // Replace with actual user ID
+          ratingForm: formData,
+        },
+      ],
+    };
+
+    const formattedData = {
+      ...updatedData,
+      rates: updatedData.rates.map((rate) => ({
+        judgeIdentifier: rate.userIdentifier,
+        ratingForm: transformRatingForm(rate.ratingForm),
+        rateAt: new Date().toISOString(), // Add the current date
+        rateValue: howManyChecked(), // Add the rating value
+      })),
+    };
+
+    try {
+      await updateDoc(docRef, formattedData);
+      toast.success("Formulario enviado correctamente");
+    } catch (error) {
+      console.error("Error updating document: ", error);
+      toast.error("Error al enviar el formulario");
+    }
+
+    setFormData({
+      question1_Label: "Letra de la canción: ¿Se toma en cuenta el contenido y el mensaje de la letra, de acuerdo con lo que estipula el artículo 3 del Reglamento del Festival Estudiantil de las Artes 2025?",
+      question1: false,
+      question1_comment: "",
+      question2_label: "Entonación y afinación: ¿La voz de la persona participante presenta una afinación y entonación precisa y correcta de acuerdo con los instrumentos musicales que lo acompañan? En caso de ser a capella, ¿mantiene la entonación y afinación, por lo que se tomará en cuenta la tonalidad con la que inicie la canción?",
+      question2: false,
+      question2_comment: "",
+      question3_Label: "Dicción: ¿Se refiere a una pronunciación correcta de las palabras? ¿Las cantantes o los cantantes utilizan una dicción clara y limpia? ¿Utiliza pronunciación correcta?",
+      question3: false,
+      question3_comment: "",
+      question4_Label: "Precisión en la ejecución vocal y estabilidad en el ritmo: ¿El tempo, compás y ritmo son constantes y puntuales a la hora de cantar? ¿Mantienen concordancia con la línea melódica que emite la voz?",
+      question4: false,
+      question4_comment: "",
+      question5_Label: "¿Propongo esta obra artística para ser considerada en la deliberación con posibilidad de ser seleccionada?",
+      question5: false,
+      question5_comment: "",
+      multiCheckbox: multiCheckboxOptions.map(option => ({
+        ...option, 
+        checked: option.checked // Assuming 'checked' is part of 'option'
+      }))
+    });
+    
+    if (closeModal) {
+      closeModal();
+    }
+
+  }
 
   return (
     <>
@@ -135,7 +235,9 @@ const RatingForm = () => {
       <div className={styles['form-wrapper']}>
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.formGroup}>
-            <p className="bolder-text">Desglose de valoracion de aspectos formativos de la propuesta artistica:</p>
+            <p className="bolder-text">
+              <b>{sectionTitle1}</b>
+            </p>
             <br />
             <MultiCheckBoxQuestionForm
               multiCheckboxOptions={multiCheckboxOptions}
@@ -143,43 +245,53 @@ const RatingForm = () => {
               handleChange={handleMultiCheckboxChange}
             />
           </div>
-          
+
+          <hr />
+          <br />
+          <p className="bolder-text"><b>{sectionTitle2}</b></p>
+          <br />
           <YesOrNoQuestionForm
-            title="Letra de la canción: "
-            textContent="¿Se toma en cuenta el contenido y el mensaje de la letra, de acuerdo con lo que estipula el artículo 3 del Reglamento del Festival Estudiantil de las Artes 2025?"
+            // title=""
+            textContent={formData.question1_Label}
             idQuestion={"question1"}
             checked={formData.question1}
             handleToggleChange={handleToggleChange}
           />
 
           <YesOrNoQuestionForm
-            title="Entonación y afinación: "
-            textContent="¿La voz de la persona participante presenta una afinación y entonación precisa y correcta de acuerdo con los instrumentos musicales que lo acompañan? En caso de ser a capella, ¿mantiene la entonación y afinación, por lo que se tomará en cuenta la tonalidad con la que inicie la canción?"
+            // title=""
+            textContent={formData.question2_label}
             idQuestion={"question2"}
             checked={formData.question2}
             handleToggleChange={handleToggleChange}
           />
 
           <YesOrNoQuestionForm
-            title="Dicción:"
-            textContent="¿Se refiere a una pronunciación correcta de las palabras? ¿Las cantantes o los cantantes utilizan una dicción clara y limpia? ¿Utiliza pronunciación correcta?"
+            // title=""
+            textContent={formData.question3_Label}
             idQuestion={"question3"}
             checked={formData.question3}
             handleToggleChange={handleToggleChange}
           />
 
           <YesOrNoQuestionForm
-            title="Precisión en la ejecución vocal y estabilidad en el ritmo: "
-            textContent="¿El tempo, compás y ritmo son constantes y puntuales a la hora de cantar? ¿Mantienen concordancia con la línea melódica que emite la voz?"
+            // title=""
+            textContent={formData.question4_Label}
             idQuestion={"question4"}
             checked={formData.question4}
             handleToggleChange={handleToggleChange}
           />
 
-          <p className="bolder-text">Desgloce de valoracion de aspectos tecnico-artisticos (Observaciones de la valoracion integral de la obra).</p>
+          <hr />
+          <br />
+          <p className="bolder-text">
+            <b>{sectionTitle3}</b>
+          </p>
 
+          <br />
           <YesOrNoQuestionForm
-            textContent="¿Propongo esta obra artística para ser considerada en la deliberación con posibilidad de ser seleccionada?"
+            // title=""
+            textContent={formData.question5_Label}
             idQuestion={"question5"}
             checked={formData.question5}
             handleToggleChange={handleToggleChange}

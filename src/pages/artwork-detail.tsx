@@ -17,6 +17,8 @@ import toast from 'react-hot-toast';
 import { ARTWORK, EMPTY_ARTWORK } from '@/types/artworks.types';
 import Preloader from '@/components/Preloader';
 import { uploadBytes, getDownloadURL, ref } from 'firebase/storage';
+import CoreSectionJudges from '@/components/CoreSectionJudges';
+import CoreSectionRatingJudges from '@/components/CoreSectionRatingJudges';
 
 const videos = [
   { id: 1, title: "Video 1", src: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4" },
@@ -246,7 +248,7 @@ const ArtworkDetail = () => {
         height="80%" // Custom height
       >
         <div className="form-wrapper">
-          <RatingForm />
+          <RatingForm closeModal={closeJudgeModal} artworkIdentifier={project?.id} userIdentifier={user?.uid} />
         </div>
       </CustomModal>
 
@@ -407,6 +409,19 @@ const ArtworkDetail = () => {
                   />
                 )}
                 <div>
+                  <div style={{ width: '300px', margin: '0 auto', color: 'lightgray'  }}>
+                    <p style={{ fontSize: '12px' }}>
+                    Estado:
+                    <span style={{ color: project?.status === 'active' ? 'lightgreen' : 'red' }}> &nbsp;
+                      {project?.status === 'active' ? 'Activo' : 'Inactivo'}
+                    </span> 
+                    <br />
+                    Privacidad: 
+                    <span style={{ color: project?.privacy === 'public' ? 'orange' : 'white' }}> &nbsp;
+                      {project?.privacy === 'public' ? 'Público' : 'Privado'}
+                    </span>
+                    </p>
+                  </div>
                   <br />
                   <p className="overflow-area">{project?.description}</p>
                   <br />
@@ -488,6 +503,9 @@ const ArtworkDetail = () => {
           </div>
         </div>
         
+        <CoreSectionRatingJudges projectIdentifier={project.id} />
+
+        <br />
         <br />
         <br />
         <br />

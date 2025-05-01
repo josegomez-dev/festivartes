@@ -81,25 +81,22 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
                   style={{ 
                     position: 'absolute', 
                     left: 0, 
-                    fontSize: '0.8rem', 
                     textDecoration: 'none', 
                     color: 'white', 
-                    background: 'orange', 
-                    padding: '5px', 
-                    borderTopRightRadius: '10px',
-                    borderBottomRightRadius: '10px',
-                    borderBottom: '1px solid orange', 
-                    borderRight: '1px solid orange', 
-                    borderTop: '1px solid orange'
+                    background: 'transparent',
+                    border: 'none',
                   }}>
                     {showAllData ? ' Ocultar' : (
+                      <>
                       <Image
                         src="/events-icon.png"
                         alt="events-icon"
-                        width={25}
-                        height={25}
+                        width={35}
+                        height={35}
                         priority
+                        style={{ animation: 'pulseGlow 1s infinite', marginTop: '15px', marginLeft: '25px' }}
                       />
+                      </>
                     )}
                 </button>
                 
