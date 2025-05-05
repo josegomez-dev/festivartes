@@ -755,6 +755,17 @@ b {
   text-overflow: ellipsis; 
 }
 
+.title-artworks-container {
+  position: absolute;
+  width: 55px; /* override any earlier width */
+  font-size: 10px;
+  height: 15px;
+  margin-top: -17px;
+  margin-left: 0px;
+  text-align: left;
+  overflow: auto;            /* Hides the overflowed text */
+}
+
 .claps-container {
   position: fixed;
   width: 80px;
@@ -1303,10 +1314,6 @@ Down
   margin-top: -5px;
   border: 1px solid #32acc0;
   padding: 15px;
-}
-
-.modal-content {
-  background: linear-gradient(135deg, #2c5364, #203a43, #0f2027);
 }
 
 .artworks-miniature-panel .project-miniature, .artworks-miniature-panel .project-thumbnail {

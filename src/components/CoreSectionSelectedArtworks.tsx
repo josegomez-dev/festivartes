@@ -10,11 +10,10 @@ import ArtworkRegisterForm from './ArtworkRegisterForm';
 import { ARTWORK } from '@/types/artworks.types';
 
 interface CoreSectionArtworksProps {
-  filterBy?: string;
   selectedArtworks?: string[];
 }
 
-const CoreSectionSelectedArtworks = ({ filterBy, selectedArtworks }: CoreSectionArtworksProps) => {
+const CoreSectionSelectedArtworks = ({ selectedArtworks }: CoreSectionArtworksProps) => {
   
   const [data, setData] = useState<ARTWORK[]>([]);
   const [dataFiltered, setDataFiltered] = useState<ARTWORK[]>([]);
@@ -35,15 +34,10 @@ const CoreSectionSelectedArtworks = ({ filterBy, selectedArtworks }: CoreSection
           ...rest
         };
       });
-  
-      setData(artworks);
-      
-      if (filterBy) {
-        const filteredArtworks = artworks.filter(artwork => {
-          return artwork.createdBy === filterBy;
-        });
-        setDataFiltered(filteredArtworks);
-      }
+      const filteredArtworks = artworks.filter(artwork => {
+        return selectedArtworks?.includes(artwork.id);
+      });
+      setData(filteredArtworks);      
     } catch (error) {
       console.error('Error fetching artwork:', error);
       return [];
@@ -52,7 +46,7 @@ const CoreSectionSelectedArtworks = ({ filterBy, selectedArtworks }: CoreSection
 
   useEffect(() => {
     fetchArtworks();
-  }, []);
+  }, [selectedArtworks]);
 
   return (
       <>
@@ -74,19 +68,14 @@ const CoreSectionSelectedArtworks = ({ filterBy, selectedArtworks }: CoreSection
           <div className={`${styles.card} `}>
           <p>
             <span className='bolder-text'>
-              <div style={{ color: 'red', left: 0, position: 'absolute'}}>
-                &nbsp;
-                &nbsp;
+              <div style={{ left: '20px', position: 'absolute'}}>
                 <RiBubbleChartFill color='gold'/> &nbsp;
-                <b>Portafolio Artístico&nbsp; </b>
+                <b>Obras registradas para el Evento&nbsp; </b>
               </div>
-              <br />
-              <br />
-              <p className='bolder-text small-text-size'>
-              Dale vida a tus ideas, compártelas con el mundo.
-              </p>
             </span>
           </p>
+          <br />
+          <br />
           <br />
           {data.length <= 0 ? 
             <div className={styles.grid}>
@@ -97,7 +86,7 @@ const CoreSectionSelectedArtworks = ({ filterBy, selectedArtworks }: CoreSection
             </div> 
             : 
             <div style={{ marginTop: '-10px' }}>
-              <ObjectMiniature projects={data} customClass={'artworks-miniature-panel'} type={'artwork'} />              
+              <ObjectMiniature projects={data} customClass={'artworks-miniature-panel'} type={'artwork'} selectMode />              
             </div>
           }
         </div> )}

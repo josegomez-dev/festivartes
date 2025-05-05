@@ -1,6 +1,7 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
 import CoreSectionArtworks from '@/components/CoreSectionArtworks';
 import CoreSectionJudges from '@/components/CoreSectionJudges';
+import authStyles from '@/app/assets/styles/Auth.module.css';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import { collection, getDocs, updateDoc, doc } from 'firebase/firestore';
@@ -14,6 +15,8 @@ import { toast } from 'react-hot-toast';
 import Preloader from '@/components/Preloader';
 import CoreSectionSelectedArtworks from '@/components/CoreSectionSelectedArtworks';
 import Image from 'next/image';
+import CustomModal from '@/components/CustomModal';
+import { ARTWORK } from '@/types/artworks.types';
 
 const EventDetail = ({ }) => {
   const router = useRouter();
@@ -23,8 +26,16 @@ const EventDetail = ({ }) => {
   const [data, setData] = useState<EVENTS[]>([]);
   const [project, setProject] = useState<EVENTS>(EMPTY_EVENT);
 
+  const [allArtworks, setAllArtworks] = useState<ARTWORK[]>([]);
+
+  const [localSelectedArtworks, setLocalSelectedArtworks] = useState<string[]>([]);
+
   const [reaction, setReaction] = useState<"happy" | "sad" | null>(null);
   const [hasClapped, setHasClapped] = useState(false);
+
+  const [selectArtworksModalOpen, setSelectArtworksModalOpen] = useState(false);
+  const onCloseSelectArtworksModal = () => setSelectArtworksModalOpen(false);
+  const onOpenSelectArtworksModal = () => setSelectArtworksModalOpen(true);
 
   const clapSoundRef = useRef<HTMLAudioElement | null>(null);
   const unclapSoundRef = useRef<HTMLAudioElement | null>(null);
@@ -58,8 +69,22 @@ const EventDetail = ({ }) => {
     }
   };
 
+  const fetchAllArtworks = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'artworks'));
+      const artworks = querySnapshot.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id
+      }));
+      setAllArtworks(artworks as ARTWORK[]);
+    } catch (error) {
+      console.error('Error fetching artworks:', error);
+    }
+  };
+
   useEffect(() => {
     fetchEvents(id);
+    fetchAllArtworks();
   }, []);
 
   if (!project) {
@@ -170,6 +195,48 @@ const EventDetail = ({ }) => {
   return (
     <div className={styles['full-view']}>
       {/* <SubMenu /> */}
+
+      <CustomModal
+        isOpen={selectArtworksModalOpen}
+        onClose={onCloseSelectArtworksModal}
+        height="85%" // Custom height
+      >
+        <div className="modal-title-centered">
+            <b>Selecciona las obras</b>
+        </div>
+        <div className="form-wrapper">
+          En esta seccion podrás seleccionar las obras que deseas exhibir en el evento.
+          <CoreSectionArtworks filterBy={user?.uid} allItems selectMode selectItem={item => {
+            if (localSelectedArtworks.includes(item)) {
+              setLocalSelectedArtworks(localSelectedArtworks.filter(artwork => artwork !== item));
+            } else {
+              setLocalSelectedArtworks([...localSelectedArtworks, item]);
+            }
+          }} />
+
+          <CoreSectionSelectedArtworks selectedArtworks={localSelectedArtworks} />
+
+          <ul style={{ listStyleType: 'none', padding: 0 }}>
+            {allArtworks.map((item) => {
+              if (localSelectedArtworks.includes(item.id)) {
+                return (
+                  <li key={item.id} style={{ fontSize: '0.8rem', marginBottom: '10px' }}>
+                    {item.title} - {item.artist} - {item.type}
+                  </li>
+                );
+              }
+              return null;
+            })}
+          </ul>
+
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+            <button className={authStyles['auth-button']} onClick={onCloseSelectArtworksModal}>
+              <b>Guardar selección</b>
+            </button>
+          </div>
+        </div>
+      </CustomModal>
+
       <audio ref={clapSoundRef} src="/sounds/spot.mp3" />
       <audio ref={unclapSoundRef} src="https://cdn.freesound.org/previews/687/687017_321967-lq.mp3" />
 
@@ -202,7 +269,7 @@ const EventDetail = ({ }) => {
                   style={{ cursor: 'pointer', textAlign: 'center', marginTop: '20px' }}
                   onClick={() => toast.error('No puedes calificar un evento que aún no ha ocurrido.')}
                 >
-                  <b>⏰ Guardar en el Calendario</b>
+                  <b>⏰ Agendar</b>
                 </p>
               )}
             </li>
@@ -231,15 +298,15 @@ const EventDetail = ({ }) => {
             </div>
           </h2>
           
-          <br />
-
+           <br />
+          {/*
           <p>
             {project.price <= 0 ? 
               <span className='bolder-text price-text'>Entrada libre y para toda la familia.</span> : 
               <span className='bolder-text price-text'>Costo de la entrada: ₡{project.price}</span>
             } 
           </p>
-          <br />
+          <br /> */}
           <img 
             src={project.thumbnail} 
             alt={project.name} 
@@ -261,7 +328,17 @@ const EventDetail = ({ }) => {
 
         <CoreSectionJudges /> */}
 
-        <CoreSectionSelectedArtworks selectedArtworks={project?.selectedArtworks} />
+        {project.selectedArtworks?.length > 0 ? (
+            <CoreSectionSelectedArtworks selectedArtworks={project?.selectedArtworks} />
+          ) : (
+            <>
+            <br />
+            <br />
+              <button className={authStyles['auth-button']} style={{  marginLeft: '165px', width: '300px', animation: 'pulseGlow 1s infinite' }} onClick={onOpenSelectArtworksModal}>
+                <b>¡Selecciona tus obras!</b>
+              </button>
+            </>
+          )}
 
       </div>
     </div>

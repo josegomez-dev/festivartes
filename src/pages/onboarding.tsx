@@ -31,7 +31,7 @@ Instituciones y entidades de promoción cultural.
   },
   {
     title: "Transparencia y eficiencia en la evaluación y premiación.",
-    description: "Reducción del tiempo y costo en la gestión de festivales.",
+    description: "Reducción del tiempo y materiales en la gestión de festivales.",
     imageUrl: "/artworks-icon.png"
   },
   {

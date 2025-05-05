@@ -3,7 +3,6 @@
 .form {
   overflow-y: scroll; /* Ensures scrolling section */
   height: 65vh; /* Takes the taller height */
-  background: transparent;
   margin: 0 auto;
 }
 

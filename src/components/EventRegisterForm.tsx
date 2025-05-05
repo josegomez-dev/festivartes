@@ -15,7 +15,6 @@ interface EventRegisterFormProps {
   closeModal: () => void;
 }
 
-
 const EventRegisterForm: React.FC<EventRegisterFormProps> = ({ closeModal }) => {
   const { user } = useAuth();
   const [formData, setFormData] = useState<EVENTS>(EMPTY_EVENT);
@@ -185,7 +184,7 @@ const EventRegisterForm: React.FC<EventRegisterFormProps> = ({ closeModal }) => 
           />
         </div>
 
-        <div className="input-group">
+        {/* <div className="input-group">
           <label htmlFor="price">
             Precio
           </label>
@@ -198,7 +197,7 @@ const EventRegisterForm: React.FC<EventRegisterFormProps> = ({ closeModal }) => 
             onChange={handleChange}
             required
           />
-        </div>
+        </div> */}
 
         {!isLoading ? (
           <button type="submit" className={`${styles.submitButton}`}>

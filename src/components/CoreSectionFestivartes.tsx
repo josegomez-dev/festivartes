@@ -9,7 +9,7 @@ import { FaCirclePlus } from 'react-icons/fa6';
 import CustomModal from './CustomModal';
 import EventRegisterForm from './EventRegisterForm';
 import { EVENTS } from '@/types/events.types';
-import { AiOutlinePlus } from 'react-icons/ai';
+import { useAuth } from '@/context/AuthContext';
 
 interface CoreSectionFestivartesProps {
   filterBy?: string;
@@ -23,7 +23,8 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
   const openEventModal = () => setIsEventModalOpen(true);
   const closeEventModal = () =>setIsEventModalOpen(false);
 
-  const [showAllData, setShowAllData] = useState(true);
+  const [showAllData, setShowAllData] = useState(false);
+  const { role } = useAuth();
   
   const fetchEvents = async () => {
     try {
@@ -111,11 +112,12 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
                 <br />
                 <br />
 
-                <div className="register-button">
+                {role === 'admin' && (
+                  <div className="register-button">
                   <button className="menu-button" onClick={openEventModal}>
                     <FaCirclePlus className="floating-menu-button" />
                   </button>
-                </div>
+                </div>)}
 
               </span>
             </p>
@@ -135,23 +137,7 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
 
         {showAllData && (
           <div className={styles.card} style={{ textAlign: 'left' }}>
-          <p>
-            <span className='bolder-text'>
-              <div style={{ color: 'red', left: 0, position: 'absolute'}}>
-                &nbsp;
-                &nbsp;
-                <RiBubbleChartFill color='gold'/> &nbsp;
-                <b>Portafolio Artístico&nbsp; </b>
-              </div>
-              <br />
-              <br />
-
-              <p className='bolder-text small-text-size'>
-              Lleva tu evento al siguiente nivel <br /> con nuestra app.
-              </p>
-              <br />
-            </span>
-          </p>
+          <br />
           <button 
             onClick={() => setShowAllData(!showAllData)} 
             style={{ 

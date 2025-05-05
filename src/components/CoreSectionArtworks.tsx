@@ -13,9 +13,12 @@ import { ARTWORK } from '@/types/artworks.types';
 import { AiOutlinePlus } from 'react-icons/ai';
 interface CoreSectionArtworksProps {
   filterBy?: string;
+  allItems?: boolean;
+  selectMode?: boolean;
+  selectItem?: (artworkIdentifier: string) => void;
 }
 
-const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
+const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: CoreSectionArtworksProps) => {
   
   const [data, setData] = useState<ARTWORK[]>([]);
   const [dataFiltered, setDataFiltered] = useState<ARTWORK[]>([]);
@@ -24,7 +27,7 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
   const openUserModal = () => setIsUserModalOpen(true);
   const closeUserModal = () =>setIsUserModalOpen(false);
 
-  const [showAllData, setShowAllData] = useState(true);
+  const [showAllData, setShowAllData] = useState(allItems || false);
 
   const fetchArtworks = async () => {
     try {
@@ -57,20 +60,22 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
 
   return (
       <>
-            <CustomModal
-              isOpen={isUserModalOpen}
-              onClose={closeUserModal}
-              height="85%" // Custom height
-            >
-              <div className="modal-title-centered">
-                  <b>Anímate a descubrir <br /> tu Artista Interior</b>
-              </div>
-              <div className="form-wrapper">
-                <ArtworkRegisterForm closeModal={closeUserModal} />
-              </div>
-            </CustomModal>
-        <div className={`${styles.card}`}>
-          <p>
+        <CustomModal
+          isOpen={isUserModalOpen}
+          onClose={closeUserModal}
+          height="85%" // Custom height
+        >
+          <div className="modal-title-centered">
+              <b>Anímate a descubrir <br /> tu Artista Interior</b>
+          </div>
+          <div className="form-wrapper">
+            <ArtworkRegisterForm closeModal={closeUserModal} />
+          </div>
+        </CustomModal>
+        
+        {!allItems && (
+          <div className={`${styles.card}`}>
+          <div>
             <span className='bolder-text'>
               <RiBubbleChartFill color='gold'/> &nbsp;
               
@@ -112,7 +117,7 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
                 </button>
               </div>
             </span>
-          </p>
+          </div>
 
           {data.length <= 0 ? 
             <div className={styles.grid}>
@@ -128,23 +133,10 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
               
             </div>
           }
-        </div>
+        </div> )}
 
         {showAllData && (
           <div className={`${styles.card} `} style={{ textAlign: 'left' }}>
-          <p>
-            <span className='bolder-text'>
-              <div>
-                &nbsp;
-                &nbsp;
-                <RiBubbleChartFill color='gold'/> &nbsp;
-                <b>Portafolio Artístico&nbsp; </b>
-              </div>
-              <p className='bolder-text small-text-size'>
-              Dale vida a tus ideas, compártelas con el mundo.
-              </p>
-            </span>
-          </p>
           <br />
           <button 
             onClick={() => setShowAllData(!showAllData)} 
@@ -157,7 +149,7 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
               background: 'transparent',
               border: 'none',
             }}>
-            {showAllData && (
+            {showAllData && !allItems && (
               <span>X Ocultar</span>
             )}
           </button>
@@ -170,7 +162,7 @@ const CoreSectionArtworks = ({ filterBy }: CoreSectionArtworksProps) => {
             </div> 
             : 
             <div style={{ marginTop: '-10px' }}>
-              <ObjectMiniature projects={data} customClass={'artworks-miniature-panel'} type={'artwork'} />              
+              <ObjectMiniature projects={data} customClass={'artworks-miniature-panel'} type={'artwork'} selectMode={selectMode} selectItem={selectItem} />              
             </div>
           }
         </div> )}

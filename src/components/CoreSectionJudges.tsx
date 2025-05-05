@@ -53,12 +53,12 @@ const CoreSectionJudges = ({ filterBy }: CoreSectionJudgesProps) => {
             🌟 Los expertos evalúan las obras artísticas.
           </p>
         </span>
-      </p>
+      </p>  
       {data.length <= 0 ?
         <div className={styles.grid}>
           <div className={styles.card}>
             <h3>Invita a tu Jurado Seleccionador</h3>
-            <p>Agrega los datos de las personas encargadas de valorar las obras. Podrán acceder de forma segura y emitir su evaluación.</p>
+            <p style={{ color: 'black' }}>Agrega los datos de las personas encargadas de valorar las obras. Podrán acceder de forma segura y emitir su evaluación.</p>
           </div>
         </div>
         :
