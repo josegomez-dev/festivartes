@@ -161,7 +161,7 @@ export default function Profile() {
 
         <div className="input-group">
           <label>Bio <span className="color-orange">*</span></label>
-          <input type="tel" name="phone" value={accountData.bio || ''} onChange={handleInputChange} />
+          <input type="tel" name="bio" value={accountData.bio || ''} onChange={handleInputChange} />
         </div>
 
         {/* <div className="input-group">

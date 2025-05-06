@@ -68,14 +68,11 @@ const CoreSectionSelectedArtworks = ({ selectedArtworks }: CoreSectionArtworksPr
           <div className={`${styles.card} `}>
           <p>
             <span className='bolder-text'>
-              <div className='artworks-registered-text'>
-                <RiBubbleChartFill color='gold'/> &nbsp;
-                <b>Obras registradas para el Evento&nbsp; </b>
+              <div className=''>
+                <p>Obras registradas para el Evento&nbsp; </p>
               </div>
             </span>
           </p>
-          <br />
-          <br />
           <br />
           {data.length <= 0 ? 
             <div className={styles.grid}>

@@ -38,14 +38,6 @@ const ShareButton = () => {
           >
             📘 Compartir en Facebook
           </div>
-          <div
-            className='pointer'
-            onClick={() =>
-              window.open(`https://twitter.com/intent/tweet?url=${window.location.href}`, '_blank')
-            }
-          >
-            🐦 Compartir en Twitter
-          </div>
         </div>
       )}
     </div>

@@ -1,6 +1,5 @@
 import { useAuth } from "@/context/AuthContext";
-import React, { useRef, useState } from "react";
-import styles from "./../app/assets/styles/ChatSidebar.module.css";
+import React, { useState } from "react";
 
 const ChatSidebar = () => {
   const { user } = useAuth();
@@ -24,36 +23,36 @@ const ChatSidebar = () => {
 
     // Simulate a bot response
     setTimeout(() => {
-      const botReply = { sender: "bot", text: "Gracias por tu mensaje, te responderemos pronto. 🤖" };
+      const botReply = { sender: "bot", text: "Gracias por tu mensaje, te responderemos pronto." };
       setMessages((prevMessages) => [...prevMessages, botReply]);
     }, 1000);
   };
 
   return (
     <>
-      <button className={styles.chatToggle} onClick={toggleChat}>
+      <button className={'chatToggle'} onClick={toggleChat}>
         <b>Festivartes</b> <span>CHAT</span>
       </button>
-      <div className={`${styles.chatSidebar} ${isOpen ? styles.open : ""}`}>
-        <div className={styles.chatHeader}>
+      <div className={`chatSidebar ${isOpen ? 'open' : ""}`}>
+        <div className={'chatHeader'}>
           <h2>
             <b>Festivartes</b> <span className="small-text-size">CHAT</span>
           </h2>
-          <button onClick={toggleChat} className={styles.closeButton}>
+          <button onClick={toggleChat} className={'closeButton'}>
             ✖
           </button>
         </div>
-        <div className={styles.chatContent}>
+        <div className={'chatContent'}>
           {messages.map((msg, index) => (
             <div
               key={index}
-              className={`${styles.chatMessage} ${msg.sender === "me" ? styles.myMessage : msg.sender === "bot" ? styles.botMessage : styles.adminMessage}`}
+              className={`${msg.sender === "me" ? 'myMessage' : msg.sender === "me" ? 'botMessage' : 'adminMessage'}`}
             >
               <b>{msg.sender === "me" ? "Tú" : msg.sender === "bot" ? "Bot" : "Admin"}:</b> {msg.text}
             </div>
           ))}
         </div>
-        <div className={styles.chatInput}>
+        <div className={'chatInput'}>
           <input
             type="text"
             placeholder="Escribe un mensaje..."

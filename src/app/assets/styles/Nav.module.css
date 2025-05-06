@@ -60,10 +60,13 @@
 
 .profile-picture {
   position: absolute; 
-  right: 45px; 
-  top: 8px; 
+  right: 60px; 
+  top: 7px; 
   border-radius: 50%; 
   z-index: 2000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--color-white);
+  background-color: var(--color-blue);
 }
 .profile-picture-user-menu {
   border-radius: 50%; 
@@ -145,10 +148,15 @@
   display: flex;
   align-items: center;
   gap: 6px;
+  font-size: 15px;
+  background-color: var(--background-black-transparent);
+  padding: 5px;
+  border-radius: 50%;
 }
 
 .logoutButton:hover {
   color: var(--color-white);
+  transform: scale(1.05);
 }
 
 
@@ -171,7 +179,7 @@
   animation: pulseGlow 1.5s ease-in-out infinite;
   position: absolute;
   top: 20px;
-  right: 110px;
+  right: 12px;
   cursor: pointer;
 }
 

@@ -26,7 +26,7 @@ const Preloader = ({ message = "Cargando...", small }: PreloaderProps) => {
           width: ${small ? '30px' : '50px'};
           height: ${small ? '30px' : '50px'};
           border: 6px solid rgba(0, 0, 0, 0.1);
-          border-left-color: var(--color-orange);
+          border-left-color: var(--color-blue);
           border-radius: 50%;
           animation: spin 1s linear infinite;
         }

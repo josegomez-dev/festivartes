@@ -120,10 +120,11 @@ const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: Cor
               </div> 
             </div> 
             : 
-            <div className='mTop-5'>
-              <ObjectMiniature projects={dataFiltered} type={'artwork'} />              
+            <div className=''>
+              <ObjectMiniature projects={dataFiltered.concat(dataFiltered).concat(dataFiltered).concat(dataFiltered).concat(dataFiltered).concat(dataFiltered).concat(dataFiltered).concat(dataFiltered)} type={'artwork'} />              
             </div>
           }
+          
         </div> )}
 
         {showAllData && (

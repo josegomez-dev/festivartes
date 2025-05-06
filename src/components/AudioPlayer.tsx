@@ -67,34 +67,6 @@ const AudioPlayer = ({ src, title }: AudioPlayerProps) => {
         />
         <span>{Math.floor(currentTime)} / {Math.floor(duration)}</span>
       </div>
-      <style jsx>{`
-        .audio-player {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          background: #222;
-          padding: 10px;
-          border-radius: 8px;
-          color: var(--color-white);
-          filter: drop-shadow(0 0 0.1rem var(--color-black));
-        }
-        .player-controls {
-          display: flex;
-          align-items: center;
-          gap: 5px;
-          margin: 0 auto;
-        }
-        button {
-          background: none;
-          border: none;
-          font-size: 20px;
-          cursor: pointer;
-          color: var(--color-white);
-        }
-        input {
-            width: 50px;
-        }
-      `}</style>
     </div>
   );
 };

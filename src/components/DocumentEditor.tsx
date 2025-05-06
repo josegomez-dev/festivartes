@@ -62,10 +62,8 @@ const DocumentEditor = ({
       <style jsx>{`
         .editor-container {
           width: 100%;
-          border-radius: 16px;
           overflow: hidden;
-          // background: #f0f0f0;
-          back
+          background: transparent;
         }
 
         .quill-editor {
@@ -77,7 +75,7 @@ const DocumentEditor = ({
 
         :global(.ql-toolbar.ql-snow) {
           border-radius: 10px 10px 0 0;
-          background: #f0f0f0;
+          background: var(--color-orange);
         }
 
         :global(.ql-container.ql-snow) {

@@ -168,7 +168,12 @@ export default function Nav() {
 
         {authenticated && (
           <div className="relative">
-            <button className="flex items-center gap-2 focus:outline-none pointer" onClick={() => setShowDropdown(!showDropdown)}>
+            
+            
+            <button 
+              className="pointer" 
+              onClick={() => setShowDropdown(!showDropdown)}
+            >
               <Image
                 width={50}
                 height={50}
@@ -176,11 +181,7 @@ export default function Nav() {
                 alt="Profile Picture"
                 className={styles['profile-picture']}
               />
-                <button onClick={handleLogout} className={styles.logoutButton}>
-                  <FaSignOutAlt />
-                </button>
             </button>
-            
 
             {renderDropdown && (
               <div
@@ -205,12 +206,26 @@ export default function Nav() {
 
                 <br />
                 <p className={styles.dropdownItem}><strong>{user?.displayName || 'Usuario'}</strong></p>
-                <p className={styles.dropdownItem}>{user?.email}</p>
-                <p className={styles.dropdownItem}>🛡️ Rol: <b>{role}</b></p>
-
+                <p className={`${styles.dropdownItem} small-text-size`}>{user?.email}</p>
+                <hr />
+                <div className="small-text-size">
+                  <p className={styles.dropdownItem}>
+                    🛡️ Rol:&nbsp;
+                    <b className="medium-text-size">{role}</b>
+                  </p>
+                  <p className={styles.dropdownItem}>
+                    ✅ Estado:&nbsp;
+                    <b className="medium-text-size">{user?.status}</b>
+                  </p>
+                  <p className={styles.dropdownItem}>
+                    👤 Tipo:&nbsp;
+                    <b className="medium-text-size">{user?.type}</b>
+                  </p>
+                </div>
+                <hr />
                 <div className={styles.dropdownActions}>
                   <br />
-                  <p className={`${styles.dropdownLink} close-session-link `}>Cerrar Sesion</p>
+                  {/* <p className={`${styles.dropdownLink} close-session-link `}>Cerrar Sesion</p> */}
                   <button onClick={handleLogout} className={styles.logoutButton}>
                     <FaSignOutAlt /> Cerrar Sesión
                   </button>
@@ -222,9 +237,11 @@ export default function Nav() {
 
           </div>
         )}
-
+        {/* <button onClick={handleLogout} className={styles.logoutButton}>
+          <FaSignOutAlt /> 
+        </button> */}
       </div>
-      {/* {authenticated && <ChatSidebar />} */}
+      {authenticated && <ChatSidebar />}
     </nav>
   )
 }

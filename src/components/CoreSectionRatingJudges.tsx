@@ -86,7 +86,6 @@ const CoreSectionRatingJudges = ({  }) => {
           </p>
         </span>
       </p>
-      <br />
       {data.length <= 0 ?
         <div className={styles.grid}>
           <div className={styles.card}>

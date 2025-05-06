@@ -245,6 +245,7 @@ b {
   flex-direction: row;
   gap: 6px;
   max-height: 300px;
+  height: auto;
 
   overflow-x: auto;
   overflow-y: hidden;
@@ -323,9 +324,8 @@ b {
   right: 0;
   left: 0;
   margin: 0 auto;
-  background: var(--background-gradient-midnight-blue);
+  background: var(--background-gradient-blue-orange);
   backdrop-filter: blur(100px);
-  border: 1px solid var(--background-transparent);
   list-style: none;
   padding: 2px;
   border-top-right-radius: 10px;
@@ -372,6 +372,10 @@ b {
   width: 120px;
   height: 180px;
   overflow: hidden;
+  margin-bottom: 5px;
+}
+.project-miniature-custom-artwork .project-miniature, .project-miniature-custom-artwork .project-thumbnail {
+  margin-bottom: 5px;
 }
 
 .project-miniature-custom-event .project-miniature {
@@ -405,14 +409,6 @@ b {
   height: 94px;
 }
 
-.project-miniature-custom-artwork {
-  display: flex;
-  overflow-x: auto;
-  overflow-y: hidden;
-  height: 118px;
-  gap: 10px;
-}
-
 .upcoming-message {
   padding: 0 10px;
   height: 40px;
@@ -420,7 +416,6 @@ b {
   backdrop-filter: blur(100px);
   border: 1px solid var(--background-transparent);
 }
-
 
 /* CustomModal.css */
 
@@ -701,15 +696,10 @@ b {
 }
 
 .stars-container {
-  position: absolute;
   width: 80px;
   font-size: 12px;
   height: 15px;
-  margin-top: -17px;
-  margin-left: 0px;
-  text-align: left;
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis; 
 }
 
@@ -754,7 +744,6 @@ b {
 }
 
 .claps-container {
-  position: fixed;
   width: 80px;
   font-size: 12px;
   height: 15px;
@@ -981,48 +970,11 @@ UP
 Down
 ****************/
 
-.pCard_card .pCard_down {
-  background-color: var(--color-blue);
-  position: absolute;
-  bottom: 0px;
-  width: 100%;
-  height: 178px;
-  z-index: 2;
-  -webkit-border-bottom-left-radius: 30px;
-  -moz-border-bottom-left-radius: 30px;
-  -ms-border-bottom-left-radius: 30px;
-  -o-border-bottom-left-radius: 30px;
-  border-bottom-left-radius: 30px;
-  -webkit-border-bottom-right-radius: 30px;
-  -moz-border-bottom-right-radius: 30px;
-  -ms-border-bottom-right-radius: 30px;
-  -o-border-bottom-right-radius: 30px;
-  border-bottom-right-radius: 30px;
-  -webkit-transition: 0.5s ease-in-out;
-  -moz-transition: 0.5s ease-in-out;
-  -ms-transition: 0.5s ease-in-out;
-  -o-transition: 0.5s ease-in-out;
-  transition: 0.5s ease-in-out;
-}
+
 
 .pCard_on .pCard_down {
   height: 100px;
 }
-
-.pCard_card .pCard_down div {
-  width: 33.333%;
-  float: left;
-  text-align: center;
-  margin-top: 50px;
-  font-size: 18px;
-  -webkit-transition: 0.5s ease-in-out;
-  -moz-transition: 0.5s ease-in-out;
-  -ms-transition: 0.5s ease-in-out;
-  -o-transition: 0.5s ease-in-out;
-  transition: 0.5s ease-in-out;
-  padding: 15px;
-}
-
 .pCard_on .pCard_down div {
   margin-top: 10px;
 }
@@ -1446,10 +1398,6 @@ Down
 .font-size-3rem {
   font-size: 3rem;
 }
-.artworks-registered-text {
-  left: 20px;
-  position: absolute;
-}
 .error-message {
   text-align: center; 
   color: red; 
@@ -1564,3 +1512,191 @@ Down
 .color-black {
   color: var(--color-black);
 }
+
+
+
+
+
+
+.tabs {
+  display: flex;
+  align-items: center;   /* Align items to the right */
+  margin: 0 auto;
+  margin-top: 100px;
+  gap: 10px;
+}
+.tabs button {
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: var(--background-transparent);
+  backdrop-filter: blur(100px);
+  color: var(--color-white);
+}
+.tabs button:hover {
+  transition: all 0.5s;
+  background: var(--color-orange);
+}
+.tabs button.active {
+  transition: all 0.5s;
+  transform: scale(1.15);
+  background: var(--color-orange);
+  color: var(--color-white);
+}
+.tab-content {
+  padding: 10px 0;
+  border-radius: 5px;
+  height: 100%;
+  min-height: 350px;
+  width: 100%;
+}
+.carousel {
+  text-align: center;
+  background: #222;
+  padding: 5px 0;
+  color: var(--color-white);
+  border-radius: 10px;
+}
+.controls {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+
+
+
+
+
+
+
+.audio-player {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #222;
+  padding: 10px;
+  border-radius: 8px;
+  color: var(--color-white);
+  filter: drop-shadow(0 0 0.1rem var(--color-black));
+}
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0 auto;
+}
+
+
+
+
+
+
+
+
+
+
+.chatToggle {
+  position: fixed;
+  top: 3.5px;
+  right: 125px;
+  z-index: 100;
+  background: var(--color-orange);
+  color: white;
+  border: 1px solid var(--color-white);
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+.chatSidebar {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 280px;
+  height: 100vh;
+  z-index: 2000;
+  transition: right 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  background: var(--background-black-transparent);
+  backdrop-filter: blur(100px);
+  border: 1px solid var(--color-white);
+}
+
+.chatSidebar.open {
+  right: 0;
+}
+
+.chatHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: var(--color-orange);
+  color: var(--color-white);
+  border: 1px solid var(--color-blue);
+}
+
+.chatContent {
+  flex-grow: 1;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.chatInput {
+  display: flex;
+  padding: 10px;
+  background: var(--background-transparent);
+  backdrop-filter: blur(100px);
+  border-top: 1px solid #ccc;
+  
+}
+
+.chatInput input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+  
+.chatInput button {
+  background-color: var(--color-orange);
+  color: var(--color-white);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: var(--color-white);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.adminMessage {
+background-color: var(--background-transparent);
+backdrop-filter: blur(100px);
+padding: 10px;
+border-radius: 10px;
+margin: 10px 0;
+}
+
+
+
+
+
+

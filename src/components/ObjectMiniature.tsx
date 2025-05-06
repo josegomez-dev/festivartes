@@ -157,28 +157,6 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type, cust
               <p>{project.title}</p>
             </div>)}
             
-            {/* {type !== 'judge' && !selectMode  && (
-              <>
-                <div className="stars-container">
-                  {!customClass ? Array.from({ length: Math.min(getStarsRaitingByProject(project), 5) }).map((_, index) => (
-                    <FaStar key={index} className="star" color="gold" />
-                  )) : (
-                    <>
-                      <FaStar key={index} className="star" color="gold" />
-                      <span style={{ marginLeft: '2px', color: 'gold' }}>
-                        {Math.min(getStarsRaitingByProject(project)) < 0 ? 0 : Math.min(getStarsRaitingByProject(project))}
-                      </span>
-                    </>
-                  )}
-                </div>
-                <div>
-                  <p className='claps-container text-orange'>
-                    👏 {getCurrentProjectClaps(project)}
-                  </p>
-                </div>
-              </>
-            )} */}
-
           </div>
         </Link>
       ))}

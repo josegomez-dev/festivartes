@@ -316,39 +316,43 @@ const ArtworkDetail = () => {
               className={activeTab === 'info' ? 'active' : ''}
               onClick={() => handleTabClick('info')}
             >
-              Info 🖼️
+              🖼️
             </button>
             <button
               className={activeTab === 'document' ? 'active' : ''}
               onClick={() => handleTabClick('document')}
             >
-              Editor 📄
+              📄
             </button>
-            {/* <button
+            <button
               className={activeTab === 'audio' ? 'active' : ''}
               onClick={() => handleTabClick('audio')}
             >
               🔊
-            </button> */}
-            {/* <button
+            </button>
+            <button
               className={activeTab === 'video' ? 'active' : ''}
               onClick={() => handleTabClick('video')}
             >
               🎥
-            </button> */}
-            {/* <button
+            </button>
+            <button
               className={activeTab === 'live' ? 'active' : ''}
               onClick={() => handleTabClick('live')}
             >
-              LIVE
-            </button> */}
+              ⏺️
+            </button>
           </div>
 
           {/* Tab Content */}
           <div className="tab-content">
-            {/* {activeTab === 'audio' && (
+            {activeTab === 'audio' && (
               <>
-                <h2><b>🔊 Reproductor de Audio</b></h2>
+                <h2>
+                  <b className='font-size-title'>
+                    {project.title || 'Title'}
+                  </b>
+                </h2>
                 <br />
                 {project.thumbnail ? (
                   <img
@@ -366,30 +370,40 @@ const ArtworkDetail = () => {
                 )}
                 <br />
                 <br />
-                <div className="links-spaced">
+                <span className={`${project.audio ? '' : 'disabled'} small-text-size`}>
+                  Sube el archivo mp3 de la obra de arte
+                </span>
+                <div className={`links-spaced ${project.audio ? '' : 'disabled'}`}>
                   <AudioPlayer
                     src="https://file-examples.com/storage/fe46ad26fa67d4043a4b9e6/2017/11/file_example_MP3_700KB.mp3"
-                    title="Sample Track"
+                    title={project.title || 'Title'}
+                  />
+                </div>
+                <br />
+                <br />
+                <div className="input-group margin-0-auto" >
+                  <label htmlFor="audio">
+                    Subir archivo mp3 de la obra de arte
+                  </label>
+                  <input
+                    type="file"
+                    id="audio"
+                    name="audio"
+                    className={styles.fileInput}
+                    accept="audio/*" 
+                    onChange={handleAudioUpload}
                   />
                 </div>
               </>
-            )} */}
+            )}
 
             {activeTab === 'info' && (
               <>
-                <h1>
+                <h2>
                   <b className='font-size-title'>
                     {project.title || 'Title'}
                   </b>
-                </h1>
-                <div className='project-info-category'>
-                  <p className='project-info-small-text'>
-                  🎨: {project?.category} 
-                  &nbsp;
-                  &nbsp;
-                  👨🏻‍🎤: {project?.artist}
-                  </p>
-                </div>
+                </h2>
                 {project.thumbnail ? (
                   <img
                     src={project.thumbnail}
@@ -406,35 +420,16 @@ const ArtworkDetail = () => {
                 <div>
                   <div style={{ width: '300px', margin: '0 auto', color: 'lightgray'  }}>
                     <p className='project-info-small-text'>
-                    Estado:
-                    <span style={{ color: project?.status === 'active' ? 'lightgreen' : 'red' }}> &nbsp;
-                      {project?.status === 'active' ? 'Activo' : 'Inactivo'}
-                    </span> 
-                    <br />
-                    Privacidad: 
-                    <span style={{ color: project?.privacy === 'public' ? 'orange' : 'white' }}> &nbsp;
-                      {project?.privacy === 'public' ? 'Público' : 'Privado'}
-                    </span>
+                      🔐: 
+                      <span style={{ color: project?.privacy === 'public' ? 'orange' : 'white' }}> &nbsp;
+                        {project?.privacy === 'public' ? 'Público' : 'Privado'}
+                      </span>
                     </p>
                   </div>
+                  <p ><b className='bolder-text'>Artista:</b> {project.artist}</p>      
+                  <p ><b className='bolder-text'>Categoria:</b> {project.category}</p>      
                   <br />
                   <p className="overflow-area">{project?.description}</p>
-                  <br />
-                  <br />
-                  <div className="input-group margin-0-auto" >
-                    <label htmlFor="audio">
-                      Subir archivo mp3 de la obra de arte
-                    </label>
-                    <input
-                      type="file"
-                      id="audio"
-                      name="audio"
-                      className={styles.fileInput}
-                      accept="audio/*" 
-                      onChange={handleAudioUpload}
-                    />
-                  </div>
-                 
                 </div>
               </>
             )}
@@ -442,7 +437,7 @@ const ArtworkDetail = () => {
             {activeTab === 'document' && (
               <>
                 <DocumentEditor
-                  title="Editor"
+                  title={project.title || 'Título de la Obra'}
                   placeholder="Empieza a escribir tu historia aquí..."
                   readOnly={false}
                   // onSave={(content) => console.log('Saving:', content)}
@@ -463,9 +458,13 @@ const ArtworkDetail = () => {
               </>
             )}
 
-            {/* {activeTab === 'video' && (
+            {activeTab === 'video' && (
               <>
-                <h2><b>🔊 Reproductor de Video</b></h2>
+                <h2>
+                  <b className='font-size-title'>
+                    {project.title || 'Title'}
+                  </b>
+                </h2>
                 <br />
                 <div className="carousel">
                 <VideoPlayer
@@ -488,7 +487,7 @@ const ArtworkDetail = () => {
                 </div>
               </div>
               </>
-            )} */}
+            )}
 
             {activeTab === 'live' && (
               <div>
@@ -510,61 +509,6 @@ const ArtworkDetail = () => {
 
       </div>
 
-      {/* Tab Styles */}
-      <style jsx>{`
-        .tabs {
-          display: flex;
-          align-items: center;   /* Align items to the right */
-          margin: 0 auto;
-          margin-top: 100px;
-          gap: 10px;
-        }
-        .tabs button {
-          padding: 5px 10px;
-          font-size: 16px;
-          cursor: pointer;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-          background: var(--background-gradient-midnight-blue);
-          backdrop-filter: blur(100px);
-          border: 1px solid var(--background-transparent);
-          color: var(--color-white);
-        }
-        .tabs button:hover {
-          transition: all 0.5s;
-          background: var(--color-orange);
-        }
-        .tabs button.active {
-          transition: all 0.5s;
-          transform: scale(1.15);
-          background: var(--color-orange);
-          color: var(--color-white);
-        }
-        .tab-content {
-          padding: 10px 0;
-          border-radius: 5px;
-          height: 100%;
-          min-height: 350px;
-          width: 100%;
-        }
-        .carousel {
-          text-align: center;
-          background: #222;
-          padding: 5px 0;
-          color: var(--color-white);
-          border-radius: 10px;
-        }
-        .controls {
-          margin-top: 10px;
-          display: flex;
-          justify-content: center;
-          gap: 5px;
-        }
-        button:disabled {
-          opacity: 0.5;
-          cursor: not-allowed;
-        }
-      `}</style>
     </div>
   );
 };

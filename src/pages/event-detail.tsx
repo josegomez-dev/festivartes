@@ -216,19 +216,21 @@ const EventDetail = ({ }) => {
 
           <CoreSectionSelectedArtworks selectedArtworks={localSelectedArtworks} />
 
-          <ul className='list-style-type-none'>
-            {allArtworks.map((item) => {
-              if (localSelectedArtworks.includes(item.id)) {
-                return (
-                  <li key={item.id} className='selected-artwork-item'>
-                    {item.title} - {item.artist} - {item.type}
-                  </li>
-                );
-              }
-              return null;
-            })}
-          </ul>
-
+          <div className="">
+            <ul className='list-style-type-none'>
+              {allArtworks.map((item) => {
+                if (localSelectedArtworks.includes(item.id)) {
+                  return (
+                    <li key={item.id} className='selected-artwork-item'>
+                      {item.title} - {item.artist} - {item.type}
+                    </li>
+                  );
+                }
+                return null;
+              })}
+            </ul>
+          </div>
+          
           <div className='modal-submit-buttons'>
             <button className={authStyles['auth-button']} onClick={onCloseSelectArtworksModal}>
               <b>Guardar selección</b>
