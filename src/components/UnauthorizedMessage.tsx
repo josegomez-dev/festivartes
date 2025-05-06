@@ -4,7 +4,7 @@ import Preloader from '@/components/Preloader';
 
 export default function UnauthorizedMessage() {
   return (
-    <div className="unauthorized-message-wrapper" style={{ textAlign: 'center' }}>
+    <div className="unauthorized-message-wrapper text-align-center">
       <div>
         <Preloader message="Autenticando..." />
         <div>

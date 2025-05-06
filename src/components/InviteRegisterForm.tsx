@@ -105,7 +105,7 @@ const InviteRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) =
           ></textarea>
         </div>
 
-        <button type="submit" className={`${styles.submitButton}`} style={{ marginTop: '-15px' }}>
+        <button type="submit" className={`${styles.submitButton} mTop-15`} >
           <b>Enviar Formulario</b>
         </button>
       </form>

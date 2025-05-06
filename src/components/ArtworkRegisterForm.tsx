@@ -139,11 +139,8 @@ const ArtworkRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) 
           <Preloader message="Subiendo imagen..." />
         )}
 
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-
-
-
-          <div className="input-group" style={{ marginTop: "-30px" }}>
+        <div className={styles.artworkCategory}>
+          <div className="input-group mTop-30">
             {formData.category === "escultura" && (
               <div>
                 <Image

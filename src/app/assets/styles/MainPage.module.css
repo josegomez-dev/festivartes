@@ -17,7 +17,7 @@
   }
 
   .title {
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    text-shadow: 0 0 10px var(--background-transparent);
   }
 
   .center {
@@ -27,7 +27,7 @@
   
   .logo {
     animation: pulseLogo 3s infinite;
-    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+    filter: drop-shadow(0 0 15px var(--background-transparent));
   }
   
   @keyframes pulseLogo {
@@ -72,4 +72,10 @@
 .footer-container {
     padding: 20px;
     font-size: 0.8rem;
+}
+
+.footer-text {
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--color-white);
 }

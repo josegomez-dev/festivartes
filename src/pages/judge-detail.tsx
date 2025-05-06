@@ -47,7 +47,7 @@ const JudgeDetail = ({ }) => {
 
       <div className='project-detail-wrapper'>
         <div className="project-detail-container">
-          <h1><b style={{ fontSize: '3rem' }}>{profile.displayName}</b></h1>          
+          <h1><b className='font-size-3rem'>{profile.displayName}</b></h1>          
           <p className='bolder-text'>
             {profile?.name} | {profile?.bio || 'Agrega una descripcion'}
           </p>

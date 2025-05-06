@@ -62,7 +62,7 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type, cust
             <>
               {ratingException && (
                 project?.rate && (
-                  <p style={{ marginBottom: '-20px' }}>
+                  <p className='mTop-20'>
                     {project?.rate} 🖋️
                   </p>
                 )
@@ -130,30 +130,34 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type, cust
           </>}
           
           <div className="project-miniature">
-            {/* {project.upcoming && <div className="upcoming-message">
-              <b className='small-text-size'>Próximamente</b>
-              <br />
-              <br />
-              ⏰
-            </div>} */}
-            {project.thumbnail || project.profilePic ? 
-            <img 
-              src={project.thumbnail || project.profilePic}
-              alt={project.name} 
-              className="project-thumbnail"
-            /> : 
-            <div className='banner-title'>
-              <p className='small-text-size'>
-                <MdHideImage className='medium-text-size' />
-              </p>
-              <p className='small-text-size'>{project.name}</p>
-            </div>}
-
-            <div className="title-artworks-container">
-              <p>{project.title}</p>
-            </div>
             
-            {type !== 'judge' && !selectMode  && (
+            {/* {project.upcoming && 
+              <div className="upcoming-message">
+                <b className='small-text-size'>Próximamente </b>
+                <br />
+                ⏰
+                {project.name}
+              </div>} */}
+
+            {project.thumbnail || project.profilePic ? 
+              <img 
+                src={project.thumbnail || project.profilePic}
+                alt={project.name} 
+                className="project-thumbnail"
+              /> : 
+              <div className='banner-title'>
+                <p className='small-text-size'>
+                  <MdHideImage className='medium-text-size' />
+                </p>
+                <p className='small-text-size'>{project.name}</p>
+              </div>}
+
+            {selectMode && (
+              <div className="title-artworks-container">
+              <p>{project.title}</p>
+            </div>)}
+            
+            {/* {type !== 'judge' && !selectMode  && (
               <>
                 <div className="stars-container">
                   {!customClass ? Array.from({ length: Math.min(getStarsRaitingByProject(project), 5) }).map((_, index) => (
@@ -168,12 +172,12 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type, cust
                   )}
                 </div>
                 <div>
-                  <p className='claps-container' style={{ color: 'orange' }}>
+                  <p className='claps-container text-orange'>
                     👏 {getCurrentProjectClaps(project)}
                   </p>
                 </div>
               </>
-            )}
+            )} */}
 
           </div>
         </Link>

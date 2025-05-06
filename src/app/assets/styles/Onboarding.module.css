@@ -5,9 +5,9 @@
     justify-content: center;
     padding: 40px;
     
-    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    background: var(--background-transparent); /* Semi-transparent background */
     backdrop-filter: blur(100px); /* Apply the blur effect */
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Optional border for added style */
+    border: 1px solid var(--background-transparent); /* Optional border for added style */
 
     min-height: 100vh;
   }
@@ -63,8 +63,8 @@
   }
 
   .navigation-button-primary {
-    background-color: orange;
-    color: white;
+    background-color: var(--color-orange);
+    color: var(--color-white);
   }
 
   .navigation-button-secondary {
@@ -73,7 +73,7 @@
   }
 
   .navigation-button-primary:hover {
-    background-color: orange;
+    background-color: var(--color-orange);
   }
 
   .navigation-button-secondary:hover {

@@ -79,17 +79,11 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
                 
                 <button 
                   onClick={() => setShowAllData(!showAllData)} 
-                  style={{ 
-                    position: 'absolute', 
-                    left: 0, 
-                    textDecoration: 'none', 
-                    color: 'white', 
-                    background: 'transparent',
-                    border: 'none',
-                  }}>
+                  className='close-button-not-visible'
+                >
                   {!showAllData && (
                     <> &nbsp;
-                    <span style={{ fontSize: '12px', color: 'orange' }}>Ver Todos</span>
+                    <span className='close-button-not-visible-text'>Ver Todos</span>
                       <br />
                       <Image
                         src="/events-icon.png"
@@ -97,7 +91,7 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
                         width={35}
                         height={35}
                         priority
-                        style={{ animation: 'pulseGlow 1s infinite', marginTop: '15px', marginLeft: '35px' }}
+                        className='animated-icon-pulse-effect'
                       />
                     </>
                   )}
@@ -109,7 +103,6 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
                 <p className='bolder-text small-text-size'>
                   ¡Elegí tu próximo escenario y <br /> hacé historia!
                 </p>
-                <br />
                 <br />
 
                 {role === 'admin' && (
@@ -124,31 +117,24 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
             {data.length <= 0 ? 
             <div className={styles.grid}>
                 <div className={styles.card}>
-                <h3 style={{ color: 'lightgray'}}>Registra tu primer Evento Calificado</h3>
-                <p style={{ color: 'black' }}>Registra tu Festival Artístico Oficial.</p>
+                <h3 className='color-light-gray'>Registra tu primer Evento Calificado</h3>
+                <p className='color-black'>Registra tu Festival Artístico Oficial.</p>
                 </div> 
             </div> 
             : 
-            <div style={{ marginTop: '-25px' }}>
+            <div className='mTop-25'>
               <ObjectMiniature projects={dataFiltered} type={'event'} />
             </div>
             }
         </div>
 
         {showAllData && (
-          <div className={styles.card} style={{ textAlign: 'left' }}>
+          <div className={`${styles.card} text-align-left`}>
           <br />
           <button 
             onClick={() => setShowAllData(!showAllData)} 
-            style={{ 
-              position: 'absolute', 
-              right: '10px', 
-              top: '10px',
-              textDecoration: 'none', 
-              color: 'white', 
-              background: 'transparent',
-              border: 'none',
-            }}>
+            className='close-button-visible'
+            >
             {showAllData && (
               <span>X Ocultar</span>
             )}
@@ -156,12 +142,12 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
           {data.length <= 0 ? 
           <div className={styles.grid}>
               <div className={styles.card}>
-              <h3 style={{ color: 'lightgray'}}>No se han registrado eventos</h3>
-              <p style={{ color: 'black' }}>¡Explora la app y crea el primero!</p>
+              <h3 className='color-light-gray'>No se han registrado eventos</h3>
+              <p className='color-black'>¡Explora la app y crea el primero!</p>
               </div> 
           </div> 
           : 
-          <div className='' style={{ marginTop: '-5px' }}>
+          <div className='mTop-5'>
             <ObjectMiniature projects={data} customClass={'festivartes-miniature-panel'} type={'event'} />
           </div>
           }

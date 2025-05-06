@@ -18,7 +18,7 @@
   font-weight: bold;
   
   font-size: 14px;
-  color: white; /* From RatingForm */
+  color: var(--color-white); /* From RatingForm */
 }
 
 .input,
@@ -31,10 +31,10 @@
   border-radius: 4px;
   font-size: 16px;
 
-  background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  background: var(--background-transparent); /* Semi-transparent background */
   backdrop-filter: blur(100px); /* Apply the blur effect */
 
-  color: orange;
+  color: var(--color-orange);
   transition: border-color 0.3s ease;
 }
 
@@ -61,21 +61,21 @@
   margin: 0 auto;
   padding: 10px;
   font-size: 18px;
-  background-color: orange;
-  color: white;
-  border: 1px solid white;
+  background-color: var(--color-orange);
+  color: var(--color-white);
+  border: 1px solid var(--color-white);
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 .submitButton b {
- filter: drop-shadow(0 0 0.2rem black);
+ filter: drop-shadow(0 0 0.2rem var(--color-black));
 }
 
 .submitButton:hover {
-  background-color: black;
-  border: 1px solid black;
-  color: white;
+  background-color: var(--color-black);
+  border: 1px solid var(--color-black);
+  color: var(--color-white);
 }
 
 .formGroup {
@@ -97,7 +97,7 @@
   margin-bottom: 18px;
   font-size: 14px;
   font-weight: bold;
-  color: white; /* From RatingForm */
+  color: var(--color-white); /* From RatingForm */
   padding: 10px;
 }
 
@@ -110,4 +110,8 @@
   flex: 1;
   margin-right: 20px;
   margin-left: 0;
+}
+.artworkCategory {
+  display: flex;
+  justify-content: space-between;
 }

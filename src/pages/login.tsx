@@ -51,25 +51,25 @@ const LoginPage = () => {
       <div className="auth-container">
         <div className="auth-form space-around">
           <h2 className="auth-title">Bienvenido a <b>FESTIVARTES</b></h2>
-          {/* <b style={{ textAlign: 'center' }}>{user?.displayName}</b> */}
           <br />
           <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Correo electrónico" className="auth-input" required />
           <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Contraseña" className="auth-input" required />
-          {errorMessage !== '' && <p style={{ textAlign: 'center', color: 'red', background: 'black', borderRadius: '10px', width: '180px', margin: '0 auto', padding: '10px' }}>
+          {errorMessage !== '' && 
+          <p className="error-message">
             {errorMessage}
           </p>}
           <br />
           <button type="submit" onClick={() => handleLogin()} className="auth-button">Iniciar sesión</button>
           <br />
-          <p style={{ textAlign: 'center', border: '1px solid gray', borderRadius: '25px', padding: '5px', width: '200px', margin: '0 auto' }} onClick={() => {
+          <p className="reset-password-link" onClick={() => {
             email !== '' ? resetPassword(email) : setErrorMessage('Por favor, ingresa tu correo electrónico');
             toast.success("Si el correo electrónico existe, se enviará un enlace para restablecer la contraseña");
           }}>
-            <span style={{ color: 'white', textDecoration: 'none', cursor: 'pointer', padding: '5px' }}>
+            <span className="forgot-password-link">
               ¿Olvidaste tu contraseña?
             </span>
           </p>
-          {/* <br />
+          <br />
           <p>
             Tambien puedes usar el boton de <strong>Google</strong> para acceder a la plataforma. <br /> 
           </p>
@@ -78,15 +78,14 @@ const LoginPage = () => {
             <>
               <div className="external-logins">
                 <div className='google-login'>
-                  <FaGoogle style={{ marginTop: '8px' }} onClick={async () => {
+                  <FaGoogle className="mTop8" onClick={async () => {
                     await signInWithGoogle();
-                    playAudio();
                     router.push('/dashboard');
                   }} />
                 </div>
               </div>
             </>
-          )} */}
+          )}
           <p className="auth-link">
           ¿No tienes una cuenta?
             <b> &nbsp;

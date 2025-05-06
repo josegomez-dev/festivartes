@@ -216,11 +216,11 @@ const EventDetail = ({ }) => {
 
           <CoreSectionSelectedArtworks selectedArtworks={localSelectedArtworks} />
 
-          <ul style={{ listStyleType: 'none', padding: 0 }}>
+          <ul className='list-style-type-none'>
             {allArtworks.map((item) => {
               if (localSelectedArtworks.includes(item.id)) {
                 return (
-                  <li key={item.id} style={{ fontSize: '0.8rem', marginBottom: '10px' }}>
+                  <li key={item.id} className='selected-artwork-item'>
                     {item.title} - {item.artist} - {item.type}
                   </li>
                 );
@@ -229,7 +229,7 @@ const EventDetail = ({ }) => {
             })}
           </ul>
 
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+          <div className='modal-submit-buttons'>
             <button className={authStyles['auth-button']} onClick={onCloseSelectArtworksModal}>
               <b>Guardar selección</b>
             </button>
@@ -246,7 +246,7 @@ const EventDetail = ({ }) => {
           <ul className="options-menu event-position">
             <li>
               {hasClapped ? (
-                <div style={{ textAlign: 'center', position: 'relative', width: '50px' }}>
+                <div className='clap-button-preloader'>
                   <Preloader message='' small />
                 </div>
                 ) : (
@@ -266,8 +266,8 @@ const EventDetail = ({ }) => {
                 />
               ) : (
                 <p
-                  style={{ cursor: 'pointer', textAlign: 'center', marginTop: '20px' }}
-                  onClick={() => toast.error('No puedes calificar un evento que aún no ha ocurrido.')}
+                  className='calendar-button'
+                  onClick={() => toast.success('Agendar evento en el calendario')}
                 >
                   <b>⏰ Agendar</b>
                 </p>
@@ -284,10 +284,10 @@ const EventDetail = ({ }) => {
           <br />
 
           <h2>
-            <b style={{ fontSize: '3rem' }}>
+            <b className='font-size-title'>
             {project.name || 'Title'}
             </b>
-            <div>
+            {/* <div>
               <Image
                 src="/artworks-icon.png"
                 alt="artworks-icon"
@@ -295,10 +295,9 @@ const EventDetail = ({ }) => {
                 height={35}
                 priority />
                 <span>{project.selectedArtworks?.length || 0}</span>
-            </div>
+            </div> */}
           </h2>
           
-           <br />
           {/*
           <p>
             {project.price <= 0 ? 
@@ -313,13 +312,18 @@ const EventDetail = ({ }) => {
             className='project-thumbnail-wrapper'
           />
           <br />
-          {/* <p ><b className='bolder-text'>Fecha:</b> {project.date}</p> */}
+          <p>
+            <b className='bolder-text'>&nbsp;
+            &nbsp;Fecha:</b> &nbsp;
+              <span style={{ animation: project.upcoming ? 'pulseGlow 1s infinite' : '', color: project.upcoming ? 'black' : '' }}>
+                {`${project.date}`}
+              </span>
+          </p>
           <p ><b className='bolder-text'>Ubicación:</b> {project.location}</p>      
           <br />
           <p className='overflow-area'>
             {project.description}
           </p>
-          {/* <LikeDislike /> */}
           {/* Add more project details as needed */}
         </div>
 
@@ -331,13 +335,14 @@ const EventDetail = ({ }) => {
         {project.selectedArtworks?.length > 0 ? (
             <CoreSectionSelectedArtworks selectedArtworks={project?.selectedArtworks} />
           ) : (
-            <>
+            role === 'admin' && (
+              <>
             <br />
             <br />
-              <button className={authStyles['auth-button']} style={{  marginLeft: '165px', width: '300px', animation: 'pulseGlow 1s infinite' }} onClick={onOpenSelectArtworksModal}>
+              <button className={authStyles['auth-button']} onClick={onOpenSelectArtworksModal}>
                 <b>¡Selecciona tus obras!</b>
               </button>
-            </>
+            </>)
           )}
 
       </div>

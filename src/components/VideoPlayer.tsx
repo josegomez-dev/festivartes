@@ -80,8 +80,8 @@ const VideoPlayer = ({ src, title }: VideoPlayerProps) => {
           border-radius: 8px;
           overflow: hidden;
           background: #222;
-          color: white;
-            filter: drop-shadow(0 0 0.1rem black);
+          color: var(--color-white);
+          filter: drop-shadow(0 0 0.1rem black);
         }
         video {
           width: 100%;
@@ -99,7 +99,7 @@ const VideoPlayer = ({ src, title }: VideoPlayerProps) => {
           border: none;
           font-size: 18px;
           cursor: pointer;
-          color: white;
+          color: var(--color-white);
         }
         input {
           width: 100px;

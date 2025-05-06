@@ -95,7 +95,7 @@ const FloatingMenuButton: React.FC<FloatingMenuButtonProps> = ({ mainBtn }) => {
           <FaCirclePlus className="floating-menu-button" />
         </button>
         ) : (
-          <div style={{ background: 'orange', borderRadius: '50%', padding: '10px', border: '2px solid white' }} onClick={() => openDropdown()}>
+          <div className="menu-floating-button" onClick={() => openDropdown()}>
             <AiOutlineMenu className="menu-button floating-menu-button" />
           </div>
         )}

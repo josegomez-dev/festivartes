@@ -37,7 +37,7 @@ const SidebarMenu = () => {
             />
           </Link>}
           <Link href={`/settings`}>
-            <IoSettings style={{ marginLeft: '10px', marginTop: '-5px' }} color='white' />
+            <IoSettings className="io-settings-icon" color='white' />
           </Link>
         </nav>
       </div>

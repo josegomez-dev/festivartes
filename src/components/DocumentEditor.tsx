@@ -51,7 +51,7 @@ const DocumentEditor = ({
   return (
     <div className="editor-container">
       <h2>
-        <b style={{ fontSize: '3rem' }}>  {title}</b>
+        <b className="font-size-title">  {title}</b>
       </h2>
       <br />
       <ReactQuill theme="snow" value={content} onChange={setContent} className="quill-editor"/>

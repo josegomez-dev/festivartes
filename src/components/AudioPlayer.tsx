@@ -75,8 +75,8 @@ const AudioPlayer = ({ src, title }: AudioPlayerProps) => {
           background: #222;
           padding: 10px;
           border-radius: 8px;
-          color: white;
-            filter: drop-shadow(0 0 0.1rem black);
+          color: var(--color-white);
+          filter: drop-shadow(0 0 0.1rem black);
         }
         .player-controls {
           display: flex;
@@ -89,7 +89,7 @@ const AudioPlayer = ({ src, title }: AudioPlayerProps) => {
           border: none;
           font-size: 20px;
           cursor: pointer;
-          color: white;
+          color: var(--color-white);
         }
         input {
             width: 50px;

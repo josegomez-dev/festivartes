@@ -140,9 +140,8 @@ export default function Profile() {
         </label>
 
         <div className="input-group">
-          <label>Rol de Usuario <span style={{ color: 'orange' }}>*</span></label>
-          <button onClick={requestRoleChange} className="role-change-button disabled" disabled>Solicitar Actualización</button>
-          <input style={{maxWidth: '125px'}} type="text" name="role" value={accountData.role} disabled className="disabled" />
+          <label>Rol de Usuario <span className="color-orange">*</span></label>
+          <input type="text" name="role" value={accountData.role} disabled className="disabled" />
           {/* <select name="role" value={profile.role} onChange={handleInputChange}>
             <option value="Admin">Admin</option>
             <option value="User">User</option>
@@ -151,17 +150,17 @@ export default function Profile() {
         </div>
 
         <div className="input-group">
-          <label>Nombre <span style={{ color: 'orange' }}>*</span></label>
+          <label>Nombre <span className="color-orange">*</span></label>
           <input type="text" name="displayName" value={accountData.displayName || ''} onChange={handleInputChange} />
         </div>
 
         <div className="input-group">
-          <label>Correo electronico <span style={{ color: 'orange' }}>*</span></label>
+          <label>Correo electronico <span className="color-orange">*</span></label>
           <input type="email" name="email" value={accountData.email || ''} onChange={handleInputChange} />
         </div>
 
         <div className="input-group">
-          <label>Bio <span style={{ color: 'orange' }}>*</span></label>
+          <label>Bio <span className="color-orange">*</span></label>
           <input type="tel" name="phone" value={accountData.bio || ''} onChange={handleInputChange} />
         </div>
 
@@ -183,7 +182,7 @@ export default function Profile() {
         </div> */}
 
         <div className="input-group">
-          <label>Ubicación <span style={{ color: 'orange' }}>*</span></label>
+          <label>Ubicación <span className="color-orange">*</span></label>
           <input type="text" name="location" value={accountData.location || ''} onChange={handleInputChange} />
         </div>
         <div className="input-group">

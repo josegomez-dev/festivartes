@@ -11,7 +11,7 @@ const Preloader = ({ message = "Cargando...", small }: PreloaderProps) => {
   return (
     <div className="preloader-wrapper">
       <div className="spinner" />
-      <p style={{ marginTop: '1rem' }}>{message}</p>
+      <p>{message}</p>
 
       <style jsx>{`
         .preloader-wrapper {
@@ -26,7 +26,7 @@ const Preloader = ({ message = "Cargando...", small }: PreloaderProps) => {
           width: ${small ? '30px' : '50px'};
           height: ${small ? '30px' : '50px'};
           border: 6px solid rgba(0, 0, 0, 0.1);
-          border-left-color: orange;
+          border-left-color: var(--color-orange);
           border-radius: 50%;
           animation: spin 1s linear infinite;
         }

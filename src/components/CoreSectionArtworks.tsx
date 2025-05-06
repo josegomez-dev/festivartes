@@ -81,17 +81,11 @@ const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: Cor
               
               <button 
                 onClick={() => setShowAllData(!showAllData)} 
-                style={{ 
-                  position: 'absolute', 
-                  left: 0, 
-                  textDecoration: 'none', 
-                  color: 'white', 
-                  background: 'transparent',
-                  border: 'none',
-                }}>
+                className='close-button-not-visible'
+              >
                 {!showAllData && (
                   <> &nbsp;
-                  <span style={{ fontSize: '12px', color: 'orange' }}>Ver Todos</span>
+                  <span className='close-button-not-visible-text'>Ver Todos</span>
                    <br />
                     <Image
                       src="/artworks-icon.png"
@@ -99,7 +93,7 @@ const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: Cor
                       width={35}
                       height={35}
                       priority
-                      style={{ animation: 'pulseGlow 1s infinite', marginTop: '15px', marginLeft: '35px' }}
+                      className='animated-icon-pulse-effect'
                     />
                   </>
                 )}
@@ -110,7 +104,6 @@ const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: Cor
               <p className='bolder-text small-text-size'>
               Convertí tu inspiración <br /> en arte inmortal.
               </p>
-              <br />
               <div className="register-button">
                 <button className="menu-button" onClick={openUserModal}>
                   <FaCirclePlus className="floating-menu-button" />
@@ -122,33 +115,24 @@ const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: Cor
           {data.length <= 0 ? 
             <div className={styles.grid}>
               <div className={styles.card}>
-                <h3 style={{ color: 'lightgray'}}>¿Listo para mostrar tu talento?</h3>
-                <p style={{ color: 'black' }}>Tu galería aún está vacía</p>
+                <h3 className='color-light-gray'>¿Listo para mostrar tu talento?</h3>
+                <p className='color-black'>Tu galería aún está vacía</p>
               </div> 
             </div> 
             : 
-            <div style={{ marginTop: '-5px' }}>
-      
-              <ObjectMiniature projects={dataFiltered} type={'artwork'} />
-              
+            <div className='mTop-5'>
+              <ObjectMiniature projects={dataFiltered} type={'artwork'} />              
             </div>
           }
         </div> )}
 
         {showAllData && (
-          <div className={`${styles.card} `} style={{ textAlign: 'left' }}>
+          <div className={`${styles.card} text-align-left`}>
           <br />
           <button 
             onClick={() => setShowAllData(!showAllData)} 
-            style={{ 
-              position: 'absolute', 
-              right: '10px', 
-              top: '10px',
-              textDecoration: 'none', 
-              color: 'white', 
-              background: 'transparent',
-              border: 'none',
-            }}>
+            className='close-button-visible'
+          >
             {showAllData && !allItems && (
               <span>X Ocultar</span>
             )}
@@ -156,12 +140,12 @@ const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: Cor
           {data.length <= 0 ? 
             <div className={styles.grid}>
               <div className={styles.card}>
-                <h3 style={{ color: 'lightgray'}}>¡Ups! Todavía no hay obras</h3>
-                <p style={{ color: 'black' }}>Sube tu obra y compártela con el mundo desde aquí.</p>
+                <h3 className='color-light-gray'>¡Ups! Todavía no hay obras</h3>
+                <p className='color-black'>Sube tu obra y compártela con el mundo desde aquí.</p>
               </div> 
             </div> 
             : 
-            <div style={{ marginTop: '-10px' }}>
+            <div className='mTop-10'>
               <ObjectMiniature projects={data} customClass={'artworks-miniature-panel'} type={'artwork'} selectMode={selectMode} selectItem={selectItem} />              
             </div>
           }

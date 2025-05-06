@@ -40,7 +40,7 @@ const StarRating = ({ totalStars = 5, initialAverage = 0, handleRating, myRating
   }, [userRating]);
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div className='text-align-center'>
       {/* Feedback animation block */}
       <audio ref={audioRef} src="https://cdn.freesound.org/previews/784/784433_4468658-lq.mp3" />
       <div
@@ -64,14 +64,23 @@ const StarRating = ({ totalStars = 5, initialAverage = 0, handleRating, myRating
 
       {/* Default average */}
       {!userRating && !showFeedback && (
-        <div style={{ fontSize: '0.8rem', color: '#fff', marginBottom: '6px' }}>
-          Promedio: {initialAverage.toFixed(1)} / {totalStars} <br />
-          Tu calificación {myRating !== undefined ? `: ${myRating}` : ' (no calificado)'}
+        <div className='average-rating'>
+          <span
+              style={{
+                cursor: 'pointer',
+                fontSize: '1rem',
+                color: '#ffc107',
+                transition: 'color 0.2s ease',
+              }}
+            >
+              ★
+            </span> {initialAverage.toFixed(1)} / {totalStars} <br />
+          Calificación {myRating !== undefined ? `: ${myRating}` : ' (no calificado)'}
         </div>
       )}
 
       {/* Stars */}
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '8px' }}>
+      <div className='star-rating-container'>
         {[...Array(totalStars)].map((_, index) => {
           const starValue = index + 1;
           return (

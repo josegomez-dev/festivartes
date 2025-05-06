@@ -254,11 +254,10 @@ const ArtworkDetail = () => {
       </CustomModal>
 
     {role === 'judge' && (
-      <div style={{ position: 'fixed', bottom: '0', right: '0', zIndex: 30, width: '100%' }}>
+      <div className='judge-button-rate'>
         <div>
           <button
-            className={registerForm['submitButton']}
-            style={{ animation: 'pulse 1.5s ease-in-out infinite' }}
+            className={registerForm['submitButton'] + 'animate-pulse-infinite'}
             type="button"
             onClick={() => {
               role === 'judge'
@@ -271,7 +270,7 @@ const ArtworkDetail = () => {
         </div>
         <div>
           {project?.audio && (
-            <div style={{ width: '100%' }} className="links-spaced">
+            <div className="links-spaced">
             <AudioPlayer
               src={project.audio}
               title=""
@@ -290,7 +289,7 @@ const ArtworkDetail = () => {
           <ul className="options-menu">
             <li>
               {hasClapped ? (
-                <div style={{ textAlign: 'center', position: 'relative', width: '50px' }}>
+                <div className='clap-button-preloader'>
                   <Preloader message='' small />
                 </div>
                 ) : (
@@ -379,19 +378,12 @@ const ArtworkDetail = () => {
             {activeTab === 'info' && (
               <>
                 <h1>
-                  <b style={{ fontSize: '3rem' }}>{project.title || 'Title'}</b>
+                  <b className='font-size-title'>
+                    {project.title || 'Title'}
+                  </b>
                 </h1>
-                <div style={{ position: 'absolute', top: '100px', left: '-135px', zIndex: 30, width: '100%' }}>
-                  <Image
-                    src="/judges-icon.png"
-                    alt="judges-icon"
-                    width={35}
-                    height={35}
-                    priority />
-                    <span>{project.rates.length || 0}</span>
-                </div>
-                <div style={{ width: '300px', margin: '0 auto', color: 'lightgray'  }}>
-                  <p style={{ fontSize: '12px' }}>
+                <div className='project-info-category'>
+                  <p className='project-info-small-text'>
                   🎨: {project?.category} 
                   &nbsp;
                   &nbsp;
@@ -413,7 +405,7 @@ const ArtworkDetail = () => {
                 )}
                 <div>
                   <div style={{ width: '300px', margin: '0 auto', color: 'lightgray'  }}>
-                    <p style={{ fontSize: '12px' }}>
+                    <p className='project-info-small-text'>
                     Estado:
                     <span style={{ color: project?.status === 'active' ? 'lightgreen' : 'red' }}> &nbsp;
                       {project?.status === 'active' ? 'Activo' : 'Inactivo'}
@@ -429,7 +421,7 @@ const ArtworkDetail = () => {
                   <p className="overflow-area">{project?.description}</p>
                   <br />
                   <br />
-                  <div className="input-group" style={{ margin: '0 auto'}}>
+                  <div className="input-group margin-0-auto" >
                     <label htmlFor="audio">
                       Subir archivo mp3 de la obra de arte
                     </label>
@@ -506,7 +498,9 @@ const ArtworkDetail = () => {
           </div>
         </div>
         
-        <CoreSectionRatingJudges />
+        {role === 'admin' && (
+          <CoreSectionRatingJudges />
+        )}
 
         <br />
         <br />
@@ -531,20 +525,20 @@ const ArtworkDetail = () => {
           cursor: pointer;
           border: 1px solid #ccc;
           border-radius: 5px;
-          background: linear-gradient(135deg, #2c5364, #203a43, #0f2027);
+          background: var(--background-gradient-midnight-blue);
           backdrop-filter: blur(100px);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          color: white;
+          border: 1px solid var(--background-transparent);
+          color: var(--color-white);
         }
         .tabs button:hover {
           transition: all 0.5s;
-          background: orange;
+          background: var(--color-orange);
         }
         .tabs button.active {
           transition: all 0.5s;
           transform: scale(1.15);
-          background: orange;
-          color: white;
+          background: var(--color-orange);
+          color: var(--color-white);
         }
         .tab-content {
           padding: 10px 0;
@@ -557,7 +551,7 @@ const ArtworkDetail = () => {
           text-align: center;
           background: #222;
           padding: 5px 0;
-          color: white;
+          color: var(--color-white);
           border-radius: 10px;
         }
         .controls {

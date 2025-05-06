@@ -12,13 +12,13 @@ const ShareButton = () => {
   };
 
   return (
-    <div style={{ textAlign: 'center', position: 'relative' }} onClick={() => setShowOptions(!showOptions)}>
-      <div style={{ fontSize: '1rem', marginTop: '10px', color: '#fff' }}>
+    <div className='social-share-container' onClick={() => setShowOptions(!showOptions)}>
+      <div className='social-share-text'>
         Compartir
       </div>
 
       <span
-        style={{ fontSize: '2rem', cursor: 'pointer', color: '#fff' }}
+        className='social-share-icon'
         title="Compartir"
       >
         📣
@@ -26,28 +26,12 @@ const ShareButton = () => {
 
       {/* Share Options Dropdown */}
       {showOptions && (
-        <div
-          style={{
-            marginTop: '10px',
-            background: 'linear-gradient(135deg, #2c5364, #203a43, #0f2027)',
-            fontSize: '1rem',
-            color: '#fff',
-            padding: '10px 15px',
-            borderRadius: '8px',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
-            position: 'absolute',
-            top: '65px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            zIndex: 10,
-            minWidth: '180px',
-          }}
-        >
-          <div style={{ marginBottom: '10px', cursor: 'pointer' }} onClick={handleCopy}>
+        <div className='share-icons-container'>
+          <div className='copy-link-wrapper' onClick={handleCopy}>
             📋 Copiar enlace
           </div>
           <div
-            style={{ marginBottom: '10px', cursor: 'pointer' }}
+            className='copy-link-wrapper'
             onClick={() =>
               window.open(`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`, '_blank')
             }
@@ -55,7 +39,7 @@ const ShareButton = () => {
             📘 Compartir en Facebook
           </div>
           <div
-            style={{ cursor: 'pointer' }}
+            className='pointer'
             onClick={() =>
               window.open(`https://twitter.com/intent/tweet?url=${window.location.href}`, '_blank')
             }

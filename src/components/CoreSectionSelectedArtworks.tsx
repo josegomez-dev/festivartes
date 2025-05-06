@@ -68,7 +68,7 @@ const CoreSectionSelectedArtworks = ({ selectedArtworks }: CoreSectionArtworksPr
           <div className={`${styles.card} `}>
           <p>
             <span className='bolder-text'>
-              <div style={{ left: '20px', position: 'absolute'}}>
+              <div className='artworks-registered-text'>
                 <RiBubbleChartFill color='gold'/> &nbsp;
                 <b>Obras registradas para el Evento&nbsp; </b>
               </div>
@@ -80,12 +80,12 @@ const CoreSectionSelectedArtworks = ({ selectedArtworks }: CoreSectionArtworksPr
           {data.length <= 0 ? 
             <div className={styles.grid}>
               <div className={styles.card}>
-                <h3 style={{ color: 'lightgray'}}>¡Ups! Todavía no hay obras</h3>
-                <p style={{ color: 'black' }}>Sube tu obra y compártela con el mundo desde aquí.</p>
+                <h3 className='color-light-gray'>¡Ups! Todavía no hay obras</h3>
+                <p className='color-black'>Sube tu obra y compártela con el mundo desde aquí.</p>
               </div> 
             </div> 
             : 
-            <div style={{ marginTop: '-10px' }}>
+            <div className='mTop-10'>
               <ObjectMiniature projects={data} customClass={'artworks-miniature-panel'} type={'artwork'} selectMode />              
             </div>
           }

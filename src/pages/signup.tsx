@@ -62,25 +62,6 @@ const SignUp = () => {
       <div className="auth-container">
         <div className="auth-form space-around">
           <h2 className="auth-title">Crea tu cuenta en <b>FESTIVARTES</b></h2>
-          <div style={{ padding: '0px 0 15px', textAlign: 'center' }}>
-            {isJudge ? (
-                <Image
-                src="/judges-icon.png"
-                alt="judges-icon"
-                width={50}
-                height={50}
-                priority 
-              />
-            ) : (
-              <Image
-                src="/artworks-icon.png"
-                alt="artworks-icon"
-                width={50}
-                height={50}
-                priority 
-              />
-            )}
-          </div>
           <input
             type="text"
             onChange={(e) => setName(e.target.value)}
@@ -106,76 +87,74 @@ const SignUp = () => {
           />
           <br />
           {router.query.email && (
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-
-
-            <div className="input-group" style={{ marginTop: "-30px" }}>
-              {category === "" && (
-                <div>
-                  <Image
-                    width={50}
-                    height={50}
-                    className='judges-badge' 
-                    src="/logo2.png" 
-                    alt="" 
-                  />
-                </div>
-                )}
-              {category === "escultura" && (
-                <div>
-                  <Image
-                    width={50}
-                    height={50}
-                    className='judges-badge badge-white' 
-                    src="/icons-sculture.png" 
-                    alt="" 
-                  />
-                </div>
-                )}
-              {category === "fotografia" && (
-                <div>
-                  <Image
-                    width={50}
-                    height={50}
-                    className='judges-badge badge-white' 
-                    src="/icons-photography.png" 
-                    alt="" 
-                  />
-                </div>
-                )}
-              {category === "arte_digital" && (
-                <div>
-                  <Image
-                    width={50}
-                    height={50}
-                    className='judges-badge badge-white' 
-                    src="/icons-digital.png" 
-                    alt="" 
-                  />
-                </div>
-                )}
-              {category === "musica" && (
-                <div>
-                  <Image
-                    width={50}
-                    height={50}
-                    className='judges-badge badge-white' 
-                    src="/icons-music.png" 
-                    alt="" 
-                  />
-                </div>
-                )}
-              {category === "baile" && (
-                <div>
-                  <Image
-                    width={50}
-                    height={50}
-                    className='judges-badge badge-white' 
-                    src="/icons-dance.png" 
-                    alt="" 
-                  />
-                </div>
-                )}
+            <div className="input-group-custom-wrapper">
+              <div className="input-group mTop-30">
+                {category === "" && (
+                  <div>
+                    <Image
+                      width={50}
+                      height={50}
+                      className='judges-badge' 
+                      src="/logo2.png" 
+                      alt="" 
+                    />
+                  </div>
+                  )}
+                {category === "escultura" && (
+                  <div>
+                    <Image
+                      width={50}
+                      height={50}
+                      className='judges-badge badge-white' 
+                      src="/icons-sculture.png" 
+                      alt="" 
+                    />
+                  </div>
+                  )}
+                {category === "fotografia" && (
+                  <div>
+                    <Image
+                      width={50}
+                      height={50}
+                      className='judges-badge badge-white' 
+                      src="/icons-photography.png" 
+                      alt="" 
+                    />
+                  </div>
+                  )}
+                {category === "arte_digital" && (
+                  <div>
+                    <Image
+                      width={50}
+                      height={50}
+                      className='judges-badge badge-white' 
+                      src="/icons-digital.png" 
+                      alt="" 
+                    />
+                  </div>
+                  )}
+                {category === "musica" && (
+                  <div>
+                    <Image
+                      width={50}
+                      height={50}
+                      className='judges-badge badge-white' 
+                      src="/icons-music.png" 
+                      alt="" 
+                    />
+                  </div>
+                  )}
+                {category === "baile" && (
+                  <div>
+                    <Image
+                      width={50}
+                      height={50}
+                      className='judges-badge badge-white' 
+                      src="/icons-dance.png" 
+                      alt="" 
+                    />
+                  </div>
+                  )}
             </div>
   
   
@@ -206,15 +185,7 @@ const SignUp = () => {
           </div>          
           )}
           {errorMessage !== '' && (
-            <p style={{
-              textAlign: 'center',
-              color: 'red',
-              background: 'black',
-              borderRadius: '10px',
-              width: '180px',
-              margin: '0 auto',
-              padding: '10px'
-            }}>
+            <p className="error-message">
               {errorMessage}
             </p>
           )}

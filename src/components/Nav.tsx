@@ -1,23 +1,16 @@
 import { useAuth } from "@/context/AuthContext";
 import styles from '@/app/assets/styles/Nav.module.css'
-import { EMPTY_USER } from '@/types/userTypes'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FaSignOutAlt } from "react-icons/fa"
 import ChatSidebar from './ChatSidebar'
 import { MdDashboardCustomize } from "react-icons/md";
-import toast, { Toaster } from 'react-hot-toast'
-import { use, useEffect, useState } from "react";
-import { FaBell } from "react-icons/fa";
+import { Toaster } from 'react-hot-toast'
+import { useEffect, useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from './../../firebaseConfig'
-interface Notification {
-  id: number;
-  text: string;
-  link: string;
-  visited: boolean;
-}
+import { Notification } from "@/types/notifications.types";
   
 export default function Nav() {
   const { role, authenticated, logout } = useAuth()
@@ -126,7 +119,6 @@ export default function Nav() {
                   setShowNotifications(!showNotifications);
                 }}
                 className={styles['notification-bell']}
-                style={{ animation: 'pulseGlow 1.5s ease-in-out infinite', position: 'absolute', top: '35px', right: '100px', cursor: 'pointer' }}
               >
                 {notifications && notifications?.filter((n: Notification) => !n.visited).length > 0 && (
                   <span className={styles['notification-badge']}>
@@ -148,9 +140,9 @@ export default function Nav() {
             
             {showNotifications && (
               <div className={styles['notification-dropdown']}>
-                <div style={{ position: 'fixed', background: 'linear-gradient(135deg, #2c5364, #203a43, #0f2027)', padding: '10px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px', color: 'white', marginTop: '-10px', marginLeft: '-10px', width: '320px' }}> 
+                <div className="notification-header"> 
                   🔔 Tienes &nbsp;
-                  <span style={{ color: 'orange'}}>{notifications.filter(n => !n.visited).length}</span> 
+                  <span className="color-orange">{notifications.filter(n => !n.visited).length}</span> 
                   &nbsp;
                   notificaciones sin leer...
                 </div>
@@ -176,7 +168,7 @@ export default function Nav() {
 
         {authenticated && (
           <div className="relative">
-            <button className="flex items-center gap-2 focus:outline-none" style={{ cursor: 'pointer' }} onClick={() => setShowDropdown(!showDropdown)}>
+            <button className="flex items-center gap-2 focus:outline-none pointer" onClick={() => setShowDropdown(!showDropdown)}>
               <Image
                 width={50}
                 height={50}
@@ -197,7 +189,7 @@ export default function Nav() {
                 <br />
                 <br />
                 <br />
-                <label htmlFor="profile-pic" style={{ textAlign: 'center', cursor: 'pointer', margin: '0 auto', left: '0px', right: '0px', display: 'block' }}>
+                <label htmlFor="profile-pic" className="profile-pic-label-custom">
                   <Image
                     src={user?.profilePic}
                     alt="Profile Picture"
@@ -207,7 +199,7 @@ export default function Nav() {
                   />
                 </label>
 
-                <div style={{ position: 'absolute', top: '0px', right: '0px', borderTopRightRadius: '10px', borderTopLeftRadius: '10px', padding: '10px',  background: 'linear-gradient(135deg, #2c5364, #203a43, #0f2027)', width: '100%' }} >
+                <div className="go-to-profile-container" >
                   <Link href="/profile" className={styles.dropdownLink}>⚙️ Ir al Perfil</Link>
                 </div>
 
@@ -218,7 +210,7 @@ export default function Nav() {
 
                 <div className={styles.dropdownActions}>
                   <br />
-                  <p className={styles.dropdownLink} style={{ color: 'white', textDecoration: 'none' }}>Cerrar Sesion</p>
+                  <p className={`${styles.dropdownLink} close-session-link `}>Cerrar Sesion</p>
                   <button onClick={handleLogout} className={styles.logoutButton}>
                     <FaSignOutAlt /> Cerrar Sesión
                   </button>

@@ -8,7 +8,7 @@ const BannerFooter = ({ }) => {
         <div className={mainStyles['footer-container']}>
           <br />
           <div className={mainStyles['footer-content']}>
-            <p style={{ textAlign: 'center', fontSize: '0.7rem', color: 'white' }}>               
+            <p className={mainStyles['footer-text']}>               
                 © 2025 | <b>Festivartes</b> <br />
               Todos los derechos reservados.
             </p>

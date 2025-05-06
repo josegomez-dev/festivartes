@@ -1,6 +1,6 @@
 .navbar {
-  background-color:#32acc0;
-  color: white;
+  background-color:var(--color-blue);
+  color: var(--color-white);
   padding: 1rem;
   width: 100%;
   z-index: 1000;
@@ -10,7 +10,7 @@
 
   /* max-width: 900px; */
   margin: 0 auto;
-  box-shadow: 0 0.5px 10px black;
+  box-shadow: 0 0.5px 10px var(--color-black);
   position: fixed;
 }
 
@@ -22,7 +22,7 @@
 }
 
 .nav-link {
-  color: white;
+  color: var(--color-white);
   text-decoration: none;
   padding: 0.5rem 1rem;
   transition: background-color 0.3s;
@@ -38,8 +38,8 @@
 }
 
 .nav-link:hover {
-  background-color: orange;
-  border: 1px solid white;
+  background-color: var(--color-orange);
+  border: 1px solid var(--color-white);
 }
 
 .logo-container {
@@ -57,7 +57,7 @@
 }
 
 .bg-red-500:hover {
-  background-color: orange;
+  background-color: var(--color-orange);
 }
 
 .profile-picture {
@@ -89,8 +89,10 @@
   top: 70px;
   right: 15px;
   width: 250px;
-  background: #1f2d3d;
-  color: white;
+  background: var(--background-transparent);
+  backdrop-filter: blur(50px); /* Apply the blur effect */
+
+  color: var(--color-white);
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
   padding: 16px;
@@ -121,7 +123,7 @@
 .dropdownActions {
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid orange;
+  border-bottom: 1px solid var(--color-orange);
   align-items: center;
 }
 .dropdownActions:last-child {
@@ -130,7 +132,7 @@
 
 .dropdownLink {
   text-decoration: none;
-  color: orange;
+  color: var(--color-white);
   font-size: 18px;
 }
 
@@ -166,12 +168,15 @@
 
 
 .notification-bell {
-  position: relative;
   font-size: 1.5rem;
-  color: white;
-  cursor: pointer;
   background: transparent;
   border: none;
+
+  animation: pulseGlow 1.5s ease-in-out infinite;
+  position: absolute;
+  top: 20px;
+  right: 110px;
+  cursor: pointer;
 }
 
 .notification-badge {
@@ -179,7 +184,7 @@
   top: -5px;
   right: 20px;
   background: red;
-  color: white;
+  color: var(--color-white);
   font-size: 0.8rem;
   padding: 2px 6px;
   border-radius: 50%;
@@ -193,10 +198,11 @@
   height: auto;
   max-height: 200px;
   overflow-y: auto;
-  background: #1f2d3d;
+  background: var(--background-transparent);
+  backdrop-filter: blur(50px); /* Apply the blur effect */
   border-radius: 8px;
   padding: 10px;
-  color: white;
+  color: var(--color-white);
   z-index: 9999;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
@@ -217,7 +223,7 @@
 }
 
 .notification-dropdown a {
-  color: orange;
+  color: var(--color-white);
   text-decoration: none;
 }
 
@@ -237,7 +243,7 @@
   margin-left: 15px;
   transition: transform 0.2s ease;
   text-decoration: none;
-  background-color: orange;
-  color: white;
+  background-color: var(--color-orange);
+  color: var(--color-white);
 }
 
