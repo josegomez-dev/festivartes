@@ -4,11 +4,9 @@
     align-items: center;
     justify-content: center;
     padding: 40px;
-    
-    background: var(--background-transparent); /* Semi-transparent background */
-    backdrop-filter: blur(100px); /* Apply the blur effect */
-    border: 1px solid var(--background-transparent); /* Optional border for added style */
-
+    background: var(--background-transparent); 
+    backdrop-filter: blur(100px); 
+    border: 1px solid var(--background-transparent); 
     min-height: 100vh;
   }
 

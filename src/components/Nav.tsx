@@ -4,13 +4,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FaSignOutAlt } from "react-icons/fa"
-import ChatSidebar from './ChatSidebar'
 import { MdDashboardCustomize } from "react-icons/md";
 import { Toaster } from 'react-hot-toast'
 import { useEffect, useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from './../../firebaseConfig'
 import { Notification } from "@/types/notifications.types";
+import ChatSidebar from "./ChatSidebar";
   
 export default function Nav() {
   const { role, authenticated, logout } = useAuth()
@@ -224,7 +224,7 @@ export default function Nav() {
         )}
 
       </div>
-      {authenticated && <ChatSidebar />}
+      {/* {authenticated && <ChatSidebar />} */}
     </nav>
   )
 }

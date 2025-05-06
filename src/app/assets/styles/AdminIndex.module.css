@@ -10,17 +10,15 @@
   flex: 1;
   padding: 20px;
   width: 80%;
-  
+ 
 }
 
 .full-view {
   padding: 20px;
   background-color: var(--background-end-rgb);
   min-height: 100vh;
-  
   max-width: 900px;
   margin: 0 auto;
-
 }
 
 .welcome-message {
@@ -29,9 +27,7 @@
   margin-bottom: 20px;
   color: var(--color-orange);
   text-align: center;
-
   animation: fadeIn 1s ease;
-
 }
 
 .slogan-text {
@@ -46,7 +42,6 @@
   padding: 10px;
   text-justify: auto;
   margin-top: 15px;
-
   animation: fadeIn 1s ease;
 }
 
@@ -55,7 +50,6 @@
   gap: 5px;
   margin-bottom: 20px;
   justify-content: center;
-
 }
 
 .quick-links a {
@@ -75,18 +69,14 @@
   background-color: var(--color-blue);
 }
 
-
 .card {
   text-align: center;
-  color: #fff;
   background: var(--background-transparent); /* Semi-transparent background */
   backdrop-filter: blur(100px); /* Apply the blur effect */
   border: 1px solid var(--background-transparent); /* Optional border for added style */
-
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   animation: fadeIn 1s ease;
-
   margin: 15px auto;
-
   padding: 10px;
   border-radius: 10px;
 }
@@ -94,17 +84,13 @@
 .card h3 {
   font-size: 18px;
   margin-bottom: 10px;
+  color: var(--color-orange);
 }
 
 .card p {
+  font-size: 12px;
   color: var(--color-white);
 }
-
-
-
-
-
-
 
 
 /* Settings Container */

@@ -1,8 +1,7 @@
-/* Merged CSS File */
 
 .form {
-  overflow-y: scroll; /* Ensures scrolling section */
-  height: 65vh; /* Takes the taller height */
+  overflow-y: scroll;
+  height: 65vh;
   margin: 0 auto;
 }
 
@@ -16,9 +15,8 @@
 .label {
   display: block;
   font-weight: bold;
-  
   font-size: 14px;
-  color: var(--color-white); /* From RatingForm */
+  color: var(--color-white);
 }
 
 .input,
@@ -30,10 +28,8 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
-
-  background: var(--background-transparent); /* Semi-transparent background */
-  backdrop-filter: blur(100px); /* Apply the blur effect */
-
+  background: var(--background-transparent);
+  backdrop-filter: blur(100px);
   color: var(--color-orange);
   transition: border-color 0.3s ease;
 }
@@ -45,7 +41,6 @@
   border-color: #007bff;
   outline: none;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-  
 }
 
 .textarea {
@@ -79,7 +74,7 @@
 }
 
 .formGroup {
-  margin-bottom: 20px; /* From RatingForm */
+  margin-bottom: 20px;
   margin: 0;
 }
 
@@ -90,14 +85,14 @@
 
 .checkboxGroup {
   display: flex;
-  flex-direction: column; /* From RatingForm */
+  flex-direction: column; 
 }
 
 .checkboxLabel {
   margin-bottom: 18px;
   font-size: 14px;
   font-weight: bold;
-  color: var(--color-white); /* From RatingForm */
+  color: var(--color-white); 
   padding: 10px;
 }
 

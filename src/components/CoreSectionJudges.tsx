@@ -58,7 +58,7 @@ const CoreSectionJudges = ({ filterBy }: CoreSectionJudgesProps) => {
         <div className={styles.grid}>
           <div className={styles.card}>
             <h3>Invita a tu Jurado Seleccionador</h3>
-            <p className='color-black'>Agrega los datos de las personas encargadas de valorar las obras. Podrán acceder de forma segura y emitir su evaluación.</p>
+            <p className='color-black'>Podrán acceder de forma segura y emitir su evaluación.</p>
           </div>
         </div>
         :
