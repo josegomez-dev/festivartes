@@ -85,7 +85,7 @@ const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: Cor
               >
                 {!showAllData && (
                   <> &nbsp;
-                  <span className='close-button-not-visible-text'>Ver Todos</span>
+                  {/* <span className='close-button-not-visible-text'>Ver Todos</span> */}
                    <br />
                     <Image
                       src="/artworks-icon.png"

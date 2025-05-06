@@ -10,7 +10,6 @@
 
   /* max-width: 900px; */
   margin: 0 auto;
-  box-shadow: 0 0.5px 10px var(--color-black);
   position: fixed;
 }
 
@@ -143,7 +142,7 @@
 .logoutButton {
   background-color: transparent;
   border: none;
-  color: red;
+  color: var(--color-orange);
   font-weight: bold;
   cursor: pointer;
   display: flex;
@@ -152,7 +151,7 @@
 }
 
 .logoutButton:hover {
-  color: darkred;
+  color: var(--color-white);
 }
 
 

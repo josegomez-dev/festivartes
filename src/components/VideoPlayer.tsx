@@ -81,7 +81,7 @@ const VideoPlayer = ({ src, title }: VideoPlayerProps) => {
           overflow: hidden;
           background: #222;
           color: var(--color-white);
-          filter: drop-shadow(0 0 0.1rem black);
+          filter: drop-shadow(0 0 0.1rem var(--color-black));
         }
         video {
           width: 100%;

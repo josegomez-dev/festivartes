@@ -45,7 +45,6 @@
   line-height: 14px;
   padding: 10px;
   text-justify: auto;
-  filter: drop-shadow(0 0 0.1rem black);
   margin-top: 15px;
 
   animation: fadeIn 1s ease;
@@ -61,19 +60,15 @@
 
 .quick-links a {
   display: block;
-  padding: 7.5px 10px 0 10px;
-  
+  padding: 7.5px 10px 0 10px;  
   background: var(--background-transparent); /* Semi-transparent background */
   backdrop-filter: blur(100px); /* Apply the blur effect */
   border: 1px solid var(--background-transparent); /* Optional border for added style */
-
   color: var(--color-white);
   text-decoration: none;
   border-radius: 5px;
   transition: background-color 0.3s;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-  filter: drop-shadow(0 0 0.2rem black);
+  filter: drop-shadow(0 0 0.2rem var(--color-black));
 }
 
 .quick-links a:hover {
@@ -94,7 +89,6 @@
 
   padding: 10px;
   border-radius: 10px;
-  box-shadow: 0 3px 5px var(--color-black);
 }
 
 .card h3 {

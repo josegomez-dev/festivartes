@@ -76,7 +76,7 @@ const AudioPlayer = ({ src, title }: AudioPlayerProps) => {
           padding: 10px;
           border-radius: 8px;
           color: var(--color-white);
-          filter: drop-shadow(0 0 0.1rem black);
+          filter: drop-shadow(0 0 0.1rem var(--color-black));
         }
         .player-controls {
           display: flex;

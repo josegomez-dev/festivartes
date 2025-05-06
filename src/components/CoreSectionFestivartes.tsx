@@ -83,7 +83,7 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
                 >
                   {!showAllData && (
                     <> &nbsp;
-                    <span className='close-button-not-visible-text'>Ver Todos</span>
+                    {/* <span className='close-button-not-visible-text'>Ver Todos</span> */}
                       <br />
                       <Image
                         src="/events-icon.png"
