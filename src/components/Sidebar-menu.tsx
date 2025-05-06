@@ -36,9 +36,9 @@ const SidebarMenu = () => {
               priority
             />
           </Link>}
-          <Link href={`/settings`}>
+          {/* <Link href={`/settings`}>
             <IoSettings className="io-settings-icon" color='white' />
-          </Link>
+          </Link> */}
         </nav>
       </div>
   )

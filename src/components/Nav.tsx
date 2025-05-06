@@ -169,19 +169,14 @@ export default function Nav() {
         {authenticated && (
           <div className="relative">
             
-            
-            <button 
-              className="pointer" 
+            <Image
+              width={50}
+              height={50}
+              src={user?.profilePic || "/default-avatar.png"}
+              alt="Profile Picture"
+              className={styles['profile-picture']}
               onClick={() => setShowDropdown(!showDropdown)}
-            >
-              <Image
-                width={50}
-                height={50}
-                src={user?.profilePic || "/default-avatar.png"}
-                alt="Profile Picture"
-                className={styles['profile-picture']}
-              />
-            </button>
+            />
 
             {renderDropdown && (
               <div
@@ -204,25 +199,36 @@ export default function Nav() {
                   <Link href="/profile" className={styles.dropdownLink}>⚙️ Ir al Perfil</Link>
                 </div>
 
-                <br />
-                <p className={styles.dropdownItem}><strong>{user?.displayName || 'Usuario'}</strong></p>
-                <p className={`${styles.dropdownItem} small-text-size`}>{user?.email}</p>
-                <hr />
+
                 <div className="small-text-size">
-                  <p className={styles.dropdownItem}>
-                    🛡️ Rol:&nbsp;
+                  <p className={styles.dropdownItem} style={{ position: 'absolute', top: '50px', left: '5px' }}>
+                    🛡️:&nbsp;
                     <b className="medium-text-size">{role}</b>
                   </p>
-                  <p className={styles.dropdownItem}>
-                    ✅ Estado:&nbsp;
+                  <p className={styles.dropdownItem} style={{ position: 'absolute', top: '50px', right: '5px' }}>
+                    ✅ :&nbsp;
                     <b className="medium-text-size">{user?.status}</b>
                   </p>
-                  <p className={styles.dropdownItem}>
-                    👤 Tipo:&nbsp;
-                    <b className="medium-text-size">{user?.type}</b>
-                  </p>
                 </div>
+
+                <p className={styles.dropdownItem}>
+                  <b className="medium-text-size">{user?.type === 'normal' ? 'Usuario Regular' : user?.type}</b>
+                </p>
+                <p className={`${styles.dropdownItem} color-orange`}><strong>{user?.displayName || 'Usuario'}</strong></p>
+                <p className={`${styles.dropdownItem} small-text-size`}>{user?.email}</p>
+                
                 <hr />
+                <br />
+                <Link href="/onboarding" className={styles.dropdownLink}>
+                  <p className={`${styles.dropdownItem} link-item`}>
+                    ➡️ Onboarding 
+                  </p>
+                </Link>
+                <Link href="/help" className={styles.dropdownLink}>
+                  <p className={`${styles.dropdownItem} link-item`}>
+                    ℹ️ Ayuda
+                  </p>
+                </Link>
                 <div className={styles.dropdownActions}>
                   <br />
                   {/* <p className={`${styles.dropdownLink} close-session-link `}>Cerrar Sesion</p> */}
@@ -237,9 +243,9 @@ export default function Nav() {
 
           </div>
         )}
-        {/* <button onClick={handleLogout} className={styles.logoutButton}>
+        <button onClick={handleLogout} className={styles.logoutButton}>
           <FaSignOutAlt /> 
-        </button> */}
+        </button>
       </div>
       {authenticated && <ChatSidebar />}
     </nav>

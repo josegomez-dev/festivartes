@@ -327,6 +327,21 @@ const EventDetail = ({ }) => {
             {project.description}
           </p>
           {/* Add more project details as needed */}
+          {role === 'admin' && (
+              <>
+              <br />
+              <button className={authStyles['auth-button']} onClick={onOpenSelectArtworksModal}>
+                <b>¡Selecciona tus obras!</b>
+              </button>
+            </>)}
+          
+          {role === 'judge' || role === 'admin' && (
+              <>
+              <br />
+              <button className={authStyles['auth-button']} onClick={() => alert('')}>
+                <b>Generar Premiacion Automatica</b>
+              </button>
+            </>)}
         </div>
 
         {/* <br />
@@ -337,14 +352,7 @@ const EventDetail = ({ }) => {
         {project.selectedArtworks?.length > 0 ? (
             <CoreSectionSelectedArtworks selectedArtworks={project?.selectedArtworks} />
           ) : (
-            role === 'admin' && (
-              <>
-            <br />
-            <br />
-              <button className={authStyles['auth-button']} onClick={onOpenSelectArtworksModal}>
-                <b>¡Selecciona tus obras!</b>
-              </button>
-            </>)
+            null
           )}
 
       </div>

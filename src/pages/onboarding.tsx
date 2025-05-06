@@ -12,31 +12,23 @@ const steps = [
     imageUrl: "/logo2.png"
   },
   {
-    title: "Público Objetivo",
-    description: `
-    Organizadores de festivales culturales.
-
-Artistas y colectivos artísticos.
-
-Jurados y evaluadores de eventos.
-
-Instituciones y entidades de promoción cultural.
-`,
-    imageUrl: "/events-icon.png"
-  },
-  {
-    title: "Sistema de calificaciones en tiempo real.",
-    description: "Automatizar la generación de premiaciones y resultados.",
-    imageUrl: "/judges-icon.png"
-  },
-  {
-    title: "Transparencia y eficiencia en la evaluación y premiación.",
-    description: "Reducción del tiempo y materiales en la gestión de festivales.",
+    title: "Obras de Arte",
+    description: "Registros  y resultados.",
     imageUrl: "/artworks-icon.png"
   },
   {
-    title: "Vamos!",
-    description: "Ya estas preparado para utilizar la plataforma intuitiva para la gestión de eventos.",
+    title: "Festivartes",
+    description: `Organización efectiva de eventos culturales.`,
+    imageUrl: "/events-icon.png"
+  },
+  {
+    title: "Calificaciones en Tiempo Real",
+    description: "Evaluación y premiación automatica.",
+    imageUrl: "/judges-icon.png"
+  },
+  {
+    title: "¡Comencemos!",
+    description: "¿Estas preparado para utilizar la plataforma?",
     imageUrl: "/logo2.png"
   }
 ]
@@ -64,7 +56,7 @@ const Onboarding = () => {
     <div className={styles['onboarding-container']}>
       <div className={styles['onboarding-card']}>
         <h1 className={styles['onboarding-header']}>
-          {steps[currentStep].title}
+          <b className='font-size-3rem'>{steps[currentStep].title}</b>
         </h1>
         <div className={styles['onboarding-step']}>
           <p>{steps[currentStep].description}</p>
