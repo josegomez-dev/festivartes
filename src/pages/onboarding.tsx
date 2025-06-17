@@ -75,14 +75,14 @@ const Onboarding = () => {
               onClick={prevStep}
               className={`${styles['navigation-button']} ${styles['navigation-button-secondary']}`}
             >
-              Back
+              Atras
             </button>
           )}
           <button
             onClick={nextStep}
             className={`${styles['navigation-button']} ${styles['navigation-button-primary']}`}
           >
-            {currentStep < steps.length - 1 ? 'Next' : 'Finish'}
+            {currentStep < steps.length - 1 ? 'Conitnuar' : 'Comenzar'}
           </button>
         </div>
       </div>

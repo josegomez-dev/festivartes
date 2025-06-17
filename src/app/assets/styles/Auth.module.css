@@ -42,7 +42,7 @@
   }
 
   .auth-input:focus {
-    border-color: var(--color-orange);
+    border-color: var(--color-white);
     outline: none;
   }
 

@@ -1234,9 +1234,9 @@ Down
 }
 
 .input-group input:focus {
-  border-color: var(--color-orange);
+  border-color: gold;
   box-shadow: 0 0 8px var(--color-orange);
-  color: var(--color-orange);
+  color: var(--color-white);
 }
 
 .input-group input:focus + label,
