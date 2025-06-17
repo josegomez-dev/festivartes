@@ -64,7 +64,7 @@ React.useEffect(() => {
               onMouseMove={handleHover}
               onMouseLeave={resetLight}
             >
-              <h3><b style={{ fontSize: 30 }}>Jose Alejandro Gomez Castro</b></h3>
+              <h3><b style={{ fontSize: 30 }}>José Alejandro Gómez Castro</b></h3>
               <br />
               <Image
                 className={styles.logo}
@@ -84,7 +84,7 @@ React.useEffect(() => {
               onMouseMove={handleHover}
               onMouseLeave={resetLight}
             >
-              <h3><b style={{ fontSize: 30 }}>Alexander Flores Aguero</b></h3>
+              <h3><b style={{ fontSize: 30 }}>Alexander Flores Agüero</b></h3>
               <br />
               <Image
                 className={styles.logo}
