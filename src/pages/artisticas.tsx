@@ -78,7 +78,7 @@ const ArtistiacasScreen = () => {
               <video
                   className={styles.video}
                   controls
-                  src="/artistica/artemediodia/4.MOV"
+                  src="/artistica/artemediodia/1.png"
                   style={{
                     width: '250px',
                     height: '250px',
