@@ -28,7 +28,7 @@ const steps = [
   },
   {
     title: "¡Comencemos!",
-    description: "¿Estas preparado para utilizar la plataforma?",
+    description: "¿Estás preparado para utilizar la plataforma?",
     imageUrl: "/logo2.png"
   }
 ]

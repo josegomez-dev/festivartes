@@ -134,7 +134,7 @@ const ArtistiacasScreen = () => {
 
           <hr style={{width: '100%'}} />
           <br />
-          <h3><b>Festival de las Artes 2025</b> | Escuela Simon Bolivar.</h3>
+          <h3><b>Festival de las Artes 2025</b> | Escuela Simón Bolívar.</h3>
           <br />
 
           <section className={styles.rowMiddle}>
@@ -162,7 +162,7 @@ const ArtistiacasScreen = () => {
               style={{ textDecoration: 'none', fontSize: 18, padding: 15, cursor: 'pointer' }}
               onMouseMove={handleHover}
             >
-              <h3><b style={{ fontSize: 30 }}>Presentacion Banda Original</b></h3>
+              <h3><b style={{ fontSize: 30 }}>Presentación Banda Original</b></h3>
               <br />
               <br />
               <Image
@@ -171,7 +171,6 @@ const ArtistiacasScreen = () => {
                 alt="Alexander"
                 width={250}
                 height={200}
-                priority
                                 style={{ border: '3px solid rgba(218, 165, 32, 0.6)' }}
               />
             </div>
@@ -190,7 +189,6 @@ const ArtistiacasScreen = () => {
                 alt="Johnasdasny"
                 width={250}
                 height={200}
-                priority
                                 style={{ border: '3px solid rgba(218, 165, 32, 0.6)' }}
               />
             </div>
@@ -215,7 +213,6 @@ const ArtistiacasScreen = () => {
                 alt="Jose Alejandroasd"
                 width={250}
                 height={200}
-                priority
                                 style={{ border: '3px solid rgba(218, 165, 32, 0.6)' }}
               />
             </div>
@@ -226,7 +223,7 @@ const ArtistiacasScreen = () => {
               style={{ textDecoration: 'none', fontSize: 18, padding: 15, cursor: 'pointer' }}
               onMouseMove={handleHover}
             >
-              <h3><b style={{ fontSize: 30 }}>Soy Tico Banda Folkclorico</b></h3>
+              <h3><b style={{ fontSize: 30 }}>Soy Tico Banda Folklore</b></h3>
               <br />
               <Image
                 className={styles.logo}
@@ -234,7 +231,6 @@ const ArtistiacasScreen = () => {
                 alt="Alexander"
                 width={150}
                 height={200}
-                priority
                                 style={{ border: '3px solid rgba(218, 165, 32, 0.6)' }}
               />
             </div>
@@ -252,7 +248,6 @@ const ArtistiacasScreen = () => {
                 alt="Johnny"
                 width={150}
                 height={200}
-                priority
                 style={{ border: '3px solid rgba(218, 165, 32, 0.6)' }}
               />
             </div>
@@ -261,7 +256,7 @@ const ArtistiacasScreen = () => {
           <hr style={{width: '100%'}} />
           <br />
 
-          <h3><b>Colegio Experimental en Barrio Latino</b> | Grecia.</h3>  
+          <h3><b>Liceo Experimental Bilingüe</b> | Grecia.</h3>  
           <br />
 
           <section className={styles.rowMiddle}>
@@ -270,7 +265,7 @@ const ArtistiacasScreen = () => {
               style={{ textDecoration: 'none', fontSize: 18, padding: 15, cursor: 'pointer' }}
               onMouseMove={handleHover}
             >
-              <h3><b style={{ fontSize: 30 }}>Liceo Experimental de Grecia</b></h3>
+              <h3><b style={{ fontSize: 30 }}>Liceo Experimental Bilingüe</b></h3>
               <br />
               <Image
                   alt='asd'
@@ -314,7 +309,7 @@ const ArtistiacasScreen = () => {
               style={{ textDecoration: 'none', fontSize: 18, padding: 15, cursor: 'pointer' }}
               onMouseMove={handleHover}
             >
-              <h3><b style={{ fontSize: 30 }}>Presentacion Teatro</b></h3>
+              <h3><b style={{ fontSize: 30 }}>Presentación Teatro</b></h3>
               <br />
               <Image
                 className={styles.logo}
@@ -322,7 +317,6 @@ const ArtistiacasScreen = () => {
                 alt="Johnny"
                 width={250}
                 height={200}
-                priority
                 style={{ border: '3px solid rgba(218, 165, 32, 0.6)' }}
               />
             </div>
