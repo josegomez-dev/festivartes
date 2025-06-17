@@ -88,7 +88,7 @@ export default function Nav() {
   }, []);
 
 
-  if (router.pathname === '/' || router.pathname === '/legartes' || router.pathname === '/artisticas') {
+  if (!authenticated) {
     return null
   }
   

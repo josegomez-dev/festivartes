@@ -103,7 +103,7 @@ React.useEffect(() => {
               onMouseMove={handleHover}
               onMouseLeave={resetLight}
             >
-              <h3><b style={{ fontSize: 30 }}>Johnny Castro</b></h3>
+              <h3><b style={{ fontSize: 30 }}>Johnny Castro & Amigos</b></h3>
               <br />
               <Image
                 className={styles.logo}
