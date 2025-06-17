@@ -3,7 +3,7 @@
 import { useAuth } from "@/context/AuthContext";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { FaGoogle } from 'react-icons/fa';
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -44,7 +44,7 @@ const LoginPage = () => {
   if (user) {
     router.push('/dashboard');
   }
-
+    
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />

@@ -5,6 +5,7 @@ import styles from '@/app/assets/styles/MainPage.module.css';
 import Image from 'next/image';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
+import { RiBubbleChartFill } from 'react-icons/ri';
 
 const Home = () => {
   const [spotlightPos, setSpotlightPos] = useState({ x: 50, y: 40 });
@@ -64,58 +65,66 @@ const Home = () => {
           <br />
 
           <section className={styles.rowMiddle}>
-            
-              <Link href="/login" className={styles.columnBox} style={{ textDecoration: 'none', fontSize: 18 }}>
+
+              <Link href="/login" className={styles.columnBox} style={{ textDecoration: 'none', fontSize: 15 }}>
                 <div
                   onMouseMove={handleHover}
                   onMouseLeave={resetLight}
                 >
-                    <h3><b style={{ fontSize: 40}}>📲 FESTIVARTES</b></h3>
+                    <h3><b style={{ fontSize: 30}}>
+                      <RiBubbleChartFill color='gold' />
+                       FESTIVARTES</b></h3>
+                    <p><strong>📲 ¡Todo en un solo lugar! 💻</strong></p>
+                    <br />
                     <p>Simplifica, automatiza y digitaliza todo tu festival cultural.</p>
                     <br />
-                    <p><strong>¡Todo en un solo lugar!</strong></p>
                     <br />
                     <Image
                       className={styles.logo}
                       src="/core/logo2.png"
                       alt="Festivartes Main Logo"
-                      width={170}
-                      height={170}
+                      width={150}
+                      height={150}
                       priority
+                      style={{ marginTop: '-25px', marginBottom: '-20px' }}
                     />
                   
                 </div>
               </Link>
 
-              <Link href="/#" className={styles.columnBox} style={{ textDecoration: 'none', fontSize: 18 }}>
+              <Link href="/artisticas" className={styles.columnBox} style={{ textDecoration: 'none', fontSize: 15 }}>
                 <div
                   onMouseMove={handleHover}
                   onMouseLeave={resetLight}
                 >                  
-                    <h3><b style={{ fontSize: 40}}>🎶 ARTISTICA</b></h3>
-                    <p><strong>Lo último en cultura y arte.</strong></p> <br />
+                    <h3><b style={{ fontSize: 30}}>▶️ ARTISTICAS</b></h3>
+                    <p><strong>🎶 ¡Lo último en cultura y arte! 🎨</strong></p> <br />
                     <p>Explora conciertos y presentaciones en vivo.</p>
                     <p>Arte visual, fotografía y mucho más.</p>
+                    <br />
+                    <br />
                     <br />
                     <Image
                       className={styles.logo}
                       src="/core/artistica.png"
                       alt="Festivartes Main Logo"
-                      width={150}
-                      height={150}
+                      width={120}
+                      height={120}
                       priority
+                      style={{ marginTop: '-25px', marginBottom: '-20px' }}
                     />
                 </div>
               </Link>
               
-              <Link href="/#" className={styles.columnBox} style={{ textDecoration: 'none', fontSize: 18 }}>
+              <Link href="/legartes" className={styles.columnBox} style={{ textDecoration: 'none', fontSize: 15 }}>
                 <div
                   onMouseMove={handleHover}
                   onMouseLeave={resetLight}
                 >
-                    <h3><b style={{ fontSize: 40}}>📜 LEGARTE</b></h3>
+                    <h3><b style={{ fontSize: 30}}>🖼️ LEGARTES</b></h3>
+                    <p><strong>📜 ¡Preservamos legados culturales! 🇨🇷</strong></p> <br />
                     <p>Homenajes y producciones audiovisuales de artistas, cantautores y compositores.</p> <br />
-                    <p><strong>Preservamos legados musicales.</strong></p>
+                    <br />
                     <br />
                     <Image
                       className={styles.logo}
@@ -124,12 +133,18 @@ const Home = () => {
                       width={150}
                       height={150}
                       priority
+                      style={{ marginTop: '-40px', marginBottom: '-20px' }}
                     />
                 </div>
               </Link>
           </section>
         </div>
       </main>
+
+      <br />
+      <br />
+      <br />
+      <br />
 
       <div style={{marginTop: '-70px', textAlign: 'center'}}>
         <Footer />
