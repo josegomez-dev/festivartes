@@ -1,81 +1,336 @@
-.main {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-size: 400% 400%;
-    animation: gradientShift 12s ease infinite;
-    overflow: hidden;
-    text-align: center;
-  }
-  
-  @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  .title {
-    text-shadow: 0 0 10px var(--background-transparent);
-  }
-
-  .center {
-    position: relative;
-    z-index: 2;
-  }
-  
-  .logo {
-    animation: pulseLogo 3s infinite;
-    filter: drop-shadow(0 0 15px var(--background-transparent));
-  }
-  
-  @keyframes pulseLogo {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.08); opacity: 0.8; }
-  }
-  
-  @keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-  }
-  
-  @keyframes blink {
-    50% { border-color: transparent }
-  }
-  
-  .quote {
-    font-size: 0.8rem;
-    max-width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 3px solid #fff;
-    margin: 10px auto;
-    padding: 10px 10px;
-    animation:
-      typing 3.5s steps(40, end),
-      blink 0.8s step-end infinite;
-  }
-  
-  
-  @keyframes fadeInQuote {
-    0%, 100% { opacity: 0; transform: translateY(10px); }
-    10% { opacity: 1; transform: translateY(0); }
-    90% { opacity: 1; transform: translateY(0); }
-  }
-  
-.center {
-    position: relative;
-    z-index: 2;
+/* Artistic Stage Background */
+.artisticBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0;
+  background: radial-gradient(#111, #000);
+  pointer-events: none;
 }
 
-.footer-container {
-    padding: 20px;
-    font-size: 0.8rem;
+/* Ambient Lights */
+.movingLight {
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  max-width: 600px;
+  max-height: 600px;
+  border-radius: 50%;
+  opacity: 0.2;
+  background: radial-gradient(circle, #ff66cc, #330066);
+  filter: blur(20px);
+  mix-blend-mode: screen;
+  animation: floatAround 10s cubic-bezier(0.42, 0, 0.58, 1) infinite;
 }
 
-.footer-text {
+.movingLight:nth-child(2) {
+  background: radial-gradient(circle, #00ffff, #003366);
+  animation-delay: -10s;
+  animation-duration: 80s;
+}
+
+.movingLight:nth-child(3) {
+  background: radial-gradient(circle, #ffee00, #664400);
+  animation-delay: -20s;
+  animation-duration: 100s;
+}
+
+.movingLight:nth-child(4) {
+  background: radial-gradient(circle, #00ff99, #003322);
+  animation-delay: -30s;
+  animation-duration: 120s;
+}
+
+.movingLight:nth-child(5) {
+  background: radial-gradient(circle, #ff2200, #440000);
+  animation-delay: -40s;
+  animation-duration: 90s;
+}
+
+/* 🌟 Main Neon Spotlight */
+.mainStageLight {
+  position: absolute;
+  top: var(--spotlight-y, 40%);
+  left: var(--spotlight-x, 50%);
+  transform: translate(-50%, -50%);
+  width: 20vw;
+  height: 20vw;
+  max-width: 700px;
+  max-height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.3) 40%, transparent 70%);
+  filter: blur(50px) brightness(1.5);
+  opacity: 0.5;
+  mix-blend-mode: screen;
+  animation: neonPulse 6s ease-in-out infinite, flickerOnOff 12s infinite;
+  pointer-events: none;
+  z-index: 1;
+  transition: top 0.5s ease, left 0.5s ease;
+}
+
+/* Animations */
+@keyframes floatAround {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  25% {
+    transform: translate3d(20vw, -10vh, 0) scale(1.1);
+  }
+  50% {
+    transform: translate3d(-10vw, 10vh, 0) scale(0.95);
+  }
+  75% {
+    transform: translate3d(15vw, 20vh, 0) scale(1.05);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes neonPulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+@keyframes flickerOnOff {
+  0%, 100% {
+    filter: brightness(1.3) blur(50px);
+  }
+  10%, 30%, 70% {
+    filter: brightness(2.2) blur(30px);
+  }
+  20%, 60%, 80% {
+    filter: brightness(0.8) blur(60px);
+  }
+  40%, 90% {
+    filter: brightness(1.5) blur(50px);
+  }
+}
+
+
+/* 📸 Paparazzi Flashes */
+.paparazzi {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.paparazzi::before,
+.paparazzi::after {
+  content: '';
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(white, transparent);
+  opacity: 0;
+  filter: blur(50px);
+  animation: paparazziFlash 10s infinite ease-in-out;
+}
+
+.paparazzi::after {
+  left: 70%;
+  animation-delay: 7s;
+}
+
+.paparazzi::before {
+  left: 20%;
+  animation-delay: 3s;
+}
+
+/* ✨ Flash burst */
+@keyframes paparazziFlash {
+  0%, 90%, 100% {
+    opacity: 0;
+    transform: scale(0.3) translateY(100vh);
+  }
+  92% {
+    opacity: 0.9;
+    transform: scale(3.5) translateY(-15vh);
+  }
+  94% {
+    opacity: 0.2;
+    transform: scale(25) translateY(-1vh);
+  }
+  96% {
+    opacity: 0.6;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Updated CSS with upgraded visuals */
+.contentWrapper {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1.5rem;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
   text-align: center;
-  font-size: 0.7rem;
-  color: var(--color-white);
+  color: white;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.rowTop {
+  margin-bottom: 4rem;
+  animation: slideDown 1.5s ease-in-out;
+}
+
+.rowTop h1 {
+  font-size: 2.5rem;
+  margin: 1rem 0 0.5rem;
+  text-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.rowMiddle {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2.5rem;
+  width: 100%;
+  margin-bottom: 4rem;
+}
+
+.columnBox {
+  flex: 1 1 280px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+  padding: 2rem;
+  border-radius: 16px;
+  backdrop-filter: blur(120px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  transition: all 0.4s ease;
+}
+
+.columnBox:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+}
+
+.rowBottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  animation: fadeIn 1.2s ease-in;
+}
+
+.ctaButton {
+  background: linear-gradient(45deg, #00f2ff, #00ffd5);
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  padding: 1rem 2rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 15px rgba(0, 242, 255, 0.4);
+}
+
+.ctaButton:hover {
+  background: #ffffff;
+  color: #000;
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.6);
+}
+
+/* Core Projects Section */
+.coreProjects {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  margin-top: 2rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.coreProject {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.coreProject:hover {
+  transform: scale(1.02);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Contact Section */
+.contactSection {
+  text-align: center;
+  background-color: #111;
+  color: white;
+  padding: 3rem 1.5rem;
+}
+
+.contactSection a {
+  color: #00f2ff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.contactSection a:hover {
+  text-decoration: underline;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide Down Animation */
+@keyframes slideDown {
+  from {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive for mobile */
+@media screen and (max-width: 768px) {
+  .rowTop h1 {
+    font-size: 1.8rem;
+  }
+
+  .columnBox {
+    flex: 1 1 100%;
+  }
+
+  .ctaButton {
+    width: 100%;
+    max-width: 300px;
+  }
 }

@@ -243,9 +243,13 @@ export default function Nav() {
 
           </div>
         )}
-        <button onClick={handleLogout} className={styles.logoutButton}>
-          <FaSignOutAlt /> 
-        </button>
+
+        {authenticated && (
+          <button onClick={handleLogout} className={styles.logoutButton}>
+            <FaSignOutAlt /> 
+          </button>
+        )}
+
       </div>
       {authenticated && <ChatSidebar />}
     </nav>

@@ -69,12 +69,12 @@ const LoginPage = () => {
               ¿Olvidaste tu contraseña?
             </span>
           </p>
-          <br />
+          {/* <br />
           <p>
             Tambien puedes usar el boton de <strong>Google</strong> para acceder a la plataforma. <br /> 
-          </p>
+          </p> */}
 
-          {!user && (
+          {/* {!user && (
             <>
               <div className="external-logins">
                 <div className='google-login'>
@@ -85,7 +85,7 @@ const LoginPage = () => {
                 </div>
               </div>
             </>
-          )}
+          )} */}
           <p className="auth-link">
           ¿No tienes una cuenta?
             <b> &nbsp;
