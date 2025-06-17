@@ -97,7 +97,7 @@ const Home = () => {
                   onMouseMove={handleHover}
                   onMouseLeave={resetLight}
                 >                  
-                    <h3><b style={{ fontSize: 30}}>▶️ ARTISTICAS</b></h3>
+                    <h3><b style={{ fontSize: 30}}>▶️ ARTÍSTICAS</b></h3>
                     <p><strong>🎶 ¡Lo último en cultura y arte! 🎨</strong></p> <br />
                     <p>Explora conciertos y presentaciones en vivo.</p>
                     <p>Arte visual, fotografía y mucho más.</p>

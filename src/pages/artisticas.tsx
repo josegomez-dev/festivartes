@@ -40,7 +40,7 @@ const ArtistiacasScreen = () => {
                 />
             </Link>
             <div style={{ textAlign: 'center' }}>
-              <h3><b style={{ fontSize: 30}}>▶️ ARTISTICAS</b></h3>
+              <h3><b style={{ fontSize: 30}}>▶️ ARTÍSTICAS</b></h3>
               <p><strong>🎶 ¡Lo último en cultura y arte! 🎨</strong></p> <br />
               <p>Explora conciertos y presentaciones en vivo.</p>
               <p>Arte visual, fotografía y mucho más.</p>
@@ -52,7 +52,7 @@ const ArtistiacasScreen = () => {
           <hr style={{width: '100%'}} />
           <br />
 
-          <h3><b>Centro de Cultura Jose Figuerres Ferrer 2025</b> | San Ramon.
+          <h3><b>Centro de Cultura José Figueres Ferrer 2025</b> | San Ramón.
               <Image
                 className={styles.logo}
                 src="/artistica/artemediodia/1.png"
