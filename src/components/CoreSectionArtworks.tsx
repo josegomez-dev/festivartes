@@ -27,7 +27,7 @@ const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: Cor
   const openUserModal = () => setIsUserModalOpen(true);
   const closeUserModal = () =>setIsUserModalOpen(false);
 
-  const [showAllData, setShowAllData] = useState(allItems || false);
+  const [showAllData, setShowAllData] = useState(allItems || true);
 
   const fetchArtworks = async () => {
     try {

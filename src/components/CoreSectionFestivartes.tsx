@@ -23,7 +23,7 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
   const openEventModal = () => setIsEventModalOpen(true);
   const closeEventModal = () =>setIsEventModalOpen(false);
 
-  const [showAllData, setShowAllData] = useState(false);
+  const [showAllData, setShowAllData] = useState(true);
   const { role } = useAuth();
   
   const fetchEvents = async () => {
@@ -103,6 +103,7 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
                 <p className='bolder-text small-text-size'>
                   ¡Elegí tu próximo escenario y <br /> hacé historia!
                 </p>
+                <br />
                 <br />
 
                 {role === 'admin' && (
