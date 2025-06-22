@@ -14,6 +14,7 @@ export interface ARTWORK {
     location: string;
     price: number;
     audio: string; // URL to the audio file
+    video: string; // URL to the audio file
     createdAt: Date;
     updatedAt: Date;
     status: 'active' | 'inactive' | 'banned'; // Could use an enum for statuses too
@@ -30,6 +31,7 @@ export const EMPTY_ARTWORK: ARTWORK = {
     date: new Date(),
     document: "",
     audio: "",
+    video: "",
     location: "",
     description: "",
     category: "",

@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 
 interface AudioPlayerProps {
   src: string;
-  title: string;
+  title?: string;
 }
 
 const AudioPlayer = ({ src, title }: AudioPlayerProps) => {

@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 
 interface VideoPlayerProps {
   src: string;
-  title: string;
+  title?: string;
 }
 
 const VideoPlayer = ({ src, title }: VideoPlayerProps) => {
@@ -77,6 +77,7 @@ const VideoPlayer = ({ src, title }: VideoPlayerProps) => {
       <style jsx>{`
         .video-player {
           max-width: 600px;
+          margin: 0 auto;
           border-radius: 8px;
           overflow: hidden;
           background: #222;

@@ -195,7 +195,7 @@ const EventDetail = ({ }) => {
 
   return (
     <div className={styles['full-view']}>
-      {/* <SubMenu /> */}
+      {/* <SubMenu /> */} 
       <FloatingMenuButton mainBtn={true} />
 
       <CustomModal

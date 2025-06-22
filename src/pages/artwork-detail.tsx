@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import AudioPlayer from "@/components/AudioPlayer";
 import VideoPlayer from "@/components/VideoPlayer";
 import DocumentEditor from "@/components/DocumentEditor";
-import { useEffect, useRef, useState } from 'react';
+import { use, useEffect, useRef, useState } from 'react';
 import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
 import { db, storage } from './../../firebaseConfig';
 import CustomModal from '@/components/CustomModal';
@@ -17,20 +17,12 @@ import toast from 'react-hot-toast';
 import { ARTWORK, EMPTY_ARTWORK } from '@/types/artworks.types';
 import Preloader from '@/components/Preloader';
 import { uploadBytes, getDownloadURL, ref } from 'firebase/storage';
-import CoreSectionJudges from '@/components/CoreSectionJudges';
 import CoreSectionRatingJudges from '@/components/CoreSectionRatingJudges';
-import Image from 'next/image';
-
-const videos = [
-  { id: 1, title: "Video 1", src: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4" },
-  { id: 2, title: "Video 2", src: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4" },
-];
 
 const ArtworkDetail = () => {
   const router = useRouter();
   const { id } = router.query; // Dynamic route parameter
 
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [activeTab, setActiveTab] = useState('info'); // Active tab state
   const { user, role } = useAuth();
 
@@ -41,7 +33,7 @@ const ArtworkDetail = () => {
   const [data, setData] = useState<ARTWORK[]>([]);
   const [project, setProject] = useState<ARTWORK>(EMPTY_ARTWORK);
 
-  const [loadingAudio, setLoadingAudio] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [reaction, setReaction] = useState<"happy" | "sad" | null>(null);
   const [hasClapped, setHasClapped] = useState(false);
@@ -85,18 +77,6 @@ const ArtworkDetail = () => {
   if (!project) {
     return <div>Loading...</div>;
   }
-
-  const nextVideo = () => {
-    if (currentIndex < videos.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    }
-  };
-
-  const prevVideo = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    }
-  };
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
@@ -191,9 +171,20 @@ const ArtworkDetail = () => {
       throw error;
     }
   };
+
+  const uploadVideoFile = async (file: File, userId: string) => {
+    try {
+      const storageRef = ref(storage, `videos/${userId}/${file.name}`);
+      await uploadBytes(storageRef, file);
+      return await getDownloadURL(storageRef);
+    } catch (error) {
+      console.error("Error uploading video:", error);
+      toast.error("Error uploading video");
+      throw error;
+    }
+  };
   
   const handleAudioUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoadingAudio(true);
     const file = e.target.files?.[0];
     if (!file) {
       toast.error("No file selected");
@@ -201,12 +192,15 @@ const ArtworkDetail = () => {
     }
     if (file && file.type.startsWith("audio/")) {
       if (user?.uid) {
-        uploadAudioFile(file, user.uid).then((url) => {
+        setLoading(true);
+        uploadVideoFile(file, user.uid).then((url) => {
           const docRef = doc(db, 'artworks', project.id);
           updateDoc(docRef, { audio: url });
           setProject((prev) => ({ ...prev, audio: url }));
+          setLoading(false);
           toast.success("Audio uploaded successfully!");
         }).catch((error) => {
+          setLoading(false);
           console.error("Error uploading audio:", error);
           toast.error("Error uploading audio");
         });
@@ -216,7 +210,34 @@ const ArtworkDetail = () => {
     } else {
       toast.error("Please select a valid audio file.");
     }
-    setLoadingAudio(false);
+  };
+
+  const handleVideoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) {
+      toast.error("No file selected");
+      return;
+    }
+    if (file && file.type.startsWith("video/")) {
+      if (user?.uid) {
+        setLoading(true);
+        uploadAudioFile(file, user.uid).then((url) => {
+          const docRef = doc(db, 'artworks', project.id);
+          updateDoc(docRef, { video: url });
+          setProject((prev) => ({ ...prev, video: url }));
+          setLoading(false);
+          toast.success("Video uploaded successfully!");
+        }).catch((error) => {
+          setLoading(false);
+          console.error("Error uploading video:", error);
+          toast.error("Error uploading video");
+        });
+      } else {
+        toast.error("User ID is undefined. Cannot upload the video.");
+      }
+    } else {
+      toast.error("Please select a valid video file.");
+    }
   };
 
   const getFullRatingAverage = () => {
@@ -252,35 +273,6 @@ const ArtworkDetail = () => {
           <RatingForm closeModal={closeJudgeModal} artworkIdentifier={project?.id} userIdentifier={user?.uid} />
         </div>
       </CustomModal>
-
-    {role === 'judge' && (
-      <div className='judge-button-rate'>
-        <div>
-          <button
-            className={registerForm['submitButton'] + 'animate-pulse-infinite'}
-            type="button"
-            onClick={() => {
-              role === 'judge'
-                ? openJudgeModal()
-                : toast.error('No tienes permisos para calificar esta obra de arte');
-            }}
-          >
-            <b>🖋️ Calificar Obra de Arte</b>
-          </button>
-        </div>
-        <div>
-          {project?.audio && (
-            <div className="links-spaced">
-            <AudioPlayer
-              src={project.audio}
-              title=""
-              // className="project-thumbnail-wrapper"
-              // title={`[${project.title}]`}
-            />
-          </div>)}
-        </div>
-      </div>
-    )}
 
 
 
@@ -336,12 +328,12 @@ const ArtworkDetail = () => {
             >
               🎥
             </button>
-            <button
+            {/* <button
               className={activeTab === 'live' ? 'active' : ''}
               onClick={() => handleTabClick('live')}
             >
               ⏺️
-            </button>
+            </button> */}
           </div>
 
           {/* Tab Content */}
@@ -359,7 +351,7 @@ const ArtworkDetail = () => {
                     src={project.thumbnail}
                     alt={project.title}
                     className="project-thumbnail-wrapper"
-                    style={{ width: '120px' }}
+                    style={{ width: '100%' }}
                   />
                 ) : (
                   <img
@@ -374,16 +366,19 @@ const ArtworkDetail = () => {
                   Sube el archivo mp3 de la obra de arte
                 </span>
                 <div className={`links-spaced ${project.audio ? '' : 'disabled'}`}>
-                  <AudioPlayer
-                    src="https://file-examples.com/storage/fe46ad26fa67d4043a4b9e6/2017/11/file_example_MP3_700KB.mp3"
-                    title={project.title || 'Title'}
-                  />
+                  {loading ? (
+                    <Preloader message='🎵 Cargando audio... Estamos ajustando el sonido para ofrecerte la mejor calidad.' small />
+                  ) : (
+                    <AudioPlayer
+                    src={user?.uid ? project.audio : "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"}
+                    // title={'Audio'}
+                  />)}
                 </div>
                 <br />
                 <br />
                 <div className="input-group margin-0-auto" >
                   <label htmlFor="audio">
-                    Subir archivo mp3 de la obra de arte
+                    Subir archivo de audio
                   </label>
                   <input
                     type="file"
@@ -404,6 +399,7 @@ const ArtworkDetail = () => {
                     {project.title || 'Title'}
                   </b>
                 </h2>
+                <br />
                 {project.thumbnail ? (
                   <img
                     src={project.thumbnail}
@@ -460,32 +456,43 @@ const ArtworkDetail = () => {
 
             {activeTab === 'video' && (
               <>
-                <h2>
-                  <b className='font-size-title'>
-                    {project.title || 'Title'}
-                  </b>
-                </h2>
-                <br />
-                <div className="carousel">
-                <VideoPlayer
-                  src={videos[currentIndex].src}
-                  title={videos[currentIndex].title}
-                />
-                <div className="controls">
-                  <button
-                    onClick={prevVideo}
-                    disabled={currentIndex === 0}
-                  >
-                    ⬅️ Prev
-                  </button>
-                  <button
-                    onClick={nextVideo}
-                    disabled={currentIndex === videos.length - 1}
-                  >
-                    Next ➡️
-                  </button>
-                </div>
-              </div>
+                {loading ? (
+                  <Preloader message='🎥 ¡Luces, cámara… casi acción! Preparando tu video…' small />
+                ) : (
+                  <>
+                    <h2>
+                      <b className='font-size-title'>
+                        {project.title || 'Title'}
+                      </b>
+                    </h2>
+                    <br />
+                    
+                    <VideoPlayer
+                      src={user?.uid ? project.video : "https://file-examples.com/storage/fe46ad26fa67d4043a4b9e6/2017/04/file_example_MP4_480_1_5MG.mp4"}
+                      // title={user?.uid ? project.title || 'Title' : "Video de la Obra de Arte"}
+                    />
+                    
+                    
+                    <br />
+                    <br />
+                    <div className="input-group margin-0-auto" >
+                      <label htmlFor="video">
+                        Subir video de la obra de arte
+                      </label>
+                      <input
+                        type="file"
+                        id="video"
+                        name="video"
+                        className={styles.fileInput}
+                        accept="video/*" 
+                        onChange={handleVideoUpload}
+                      />
+                    </div>
+                  </>
+                )}
+
+  
+                
               </>
             )}
 
@@ -497,9 +504,9 @@ const ArtworkDetail = () => {
           </div>
         </div>
         
-        {role === 'admin' && (
+        {/* {role === 'admin' && (
           <CoreSectionRatingJudges />
-        )}
+        )} */}
 
         <br />
         <br />
