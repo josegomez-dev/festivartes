@@ -14,7 +14,6 @@ import { EMPTY_EVENT, EVENTS } from '@/types/events.types';
 import { toast } from 'react-hot-toast';
 import Preloader from '@/components/Preloader';
 import CoreSectionSelectedArtworks from '@/components/CoreSectionSelectedArtworks';
-import Image from 'next/image';
 import CustomModal from '@/components/CustomModal';
 import { ARTWORK } from '@/types/artworks.types';
 import FloatingMenuButton from '@/components/FloatingMenuButton';
@@ -204,10 +203,14 @@ const EventDetail = ({ }) => {
         height="85%" // Custom height
       >
         <div className="modal-title-centered">
-            <b>Selecciona las obras</b>
+            <b>
+              Selección de obras para el evento
+            </b>
         </div>
         <div className="form-wrapper">
-          En esta seccion podrás seleccionar las obras que deseas exhibir en el evento.
+          <p className='color-light-gray'>
+            Selecciona las obras que deseas incluir en el evento.
+          </p>
           <CoreSectionArtworks filterBy={user?.uid} allItems selectMode selectItem={item => {
             if (localSelectedArtworks.includes(item)) {
               setLocalSelectedArtworks(localSelectedArtworks.filter(artwork => artwork !== item));
@@ -298,25 +301,8 @@ const EventDetail = ({ }) => {
             <b className='font-size-title'>
             {project.name || 'Title'}
             </b>
-            {/* <div>
-              <Image
-                src="/artworks-icon.png"
-                alt="artworks-icon"
-                width={35}
-                height={35}
-                priority />
-                <span>{project.selectedArtworks?.length || 0}</span>
-            </div> */}
           </h2>
           
-          {/*
-          <p>
-            {project.price <= 0 ? 
-              <span className='bolder-text price-text'>Entrada libre y para toda la familia.</span> : 
-              <span className='bolder-text price-text'>Costo de la entrada: ₡{project.price}</span>
-            } 
-          </p>
-          <br /> */}
           <img 
             src={project.thumbnail} 
             alt={project.name} 
@@ -343,20 +329,7 @@ const EventDetail = ({ }) => {
                 <b>¡Selecciona tus obras!</b>
               </button>
             </>)}
-          
-          {/* {role === 'judge' || role === 'admin' && (
-              <>
-              <br />
-              <button className={authStyles['auth-button']} onClick={() => alert('')}>
-                <b>Registrar Obra</b>
-              </button>
-            </>)} */}
         </div>
-
-        {/* <br />
-        <hr />
-
-        <CoreSectionJudges /> */}
 
         {project.selectedArtworks?.length > 0 ? (
             <CoreSectionSelectedArtworks selectedArtworks={project?.selectedArtworks} />

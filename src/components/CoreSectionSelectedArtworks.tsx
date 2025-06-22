@@ -1,12 +1,8 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
 import ObjectMiniature from './ObjectMiniature';
-import { RiBubbleChartFill } from 'react-icons/ri';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
-import CustomModal from './CustomModal';
-import ArtworkRegisterForm from './ArtworkRegisterForm';
 import { ARTWORK } from '@/types/artworks.types';
 
 interface CoreSectionArtworksProps {
@@ -17,10 +13,6 @@ const CoreSectionSelectedArtworks = ({ selectedArtworks }: CoreSectionArtworksPr
   
   const [data, setData] = useState<ARTWORK[]>([]);
   const [dataFiltered, setDataFiltered] = useState<ARTWORK[]>([]);
-
-  const [isUserModalOpen, setIsUserModalOpen] = useState(false);  
-  const openUserModal = () => setIsUserModalOpen(true);
-  const closeUserModal = () =>setIsUserModalOpen(false);
 
   const [showAllData, setShowAllData] = useState(true);
 
@@ -50,19 +42,6 @@ const CoreSectionSelectedArtworks = ({ selectedArtworks }: CoreSectionArtworksPr
 
   return (
       <>
-        <CustomModal
-          isOpen={isUserModalOpen}
-          onClose={closeUserModal}
-          height="85%" // Custom height
-        >
-          <div className="modal-title-centered">
-              <b>Anímate a descubrir <br /> tu Artista Interior</b>
-          </div>
-          <div className="form-wrapper">
-            <ArtworkRegisterForm closeModal={closeUserModal} />
-          </div>
-        </CustomModal>
-    
 
         {showAllData && (
           <div className={`${styles.card} `}>

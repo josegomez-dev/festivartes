@@ -107,7 +107,10 @@ const FloatingMenuButton: React.FC<FloatingMenuButtonProps> = ({ mainBtn }) => {
         height="85%" // Custom height
       >
         <div className="modal-title-centered">
-            <b>Anímate a descubrir <br /> tu Artista Interior</b>
+          <b>
+            <h2 className='bolder-text'>Registrar Obra</h2>
+            <p className='color-light-gray'>Sube tu obra y compártela con el mundo.</p>
+          </b>
         </div>
         <div className="form-wrapper">
           <ArtworkRegisterForm closeModal={closeUserModal} />

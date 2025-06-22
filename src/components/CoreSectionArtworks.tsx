@@ -40,10 +40,14 @@ const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: Cor
         };
       });
         
-      const filteredArtworks = artworks.filter(artwork => {
-        return !artwork.createdBy || artwork.createdBy !== filterBy;
-      });
-      setData(filteredArtworks);
+      if (!selectMode) {
+        const filteredArtworks = artworks.filter(artwork => {
+          return !artwork.createdBy || artwork.createdBy !== filterBy;
+        });
+        setData(filteredArtworks);
+      } else {
+        setData(artworks);
+      }
       
       if (filterBy) {
         const filteredArtworks = artworks.filter(artwork => {
@@ -69,7 +73,10 @@ const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: Cor
           height="85%" // Custom height
         >
           <div className="modal-title-centered">
-              <b>Anímate a descubrir <br /> tu Artista Interior</b>
+            <b>
+              <h2 className='bolder-text'>Registrar Obra</h2>
+              <p className='color-light-gray'>Sube tu obra y compártela con el mundo.</p>
+            </b>
           </div>
           <div className="form-wrapper">
             <ArtworkRegisterForm closeModal={closeUserModal} />

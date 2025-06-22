@@ -67,7 +67,8 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
         >
           <div className="modal-title-centered">
             <b>
-              <b>Anímate a descubrir <br /> tu Artista Interior</b>
+              <h2 className='bolder-text'>Registrar Evento</h2>
+              <p className='color-light-gray'>Organiza y registra tu festival artístico.</p>
             </b>
           </div>
           <div className="form-wrapper">
