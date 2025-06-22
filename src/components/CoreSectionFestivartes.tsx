@@ -37,7 +37,10 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
         };
       });
   
-      setData(events);
+      const filteredEvents = events.filter(event => {
+        return !event.createdBy || event.createdBy !== filterBy;
+      });
+      setData(filteredEvents);
 
       if (filterBy) {
         const filteredEvents = events.filter(event => {

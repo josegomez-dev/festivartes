@@ -39,8 +39,11 @@ const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: Cor
           ...rest
         };
       });
-  
-      setData(artworks);
+        
+      const filteredArtworks = artworks.filter(artwork => {
+        return !artwork.createdBy || artwork.createdBy !== filterBy;
+      });
+      setData(filteredArtworks);
       
       if (filterBy) {
         const filteredArtworks = artworks.filter(artwork => {
