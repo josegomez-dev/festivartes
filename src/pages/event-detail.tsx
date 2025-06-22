@@ -17,6 +17,7 @@ import CoreSectionSelectedArtworks from '@/components/CoreSectionSelectedArtwork
 import Image from 'next/image';
 import CustomModal from '@/components/CustomModal';
 import { ARTWORK } from '@/types/artworks.types';
+import FloatingMenuButton from '@/components/FloatingMenuButton';
 
 const EventDetail = ({ }) => {
   const router = useRouter();
@@ -195,6 +196,7 @@ const EventDetail = ({ }) => {
   return (
     <div className={styles['full-view']}>
       {/* <SubMenu /> */}
+      <FloatingMenuButton mainBtn={true} />
 
       <CustomModal
         isOpen={selectArtworksModalOpen}
@@ -335,13 +337,13 @@ const EventDetail = ({ }) => {
               </button>
             </>)}
           
-          {role === 'judge' || role === 'admin' && (
+          {/* {role === 'judge' || role === 'admin' && (
               <>
               <br />
               <button className={authStyles['auth-button']} onClick={() => alert('')}>
-                <b>Generar Premiacion Automatica</b>
+                <b>Registrar Obra</b>
               </button>
-            </>)}
+            </>)} */}
         </div>
 
         {/* <br />

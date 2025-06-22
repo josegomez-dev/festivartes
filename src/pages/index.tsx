@@ -6,10 +6,15 @@ import Image from 'next/image';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { RiBubbleChartFill } from 'react-icons/ri';
+import { useAuth } from '@/context/AuthContext';
+import { useRouter } from 'next/router';
 
 const Home = () => {
   const [spotlightPos, setSpotlightPos] = useState({ x: 50, y: 40 });
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const { user } = useAuth();
+  const router = useRouter();
 
   const handleHover = (e: React.MouseEvent) => {
     if (!containerRef.current) return;
@@ -22,6 +27,12 @@ const Home = () => {
   const resetLight = () => {
     setSpotlightPos({ x: 50, y: 40 }); // Default center position
   };
+
+  // If the user is logged in, redirect to the dashboard
+  if (user) {
+    router.push('/dashboard');
+    return null; // Prevent rendering the rest of the component
+  }
 
   return (
     <>
@@ -92,7 +103,7 @@ const Home = () => {
                 </div>
               </Link>
 
-              <Link href="/artisticas" className={styles.columnBox} style={{ textDecoration: 'none', fontSize: 15 }}>
+              {/* <Link href="/artisticas" className={styles.columnBox} style={{ textDecoration: 'none', fontSize: 15 }}>
                 <div
                   onMouseMove={handleHover}
                   onMouseLeave={resetLight}
@@ -136,7 +147,7 @@ const Home = () => {
                       style={{ marginTop: '-40px', marginBottom: '-20px' }}
                     />
                 </div>
-              </Link>
+              </Link> */}
           </section>
         </div>
       </main>

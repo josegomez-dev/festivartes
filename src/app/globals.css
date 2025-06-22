@@ -610,11 +610,11 @@ b {
 }
 
 .overflow-area {
-  background: var(--background-transparent);
+  background: white;
   backdrop-filter: blur(100px); 
   border: 1px solid var(--background-transparent); 
   border-radius: 10px; 
-  color:var(--color-white); 
+  color:var(--color-orange); 
   border: 1px solid var(--background-transparent); 
   width: 100%; 
   max-width: 500px; 
