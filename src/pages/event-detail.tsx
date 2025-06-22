@@ -218,20 +218,27 @@ const EventDetail = ({ }) => {
 
           <CoreSectionSelectedArtworks selectedArtworks={localSelectedArtworks} />
 
-          <div className="">
-            <ul className='list-style-type-none'>
-              {allArtworks.map((item) => {
-                if (localSelectedArtworks.includes(item.id)) {
-                  return (
-                    <li key={item.id} className='selected-artwork-item'>
-                      {item.title} - {item.artist} - {item.type}
-                    </li>
-                  );
-                }
-                return null;
-              })}
-            </ul>
-          </div>
+          {localSelectedArtworks.length > 0 && (
+            <>
+              <hr />
+              <div className="">
+                Confirmar selección de obras para el evento: <b>{project.name}</b>
+                <ol className='selected-artworks-list'>
+                  {allArtworks.map((item) => {
+                    if (localSelectedArtworks.includes(item.id)) {
+                      return (
+                        <li key={item.id} className='selected-artwork-item'>
+                          {item.title} -&nbsp; 
+                          <strong style={{ color: 'var(--color-orange)'}}>{item.artist}</strong> -&nbsp; 
+                          <span style={{ color: 'var(--color-blue)' }}>{item.type}</span>
+                        </li>
+                      );
+                    }
+                    return null;
+                  })}
+                </ol>
+              </div>
+            </>)}
           
           <div className='modal-submit-buttons'>
             <button className={authStyles['auth-button']} onClick={onCloseSelectArtworksModal}>

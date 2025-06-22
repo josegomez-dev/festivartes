@@ -17,30 +17,30 @@ interface ObjectMiniatureProps {
 
 const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type, customClass, ratingException, selectMode, selectItem }) => {
 
-  const getStarsRaitingByProject = (project: ARTWORK | EVENTS) => {
-    let average = 0;
+  // const getStarsRaitingByProject = (project: ARTWORK | EVENTS) => {
+  //   let average = 0;
 
-    if (!project.stars || project.stars.length === 0) {
-      return 0;
-    }
+  //   if (!project.stars || project.stars.length === 0) {
+  //     return 0;
+  //   }
    
-    const totalStars = project.stars.length;
-    const totalRating = project.stars.reduce((acc, item) => acc + (item.rating || 0), 0);
-    average = totalStars > 0 ? totalRating / totalStars : 0;
-    return Math.round(average);
-  };
+  //   const totalStars = project.stars.length;
+  //   const totalRating = project.stars.reduce((acc, item) => acc + (item.rating || 0), 0);
+  //   average = totalStars > 0 ? totalRating / totalStars : 0;
+  //   return Math.round(average);
+  // };
 
-  const getCurrentProjectClaps = (project: ARTWORK | EVENTS) => {
-    let totalClaps = 0;
-    if (project.claps && project.claps.length > 0) {
-      project.claps.forEach((item: any) => {
-        if (item.clap) {
-          totalClaps++;
-        }
-      });
-    }
-    return totalClaps;
-  }
+  // const getCurrentProjectClaps = (project: ARTWORK | EVENTS) => {
+  //   let totalClaps = 0;
+  //   if (project.claps && project.claps.length > 0) {
+  //     project.claps.forEach((item: any) => {
+  //       if (item.clap) {
+  //         totalClaps++;
+  //       }
+  //     });
+  //   }
+  //   return totalClaps;
+  // }
 
   return (
     <div className={`project-miniature-container project-miniature-custom-${type} ${customClass}`}>
@@ -152,10 +152,10 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type, cust
                 <p className='small-text-size'>{project.name}</p>
               </div>}
 
-            {selectMode && (
+            {/* {selectMode && (
               <div className="title-artworks-container">
               <p>{project.title}</p>
-            </div>)}
+            </div>)} */}
             
           </div>
         </Link>

@@ -69,7 +69,7 @@ const CoreSectionSelectedArtworks = ({ selectedArtworks }: CoreSectionArtworksPr
           <p>
             <span className='bolder-text'>
               <div className=''>
-                <p>Obras registradas para el Evento&nbsp; </p>
+                <p>Obras seleccionadas para el Evento&nbsp; </p>
               </div>
             </span>
           </p>
@@ -77,8 +77,8 @@ const CoreSectionSelectedArtworks = ({ selectedArtworks }: CoreSectionArtworksPr
           {data.length <= 0 ? 
             <div className={styles.grid}>
               <div className={styles.card}>
-                <h3 className='color-light-gray'>¡Ups! Todavía no hay obras</h3>
-                <p className='color-black'>Sube tu obra y compártela con el mundo desde aquí.</p>
+                <h3 className='color-light-gray'>¡Ups! Todavía no hay obras seleccionadas</h3>
+                {/* <p className='color-black'>Sube tu obra y compártela con el mundo desde aquí.</p> */}
               </div> 
             </div> 
             : 

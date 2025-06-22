@@ -97,6 +97,24 @@ const ArtworkRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) 
       <form className={`${styles.form} profile-container`} onSubmit={handleSubmit}>
 
         <div className="input-group">
+          <label className={styles.label} htmlFor="event">
+            Evento
+          </label>
+          <select
+            id="event"
+            name="event"
+            className={styles.select}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Selecciona un evento</option>
+            <option value="evento1">Evento 1</option>
+            <option value="evento2">Evento 2</option>
+            <option value="evento3">Evento 3</option>
+          </select>
+        </div>
+
+        <div className="input-group">
           <label htmlFor="title">
             Título de la Obra
           </label>

@@ -703,15 +703,21 @@ b {
   text-overflow: ellipsis; 
 }
 
+.selected-artworks-list {
+  gap: 6px;
+  max-height: 300px;
+  height: auto;
+  padding: 25px;
+}
+
 .title-artworks-container {
   position: absolute;
-  width: 55px;
   font-size: 10px;
   height: 15px;
   margin-top: -17px;
   margin-left: 0px;
   text-align: left;
-  overflow: auto;
+  /* overflow: auto; */
 }
 
 .clap-button-wrapper {
@@ -1634,7 +1640,7 @@ button:disabled {
   top: 0;
   right: -300px;
   width: 280px;
-  height: 100vh;
+  height: 100dvh;
   z-index: 2000;
   transition: right 0.3s ease-in-out;
   display: flex;

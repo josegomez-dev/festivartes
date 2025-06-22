@@ -7,10 +7,12 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from './../../firebaseConfig'; 
 
 interface CoreSectionJudgesProps {
-  filterBy?: any
+  filterBy?: any;
+  selectMode?: boolean;
+  selectItem?: (artworkIdentifier: string) => void;
 }
 
-const CoreSectionJudges = ({ filterBy }: CoreSectionJudgesProps) => {
+const CoreSectionJudges = ({ filterBy, selectMode, selectItem }: CoreSectionJudgesProps) => {
 
   const [data, setData] = useState<{ id: string; [key: string]: any }[]>([]);
 
@@ -62,7 +64,7 @@ const CoreSectionJudges = ({ filterBy }: CoreSectionJudgesProps) => {
           </div>
         </div>
         :
-        <ObjectMiniature projects={data} type="judge" />}
+        <ObjectMiniature projects={data} type="judge" selectMode={selectMode} selectItem={selectItem} />}
     </div>
   );
 }
