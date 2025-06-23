@@ -16,7 +16,6 @@ import Preloader from '@/components/Preloader';
 import CoreSectionSelectedArtworks from '@/components/CoreSectionSelectedArtworks';
 import CustomModal from '@/components/CustomModal';
 import { ARTWORK } from '@/types/artworks.types';
-import FloatingMenuButton from '@/components/FloatingMenuButton';
 import CoreSectionSelectedJudges from '@/components/CoreSectionSelectedJudges';
 import { User } from '@/types/userTypes';
 
@@ -31,8 +30,8 @@ const EventDetail = ({ }) => {
   const [allArtworks, setAllArtworks] = useState<ARTWORK[]>([]);
   const [allJudges, setAllJudges] = useState<User[]>([]);
 
-  const [localSelectedArtworks, setLocalSelectedArtworks] = useState<string[]>([]);
-  const [localSelectedJudges, setLocalSelectedJudges] = useState<string[]>([]);
+  const [localSelectedArtworks, setLocalSelectedArtworks] = useState<string[]>(project.selectedArtworks || []);
+  const [localSelectedJudges, setLocalSelectedJudges] = useState<string[]>(project.selectedJudges || []);
 
   const [reaction, setReaction] = useState<"happy" | "sad" | null>(null);
   const [hasClapped, setHasClapped] = useState(false);
@@ -63,14 +62,16 @@ const EventDetail = ({ }) => {
     try {
       const querySnapshot = await getDocs(collection(db, 'events'));
       const events = querySnapshot.docs.map(doc => ({
-        ...doc.data(),
+        ...(doc.data() as EVENTS),
         id: doc.id
-      }));
-      const selectedProject = events.find(event => event.id === id || event.id === _id); ;
+      })) as EVENTS[];
+      const selectedProject = events.find(event => event.id === id || event.id === _id);
       if (selectedProject) {
-        setProject(selectedProject as EVENTS);
+        setProject(selectedProject);
+        setLocalSelectedArtworks(selectedProject.selectedArtworks || []);
+        setLocalSelectedJudges(selectedProject.selectedJudges || []);
       }
-      setData(events as EVENTS[]);
+      setData(events);
       return events;
     } catch (error) {
       console.error('Error fetching events:', error);
@@ -216,6 +217,24 @@ const EventDetail = ({ }) => {
     return myRating ? myRating.rating : 0;
   };
 
+  const saveArtworksSelection = async () => {
+    const docRef = doc(db, 'events', project.id);
+    await updateDoc(docRef, {
+      selectedArtworks: localSelectedArtworks,
+    });
+    onCloseSelectArtworksModal();
+    toast.success('Obras seleccionadas correctamente!');
+  };
+
+  const saveJudgesSelection = async () => {
+    const docRef = doc(db, 'events', project.id);
+    await updateDoc(docRef, {
+      selectedJudges: localSelectedJudges,
+    });
+    onCloseSelectJudgesModal();
+    toast.success('Jurados seleccionados correctamente!');
+  };
+
   return (
     <div className={styles['full-view']}>
       {/* <SubMenu /> */} 
@@ -268,7 +287,7 @@ const EventDetail = ({ }) => {
             </>)}
           
           <div className='modal-submit-buttons'>
-            <button className={authStyles['auth-button']} onClick={onCloseSelectArtworksModal}>
+            <button className={authStyles['auth-button']} onClick={saveArtworksSelection}>
               <b>Guardar selección</b>
             </button>
           </div>
@@ -323,7 +342,7 @@ const EventDetail = ({ }) => {
             </>)}
           
           <div className='modal-submit-buttons'>
-            <button className={authStyles['auth-button']} onClick={onCloseSelectArtworksModal}>
+            <button className={authStyles['auth-button']} onClick={saveJudgesSelection}>
               <b>Guardar selección</b>
             </button>
           </div>
@@ -415,7 +434,12 @@ const EventDetail = ({ }) => {
         </div>
 
         {project.selectedArtworks?.length > 0 ? (
-            <CoreSectionSelectedArtworks selectedArtworks={project?.selectedArtworks} />
+            <CoreSectionSelectedArtworks selectedArtworks={localSelectedArtworks} />
+          ) : (
+            null
+          )}
+        {project.selectedJudges?.length > 0 ? (
+            <CoreSectionSelectedJudges selectedJudges={localSelectedJudges} />
           ) : (
             null
           )}

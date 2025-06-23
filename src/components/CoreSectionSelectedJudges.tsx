@@ -50,7 +50,7 @@ const CoreSectionSelectedJudges = ({ selectedJudges }: CoreSectionJudgesProps) =
 
   return (
     <div className={`${styles.card} top-spaced`}>
-      <p className='bolder-text'>Obras seleccionadas para el Evento&nbsp; </p>
+      <p className='bolder-text'>Jurado Seleccionador&nbsp; </p>
       {data.length <= 0 ?
         <div className={styles.grid}>
           <div className={styles.card}>

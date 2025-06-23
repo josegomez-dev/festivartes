@@ -1,6 +1,7 @@
 // Interface for a User
 export interface User {
     id: string;
+    uid: string;
     displayName: string;
     email: string;
     bio: string;
@@ -26,6 +27,7 @@ export interface User {
   // Mock Data for an empty user
   export const EMPTY_USER: User = {
     id: '',
+    uid: '',
     displayName: '',
     email: '',
     bio: '',
@@ -45,6 +47,7 @@ export interface User {
   
   export const createEmptyUser = (): User => ({
   id: '',
+  uid: '',
   displayName: '',
   email: '',
   bio: '',

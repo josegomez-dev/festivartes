@@ -47,7 +47,7 @@ const CoreSectionSelectedArtworks = ({ selectedArtworks }: CoreSectionArtworksPr
           <div className={`${styles.card} `}>
           <p>
             <div className='bolder-text'>
-              <p>Obras seleccionadas para el Evento&nbsp; </p>
+              <p>Obras Registradas&nbsp; </p>
             </div>
           </p>
           <br />

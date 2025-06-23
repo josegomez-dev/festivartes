@@ -6,7 +6,8 @@ export interface EVENTS {
     location: string;
     thumbnail: string;
     date: Date;
-    selectedArtworks: Array<string>; // Array of artwork IDs
+    selectedJudges: string[]; // Optional field for selected judges
+    selectedArtworks: string[]; // Optional field for selected artworks
     stars: Array<{ userIdentifier: string; rating: number }>;
     claps: Array<{ userIdentifier: string; clap: boolean }>;
     price: number;
@@ -24,10 +25,11 @@ export const EMPTY_EVENT: EVENTS = {
     date: new Date(),
     location: "",
     description: "",
+    selectedJudges: [],
+    selectedArtworks: [],
     upcoming: false,
     price: 0,
     createdBy: "",
-    selectedArtworks: [],
     claps: [],
     stars: [
         // {
