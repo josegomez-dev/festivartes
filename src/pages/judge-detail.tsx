@@ -4,28 +4,49 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from './../../firebaseConfig';
+import { User } from '@/types/userTypes';
 
 const JudgeDetail = ({ }) => {
-  const router = useRouter();
-  const { id } = router.query; // Dynamic route parameter
-  const [data, setData] = useState<{ id: string; [key: string]: any }[]>([]);
-  const [profile, setProfile] = useState<{ id: string; [key: string]: any } | null>(null);
+  const params = new URLSearchParams(document.location.search);
+  const id = params.get('id');
+  const [profile, setProfile] = useState<User | null>(null);
 
   const fetchJudge = async (id: string | string[] | undefined) => {
     try {
       const querySnapshot = await getDocs(collection(db, 'accounts'))
       // get only users account with role "judge"
       const accounts = querySnapshot.docs
-        .map(doc => ({
-          id: doc.id,
-          ...(doc.data() as { role: string })
-        }))
+        .map(doc => {
+          const data = doc.data();
+          return {
+            id: doc.id,
+            uid: data.uid ?? doc.id,
+            displayName: data.displayName ?? '',
+            email: data.email ?? '',
+            bio: data.bio ?? '',
+            phone: data.phone ?? '',
+            address: data.address ?? '',
+            location: data.location ?? '',
+            website: data.website ?? '',
+            name: data.name ?? '',
+            role: data.role ?? '',
+            thumbnail: data.thumbnail ?? '',
+            profilePic: data.profilePic ?? '',
+            // Provide default values for all required User fields
+            type: data.type ?? '',
+            status: data.status ?? '',
+            notifications: data.notifications ?? [],
+            category: data.category ?? '',
+            createdAt: data.createdAt ?? null,
+            // add other User fields as needed, with fallback defaults
+          } as unknown as User;
+        })
         .filter((account) => account.role === 'judge');
+      // alert('accounts: ' + JSON.stringify(accounts));
       const selectedJudge = accounts.find(account => account.id === id);
       if (selectedJudge) {
         setProfile(selectedJudge);
       }
-      setData(accounts);
       return accounts;
     } catch (error) {
       console.error('Error fetching events:', error);
@@ -34,7 +55,7 @@ const JudgeDetail = ({ }) => {
   };
 
   useEffect(() => {
-    fetchJudge(id);
+    fetchJudge(id ?? undefined);
   }, []);
 
   if (!profile) {
@@ -49,14 +70,14 @@ const JudgeDetail = ({ }) => {
         <div className="project-detail-container">
           <h1><b className='font-size-3rem'>{profile.displayName}</b></h1>          
           <p className='bolder-text'>
-            {profile?.name} | {profile?.bio || 'Agrega una descripcion'}
+            {profile?.displayName} | {profile?.bio || 'Agrega una descripcion'}
           </p>
           <br />
 
-          {profile.thumbnail || profile.profilePic ? 
-            <img src={profile.thumbnail || profile.profilePic} alt={profile.name} className='project-thumbnail-wrapper' />
+          {profile.profilePic ? 
+            <img src={profile.profilePic} alt={profile.displayName} className='project-thumbnail-wrapper' />
           : 
-            <img src='https://cdn-icons-png.flaticon.com/512/149/149071.png' alt={profile.name} className='project-thumbnail-judge' /> 
+            <img src='https://cdn-icons-png.flaticon.com/512/149/149071.png' alt={profile.displayName} className='project-thumbnail-judge' /> 
           }
           <br />
 

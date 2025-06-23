@@ -55,6 +55,9 @@
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 250px;
   }
 
   .auth-button:hover {
