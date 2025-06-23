@@ -1,5 +1,5 @@
 import styles from '@/app/assets/styles/AdminIndex.module.css';
-import registerForm from '@/app/assets/styles/RegisterForm.module.css';
+import authStyles from '@/app/assets/styles/Auth.module.css';
 import { useRouter } from 'next/router';
 import AudioPlayer from "@/components/AudioPlayer";
 import VideoPlayer from "@/components/VideoPlayer";
@@ -17,7 +17,7 @@ import toast from 'react-hot-toast';
 import { ARTWORK, EMPTY_ARTWORK } from '@/types/artworks.types';
 import Preloader from '@/components/Preloader';
 import { uploadBytes, getDownloadURL, ref } from 'firebase/storage';
-import CoreSectionRatingJudges from '@/components/CoreSectionRatingJudges';
+import RateCard, { Rate } from '@/components/RateCard';
 
 const ArtworkDetail = () => {
   const router = useRouter();
@@ -75,7 +75,7 @@ const ArtworkDetail = () => {
   }, []);
 
   if (!project) {
-    return <div>Loading...</div>;
+    return <div>Cargando Datos...</div>;
   }
 
   const handleTabClick = (tab: string) => {
@@ -267,10 +267,20 @@ const ArtworkDetail = () => {
       <CustomModal
         isOpen={isJudgeModalOpen}
         onClose={closeJudgeModal}
-        height="80%" // Custom height
+        height="85%" // Custom height
       >
+        <div className="modal-title-centered">
+            <b>
+              Calificar Obra {project?.title ? `- ${project.title}` : ''}
+            </b>
+        </div>
         <div className="form-wrapper">
           <RatingForm closeModal={closeJudgeModal} artworkIdentifier={project?.id} userIdentifier={user?.uid} />
+          {/* <div className='modal-submit-buttons'>
+            <button className={authStyles['auth-button']} onClick={onCloseModalReviewArtwork}>
+              <b>Guardar Calificación</b>
+            </button>
+          </div> */}
         </div>
       </CustomModal>
 
@@ -530,10 +540,57 @@ const ArtworkDetail = () => {
             )}
           </div>
         </div>
+
+        <br />
+        <div className="project-detail-wrapper">
+          <div className="project-detail-container">
+            <div className="project-detail-header">
+              <h2>
+                <b className='font-size-title'>
+                  {project.title || 'Title'}
+                </b>
+              </h2>
+
+
+              <div className="project-detail-header-rates">
+                {project.rates && project.rates.length > 0 ? (
+                  <RateCard 
+                    rates={(project.rates as unknown as Rate[]).map((r) => ({
+                      judgeIdentifier: r.judgeIdentifier,
+                      ratingForm: typeof r.ratingForm === 'string' ? r.ratingForm : JSON.stringify(r.ratingForm),
+                      rateAt: r.rateAt,
+                      rateValue: r.rateValue
+                    }))}
+                  />
+                ) : (
+                  <p>No hay calificaciones para esta obra.</p>
+                )} 
+              </div>    
+
+
+
+              <div className="project-detail-header-buttons">
+                {role === 'judge' && (
+                    <>
+                      <br />
+                      <button className={authStyles['auth-button']} onClick={() => {
+                        // check in rates if the user has already rated this artwork
+                        const hasRated = project.rates?.some((rate: any) => rate.judgeIdentifier === user?.uid);
+                        if (hasRated) {
+                          toast.error('Ya has calificado esta obra.');
+                        }
+                        else {
+                          openJudgeModal();
+                        }
+                      }}>
+                        <b>¡Calificar Obra!</b>
+                      </button>
+                    </>)}
+              </div>
+            </div>
+          </div>
+        </div>        
         
-        {/* {role === 'admin' && (
-          <CoreSectionRatingJudges />
-        )} */}
 
         <br />
         <br />

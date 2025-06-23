@@ -1,0 +1,68 @@
+.rateCardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+  justify-content: center;
+}
+
+.rateCard {
+  background-color: #b6b6b629;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease-in-out;
+}
+
+.rateCard:hover {
+  transform: translateY(-5px);
+}
+
+.rateHeader {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.judgeAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 0.5rem;    
+  position: absolute;
+  float: right;
+}
+
+.judgeName {
+  color: #333;
+}
+
+.rateDate {
+  font-size: 0.8rem;
+  color: var(--color-orange);
+}
+
+.rateBody {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 0.75rem;
+}
+
+.ratingForm {
+  white-space: pre-wrap;
+  line-height: 1.4;
+}
+
+.rateFooter {
+  text-align: right;
+}
+
+.stars {
+  font-size: 1.25rem;
+}

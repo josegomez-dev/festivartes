@@ -38,9 +38,9 @@
 .textarea:focus,
 .select:focus,
 .toggle:focus {
-  border-color: #007bff;
+  border-color: var(--color-orange);
   outline: none;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  box-shadow: 0 0 5px rgba(255, 160, 6, 0.5);
 }
 
 .textarea {

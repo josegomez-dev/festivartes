@@ -60,7 +60,7 @@ const CoreSectionSelectedArtworks = ({ selectedArtworks }: CoreSectionArtworksPr
             </div> 
             : 
             <div className='mTop-10'>
-              <ObjectMiniature projects={data} customClass={'artworks-miniature-panel'} type={'artwork'} selectMode />              
+              <ObjectMiniature projects={data} customClass={'artworks-miniature-panel'} type={'artwork'} />              
             </div>
           }
         </div> )}

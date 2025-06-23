@@ -18,6 +18,7 @@ import CustomModal from '@/components/CustomModal';
 import { ARTWORK } from '@/types/artworks.types';
 import CoreSectionSelectedJudges from '@/components/CoreSectionSelectedJudges';
 import { User } from '@/types/userTypes';
+import RatingForm from '@/components/RatingForm';
 
 const EventDetail = ({ }) => {
   const router = useRouter();
@@ -39,7 +40,6 @@ const EventDetail = ({ }) => {
   const [selectArtworksModalOpen, setSelectArtworksModalOpen] = useState(false);
   const onCloseSelectArtworksModal = () => setSelectArtworksModalOpen(false);
   const onOpenSelectArtworksModal = () => setSelectArtworksModalOpen(true);
-
 
   const [selectJudgesModalOpen, setSelectJudgesModalOpen] = useState(false);
   const onCloseSelectJudgesModal = () => setSelectJudgesModalOpen(false);
@@ -113,7 +113,7 @@ const EventDetail = ({ }) => {
   }, []);
 
   if (!project) {
-    return <div>Loading...</div>;
+    return <div>Cargando Datos...</div>;
   }
 
   const getCurrentClaps = () => {
