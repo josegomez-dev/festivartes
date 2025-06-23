@@ -29,7 +29,7 @@ const JudgeDetail = () => {
           .map((doc) => ({ id: doc.id, ...doc.data() } as User))
           .filter((u) => u.role === "judge");
 
-        const found = judges.find((u) => u.id === judgeId);
+        const found = judges.find((u) => u.uid === judgeId);
         setProfile(found ?? null);
       } catch (e) {
         console.error(e);

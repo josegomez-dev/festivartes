@@ -47,7 +47,7 @@ const RateCard: React.FC<RateCardProps> = ({ rates }) => {
         <div key={index} className={styles.rateCard}>
           <div className={styles.rateHeader}>
             <Image
-                src={allJudges.find(judge => judge.uid === rate.judgeIdentifier)?.profilePic || '/default-avatar.png'}
+                src={allJudges.find(judge => judge.uid === rate.judgeIdentifier)?.profilePic || ''}
                 alt="Judge Avatar"
                 width={50}
                 height={50}
