@@ -45,7 +45,7 @@ const DocumentEditor = ({
     await updateDoc(docRef, {
       document: content,
     });
-    toast.success('Document saved successfully!');
+    toast.success('Documento guardado exitosamente!');
   };
 
   return (
