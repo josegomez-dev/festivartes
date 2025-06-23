@@ -54,20 +54,24 @@ const RateCard: React.FC<RateCardProps> = ({ rates }) => {
                 className={styles.judgeAvatar}
             />
             &nbsp;
-            <span className={styles.judgeName}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{allJudges.find(judge => judge.uid === rate.judgeIdentifier)?.displayName || 'Unknown Judge'}</span>
+            <span className={styles.judgeName}>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              {allJudges.find(judge => judge.uid === rate.judgeIdentifier)?.displayName || 'Unknown Judge'}
+            </span>
           </div>
           {/* <div className={styles.rateBody}>
             <p className={styles.ratingForm}>{rate.ratingForm}</p>
           </div> */}
           <div className={styles.rateFooter}>
             <span className={styles.stars}>
-              {rate.rateValue}: &nbsp;
+              {rate.rateValue}pts: <br /> &nbsp;
               {rate.rateValue > 0 && (
                 <span style={{ color: 'gold' }}>
                   {'★'.repeat(rate.rateValue)}
                 </span>
               )}
-            </span> &nbsp;
+            </span> 
+            <br />
             <span className={styles.rateDate}>{new Date(rate.rateAt).toLocaleString()}</span>
           </div>
         </div>

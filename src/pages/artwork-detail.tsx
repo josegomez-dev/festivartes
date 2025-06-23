@@ -547,7 +547,8 @@ const ArtworkDetail = () => {
             <div className="project-detail-header">
               <h2>
                 <b className='font-size-title'>
-                  {project.title || 'Title'}
+                  Calificaciones
+                  {/* {project.title || 'Title'} */}
                 </b>
               </h2>
 

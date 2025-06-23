@@ -3,9 +3,8 @@ import styles from "./../app/assets/styles/RegisterForm.module.css";
 import YesOrNoQuestionForm from "./YesOrNoQuestionForm";
 import MultiCheckBoxQuestionForm from "./MultiCheckBoxQuestionForm";
 import { db } from "./../../firebaseConfig";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, getDoc } from "firebase/firestore";
 import toast from "react-hot-toast";
-import { format } from "path";
 import { QUESTION_TYPES } from "@/types/questions.types";
 
 interface RatingFormProps {
@@ -166,66 +165,63 @@ const RatingForm: React.FC<RatingFormProps> = ({ artworkIdentifier, userIdentifi
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!artworkIdentifier) {
       console.error("artworkIdentifier is undefined");
       return;
     }
-    const docRef = doc(db, 'artworks', artworkIdentifier);
-    
-    const updatedData = {
-      rates: [
-        {
-          userIdentifier: userIdentifier, // Replace with actual user ID
-          ratingForm: formData,
-        },
-      ],
-    };
 
-    const formattedData = {
-      ...updatedData,
-      rates: updatedData.rates.map((rate) => ({
-        judgeIdentifier: rate.userIdentifier,
-        ratingForm: transformRatingForm(rate.ratingForm),
-        rateAt: new Date().toISOString(), // Add the current date
-        rateValue: howManyChecked(), // Add the rating value
-      })),
-    };
+    const docRef = doc(db, 'artworks', artworkIdentifier);
 
     try {
-      await updateDoc(docRef, formattedData);
+      const docSnap = await getDoc(docRef); // Get existing data
+      const existingData = docSnap.exists() ? docSnap.data() : {};
+      const existingRates = existingData.rates || [];
+
+      const newRate = {
+        judgeIdentifier: userIdentifier,
+        ratingForm: transformRatingForm(formData),
+        rateAt: new Date().toISOString(),
+        rateValue: howManyChecked(),
+      };
+
+      const updatedRates = [...existingRates, newRate];
+
+      await updateDoc(docRef, { rates: updatedRates });
+
       toast.success("Formulario enviado correctamente");
+      window.location.reload();
     } catch (error) {
       console.error("Error updating document: ", error);
       toast.error("Error al enviar el formulario");
     }
 
+    // Reset form and close modal
     setFormData({
-      question1_Label: "Letra de la canción: ¿Se toma en cuenta el contenido y el mensaje de la letra, de acuerdo con lo que estipula el artículo 3 del Reglamento del Festival Estudiantil de las Artes 2025?",
+      question1_Label: "...",
       question1: false,
       question1_comment: "",
-      question2_label: "Entonación y afinación: ¿La voz de la persona participante presenta una afinación y entonación precisa y correcta de acuerdo con los instrumentos musicales que lo acompañan? En caso de ser a capella, ¿mantiene la entonación y afinación, por lo que se tomará en cuenta la tonalidad con la que inicie la canción?",
+      question2_label: "...",
       question2: false,
       question2_comment: "",
-      question3_Label: "Dicción: ¿Se refiere a una pronunciación correcta de las palabras? ¿Las cantantes o los cantantes utilizan una dicción clara y limpia? ¿Utiliza pronunciación correcta?",
+      question3_Label: "...",
       question3: false,
       question3_comment: "",
-      question4_Label: "Precisión en la ejecución vocal y estabilidad en el ritmo: ¿El tempo, compás y ritmo son constantes y puntuales a la hora de cantar? ¿Mantienen concordancia con la línea melódica que emite la voz?",
+      question4_Label: "...",
       question4: false,
       question4_comment: "",
-      question5_Label: "¿Propongo esta obra artística para ser considerada en la deliberación con posibilidad de ser seleccionada?",
+      question5_Label: "...",
       question5: false,
       question5_comment: "",
       multiCheckbox: multiCheckboxOptions.map(option => ({
-        ...option, 
-        checked: option.checked // Assuming 'checked' is part of 'option'
-      }))
+        ...option,
+        checked: option.checked,
+      })),
     });
-    
-    if (closeModal) {
-      closeModal();
-    }
 
-  }
+    if (closeModal) closeModal();
+  };
+
 
   return (
     <>
