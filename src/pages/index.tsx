@@ -3,7 +3,6 @@
 import React, { useState, useRef } from 'react';
 import styles from '@/app/assets/styles/MainPage.module.css';
 import Image from 'next/image';
-import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { RiBubbleChartFill } from 'react-icons/ri';
 import { useAuth } from '@/context/AuthContext';
@@ -66,9 +65,8 @@ const Home = () => {
               priority
             />
             <div style={{ textAlign: 'center', marginTop: '-35px' }}>
-              <h1>Bienvenid@s a este <b style={{ fontSize: 35 }}>Espacio Culutral e Interactivo</b> que brinda <b style={{ fontSize: 35 }}>Catarsis Musical.</b></h1>
-              <br />  
-              <p>Una experiencia artística como ninguna otra.</p>
+              <b>Catarsis Musical</b>
+              <p>Bienvenid@s a este Espacio Culutral e Interactivo.</p>
             </div>
           </section>
 
@@ -94,8 +92,39 @@ const Home = () => {
                       className={styles.logo}
                       src="/core/logo2.png"
                       alt="Festivartes Main Logo"
-                      width={150}
-                      height={150}
+                      width={130}
+                      height={130}
+                      priority
+                      style={{ marginTop: '-25px', marginBottom: '-20px' }}
+                    />
+                  
+                </div>
+              </Link>
+            
+              <Link href="/login" className={styles.columnBox} style={{ textDecoration: 'none', fontSize: 15 }}>
+                <div
+                  onMouseMove={handleHover}
+                  onMouseLeave={resetLight}
+                >
+                    <h3><b style={{ fontSize: 30}}>
+                      <RiBubbleChartFill color='gold' />
+                       DOCUMENTACION OFICIAL</b>
+                    </h3>
+                    <p>
+                    <strong>📚 ¡Todo lo que necesitas saber! 📖</strong>
+                    </p>
+                    <br />
+                    <p>
+                      Explora nuestra documentación oficial para conocer todas las funcionalidades y guías de uso.
+                    </p>
+                    <br />
+                    <br />
+                    <Image
+                      className={styles.logo}
+                      src="/core/legartes.png"
+                      alt="Festivartes Main Logo"
+                      width={100}
+                      height={100}
                       priority
                       style={{ marginTop: '-25px', marginBottom: '-20px' }}
                     />
@@ -149,17 +178,9 @@ const Home = () => {
                 </div>
               </Link> */}
           </section>
+          <p>Creado por: <b><a target='_blank' href="https://www.linkedin.com/in/josealejandrogomezcastro/">Jose Alejandro Gomez Castro</a></b></p>
         </div>
       </main>
-
-      <br />
-      <br />
-      <br />
-      <br />
-
-      <div style={{marginTop: '-70px', textAlign: 'center'}}>
-        <Footer />
-      </div>
 
     </>
   );

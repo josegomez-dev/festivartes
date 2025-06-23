@@ -704,10 +704,11 @@ b {
 }
 
 .selected-artworks-list {
-  gap: 6px;
-  max-height: 300px;
-  height: auto;
-  padding: 25px;
+  height: 80px;
+  overflow: auto;
+  padding: 10px 20px;
+  border: 1px solid var(--background-transparent);
+  border-radius: 10px;
 }
 
 .title-artworks-container {

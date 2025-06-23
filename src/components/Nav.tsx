@@ -114,7 +114,8 @@ export default function Nav() {
 
           {authenticated && (
             <div className="relative mr-4">
-              <button
+              {notifications.filter(n => !n.visited).length > 0 && (
+                <button
                 onClick={() => {
                   setShowNotifications(!showNotifications);
                 }}
@@ -127,6 +128,7 @@ export default function Nav() {
                 )}
                 <strong >🔔 </strong>
               </button>
+              )}
 
             &nbsp;
             &nbsp;
@@ -221,12 +223,12 @@ export default function Nav() {
                 <br />
                 <Link href="/onboarding" className={styles.dropdownLink}>
                   <p className={`${styles.dropdownItem} link-item`}>
-                    ➡️ Onboarding 
+                    Onboarding 
                   </p>
                 </Link>
-                <Link href="/help" className={styles.dropdownLink}>
+                <Link href="/tutorials" className={styles.dropdownLink}>
                   <p className={`${styles.dropdownItem} link-item`}>
-                    ℹ️ Ayuda
+                    Tutoriales
                   </p>
                 </Link>
                 <div className={styles.dropdownActions}>

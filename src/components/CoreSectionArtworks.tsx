@@ -145,7 +145,9 @@ const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: Cor
             className='close-button-visible'
           >
             {showAllData && !allItems && (
-              <span>X Ocultar</span>
+              <span style={{ background: 'orange', padding: 4, borderRadius: 6, animation: 'pulse 2s infinite'}}>
+                Ocultar Obras de Arte
+              </span>
             )}
           </button>
           {data.length <= 0 ? 

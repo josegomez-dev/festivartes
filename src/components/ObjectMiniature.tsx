@@ -47,13 +47,13 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type, cust
       {projects.map((project: any, index: number) => (
         <Link 
           key={index + project.name + document.location.search + 'react-key'} 
-          href={selectMode ? `#` : `/${type}-detail?id=${project.id}`}
+          href={selectMode ? `` : `/${type}-detail?id=${project.id || project.uid}`}
           className='project-miniature-link'
           onClick={(e) => {
             if (selectMode) {
               e.preventDefault();
               // handle select mode logic here
-              selectItem && selectItem(project.id);
+              selectItem && selectItem(project.id || project.uid);
             }
           }}
         >

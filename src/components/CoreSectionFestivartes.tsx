@@ -141,7 +141,9 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
             className='close-button-visible'
             >
             {showAllData && (
-              <span>X Ocultar</span>
+              <span style={{ background: 'orange', padding: 4, borderRadius: 6, animation: 'pulse 2s infinite'}}>
+                Ocultar Eventos
+              </span>
             )}
           </button>
           {data.length <= 0 ? 

@@ -48,7 +48,6 @@ const CoreSectionRatingJudges = ({  }) => {
 
             const filteredAccounts = accountsData.filter((account) => {
               return accounts.some((a) => {
-                console.log('account', a);
                 return a.id === account.uid
               });
             });

@@ -17,6 +17,8 @@ import CoreSectionSelectedArtworks from '@/components/CoreSectionSelectedArtwork
 import CustomModal from '@/components/CustomModal';
 import { ARTWORK } from '@/types/artworks.types';
 import FloatingMenuButton from '@/components/FloatingMenuButton';
+import CoreSectionSelectedJudges from '@/components/CoreSectionSelectedJudges';
+import { User } from '@/types/userTypes';
 
 const EventDetail = ({ }) => {
   const router = useRouter();
@@ -27,8 +29,10 @@ const EventDetail = ({ }) => {
   const [project, setProject] = useState<EVENTS>(EMPTY_EVENT);
 
   const [allArtworks, setAllArtworks] = useState<ARTWORK[]>([]);
+  const [allJudges, setAllJudges] = useState<User[]>([]);
 
   const [localSelectedArtworks, setLocalSelectedArtworks] = useState<string[]>([]);
+  const [localSelectedJudges, setLocalSelectedJudges] = useState<string[]>([]);
 
   const [reaction, setReaction] = useState<"happy" | "sad" | null>(null);
   const [hasClapped, setHasClapped] = useState(false);
@@ -36,6 +40,11 @@ const EventDetail = ({ }) => {
   const [selectArtworksModalOpen, setSelectArtworksModalOpen] = useState(false);
   const onCloseSelectArtworksModal = () => setSelectArtworksModalOpen(false);
   const onOpenSelectArtworksModal = () => setSelectArtworksModalOpen(true);
+
+
+  const [selectJudgesModalOpen, setSelectJudgesModalOpen] = useState(false);
+  const onCloseSelectJudgesModal = () => setSelectJudgesModalOpen(false);
+  const onOpenSelectJudgesModal = () => setSelectJudgesModalOpen(true);
 
   const clapSoundRef = useRef<HTMLAudioElement | null>(null);
   const unclapSoundRef = useRef<HTMLAudioElement | null>(null);
@@ -82,9 +91,24 @@ const EventDetail = ({ }) => {
     }
   };
 
+  const fetchAllJudges = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'accounts'));
+      const accounts = querySnapshot.docs.map(doc => ({
+        ...(doc.data() as User),
+        id: doc.id
+      }));
+      const judges = accounts.filter(account => account.role === 'judge');
+      setAllJudges(judges as User[]);
+    } catch (error) {
+      console.error('Error fetching judges:', error);
+    }
+  };
+
   useEffect(() => {
     fetchEvents(id);
     fetchAllArtworks();
+    fetchAllJudges();
   }, []);
 
   if (!project) {
@@ -200,7 +224,7 @@ const EventDetail = ({ }) => {
       <CustomModal
         isOpen={selectArtworksModalOpen}
         onClose={onCloseSelectArtworksModal}
-        height="85%" // Custom height
+        height="100%" // Custom height
       >
         <div className="modal-title-centered">
             <b>
@@ -224,16 +248,72 @@ const EventDetail = ({ }) => {
           {localSelectedArtworks.length > 0 && (
             <>
               <hr />
+              <br />
               <div className="">
-                Confirmar selección de obras para el evento: <b>{project.name}</b>
+                Confirmar selección de obras para el evento: 
                 <ol className='selected-artworks-list'>
                   {allArtworks.map((item) => {
                     if (localSelectedArtworks.includes(item.id)) {
                       return (
-                        <li key={item.id} className='selected-artwork-item'>
-                          {item.title} -&nbsp; 
-                          <strong style={{ color: 'var(--color-orange)'}}>{item.artist}</strong> -&nbsp; 
+                        <li key={`artwork-${item.id}`} className='selected-artwork-item'>
+                          {item.title} -&nbsp;
+                          <strong style={{ color: 'var(--color-orange)' }}>{item.artist}</strong> -&nbsp;
                           <span style={{ color: 'var(--color-blue)' }}>{item.type}</span>
+                        </li>
+                      );
+                    }
+                    return null;
+                  })}
+                </ol>
+              </div>
+            </>)}
+          
+          <div className='modal-submit-buttons'>
+            <button className={authStyles['auth-button']} onClick={onCloseSelectArtworksModal}>
+              <b>Guardar selección</b>
+            </button>
+          </div>
+        </div>
+      </CustomModal>
+
+
+      <CustomModal
+        isOpen={selectJudgesModalOpen}
+        onClose={onCloseSelectJudgesModal}
+        height="100%" // Custom height
+      >
+        <div className="modal-title-centered">
+            <b>
+              Elije al jurado seleccionador
+            </b>
+        </div>
+        <div className="form-wrapper">
+          <p className='color-light-gray'>
+            Selecciona los jueces que formarán parte del jurado para el evento.
+          </p>
+          <CoreSectionJudges filterBy={user?.uid} selectMode selectItem={item => {
+            if (localSelectedJudges.includes(item)) {
+              setLocalSelectedJudges(localSelectedJudges.filter(judge => judge !== item));
+            } else {
+              setLocalSelectedJudges([...localSelectedJudges, item]);
+            }
+          }} />
+
+          <CoreSectionSelectedJudges selectedJudges={localSelectedJudges} />
+
+          {localSelectedJudges.length > 0 && (
+            <>
+              <hr />
+              <div className="">
+                <br />
+                Confirmar selección de jurados para el evento:
+                <ol className='selected-artworks-list'>
+                  {allJudges.map((item) => {
+                    if (localSelectedJudges.includes(item.id)) {
+                      return (
+                        <li key={item.id} className='selected-artwork-item'>
+                          <span style={{ color: 'var(--color-orange)' }}>{item.displayName}</span>&nbsp; 
+                          <span style={{ color: 'var(--color-white)' }}>({item.category})</span>
                         </li>
                       );
                     }
@@ -324,11 +404,15 @@ const EventDetail = ({ }) => {
           {/* Add more project details as needed */}
           {role === 'admin' && (
               <>
-              <br />
-              <button className={authStyles['auth-button']} onClick={onOpenSelectArtworksModal}>
-                <b>¡Selecciona tus obras!</b>
-              </button>
-            </>)}
+                <br />
+                <button className={authStyles['auth-button']} onClick={onOpenSelectArtworksModal}>
+                  <b>¡Selecciona tus obras!</b>
+                </button>
+                <br />
+                <button className={authStyles['auth-button']} onClick={onOpenSelectJudgesModal}>
+                  <b>Elije al jurado seleccionador!</b>
+                </button>
+              </>)}
         </div>
 
         {project.selectedArtworks?.length > 0 ? (

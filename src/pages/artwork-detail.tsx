@@ -346,50 +346,67 @@ const ArtworkDetail = () => {
                   </b>
                 </h2>
                 <br />
-                {project.thumbnail ? (
-                  <img
-                    src={project.thumbnail}
-                    alt={project.title}
-                    className="project-thumbnail-wrapper"
-                    style={{ width: '100%' }}
-                  />
+                {user?.uid && project.audio ? (
+                  <>
+                      {project.thumbnail ? (
+                      <img
+                        src={project.thumbnail}
+                        alt={project.title}
+                        className="project-thumbnail-wrapper"
+                        style={{ width: '100%' }}
+                      />
+                    ) : (
+                      <img
+                        src="https://getuikit.com/v2/docs/images/placeholder_600x400.svg"
+                        alt={project.title}
+                        className="project-thumbnail-wrapper"
+                      />
+                    )}
+                  </>
                 ) : (
-                  <img
-                    src="https://getuikit.com/v2/docs/images/placeholder_600x400.svg"
-                    alt={project.title}
-                    className="project-thumbnail-wrapper"
-                  />
+                  <>
+                    <p className='disabled small-text-size'>
+                      No hay audio disponible para esta obra de arte.
+                    </p>
+                    <p>
+                      <b className='bolder-text'>¡Subí el audio de tu obra de arte!</b>
+                    </p>
+                  </>
                 )}
                 <br />
                 <br />
-                <span className={`${project.audio ? '' : 'disabled'} small-text-size`}>
-                  Sube el archivo mp3 de la obra de arte
-                </span>
-                <div className={`links-spaced ${project.audio ? '' : 'disabled'}`}>
-                  {loading ? (
-                    <Preloader message='🎵 Cargando audio... Estamos ajustando el sonido para ofrecerte la mejor calidad.' small />
-                  ) : (
-                    <AudioPlayer
-                    src={user?.uid ? project.audio : "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"}
-                    // title={'Audio'}
-                  />)}
-                </div>
-                <br />
-                <br />
-                <div className="input-group margin-0-auto" >
-                  <label htmlFor="audio">
-                    Subir archivo de audio
-                  </label>
-                  <input
-                    type="file"
-                    id="audio"
-                    name="audio"
-                    className={styles.fileInput}
-                    accept="audio/*" 
-                    onChange={handleAudioUpload}
-                  />
-                </div>
-              </>
+
+                {loading ? (
+                  <Preloader message='🎵 Cargando audio... Estamos ajustando el sonido para ofrecerte la mejor calidad.' small />
+                ) : (
+                  <>
+                    <br />
+                    <div className="input-group margin-0-auto" >
+                      <label htmlFor="audio">
+                        Subir archivo de audio
+                      </label>
+                      <input
+                        type="file"
+                        id="audio"
+                        name="audio"
+                        className={styles.fileInput}
+                        accept="audio/*" 
+                        onChange={handleAudioUpload}
+                      />
+                    </div>
+                  
+                    <br />
+                    <br />
+
+                    <div className={`links-spaced ${project.audio ? '' : 'disabled'}`}>
+                      <AudioPlayer
+                        src={user?.uid ? project.audio : "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"}
+                        // title={'Audio'}
+                      />
+                    </div>
+                  </>
+                  )}
+                </>
             )}
 
             {activeTab === 'info' && (
@@ -467,11 +484,21 @@ const ArtworkDetail = () => {
                     </h2>
                     <br />
                     
-                    <VideoPlayer
+                    {user?.uid && project.video ? (
+                      <VideoPlayer
                       src={user?.uid ? project.video : "https://file-examples.com/storage/fe46ad26fa67d4043a4b9e6/2017/04/file_example_MP4_480_1_5MG.mp4"}
                       // title={user?.uid ? project.title || 'Title' : "Video de la Obra de Arte"}
                     />
-                    
+                    ) : (
+                      <>
+                        <p className='disabled small-text-size'>
+                          No hay video disponible para esta obra de arte.
+                        </p>
+                        <p>
+                          <b className='bolder-text'>¡Subí el video de tu obra de arte!</b>
+                        </p>
+                      </>
+                    )}
                     
                     <br />
                     <br />
