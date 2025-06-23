@@ -75,7 +75,7 @@ const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: Cor
           <div className="modal-title-centered">
             <b>
               <h2 className='bolder-text'>Registrar Obra</h2>
-              <p className='color-light-gray'>Sube tu obra y compártela con el mundo.</p>
+              {/* <p className='color-light-gray'>Sube tu obra y compártela con el mundo.</p> */}
             </b>
           </div>
           <div className="form-wrapper">
@@ -154,7 +154,7 @@ const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: Cor
             <div className={styles.grid}>
               <div className={styles.card}>
                 <h3 className='color-light-gray'>¡Ups! Todavía no hay obras</h3>
-                <p className='color-black'>Sube tu obra y compártela con el mundo desde aquí.</p>
+                {/* <p className='color-black'>Sube tu obra y compártela con el mundo desde aquí.</p> */}
               </div> 
             </div> 
             : 

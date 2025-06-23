@@ -207,15 +207,16 @@ export default function Nav() {
                     🛡️:&nbsp;
                     <b className="medium-text-size">{role}</b>
                   </p>
-                  <p className={styles.dropdownItem} style={{ position: 'absolute', top: '50px', right: '5px' }}>
+                  {/* <p className={styles.dropdownItem} style={{ position: 'absolute', top: '50px', right: '5px' }}>
                     ✅ :&nbsp;
                     <b className="medium-text-size">{user?.status}</b>
-                  </p>
+                  </p> */}
                 </div>
 
-                <p className={styles.dropdownItem}>
+                <br />
+                {/* <p className={styles.dropdownItem}>
                   <b className="medium-text-size">{user?.type === 'normal' ? 'Usuario Regular' : user?.type}</b>
-                </p>
+                </p> */}
                 <p className={`${styles.dropdownItem} color-orange`}><strong>{user?.displayName || 'Usuario'}</strong></p>
                 <p className={`${styles.dropdownItem} small-text-size`}>{user?.email}</p>
                 
@@ -226,11 +227,16 @@ export default function Nav() {
                     Onboarding 
                   </p>
                 </Link>
-                {/* <Link href="/tutorials" className={styles.dropdownLink}>
+                <Link href="/docs" className={styles.dropdownLink}>
                   <p className={`${styles.dropdownItem} link-item`}>
-                    Tutoriales
+                    Documentación
                   </p>
-                </Link> */}
+                </Link>
+                <Link href="/faq" className={styles.dropdownLink}>
+                  <p className={`${styles.dropdownItem} link-item`}>
+                    Preguntas Frecuentes
+                  </p>
+                </Link>
                 <div className={styles.dropdownActions}>
                   <br />
                   {/* <p className={`${styles.dropdownLink} close-session-link `}>Cerrar Sesion</p> */}
