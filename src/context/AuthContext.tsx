@@ -13,7 +13,7 @@ import {
 } from "firebase/auth";
 import { auth, db } from "./../../firebaseConfig";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import { EMPTY_USER } from "@/types/userTypes";
+import { createEmptyUser } from '@/types/userTypes';
 import emailjs from 'emailjs-com';
 import toast from 'react-hot-toast';
 import { v4 as uuidv4 } from 'uuid';
@@ -116,7 +116,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const user = userCredential.user;
 
       const _user = {
-        ...EMPTY_USER,
+        ...createEmptyUser(),
         uid: user.uid,
         email: user.email,
         displayName: user.displayName || name,

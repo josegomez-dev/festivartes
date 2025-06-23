@@ -77,8 +77,8 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
         </CustomModal>
         
         <div className={styles.card}>
-            <p>
-              <span className='bolder-text'>
+            <div>
+              <div className='bolder-text'>
                 <RiBubbleChartFill color='gold'/> &nbsp;
                 
                 <button 
@@ -117,8 +117,8 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
                   </button>
                 </div>)}
 
-              </span>
-            </p>
+              </div>
+            </div>
             {data.length <= 0 ? 
             <div className={styles.grid}>
                 <div className={styles.card}>
@@ -149,8 +149,8 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
           {data.length <= 0 ? 
           <div className={styles.grid}>
               <div className={styles.card}>
-              <h3 className='color-light-gray'>No se han registrado eventos</h3>
-              <p className='color-black'>¡Explora la app y crea el primero!</p>
+                <h3 className='color-light-gray'>No se han registrado eventos</h3>
+                <p className='color-black'>¡Explora la app y crea el primero!</p>
               </div> 
           </div> 
           : 

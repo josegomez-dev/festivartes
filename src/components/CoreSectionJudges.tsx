@@ -40,27 +40,24 @@ const CoreSectionJudges = ({ filterBy, selectMode, selectItem }: CoreSectionJudg
 
   return (
     <div className={`${styles.card} top-spaced`}>
-      <p>
-        <span className='bolder-text'>
-          {!selectMode &&
-          (
-            <>
-            <RiBubbleChartFill color='gold' /> &nbsp;
-            <b>Jurado Seleccionador &nbsp;
-              <Image
-                src="/judges-icon.png"
-                alt="judges-icon"
-                width={25}
-                height={25}
-                priority />
-            </b>
-              <p className='bolder-text small-text-size'>
-                🌟 Los expertos evalúan las obras artísticas.
-              </p>
-            </>
-          )}
-        </span>
-      </p>  
+      {!selectMode && (
+        <div>
+        <div className='bolder-text'>
+          <RiBubbleChartFill color='gold' /> &nbsp;
+          <b>Jurado Seleccionador &nbsp;
+            <Image
+              src="/judges-icon.png"
+              alt="judges-icon"
+              width={25}
+              height={25}
+              priority />
+          </b>
+          <p className='bolder-text small-text-size'>
+            🌟 Los expertos evalúan las obras artísticas.
+          </p>
+        </div>
+      </div> 
+      )} 
       {data.length <= 0 ?
         <div className={styles.grid}>
           <div className={styles.card}>

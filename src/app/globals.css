@@ -704,7 +704,7 @@ b {
 }
 
 .selected-artworks-list {
-  height: 80px;
+  height: 100px;
   overflow: auto;
   padding: 10px 20px;
   border: 1px solid var(--background-transparent);

@@ -226,11 +226,11 @@ export default function Nav() {
                     Onboarding 
                   </p>
                 </Link>
-                <Link href="/tutorials" className={styles.dropdownLink}>
+                {/* <Link href="/tutorials" className={styles.dropdownLink}>
                   <p className={`${styles.dropdownItem} link-item`}>
                     Tutoriales
                   </p>
-                </Link>
+                </Link> */}
                 <div className={styles.dropdownActions}>
                   <br />
                   {/* <p className={`${styles.dropdownLink} close-session-link `}>Cerrar Sesion</p> */}

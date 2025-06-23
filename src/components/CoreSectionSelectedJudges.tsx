@@ -50,19 +50,7 @@ const CoreSectionSelectedJudges = ({ selectedJudges }: CoreSectionJudgesProps) =
 
   return (
     <div className={`${styles.card} top-spaced`}>
-      <p>
-        {/* <span className='bolder-text'>
-          <RiBubbleChartFill color='gold' /> &nbsp;
-          <b>Jurado Seleccionador &nbsp;
-            <Image
-              src="/judges-icon.png"
-              alt="judges-icon"
-              width={25}
-              height={25}
-              priority />
-          </b>
-        </span> */}
-      </p>  
+      <p className='bolder-text'>Obras seleccionadas para el Evento&nbsp; </p>
       {data.length <= 0 ?
         <div className={styles.grid}>
           <div className={styles.card}>

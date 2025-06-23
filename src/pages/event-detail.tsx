@@ -219,7 +219,6 @@ const EventDetail = ({ }) => {
   return (
     <div className={styles['full-view']}>
       {/* <SubMenu /> */} 
-      <FloatingMenuButton mainBtn={true} />
 
       <CustomModal
         isOpen={selectArtworksModalOpen}

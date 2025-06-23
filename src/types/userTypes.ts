@@ -43,4 +43,21 @@ export interface User {
     createdAt: new Date(),
   };
   
-  
+  export const createEmptyUser = (): User => ({
+  id: '',
+  displayName: '',
+  email: '',
+  bio: '',
+  role: 'user',
+  category: '',
+  notifications: [],
+  type: 'normal',
+  status: 'inactive',
+  profilePic: '/blank-profile-picture.png',
+  phone: '',
+  address: '',
+  website: '',
+  location: '',
+  updatedAt: new Date(),
+  createdAt: new Date(),
+});

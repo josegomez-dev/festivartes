@@ -8,14 +8,14 @@ import Image from "next/image";
 import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { db, storage } from "./../../firebaseConfig"
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { EMPTY_USER } from "@/types/userTypes";
+import { createEmptyUser } from "@/types/userTypes";
 import toast from 'react-hot-toast';
 
 export default function Profile() {
   const { user, role, authenticated } = useAuth();
   const [loading, setLoading] = useState(true);
   const [accountData, setAccountData] = useState({
-    ...EMPTY_USER,
+    ...createEmptyUser(),
     uid: user?.uid,
     userId: user?.uid,
     email: user?.email,

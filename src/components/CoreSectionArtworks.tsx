@@ -86,7 +86,7 @@ const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: Cor
         {!allItems && (
           <div className={`${styles.card}`}>
           <div>
-            <span className='bolder-text'>
+            <div className='bolder-text'>
               <RiBubbleChartFill color='gold'/> &nbsp;
               
               <button 
@@ -119,7 +119,7 @@ const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: Cor
                   <FaCirclePlus className="floating-menu-button" />
                 </button>
               </div>
-            </span>
+            </div>
           </div>
 
           {data.length <= 0 ? 

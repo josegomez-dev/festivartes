@@ -15,44 +15,27 @@ interface ObjectMiniatureProps {
   selectItem?: (artworkIdentifier: string) => void;
 }
 
+const badgeIcons: Record<string, string> = {
+  escultura: "/icons-sculture.png",
+  fotografia: "/icons-photography.png",
+  musica: "/icons-music.png",
+  baile: "/icons-dance.png",
+  arte_digital: "/icons-digital.png",
+  normal: "/icons-sculture.png",
+};
+
 const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type, customClass, ratingException, selectMode, selectItem }) => {
-
-  // const getStarsRaitingByProject = (project: ARTWORK | EVENTS) => {
-  //   let average = 0;
-
-  //   if (!project.stars || project.stars.length === 0) {
-  //     return 0;
-  //   }
-   
-  //   const totalStars = project.stars.length;
-  //   const totalRating = project.stars.reduce((acc, item) => acc + (item.rating || 0), 0);
-  //   average = totalStars > 0 ? totalRating / totalStars : 0;
-  //   return Math.round(average);
-  // };
-
-  // const getCurrentProjectClaps = (project: ARTWORK | EVENTS) => {
-  //   let totalClaps = 0;
-  //   if (project.claps && project.claps.length > 0) {
-  //     project.claps.forEach((item: any) => {
-  //       if (item.clap) {
-  //         totalClaps++;
-  //       }
-  //     });
-  //   }
-  //   return totalClaps;
-  // }
 
   return (
     <div className={`project-miniature-container project-miniature-custom-${type} ${customClass}`}>
       {projects.map((project: any, index: number) => (
         <Link 
-          key={index + project.name + document.location.search + 'react-key'} 
+          key={`project-${project.id || project.uid || index}`}
           href={selectMode ? `` : `/${type}-detail?id=${project.id || project.uid}`}
           className='project-miniature-link'
           onClick={(e) => {
             if (selectMode) {
               e.preventDefault();
-              // handle select mode logic here
               selectItem && selectItem(project.id || project.uid);
             }
           }}
@@ -68,65 +51,15 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type, cust
                 )
               )}
 
-              {project.type === 'escultura' &&  
+              {badgeIcons[project.type] && (
                 <Image
                   width={50}
                   height={50}
-                  className='judges-badge badge-orange' 
-                  src="/icons-sculture.png" 
-                  alt="" 
+                  className={`judges-badge ${project.type === 'normal' ? 'badge-white' : 'badge-orange'}`} 
+                  src={badgeIcons[project.type]} 
+                  alt={project.type} 
                 />
-              }
-
-              {project.type === 'fotografia' &&  
-                <Image
-                  width={50}
-                  height={50}
-                  className='judges-badge badge-orange' 
-                  src="/icons-photography.png" 
-                  alt="" 
-                />
-              }
-
-              {project.type === 'musica' &&  
-                <Image
-                  width={50}
-                  height={50}
-                  className='judges-badge badge-orange' 
-                  src="/icons-music.png" 
-                  alt="" 
-                />
-              }
-              
-              {project.type === 'baile' &&  
-                <Image
-                  width={50}
-                  height={50}
-                  className='judges-badge badge-orange' 
-                  src="/icons-dance.png" 
-                  alt="" 
-                />
-              }
-              
-              {project.type === 'arte_digital' &&  
-                <Image
-                  width={50}
-                  height={50}
-                  className='judges-badge badge-orange' 
-                  src="/icons-digital.png" 
-                  alt="" 
-                />
-              }
-              
-              {project.type === 'normal' &&  
-                <Image
-                  width={50}
-                  height={50}
-                  className='judges-badge badge-white' 
-                  src="/icons-sculture.png" 
-                  alt="" 
-                />
-              }
+              )}
           </>}
           
           <div className="project-miniature">

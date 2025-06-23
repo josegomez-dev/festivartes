@@ -69,8 +69,8 @@ const CoreSectionRatingJudges = ({  }) => {
 
   return (
     <div className={`${styles.card} top-spaced`}>
-      <p>
-        <span className='bolder-text'>
+      <div>
+        <div className='bolder-text'>
           <RiBubbleChartFill color='gold' /> &nbsp;
           <b>Jurado Seleccionador &nbsp;
             <Image
@@ -83,8 +83,8 @@ const CoreSectionRatingJudges = ({  }) => {
           <p className='bolder-text small-text-size'>
             🌟 Los expertos evalúan las obras artísticas.
           </p>
-        </span>
-      </p>
+        </div>
+      </div>
       {data.length <= 0 ?
         <div className={styles.grid}>
           <div className={styles.card}>
