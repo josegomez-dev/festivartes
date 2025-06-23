@@ -37,9 +37,9 @@ const FloatingMenuButton: React.FC<FloatingMenuButtonProps> = ({ mainBtn }) => {
 
 
   const menuOptions : any = {
-    admin: ["Registrar Evento", "Registrar Nueva Obra", "Consultar Reglamento", "Invitar Jurado"],
-    judge: ["Registrar Nueva Obra", "Consultar Reglamento"],
-    user: ["Registrar Nueva Obra", "Consultar Reglamento"],
+    admin: ["Registrar Evento", "Registrar Nueva Obra", "Invitar Jurado"],
+    judge: ["Registrar Nueva Obra"],
+    user: ["Registrar Nueva Obra"],
   };
 
   const options = menuOptions[role] || ["No options available"];
@@ -125,7 +125,7 @@ const FloatingMenuButton: React.FC<FloatingMenuButtonProps> = ({ mainBtn }) => {
         <b>{currentAction}</b>
         <div className="form-wrapper">
           <br />
-          <iframe src="https://www.mep.go.cr/sites/default/files/2023-05/reglamento-FEA-23.pdf" width={"100%"} height={"500px"}></iframe>
+          <iframe src="" width={"100%"} height={"500px"}></iframe>
         </div>
       </CustomModal>
 

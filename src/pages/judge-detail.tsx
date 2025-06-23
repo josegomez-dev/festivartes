@@ -1,94 +1,85 @@
-import styles from '@/app/assets/styles/AdminIndex.module.css';
-import SubMenu from '@/components/SubMenu';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from './../../firebaseConfig';
-import { User } from '@/types/userTypes';
+"use client";
 
-const JudgeDetail = ({ }) => {
-  const params = new URLSearchParams(document.location.search);
-  const id = params.get('id');
-  const [profile, setProfile] = useState<User | null>(null);
+import styles from "@/app/assets/styles/AdminIndex.module.css";
+import SubMenu from "@/components/SubMenu";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebaseConfig"; // Adjust the path as necessary
+import { User } from "@/types/userTypes";
 
-  const fetchJudge = async (id: string | string[] | undefined) => {
-    try {
-      const querySnapshot = await getDocs(collection(db, 'accounts'))
-      // get only users account with role "judge"
-      const accounts = querySnapshot.docs
-        .map(doc => {
-          const data = doc.data();
-          return {
-            id: doc.id,
-            uid: data.uid ?? doc.id,
-            displayName: data.displayName ?? '',
-            email: data.email ?? '',
-            bio: data.bio ?? '',
-            phone: data.phone ?? '',
-            address: data.address ?? '',
-            location: data.location ?? '',
-            website: data.website ?? '',
-            name: data.name ?? '',
-            role: data.role ?? '',
-            thumbnail: data.thumbnail ?? '',
-            profilePic: data.profilePic ?? '',
-            // Provide default values for all required User fields
-            type: data.type ?? '',
-            status: data.status ?? '',
-            notifications: data.notifications ?? [],
-            category: data.category ?? '',
-            createdAt: data.createdAt ?? null,
-            // add other User fields as needed, with fallback defaults
-          } as unknown as User;
-        })
-        .filter((account) => account.role === 'judge');
-      // alert('accounts: ' + JSON.stringify(accounts));
-      const selectedJudge = accounts.find(account => account.id === id);
-      if (selectedJudge) {
-        setProfile(selectedJudge);
-      }
-      return accounts;
-    } catch (error) {
-      console.error('Error fetching events:', error);
-      return [];
-    }
-  };
+const JudgeDetail = () => {
+  const router = useRouter();
+  const { id } = router.query;              // ← /admin/judges?id=abc   OR  /admin/judges/abc (if dynamic route)
 
+  const [profile, setProfile]   = useState<User | null>(null);
+  const [loading, setLoading]   = useState(true);
+  const [error,   setError]     = useState<string | null>(null);
+
+  // ─────────────────────────────────────────────────────────────
+  // Fetch once the param is available on the client
+  // ─────────────────────────────────────────────────────────────
   useEffect(() => {
-    fetchJudge(id ?? undefined);
-  }, []);
+    if (!router.isReady || !id) return;     // wait for hydration / param
 
-  if (!profile) {
-    return <div>Loading...</div>;
-  }
+    const fetchJudge = async (judgeId: string) => {
+      try {
+        const snapshot  = await getDocs(collection(db, "accounts"));
+        const judges    = snapshot.docs
+          .map((doc) => ({ id: doc.id, ...doc.data() } as User))
+          .filter((u) => u.role === "judge");
+
+        const found = judges.find((u) => u.id === judgeId);
+        setProfile(found ?? null);
+      } catch (e) {
+        console.error(e);
+        setError("No se pudo obtener la información del juez.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchJudge(Array.isArray(id) ? id[0] : id);
+  }, [router.isReady, id]);
+
+  // ─────────────────────────────────────────────────────────────
+  // UI states
+  // ─────────────────────────────────────────────────────────────
+  if (loading)  return <div>Loading…</div>;
+  if (error)    return <div>{error}</div>;
+  if (!profile) return <div>No se encontró el juez.</div>;
 
   return (
-    <div className={styles['full-view']}>
+    <div className={styles["full-view"]}>
       <SubMenu />
 
-      <div className='project-detail-wrapper'>
+      <div className="project-detail-wrapper">
         <div className="project-detail-container">
-          <h1><b className='font-size-3rem'>{profile.displayName}</b></h1>          
-          <p className='bolder-text'>
-            {profile?.displayName} | {profile?.bio || 'Agrega una descripcion'}
+          <h1><b className="font-size-3rem">{profile.displayName}</b></h1>
+          <p className="bolder-text">
+            {profile.displayName} | {profile.bio || "Agrega una descripción"}
           </p>
+
           <br />
 
-          {profile.profilePic ? 
-            <img src={profile.profilePic} alt={profile.displayName} className='project-thumbnail-wrapper' />
-          : 
-            <img src='https://cdn-icons-png.flaticon.com/512/149/149071.png' alt={profile.displayName} className='project-thumbnail-judge' /> 
-          }
+          <img
+            src={
+              profile.profilePic ||
+              "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+            }
+            alt={profile.displayName}
+            className="project-thumbnail-judge"
+          />
+
           <br />
 
           <div>
-            <p ><b className='bolder-text'>Email:</b> {profile.email}</p>
-            <p ><b className='bolder-text'>Teléfono:</b> {profile.phone}</p>      
-            <p ><b className='bolder-text'>Ubicación:</b> {profile.address}</p>      
-            <p ><b className='bolder-text'>Dirección:</b> {profile.location}</p>      
-            <p ><b className='bolder-text'>Sitio web:</b> {profile.website}</p>      
+            <p><b>Email:</b> {profile.email}</p>
+            <p><b>Teléfono:</b> {profile.phone}</p>
+            <p><b>Ubicación:</b> {profile.location}</p>
+            <p><b>Dirección:</b> {profile.address}</p>
+            <p><b>Sitio web:</b> {profile.website}</p>
           </div>
-          {/* Add more project details as needed */}
         </div>
       </div>
     </div>

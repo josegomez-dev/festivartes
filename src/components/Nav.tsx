@@ -227,14 +227,14 @@ export default function Nav() {
                     Onboarding 
                   </p>
                 </Link>
-                <Link href="/docs" className={styles.dropdownLink}>
-                  <p className={`${styles.dropdownItem} link-item`}>
-                    Documentación
-                  </p>
-                </Link>
                 <Link href="/faq" className={styles.dropdownLink}>
                   <p className={`${styles.dropdownItem} link-item`}>
                     Preguntas Frecuentes
+                  </p>
+                </Link>
+                <Link href="/docs" className={styles.dropdownLink}>
+                  <p className={`${styles.dropdownItem} link-item`}>
+                    Documentación
                   </p>
                 </Link>
                 <div className={styles.dropdownActions}>
