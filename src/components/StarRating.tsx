@@ -51,20 +51,18 @@ const StarRating = ({ totalStars = 5, initialAverage = 0, handleRating, myRating
           fontSize: '1rem',
           fontWeight: 'bold',
           color: 'green',
-          marginBottom: '6px',
         }}
       >
         {userRating && (
           <>
-            Tu calificación <br />
-            {userRating}
+            Tu puntuación: {userRating}
           </>
           )}
       </div>
 
       {/* Default average */}
       {!userRating && !showFeedback && (
-        <div className='average-rating'>
+        <div className='average-rating' style={{ marginBottom: '-5px' }}>
           <span
               style={{
                 cursor: 'pointer',
@@ -75,7 +73,7 @@ const StarRating = ({ totalStars = 5, initialAverage = 0, handleRating, myRating
             >
               ★
             </span> {initialAverage.toFixed(1)} / {totalStars} <br />
-          Calificación {myRating !== undefined ? `: ${myRating}` : ' (no calificado)'}
+          Tu Puntuación {myRating !== undefined ? `: ${myRating}` : ' (no calificado)'}
         </div>
       )}
 

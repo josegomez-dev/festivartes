@@ -202,7 +202,7 @@ const EventDetail = ({ }) => {
       stars: updatedStars as { userIdentifier: string; rating: number; }[],
     }));
 
-    toast.success('Rating added successfully!');
+    toast.success('Calificación guardada correctamente!');
   };  
 
   const getFullRatingAverage = () => {

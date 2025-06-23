@@ -157,7 +157,7 @@ const ArtworkDetail = () => {
       stars: updatedStars as { userIdentifier: string; rating: number; }[],
     }));
 
-    toast.success('Rating added successfully!');
+    toast.success('Calificación guardada exitosamente!');
   };  
 
   const uploadAudioFile = async (file: File, userId: string) => {
@@ -167,7 +167,7 @@ const ArtworkDetail = () => {
       return await getDownloadURL(storageRef);
     } catch (error) {
       console.error("Error uploading audio:", error);
-      toast.error("Error uploading audio");
+      toast.error("Error subiendo el audio");
       throw error;
     }
   };
