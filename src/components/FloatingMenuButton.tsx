@@ -37,8 +37,8 @@ const FloatingMenuButton: React.FC<FloatingMenuButtonProps> = ({ mainBtn }) => {
 
 
   const menuOptions : any = {
-    admin: ["Registrar Evento", "Registrar Nueva Obra", "Invitar Jurado"],
-    judge: ["Registrar Nueva Obra"],
+    admin: ["Registrar Evento", "Registrar Nueva Obra", "Invitar Jurado", "Exportar Agenda Cultural"],
+    judge: ["Registrar Nueva Obra", "Exportar Agenda Cultural"],
     user: ["Registrar Nueva Obra"],
   };
 

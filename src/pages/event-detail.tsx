@@ -242,7 +242,7 @@ const EventDetail = ({ }) => {
       <CustomModal
         isOpen={selectArtworksModalOpen}
         onClose={onCloseSelectArtworksModal}
-        height="100%" // Custom height
+        height="92%" // Custom height
       >
         <div className="modal-title-centered">
             <b>
@@ -400,11 +400,12 @@ const EventDetail = ({ }) => {
             {project.name || 'Title'}
             </b>
           </h2>
-          
+          <br />
           <img 
             src={project.thumbnail} 
             alt={project.name} 
             className='project-thumbnail-wrapper'
+            style={{ width: '100%', height: 'auto', maxWidth: '600px', borderRadius: '8px' }}
           />
           <br />
           <p>
@@ -420,29 +421,85 @@ const EventDetail = ({ }) => {
             {project.description}
           </p>
           {/* Add more project details as needed */}
-          {role === 'admin' && (
-              <>
-                <br />
-                <button className={authStyles['auth-button']} onClick={onOpenSelectArtworksModal}>
-                  <b>¡Selecciona tus obras!</b>
-                </button>
-                <br />
-                <button className={authStyles['auth-button']} onClick={onOpenSelectJudgesModal}>
-                  <b>Elije al jurado seleccionador!</b>
-                </button>
-              </>)}
         </div>
 
-        {project.selectedArtworks?.length > 0 ? (
-            <CoreSectionSelectedArtworks selectedArtworks={localSelectedArtworks} />
-          ) : (
-            null
-          )}
-        {project.selectedJudges?.length > 0 ? (
-            <CoreSectionSelectedJudges selectedJudges={localSelectedJudges} />
-          ) : (
-            null
-          )}
+        <br />
+        
+        {role === 'admin' && (
+          <>
+            <hr />
+            {project.selectedArtworks?.length > 0 ? (
+                <>
+                  <h2>
+                    <b className='font-size-title'>
+                      Obras Registradas
+                    </b>
+                  </h2>
+                  <br />
+                  <br />
+                  <CoreSectionSelectedArtworks selectedArtworks={localSelectedArtworks} />
+                  <button className={authStyles['auth-button']} onClick={onOpenSelectArtworksModal} style={{ marginTop: '-160px', marginLeft: '-120px', position: 'absolute' }}>
+                    <b>Editar Lista 🎨</b>
+                  </button>
+                </>
+              ) : (
+                <>
+                  <br />
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere deleniti iusto soluta qui ad pariatur sunt rerum, deserunt repellendus earum consectetur vitae, minus veniam.
+                  </p>
+                  <br />
+                  <button className={authStyles['auth-button']} onClick={onOpenSelectArtworksModal}>
+                    <b>✚ ¡Elije las Obras! 🎨</b>
+                  </button>
+                  <br />
+                  <br />
+                </>
+              )}
+
+            <hr />
+
+            {project.selectedJudges?.length > 0 ? (
+                <>
+                  <h2>
+                    <b className='font-size-title'>
+                      Jurado Seleccionador
+                    </b>
+                  </h2>
+                  <br />
+                  <br />
+                  <CoreSectionSelectedJudges selectedJudges={localSelectedJudges} />
+                  <button className={authStyles['auth-button']} onClick={onOpenSelectJudgesModal} style={{ marginTop: '-160px', marginLeft: '-120px', position: 'absolute' }}>
+                    <b>Editar Lista 👨‍⚖️</b>
+                  </button>
+                </>
+              ) : (
+                <>
+                  <br />
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere deleniti iusto soluta qui ad pariatur sunt rerum, deserunt repellendus earum consectetur vitae, minus veniam.
+                  </p>
+                  <br />
+                  <button className={authStyles['auth-button']} onClick={onOpenSelectJudgesModal}>
+                    <b>✚ ¡Elije al Jurado! 👨‍⚖️ </b>
+                  </button>
+                  <br />
+                  <br />
+                </>
+              )}
+          </>
+        )}
+        
+        <hr />
+        <br />
+
+        <div className="project-detail-wrapper">
+          <div className="project-detail-container">
+            <p>
+              Si tienes alguna duda, puedes contactarnos a través de nuestras redes sociales o por correo electrónico <a href="">josegomez.dev@gmail.com</a>.
+            </p>
+          </div>
+        </div>
 
       </div>
     </div>

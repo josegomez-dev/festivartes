@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import { RiBubbleChartFill } from 'react-icons/ri'; // Import icons as needed
 
 
 const ShareButton = () => {
@@ -13,14 +14,9 @@ const ShareButton = () => {
 
   return (
     <div className='social-share-container' onClick={() => setShowOptions(!showOptions)}>
-      <div className='social-share-text'>
-        Compartir
-      </div>
+      <div className='social-share-text'>... </div>
 
-      <span
-        className='social-share-icon'
-        title="Compartir"
-      >
+      <span className='social-share-icon'>
         📣
       </span>
 
@@ -36,7 +32,13 @@ const ShareButton = () => {
               window.open(`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`, '_blank')
             }
           >
-            📘 Compartir en Facebook
+            📲 Compartir en Facebook
+          </div>
+          <div
+            className='copy-link-wrapper'
+            onClick={() => alert('Funcionalidad de Exportar Agenda Cultural aún no implementada')}
+          >
+            📇 Exportar Agenda Cultural
           </div>
         </div>
       )}

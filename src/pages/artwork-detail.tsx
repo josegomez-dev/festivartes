@@ -18,6 +18,7 @@ import { ARTWORK, EMPTY_ARTWORK } from '@/types/artworks.types';
 import Preloader from '@/components/Preloader';
 import { uploadBytes, getDownloadURL, ref } from 'firebase/storage';
 import RateCard, { Rate } from '@/components/RateCard';
+import Image from 'next/image';
 
 const ArtworkDetail = () => {
   const router = useRouter();
@@ -284,8 +285,6 @@ const ArtworkDetail = () => {
         </div>
       </CustomModal>
 
-
-
       <div className="project-detail-wrapper">
         <div className="project-detail-container">
           <ul className="options-menu">
@@ -355,37 +354,7 @@ const ArtworkDetail = () => {
                     {project.title || 'Title'}
                   </b>
                 </h2>
-                <br />
-                {user?.uid && project.audio ? (
-                  <>
-                      {project.thumbnail ? (
-                      <img
-                        src={project.thumbnail}
-                        alt={project.title}
-                        className="project-thumbnail-wrapper"
-                        style={{ width: '100%' }}
-                      />
-                    ) : (
-                      <img
-                        src="https://getuikit.com/v2/docs/images/placeholder_600x400.svg"
-                        alt={project.title}
-                        className="project-thumbnail-wrapper"
-                      />
-                    )}
-                  </>
-                ) : (
-                  <>
-                    <p className='disabled small-text-size'>
-                      No hay audio disponible para esta obra de arte.
-                    </p>
-                    <p>
-                      <b className='bolder-text'>¡Subí el audio de tu obra de arte!</b>
-                    </p>
-                  </>
-                )}
-                <br />
-                <br />
-
+                
                 {loading ? (
                   <Preloader message='🎵 Cargando audio... Estamos ajustando el sonido para ofrecerte la mejor calidad.' small />
                 ) : (
@@ -427,11 +396,13 @@ const ArtworkDetail = () => {
                   </b>
                 </h2>
                 <br />
+
                 {project.thumbnail ? (
                   <img
                     src={project.thumbnail}
                     alt={project.title}
                     className="project-thumbnail-wrapper"
+                    style={{ width: '100%', height: 'auto', maxWidth: '600px', borderRadius: '8px' }}
                   />
                 ) : (
                   <img
@@ -439,7 +410,8 @@ const ArtworkDetail = () => {
                     alt={project.title}
                     className="project-thumbnail-wrapper"
                   />
-                )}
+                )}  
+
                 <div>
                   <div style={{ width: '300px', margin: '0 auto', color: 'lightgray'  }}>
                     <p className='project-info-small-text'>
@@ -540,7 +512,9 @@ const ArtworkDetail = () => {
             )}
           </div>
         </div>
-
+          
+        <br />
+        <hr />
         <br />
         <div className="project-detail-wrapper">
           <div className="project-detail-container">
@@ -588,10 +562,23 @@ const ArtworkDetail = () => {
                       </button>
                     </>)}
               </div>
+
+
+
             </div>
           </div>
         </div>        
         
+        <br />
+        <hr />
+        <br />
+        <div className="project-detail-wrapper">
+          <div className="project-detail-container">
+            <p>
+              Si tienes alguna duda, puedes contactarnos a través de nuestras redes sociales o por correo electrónico <a href="">josegomez.dev@gmail.com</a>.
+            </p>
+          </div>
+        </div>
 
         <br />
         <br />

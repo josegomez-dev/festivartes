@@ -55,7 +55,7 @@ const StarRating = ({ totalStars = 5, initialAverage = 0, handleRating, myRating
       >
         {userRating && (
           <>
-            Tu puntuación: {userRating}
+            Puntuación: {userRating}
           </>
           )}
       </div>
@@ -73,7 +73,7 @@ const StarRating = ({ totalStars = 5, initialAverage = 0, handleRating, myRating
             >
               ★
             </span> {initialAverage.toFixed(1)} / {totalStars} <br />
-          Tu Puntuación {myRating !== undefined ? `: ${myRating}` : ' (no calificado)'}
+          Puntuación {myRating !== undefined ? `: ${myRating}` : ' (no calificado)'}
         </div>
       )}
 

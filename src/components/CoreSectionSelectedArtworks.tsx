@@ -45,12 +45,6 @@ const CoreSectionSelectedArtworks = ({ selectedArtworks }: CoreSectionArtworksPr
 
         {showAllData && (
           <div className={`${styles.card} `}>
-          <p>
-            <div className='bolder-text'>
-              <p>Obras Registradas&nbsp; </p>
-            </div>
-          </p>
-          <br />
           {data.length <= 0 ? 
             <div className={styles.grid}>
               <div className={styles.card}>
