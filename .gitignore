@@ -33,6 +33,8 @@ coverage/
 # IDE-specific files
 .vscode/
 .idea/
+.env
+.env.local
 *.sublime-workspace
 
 # MacOS
