@@ -446,7 +446,7 @@ const EventDetail = ({ }) => {
                 <>
                   <br />
                   <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere deleniti iusto soluta qui ad pariatur sunt rerum, deserunt repellendus earum consectetur vitae, minus veniam.
+                    Selecciona las obras que formarán parte del evento.
                   </p>
                   <br />
                   <button className={authStyles['auth-button']} onClick={onOpenSelectArtworksModal}>
@@ -477,7 +477,7 @@ const EventDetail = ({ }) => {
                 <>
                   <br />
                   <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere deleniti iusto soluta qui ad pariatur sunt rerum, deserunt repellendus earum consectetur vitae, minus veniam.
+                    Selecciona los jueces que formarán parte del jurado del evento.
                   </p>
                   <br />
                   <button className={authStyles['auth-button']} onClick={onOpenSelectJudgesModal}>

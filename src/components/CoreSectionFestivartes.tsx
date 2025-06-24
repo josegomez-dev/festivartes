@@ -142,7 +142,7 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
             >
             {showAllData && (
               <span style={{ background: 'orange', padding: 4, borderRadius: 6, animation: 'pulse 2s infinite'}}>
-                Ocultar Eventos
+                Ocultar Eventos...
               </span>
             )}
           </button>

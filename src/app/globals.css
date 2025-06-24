@@ -397,7 +397,8 @@ b {
 }
 
 .project-miniature-custom-judge .project-thumbnail {
-  width: 68px;
+  width: 100%;
+  height: auto;
 }
 
 .project-miniature-custom-artwork .project-miniature {
@@ -406,7 +407,7 @@ b {
 }
 .project-miniature-custom-artwork .project-thumbnail {
   width: 98px;
-  height: 94px;
+  height: 98px;
 }
 
 .upcoming-message {

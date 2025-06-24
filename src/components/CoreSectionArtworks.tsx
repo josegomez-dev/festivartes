@@ -146,7 +146,7 @@ const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: Cor
           >
             {showAllData && !allItems && (
               <span style={{ background: 'orange', padding: 4, borderRadius: 6, animation: 'pulse 2s infinite'}}>
-                Ocultar Obras de Arte
+                Ocultar Obras de Arte...
               </span>
             )}
           </button>
