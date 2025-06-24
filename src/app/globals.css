@@ -845,7 +845,7 @@ b {
 .close-button-visible {
   position: absolute;
   right: 10px;
-  top: 10px;
+  top: 15px;
   text-decoration: none;
   color: var(--color-white)white;
   background: transparent;

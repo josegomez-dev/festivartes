@@ -50,9 +50,9 @@ const ObjectMiniature : React.FC<ObjectMiniatureProps> = ({ projects, type, cust
                   </p>
                 )
               )}
-
-              <div style={{ marginTop: '-16px' }}></div>
               
+              <div style={{ marginTop: '-16px' }}></div>
+
               {badgeIcons[project.type] && (
                 <Image
                   width={50}

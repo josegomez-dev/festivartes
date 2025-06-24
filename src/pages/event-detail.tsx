@@ -242,7 +242,7 @@ const EventDetail = ({ }) => {
       <CustomModal
         isOpen={selectArtworksModalOpen}
         onClose={onCloseSelectArtworksModal}
-        height="92%" // Custom height
+        height="90%" // Custom height
       >
         <div className="modal-title-centered">
             <b>
@@ -298,7 +298,7 @@ const EventDetail = ({ }) => {
       <CustomModal
         isOpen={selectJudgesModalOpen}
         onClose={onCloseSelectJudgesModal}
-        height="100%" // Custom height
+        height="90%" // Custom height
       >
         <div className="modal-title-centered">
             <b>
