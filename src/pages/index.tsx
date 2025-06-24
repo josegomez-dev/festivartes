@@ -101,7 +101,7 @@ const Home = () => {
                 </div>
               </Link>
             
-              <Link href="/login" className={styles.columnBox} style={{ textDecoration: 'none', fontSize: 15 }}>
+              <Link target="_blank" href="https://joses-organization-73.gitbook.io/festivartes" className={styles.columnBox} style={{ textDecoration: 'none', fontSize: 15 }}>
                 <div
                   onMouseMove={handleHover}
                   onMouseLeave={resetLight}
