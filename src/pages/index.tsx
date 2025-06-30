@@ -132,30 +132,6 @@ const Home = () => {
                 </div>
               </Link>
 
-              {/* <Link href="/artisticas" className={styles.columnBox} style={{ textDecoration: 'none', fontSize: 15 }}>
-                <div
-                  onMouseMove={handleHover}
-                  onMouseLeave={resetLight}
-                >                  
-                    <h3><b style={{ fontSize: 30}}>▶️ ARTÍSTICAS</b></h3>
-                    <p><strong>🎶 ¡Lo último en cultura y arte! 🎨</strong></p> <br />
-                    <p>Explora conciertos y presentaciones en vivo.</p>
-                    <p>Arte visual, fotografía y mucho más.</p>
-                    <br />
-                    <br />
-                    <br />
-                    <Image
-                      className={styles.logo}
-                      src="/core/artistica.png"
-                      alt="Festivartes Main Logo"
-                      width={120}
-                      height={120}
-                      priority
-                      style={{ marginTop: '-25px', marginBottom: '-20px' }}
-                    />
-                </div>
-              </Link>
-              
               <Link href="/legartes" className={styles.columnBox} style={{ textDecoration: 'none', fontSize: 15 }}>
                 <div
                   onMouseMove={handleHover}
@@ -176,7 +152,7 @@ const Home = () => {
                       style={{ marginTop: '-40px', marginBottom: '-20px' }}
                     />
                 </div>
-              </Link> */}
+              </Link>
           </section>
           <p>Creado por: <b><a target='_blank' href="https://www.linkedin.com/in/josealejandrogomezcastro/">Jose Alejandro Gomez Castro</a></b></p>
         </div>

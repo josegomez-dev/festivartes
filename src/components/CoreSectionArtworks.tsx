@@ -39,6 +39,11 @@ const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: Cor
           ...rest
         };
       });
+
+      // sort most recent first
+      artworks.sort((a, b) => {
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+      });
         
       if (!selectMode) {
         const filteredArtworks = artworks.filter(artwork => {
@@ -110,6 +115,7 @@ const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: Cor
               </button>
 
               <b>Mi Galería Creativa &nbsp; 
+                
               </b>
               <p className='bolder-text small-text-size'>
               Convertí tu inspiración <br /> en arte inmortal.
@@ -140,6 +146,23 @@ const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: Cor
         {showAllData && (
           <div className={`${styles.card} text-align-left`}>
           <br />
+          
+          <div style={{ float: 'left', marginTop: 5 }} className='bolder-text'>
+            <b>Obras de Arte &nbsp; </b>
+            <br />
+            <Image
+              src="/artworks-icon.png"
+              alt="artworks-icon"
+              width={55}
+              height={55}
+              priority
+            />
+          </div>
+          <br />
+          <p className='bolder-text small-text-size'>
+            ¡Explora, crea y comparte arte!
+          </p>
+
           <button 
             onClick={() => setShowAllData(!showAllData)} 
             className='close-button-visible'

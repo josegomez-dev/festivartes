@@ -36,6 +36,11 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
           ...rest
         };
       });
+
+      // sort most recent first
+      events.sort((a, b) => {
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+      });
   
       const filteredEvents = events.filter(event => {
         return !event.createdBy || event.createdBy !== filterBy;
@@ -105,7 +110,7 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
                 
                 </b>
                 <p className='bolder-text small-text-size'>
-                  ¡Elegí tu próximo escenario y <br /> hacé historia!
+                  ¡Explora y organiza eventos artísticos!
                 </p>
                 <br />
                 <br />
@@ -136,6 +141,23 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
         {showAllData && (
           <div className={`${styles.card} text-align-left`}>
           <br />
+
+          <div style={{ float: 'left', marginTop: 20 }} className='bolder-text'>
+            <b>Festivartes &nbsp; </b>
+            <br />
+            <Image
+              src="/events-icon.png"
+              alt="festivartes-icon"
+              width={55}
+              height={55}
+              priority
+            />
+          </div>
+          <br />
+          <p className='bolder-text small-text-size'>
+            ¡Explora eventos artísticos!
+          </p>
+
           <button 
             onClick={() => setShowAllData(!showAllData)} 
             className='close-button-visible'

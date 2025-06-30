@@ -14,7 +14,8 @@ const LoginPage = () => {
   const [errorMessage, setErrorMessage] = useState('')
   const router = useRouter()
 
-  const handleLogin = async () => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (email === '' || password === '') {
       setErrorMessage('Por favor, rellena todos los campos');
       toast.error("Por favor, rellena todos los campos");
@@ -49,7 +50,7 @@ const LoginPage = () => {
     <>
       <Toaster position="top-center" reverseOrder={false} />
       <div className="auth-container">
-        <div className="auth-form space-around">
+        <form onSubmit={handleLogin} className="auth-form space-around">
           <h2 className="auth-title">Bienvenido a <b>FESTIVARTES</b></h2>
           <br />
           <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Correo electrónico" className="auth-input" required />
@@ -59,7 +60,7 @@ const LoginPage = () => {
             {errorMessage}
           </p>}
           <br />
-          <button type="submit" onClick={() => handleLogin()} className="auth-button">Iniciar sesión</button>
+          <button type="submit" className="auth-button">Iniciar sesión</button>
           <br />
           <p className="reset-password-link" onClick={() => {
             email !== '' ? resetPassword(email) : setErrorMessage('Por favor, ingresa tu correo electrónico');
@@ -94,7 +95,7 @@ const LoginPage = () => {
             </Link>
             </b>
           </p>
-        </div>
+        </form>
       </div>
     </>
   );

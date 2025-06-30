@@ -50,7 +50,7 @@ const CoreSectionJudges = ({ filterBy, selectMode, selectItem }: CoreSectionJudg
                 alt="judges-icon"
                 width={25}
                 height={25}
-                priority />
+              />
             </b>
             <p className='bolder-text small-text-size'>
               🌟 Los expertos evalúan las obras artísticas.

@@ -13,6 +13,7 @@ interface ObjectMiniatureProps {
   ratingException?: boolean;
   selectMode?: boolean;
   selectItem?: (artworkIdentifier: string) => void;
+    onDelete?: (id: string) => void; // <- New prop
 }
 
 const badgeIcons: Record<string, string> = {

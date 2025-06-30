@@ -53,7 +53,6 @@ const DocumentEditor = ({
       <h2>
         <b className="font-size-title">  {title}</b>
       </h2>
-      <br />
       <ReactQuill theme="snow" value={content} onChange={setContent} className="quill-editor"/>
       <br />
       <button onClick={saveArtworkDocument} className={registerForm['submitButton']}>
