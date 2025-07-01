@@ -1713,8 +1713,48 @@ border-radius: 10px;
 margin: 10px 0;
 }
 
+.disabled-miniature {
+  opacity: 0.5;
+  pointer-events: none;
+}
 
+.blur-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(2px);
+  background-color: rgba(0, 0, 0, 0.25);
+  z-index: 1;
+  border-radius: 6px;
+}
 
+.lock-overlay {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem;
+  color: white;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+}
+
+/* 🔐 Animation */
+.animated-lock {
+  animation: pulseLock 1.8s infinite ease-in-out;
+}
+
+@keyframes pulseLock {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
 
 
 

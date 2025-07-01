@@ -137,7 +137,7 @@ const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: Cor
             </div> 
             : 
             <div className=''>
-              <ObjectMiniature projects={dataFiltered} type={'artwork'} />              
+              <ObjectMiniature projects={dataFiltered} type={'artwork'} currentUserId={filterBy} />           
             </div>
           }
           

@@ -46,7 +46,7 @@ const TabInfo: React.FC<TabInfoProps> = ({ project, onTogglePrivacy }) => {
       />
 
       <div style={{ width: '300px', textAlign: 'left', margin: '0 auto' }}>
-        <p><b className='bolder-text'>Artista:</b> {project.artist}</p>
+        <p><b className='bolder-text'>Artista/Grupo:</b> {project.artist}</p>
         <p><b className='bolder-text'>Categoría:</b> {project.category}</p>
       </div>
       

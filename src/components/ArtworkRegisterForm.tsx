@@ -153,7 +153,7 @@ const ArtworkRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) 
         )}
       </div>
       <div className="input-group">
-        <label htmlFor="artist">Artista o Compositor</label>
+        <label htmlFor="artist">Artista/Grupo</label>
         <input
           type="text"
           id="artist"
