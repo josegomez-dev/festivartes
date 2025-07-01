@@ -162,6 +162,27 @@ const ArtworkDetail = () => {
             {activeTab === 'audio' && <TabAudio project={project} user={user} loading={loading} onUpload={handleUpload} />}
             {activeTab === 'video' && <TabVideo project={project} user={user} loading={loading} onUpload={handleUpload} />}
           </div>
+
+            
+          {role === 'admin' && project.createdBy === user?.uid && (
+            <button style={{ padding: 10, background: 'red', border: 'none', cursor: 'pointer' }} onClick={() => {
+              if (confirm('¿Estás seguro de que deseas eliminar esta obra? Esta acción no se puede deshacer.')) {
+                const docRef = doc(db, 'artworks', project.id);
+                updateDoc(docRef, { deleted: true })
+                  .then(() => {
+                    toast.success('Obra eliminada exitosamente');
+                    router.push('/artworks');
+                  })
+                  .catch((err) => {
+                    console.error('Error eliminando obra:', err);
+                    toast.error('Error al eliminar la obra');
+                  });
+              }
+            }}>
+              Eliminar Obra
+            </button>
+          )}
+
         </div>
 
         <br />
