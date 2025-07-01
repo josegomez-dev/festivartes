@@ -421,6 +421,30 @@ const EventDetail = ({ }) => {
             {project.description}
           </p>
           {/* Add more project details as needed */}
+
+          <br />
+          {role === 'admin' && project.createdBy === user?.uid && (
+            <button 
+              style={{ padding: 10, background: 'red', border: 'none', cursor: 'pointer' }} 
+              onClick={() => {
+                if (confirm('¿Estás seguro de que deseas eliminar este evento? Esta acción no se puede deshacer.')) {
+                  const docRef = doc(db, 'events', project.id);
+                  updateDoc(docRef, { deleted: true })
+                    .then(() => {
+                      toast.success('Evento eliminado exitosamente');
+                      router.push('/events');
+                    })
+                    .catch((err) => {
+                      console.error('Error eliminando evento:', err);
+                      toast.error('Error al eliminar el evento');
+                    });
+                }
+              }}
+            >
+              Eliminar Evento
+            </button>
+          )}
+
         </div>
 
         <br />
