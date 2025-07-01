@@ -157,7 +157,18 @@ const ArtworkDetail = () => {
           </div>
 
           <div className="tab-content">
-            {activeTab === 'info' && <TabInfo project={project} />}
+            {activeTab === 'info' && <TabInfo project={project} onTogglePrivacy={(newPrivacy) => {
+              const docRef = doc(db, 'artworks', project.id);
+              updateDoc(docRef, { privacy: newPrivacy })
+                .then(() => {
+                  setProject((prev) => ({ ...prev, privacy: newPrivacy }));
+                  toast.success(`Privacidad cambiada a ${newPrivacy}`);
+                })
+                .catch((err) => {
+                  console.error('Error cambiando privacidad:', err);
+                  toast.error('Error al cambiar privacidad');
+                });
+            }} />}
             {activeTab === 'document' && <TabDocument project={project} getTodayDate={getToday} />}
             {activeTab === 'audio' && <TabAudio project={project} user={user} loading={loading} onUpload={handleUpload} />}
             {activeTab === 'video' && <TabVideo project={project} user={user} loading={loading} onUpload={handleUpload} />}
