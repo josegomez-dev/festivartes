@@ -16,11 +16,12 @@ interface InviteRegisterFormProps {
 }
 
 const categoryIcons: Record<string, string> = {
-  escultura: "/icons-sculture.png",
-  fotografia: "/icons-photography.png",
-  arte_digital: "/icons-digital.png",
-  musica: "/icons-music.png",
-  baile: "/icons-dance.png",
+  feria: "/icons/icons-feria.png", // TODO: update this icon
+  escultura: "/icons/icons-sculture.png",
+  fotografia: "/icons/icons-photography.png",
+  arte_digital: "/icons/icons-digital.png",
+  musica: "/icons/icons-music.png",
+  baile: "/icons/icons-dance.png",
 };
 
 const ArtworkRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) => {
@@ -131,6 +132,7 @@ const ArtworkRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) 
             required
           >
             <option value="">Selecciona una categoría</option>
+            <option value="feria">Feria Científica</option>
             <option value="escultura">Escultura</option>
             <option value="fotografia">Fotografía</option>
             <option value="arte_digital">Arte Digital</option>

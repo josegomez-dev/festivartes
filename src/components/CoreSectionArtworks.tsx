@@ -147,7 +147,7 @@ const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: Cor
           <div className={`${styles.card} text-align-left`}>
           <br />
           
-          <div style={{ float: 'left', marginTop: 5 }} className='bolder-text'>
+          <div style={{ float: 'left', marginTop: '-15px' }} className='bolder-text'>
             <b>Obras de Arte &nbsp; </b>
             <br />
             <Image
@@ -158,11 +158,7 @@ const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: Cor
               priority
             />
           </div>
-          <br />
-          <p className='bolder-text small-text-size'>
-            ¡Explora, crea y comparte arte!
-          </p>
-
+          
           <button 
             onClick={() => setShowAllData(!showAllData)} 
             className='close-button-visible'

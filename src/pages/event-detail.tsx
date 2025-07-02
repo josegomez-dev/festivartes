@@ -425,7 +425,7 @@ const EventDetail = ({ }) => {
           <br />
           {role === 'admin' && project.createdBy === user?.uid && (
             <button 
-              style={{ padding: 10, background: 'red', border: 'none', cursor: 'pointer' }} 
+              style={{ padding: 10, background: 'red', border: 'none', cursor: 'pointer', borderRadius: '8px' }} 
               onClick={() => {
                 if (confirm('¿Estás seguro de que deseas eliminar este evento? Esta acción no se puede deshacer.')) {
                   const docRef = doc(db, 'events', project.id);

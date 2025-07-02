@@ -106,9 +106,7 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
                   )}
                 </button>
                 
-                <b>Mis Festivartes &nbsp; 
-                
-                </b>
+                <b>Mis Festivartes &nbsp; </b>
                 <p className='bolder-text small-text-size'>
                   ¡Explora y organiza eventos artísticos!
                 </p>
@@ -142,7 +140,7 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
           <div className={`${styles.card} text-align-left`}>
           <br />
 
-          <div style={{ float: 'left', marginTop: 20 }} className='bolder-text'>
+          <div style={{ float: 'left', marginTop: '-15px' }} className='bolder-text'>
             <b>Festivartes &nbsp; </b>
             <br />
             <Image
@@ -153,10 +151,6 @@ const CoreSectionFestivartes = ({ filterBy }: CoreSectionFestivartesProps) => {
               priority
             />
           </div>
-          <br />
-          <p className='bolder-text small-text-size'>
-            ¡Explora eventos artísticos!
-          </p>
 
           <button 
             onClick={() => setShowAllData(!showAllData)} 

@@ -176,7 +176,7 @@ const ArtworkDetail = () => {
 
             
           {role === 'admin' && project.createdBy === user?.uid && (
-            <button style={{ padding: 10, background: 'red', border: 'none', cursor: 'pointer' }} onClick={() => {
+            <button style={{ padding: 10, background: 'red', border: 'none', cursor: 'pointer', borderRadius: '8px' }} onClick={() => {
               if (confirm('¿Estás seguro de que deseas eliminar esta obra? Esta acción no se puede deshacer.')) {
                 const docRef = doc(db, 'artworks', project.id);
                 updateDoc(docRef, { deleted: true })
