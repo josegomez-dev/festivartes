@@ -57,6 +57,7 @@ const ObjectMiniature: React.FC<ObjectMiniatureProps> = ({
         const isPrivate = project.privacy === 'private';
         const isOwner = project.createdBy === currentUserId;
         const isDisabled = isPrivate && !selectMode && !isOwner;
+        const isUpcoming = project.upcoming;
 
         return (
           <Link
@@ -65,31 +66,10 @@ const ObjectMiniature: React.FC<ObjectMiniatureProps> = ({
             className={`project-miniature-link ${isDisabled ? 'disabled-miniature' : ''}`}
             onClick={(e) => handleClick(e, projectId, isPrivate, isOwner)}
           >
-            {type === 'judge' && (
-              <>
-                {ratingException && project?.rate && (
-                  <p className="mTop-20">{project.rate} 🖋️</p>
-                )}
-                <div style={{ marginTop: '-16px' }} />
-                {icon && (
-                  <Image
-                    width={50}
-                    height={50}
-                    className={`judges-badge ${project.type === 'normal' ? 'badge-white' : 'badge-orange'}`}
-                    src={icon}
-                    alt={project.type}
-                  />
-                )}
-              </>
-            )}
-
             <div className="project-miniature" style={{ position: 'relative' }}>
+              {/* Thumbnail */}
               {imageUrl ? (
-                <img
-                  src={imageUrl}
-                  alt={project.name}
-                  className="project-thumbnail"
-                />
+                <img src={imageUrl} alt={project.name} className="project-thumbnail" />
               ) : (
                 <div className="banner-title">
                   <p className="small-text-size">
@@ -99,12 +79,39 @@ const ObjectMiniature: React.FC<ObjectMiniatureProps> = ({
                 </div>
               )}
 
+              {/* Blur and Lock for private */}
               {isDisabled && (
                 <>
                   <div className="blur-overlay" />
                   <div className="lock-overlay animated-lock">🔐</div>
                 </>
               )}
+
+              {/* Overlay Info */}
+              <div className="info-overlay">
+                <div className="overlay-content">
+                  <p 
+                    className="project-title" 
+                    style={{ animation: isUpcoming ? 'pulse 2s infinite' : '', background: isUpcoming ? 'orange' : '', borderRadius: isUpcoming ? '4px' : '0' }}>
+                      {project.name || project.title || project.display}
+                  </p>
+                  {icon && (
+                    <Image src={icon} alt="type" width={20} height={20} className="type-icon" />
+                  )}
+                </div>
+
+                {/* Upcoming Badge */}
+                {isUpcoming && (
+                  <div className="upcoming-badge">
+                    <button className="calendar-btn" style={{ animation: 'pulse 2s infinite' }} onClick={(e) => {
+                      e.preventDefault();
+                      alert('Save to calendar coming soon!');
+                    }}>
+                      📅 Agendar
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </Link>
         );
