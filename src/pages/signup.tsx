@@ -1,11 +1,13 @@
 'use client';
 import styles from "./../app/assets/styles/RegisterForm.module.css";
 import { useAuth } from "@/context/AuthContext";
+import { collection, getDocs } from "firebase/firestore";
 import Image from "next/image";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import { db } from "../../firebaseConfig";
 
 const SignUp = () => {
   const { signUp } = useAuth()
@@ -35,7 +37,30 @@ const SignUp = () => {
     }
 
     if (queryRole === 'judge') {
-      toast.success(`🎟️ Invitación para crear una cuenta de "Jurado Seleccionador".`);
+
+      // check if this user is already registered as a judge in all firebase accounts collections
+      const isJudgeRegistered = async () => {
+        const accountsRef = collection(db, 'accounts');
+        const querySnapshot = await getDocs(accountsRef);
+        let isRegistered = false;
+
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          if (data.email === queryEmail && data.role === 'judge') {
+            isRegistered = true;
+          }
+        });
+
+        if (isRegistered) {
+          toast.error('Ya tienes una cuenta como jurado. Por favor, inicia sesión.');
+          router.push('/login');
+        } else {
+          toast.success(`🎟️ Invitación para crear una cuenta de "Jurado Seleccionador".`);
+        }
+      };
+
+      isJudgeRegistered(); 
+
     }
   }, [router.isReady]);
 
@@ -89,46 +114,13 @@ const SignUp = () => {
           {router.query.email && (
             <div className="input-group-custom-wrapper">
               <div className="input-group mTop-30">
-                {category === "" && (
-                  <div>
-                    <Image
-                      width={50}
-                      height={50}
-                      className='judges-badge' 
-                      src="/logo2.png" 
-                      alt="" 
-                    />
-                  </div>
-                  )}
-                {category === "escultura" && (
+                {category === "arte" && (
                   <div>
                     <Image
                       width={50}
                       height={50}
                       className='judges-badge badge-white' 
-                      src="/icons-sculture.png" 
-                      alt="" 
-                    />
-                  </div>
-                  )}
-                {category === "fotografia" && (
-                  <div>
-                    <Image
-                      width={50}
-                      height={50}
-                      className='judges-badge badge-white' 
-                      src="/icons-photography.png" 
-                      alt="" 
-                    />
-                  </div>
-                  )}
-                {category === "arte_digital" && (
-                  <div>
-                    <Image
-                      width={50}
-                      height={50}
-                      className='judges-badge badge-white' 
-                      src="/icons-digital.png" 
+                      src="/icons/icons-digital.png" 
                       alt="" 
                     />
                   </div>
@@ -139,7 +131,7 @@ const SignUp = () => {
                       width={50}
                       height={50}
                       className='judges-badge badge-white' 
-                      src="/icons-music.png" 
+                      src="/icons/icons-music.png" 
                       alt="" 
                     />
                   </div>
@@ -150,7 +142,7 @@ const SignUp = () => {
                       width={50}
                       height={50}
                       className='judges-badge badge-white' 
-                      src="/icons-dance.png" 
+                      src="/icons/icons-dance.png" 
                       alt="" 
                     />
                   </div>
@@ -173,9 +165,7 @@ const SignUp = () => {
                   required
                 >
                   <option value="">Selecciona una categoría</option>
-                  <option value="escultura">Escultura</option>
-                  <option value="fotografia">Fotografía</option>
-                  <option value="arte_digital">Arte Digital</option>
+                  <option value="arte">Arte</option>
                   <option value="musica">Música</option>
                   <option value="baile">Baile o Danza</option>
                 </select>

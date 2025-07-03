@@ -17,12 +17,9 @@ interface ObjectMiniatureProps {
 }
 
 const badgeIcons: Record<string, string> = {
-  escultura: "/icons-sculture.png",
-  fotografia: "/icons-photography.png",
-  musica: "/icons-music.png",
-  baile: "/icons-dance.png",
-  arte_digital: "/icons-digital.png",
-  normal: "/icons-sculture.png",
+  musica: "/icons/icons-music.png",
+  baile: "/icons/icons-dance.png",
+  arte: "/icons/icons-digital.png",
 };
 
 const ObjectMiniature: React.FC<ObjectMiniatureProps> = ({
