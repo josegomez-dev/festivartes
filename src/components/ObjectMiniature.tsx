@@ -61,17 +61,17 @@ const ObjectMiniature: React.FC<ObjectMiniatureProps> = ({
 
         // 🧮 Calculate claps
         const clapCount = Array.isArray(project.claps)
-          ? project.claps.filter((c) => c.clap).length
+          ? project.claps.filter((c: { clap: boolean }) => c.clap).length
           : 0;
 
         // ⭐ Calculate average stars
         const starRatings = Array.isArray(project.stars)
-          ? project.stars.map((s) => s.rating)
+          ? project.stars.map((s: { rating: number }) => s.rating)
           : [];
 
         const averageStars =
           starRatings.length > 0
-            ? (starRatings.reduce((acc, val) => acc + val, 0) / starRatings.length).toFixed(1)
+            ? (starRatings.reduce((acc: number, val: number) => acc + val, 0) / starRatings.length).toFixed(1)
             : null;
 
         return (
