@@ -22,7 +22,20 @@ export default function Nav() {
   const [showNotifications, setShowNotifications] = useState(false);
   const [notifications, setNotifications] = useState<Notification[]>(user?.notifications);
 
-  const router = useRouter()
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setShowDropdown(false);
+      setShowNotifications(false);
+    };
+
+    router.events.on('routeChangeStart', handleRouteChange);
+
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChange);
+    };
+  }, []);
 
   const handleNotificationClick = (id: number) => {
     alert(`Notificación: ${notifications.find((n) => n.id === id)?.text}`);
@@ -222,9 +235,14 @@ export default function Nav() {
                 
                 <hr />
                 <br />
+                <Link href="/profile" className={styles.dropdownLink}>
+                  <p className={`${styles.dropdownItem} link-item`}>
+                    Mi Perfil
+                  </p>
+                </Link>
                 <Link href="/onboarding" className={styles.dropdownLink}>
                   <p className={`${styles.dropdownItem} link-item`}>
-                    Onboarding 
+                    ¿Como usar? <b>Festivartes</b>
                   </p>
                 </Link>
                 <Link href="/faq" className={styles.dropdownLink}>
