@@ -1,28 +1,27 @@
 'use client';
-import styles from "./../app/assets/styles/RegisterForm.module.css";
-import { useAuth } from "@/context/AuthContext";
-import { collection, getDocs } from "firebase/firestore";
-import Image from "next/image";
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import Image from 'next/image';
+import Link from 'next/link';
 import toast, { Toaster } from 'react-hot-toast';
-import { db } from "../../firebaseConfig";
+import { collection, getDocs } from 'firebase/firestore';
+
+import styles from '../app/assets/styles/RegisterForm.module.css';
+import { useAuth } from '@/context/AuthContext';
+import { db } from '../../firebaseConfig';
 
 const SignUp = () => {
-  const { signUp } = useAuth()
+  const { signUp } = useAuth();
+  const router = useRouter();
 
-  const [email, setEmail] = useState('')
-  const [name, setName] = useState('')
-  const [password, setPassword] = useState('')
-  const [category, setCategory] = useState('')
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [category, setCategory] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isJudge, setIsJudge] = useState(false);
 
-  const [errorMessage, setErrorMessage] = useState('')
-
-  const router = useRouter()
-
-  const [isJudge, setIsJudge] = useState(false)
-
+  // Handles query params and checks if judge is already registered
   useEffect(() => {
     if (!router.isReady) return;
 
@@ -34,168 +33,143 @@ const SignUp = () => {
       setEmail(queryEmail);
       setName(queryName);
       setIsJudge(queryRole === 'judge');
-    }
 
-    if (queryRole === 'judge') {
+      if (queryRole === 'judge') {
+        const checkIfJudgeRegistered = async () => {
+          const accountsRef = collection(db, 'accounts');
+          const querySnapshot = await getDocs(accountsRef);
 
-      // check if this user is already registered as a judge in all firebase accounts collections
-      const isJudgeRegistered = async () => {
-        const accountsRef = collection(db, 'accounts');
-        const querySnapshot = await getDocs(accountsRef);
-        let isRegistered = false;
+          const alreadyRegistered = querySnapshot.docs.some(doc => {
+            const data = doc.data();
+            return data.email === queryEmail && data.role === 'judge';
+          });
 
-        querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          if (data.email === queryEmail && data.role === 'judge') {
-            isRegistered = true;
+          if (alreadyRegistered) {
+            toast.error('Ya tienes una cuenta como jurado. Por favor, inicia sesión.');
+            router.push('/login');
+          } else {
+            toast.success('🎟️ Invitación para crear una cuenta de "Jurado Seleccionador".');
           }
-        });
+        };
 
-        if (isRegistered) {
-          toast.error('Ya tienes una cuenta como jurado. Por favor, inicia sesión.');
-          router.push('/login');
-        } else {
-          toast.success(`🎟️ Invitación para crear una cuenta de "Jurado Seleccionador".`);
-        }
-      };
-
-      isJudgeRegistered(); 
-
+        checkIfJudgeRegistered();
+      }
     }
   }, [router.isReady]);
 
   const handleSignUp = async () => {
-    if (email === '' || password === '') {
-      setErrorMessage('Por favor, rellena todos los campos')
-      return
+    if (!email || !password) {
+      setErrorMessage('Por favor, rellena todos los campos');
+      return;
     }
+
     try {
-      await signUp(email, password, isJudge, name, category)
-      toast.success('¡Cuenta creada con éxito! 🎉')
-      router.push('/onboarding')
+      await signUp(email, password, isJudge, name, category);
+      toast.success('¡Cuenta creada con éxito! 🎉');
+      router.push('/onboarding');
     } catch (error) {
-      setErrorMessage((error as Error).message)
-      setTimeout(() => {
-        setErrorMessage('')
-      }, 3000)
+      setErrorMessage((error as Error).message);
+      setTimeout(() => setErrorMessage(''), 3000);
     }
-  }
+  };
+
+  const renderCategoryBadge = () => {
+    const icons: Record<string, string> = {
+      arte: '/icons/icons-digital.png',
+      musica: '/icons/icons-music.png',
+      baile: '/icons/icons-dance.png',
+      literature: '/icons/icons-literature.png',
+    };
+
+    return category && icons[category] ? (
+      <Image
+        width={50}
+        height={50}
+        src={icons[category]}
+        alt={`Icono ${category}`}
+        className="judges-badge badge-white"
+        style={{ marginRight: '25px' }}
+      />
+    ) : null;
+  };
+
+  const renderCategorySelector = () => (
+    <div className="input-group">
+      <label className={styles.label} htmlFor="category">Categoría</label>
+      <select
+        id="category"
+        name="category"
+        className={styles.select}
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+        required
+      >
+        <option value="">Selecciona una categoría</option>
+        <option value="arte">Arte</option>
+        <option value="musica">Música</option>
+        <option value="baile">Baile o Danza</option>
+        <option value="literature">Literatura</option>
+      </select>
+    </div>
+  );
 
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
       <div className="auth-container">
         <div className="auth-form space-around">
-          <h2 className="auth-title">Crea tu cuenta en <b>FESTIVARTES</b></h2>
+          <h2 className="auth-title">
+            Crea tu cuenta en <b>FESTIVARTES</b>
+          </h2>
+
           <input
             type="text"
-            onChange={(e) => setName(e.target.value)}
             value={name}
+            onChange={(e) => setName(e.target.value)}
             placeholder="Nombre completo"
             className="auth-input"
             required
           />
           <input
             type="email"
-            onChange={(e) => setEmail(e.target.value)}
             value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Correo electrónico"
             className="auth-input"
             required
           />
           <input
             type="password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Contraseña"
             className="auth-input"
             required
           />
-          <br />
+
           {router.query.email && (
             <div className="input-group-custom-wrapper">
-              <div className="input-group mTop-30">
-                {category === "arte" && (
-                  <div>
-                    <Image
-                      width={50}
-                      height={50}
-                      className='judges-badge badge-white' 
-                      src="/icons/icons-digital.png" 
-                      alt="" 
-                    />
-                  </div>
-                  )}
-                {category === "musica" && (
-                  <div>
-                    <Image
-                      width={50}
-                      height={50}
-                      className='judges-badge badge-white' 
-                      src="/icons/icons-music.png" 
-                      alt="" 
-                    />
-                  </div>
-                  )}
-                {category === "baile" && (
-                  <div>
-                    <Image
-                      width={50}
-                      height={50}
-                      className='judges-badge badge-white' 
-                      src="/icons/icons-dance.png" 
-                      alt="" 
-                    />
-                  </div>
-                  )}
+              {renderCategoryBadge()}
+              {renderCategorySelector()}
             </div>
-  
-  
-  
-            <div className="input-group">
-              <div className="input-group">
-                <label className={styles.label} htmlFor="category">
-                  Categoría
-                </label>
-                <select
-                  id="category"
-                  name="category"
-                  className={styles.select}
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  required
-                >
-                  <option value="">Selecciona una categoría</option>
-                  <option value="arte">Arte</option>
-                  <option value="musica">Música</option>
-                  <option value="baile">Baile o Danza</option>
-                </select>
-              </div>
-            </div>
-  
-          </div>          
           )}
-          {errorMessage !== '' && (
-            <p className="error-message">
-              {errorMessage}
-            </p>
-          )}
+
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
+
           <button type="submit" onClick={handleSignUp} className="auth-button">
             {isJudge ? 'Crear cuenta como 👨‍⚖️ Jurado' : 'Crear cuenta'}
           </button>
-          
+
           <p className="auth-link">
-            ¿Ya tienes una cuenta?
+            ¿Ya tienes una cuenta?&nbsp;
             <b>
-              &nbsp;
-              <Link href="/login">
-                Iniciar sesión
-              </Link>
+              <Link href="/login">Iniciar sesión</Link>
             </b>
           </p>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default SignUp;

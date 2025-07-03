@@ -386,7 +386,6 @@ b {
 }
 
 .project-miniature-custom-judge .project-miniature, .project-miniature-custom-judge .project-thumbnail {
-  border-radius: 50%;
   width: 70px;
   height: 70px;
 }

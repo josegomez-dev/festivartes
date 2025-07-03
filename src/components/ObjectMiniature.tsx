@@ -87,12 +87,11 @@ const ObjectMiniature: React.FC<ObjectMiniatureProps> = ({
                 </>
               )}
 
-              {/* Overlay Info */}
               <div className="info-overlay">
                 <div className="overlay-content">
                   <p 
                     className="project-title" 
-                    style={{ animation: isUpcoming ? 'pulse 2s infinite' : '', background: isUpcoming ? 'orange' : '', borderRadius: isUpcoming ? '4px' : '0' }}>
+                    style={{ animation: isUpcoming ? 'pulse 2s infinite' : '', background: isUpcoming ? 'orange' : '', borderRadius: isUpcoming ? 'px' : '0' }}>
                       {project.name || project.title || project.display}
                   </p>
                   {icon && (

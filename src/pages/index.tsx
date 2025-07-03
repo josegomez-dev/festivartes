@@ -132,7 +132,7 @@ const Home = () => {
                 </div>
               </Link>
 
-              <Link href="/legartes" className={styles.columnBox} style={{ textDecoration: 'none', fontSize: 15 }}>
+              {/* <Link href="/legartes" className={styles.columnBox} style={{ textDecoration: 'none', fontSize: 15 }}>
                 <div
                   onMouseMove={handleHover}
                   onMouseLeave={resetLight}
@@ -152,7 +152,7 @@ const Home = () => {
                       style={{ marginTop: '-40px', marginBottom: '-20px' }}
                     />
                 </div>
-              </Link>
+              </Link> */}
           </section>
           <p>Creado por: <b><a target='_blank' href="https://www.linkedin.com/in/josealejandrogomezcastro/">Jose Alejandro Gomez Castro</a></b></p>
         </div>
