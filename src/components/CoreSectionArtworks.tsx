@@ -84,10 +84,7 @@ const CoreSectionArtworks = ({ filterBy, allItems, selectMode, selectItem }: Cor
             </b>
           </div>
           <div className="form-wrapper">
-            <ArtworkRegisterForm closeModal={closeUserModal} refetchData={() => {
-              fetchArtworks();
-              setShowAllData(false);
-            }} />
+            <ArtworkRegisterForm closeModal={closeUserModal} />
           </div>
         </CustomModal>
         

@@ -4,7 +4,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
-import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
+import { collection, getDocs, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { uploadBytes, getDownloadURL, ref } from 'firebase/storage';
 
 // Firebase
@@ -126,6 +126,19 @@ const ArtworkDetail = () => {
     }
   };
 
+  const handleDelete = async (id: string) => {
+    const docRef = doc(db, 'artworks', id); // adjust collection name if needed
+
+    try {
+      await deleteDoc(docRef);
+      toast.success('Obra eliminada exitosamente');
+      router.push('/artworks');
+    } catch (err) {
+      console.error('Error eliminando obra:', err);
+      toast.error('Error al eliminar la obra');
+    }
+  };
+
   return (
     <div className={styles['full-view']}>
       <audio ref={clapSoundRef} src="/sounds/spot.mp3" />
@@ -176,20 +189,7 @@ const ArtworkDetail = () => {
 
             
           {role === 'admin' && project.createdBy === user?.uid && (
-            <button style={{ padding: 10, background: 'red', border: 'none', cursor: 'pointer', borderRadius: '8px' }} onClick={() => {
-              if (confirm('¿Estás seguro de que deseas eliminar esta obra? Esta acción no se puede deshacer.')) {
-                const docRef = doc(db, 'artworks', project.id);
-                updateDoc(docRef, { deleted: true })
-                  .then(() => {
-                    toast.success('Obra eliminada exitosamente');
-                    router.push('/artworks');
-                  })
-                  .catch((err) => {
-                    console.error('Error eliminando obra:', err);
-                    toast.error('Error al eliminar la obra');
-                  });
-              }
-            }}>
+            <button style={{ padding: 10, background: 'red', border: 'none', cursor: 'pointer', borderRadius: '8px' }} onClick={() => handleDelete(project.id)}>
               Eliminar Obra
             </button>
           )}

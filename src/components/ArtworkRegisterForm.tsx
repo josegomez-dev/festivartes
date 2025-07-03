@@ -13,7 +13,6 @@ import { ARTWORK, EMPTY_ARTWORK } from "@/types/artworks.types";
 
 interface InviteRegisterFormProps {
   closeModal: () => void;
-  refetchData?: () => void; // Optional, can be used to refetch data after submission
 }
 
 const categoryIcons: Record<string, string> = {
@@ -26,7 +25,7 @@ const categoryIcons: Record<string, string> = {
   baile: "/icons/icons-dance.png",
 };
 
-const ArtworkRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal, refetchData }) => {
+const ArtworkRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) => {
   const { user } = useAuth();
   const [formData, setFormData] = useState<ARTWORK>(EMPTY_ARTWORK);
   const [isLoading, setIsLoading] = useState(false);
@@ -81,9 +80,7 @@ const ArtworkRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal, re
       toast.success("Obra de arte registrada con éxito");
       setFormData(EMPTY_ARTWORK);
       closeModal();
-      if (refetchData) {
-        refetchData(); // Call the refetch function if provided
-      }
+      window.location.reload(); // Refresh the page to see the new artwork
     } catch (error) {
       console.error("Error saving artwork:", error);
       toast.error("Error al registrar la obra");
