@@ -16,7 +16,7 @@ const Footer = () => {
         </a>
       </div>
       <div>
-        <p className={styles['footer-rights-text']}>&copy; 2024 <b>FESTIVARTES</b> | Todos los derechos reservados</p>
+        <p className={styles['footer-rights-text']}>&copy; 2025 <b>FESTIVARTES</b> <br /> Todos los derechos reservados</p>
       </div>
     </footer>
   )

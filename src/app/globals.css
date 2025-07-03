@@ -384,14 +384,28 @@ b {
 .project-miniature-custom-event .project-thumbnail {
   width: 117px;
 }
+.project-miniature-custom-judge {
+  background: linear-gradient(0deg, var(--color-blue), var(--color-orange));
+  padding: 10px 5px;
+  border-radius: 12px;
+}
+
+.project-miniature-custom-judge .project-miniature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border-radius: 12px;
+  margin-top: 0px;
+  border: 1px solid var(--color-orange);
+}
 
 .project-miniature-custom-judge .project-miniature, .project-miniature-custom-judge .project-thumbnail {
   width: 70px;
   height: 70px;
-}
 
-.project-miniature-custom-judge .project-miniature {
-	border: 1px solid var(--color-blue);
+  border-radius: 2px;
 }
 
 .project-miniature-custom-judge .project-thumbnail {
@@ -1762,9 +1776,9 @@ margin: 10px 0;
   position: absolute;
   bottom: 0;
   width: 100%;
-  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  background: linear-gradient(to top, rgba(0,0,0,1), transparent);
   color: white;
-  padding: 6px;
+  padding: 5px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;

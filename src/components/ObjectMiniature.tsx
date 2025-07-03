@@ -59,6 +59,21 @@ const ObjectMiniature: React.FC<ObjectMiniatureProps> = ({
         const isDisabled = isPrivate && !selectMode && !isOwner;
         const isUpcoming = project.upcoming;
 
+        // 🧮 Calculate claps
+        const clapCount = Array.isArray(project.claps)
+          ? project.claps.filter((c) => c.clap).length
+          : 0;
+
+        // ⭐ Calculate average stars
+        const starRatings = Array.isArray(project.stars)
+          ? project.stars.map((s) => s.rating)
+          : [];
+
+        const averageStars =
+          starRatings.length > 0
+            ? (starRatings.reduce((acc, val) => acc + val, 0) / starRatings.length).toFixed(1)
+            : null;
+
         return (
           <Link
             key={`project-${projectId}`}
@@ -87,25 +102,54 @@ const ObjectMiniature: React.FC<ObjectMiniatureProps> = ({
                 </>
               )}
 
+              {/* Info Overlay */}
               <div className="info-overlay">
                 <div className="overlay-content">
-                  <p 
-                    className="project-title" 
-                    style={{ animation: isUpcoming ? 'pulse 2s infinite' : '', background: isUpcoming ? 'orange' : '', borderRadius: isUpcoming ? 'px' : '0' }}>
-                      {project.name || project.title || project.display}
-                  </p>
+
                   {icon && (
                     <Image src={icon} alt="type" width={20} height={20} className="type-icon" />
                   )}
+
+                  {/* Claps & Stars */}
+                  <div style={{ display: 'flex', justifyContent: 'center', gap: '2px', textShadow: '1px 1px 2px black', overflow: 'auto' }}>
+                    {clapCount > 0 && (
+                      <span title="Claps">👏 {clapCount}</span>
+                    )}
+                    {averageStars && (
+                      <span title="Average Rating">⭐ {averageStars}</span>
+                    )}
+                  </div>
+
+                  <p 
+                    className="project-title" 
+                    style={{ 
+                      animation: isUpcoming ? 'pulse 2s infinite' : '', 
+                      background: isUpcoming ? 'orange' : '',
+                      borderRadius: isUpcoming ? '6px' : '0', 
+                      width: '100%',
+                      textAlign: 'center',
+                      overflow: 'auto',
+                      color: isUpcoming ? 'white' : 'orange',
+                      fontWeight: 'bold',
+                      fontSize: '10px',
+                      textShadow: '1px 1px 2px black'
+                    }}
+                  >
+                    {project.name || project.title || project.displayName}
+                  </p>
                 </div>
 
                 {/* Upcoming Badge */}
                 {isUpcoming && (
                   <div className="upcoming-badge">
-                    <button className="calendar-btn" style={{ animation: 'pulse 2s infinite' }} onClick={(e) => {
-                      e.preventDefault();
-                      alert('Save to calendar coming soon!');
-                    }}>
+                    <button
+                      className="calendar-btn"
+                      style={{ animation: 'pulse 2s infinite' }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        alert('Save to calendar coming soon!');
+                      }}
+                    >
                       📅 Agendar
                     </button>
                   </div>

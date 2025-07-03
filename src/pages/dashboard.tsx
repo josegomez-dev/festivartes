@@ -8,6 +8,7 @@ import CoreSectionJudges from '@/components/CoreSectionJudges';
 import BannerFooter from '@/components/BannerFooter';
 import SubMenu from '@/components/SubMenu';
 import { Toaster } from 'react-hot-toast'
+import Footer from '@/components/Footer';
 
 export default function Dashboard() {
   const { user, role, authenticated } = useAuth()
@@ -37,8 +38,10 @@ export default function Dashboard() {
         <CoreSectionFestivartes filterBy={user?.uid} />
         <hr />
         <CoreSectionJudges filterBy={user?.uid} />
-        <BannerFooter />
+
         <FloatingMenuButton mainBtn={true} />
+
+        <Footer />
       </div>
     </div>
   )

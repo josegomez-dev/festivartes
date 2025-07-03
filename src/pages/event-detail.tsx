@@ -19,6 +19,7 @@ import { ARTWORK } from '@/types/artworks.types';
 import CoreSectionSelectedJudges from '@/components/CoreSectionSelectedJudges';
 import { User } from '@/types/userTypes';
 import RatingForm from '@/components/RatingForm';
+import Footer from '@/components/Footer';
 
 const EventDetail = ({ }) => {
   const router = useRouter();
@@ -523,13 +524,7 @@ const EventDetail = ({ }) => {
         <hr />
         <br />
 
-        <div className="project-detail-wrapper">
-          <div className="project-detail-container">
-            <p>
-              Si tienes alguna duda, puedes contactarnos a través de nuestras redes sociales o por correo electrónico <a href="">josegomez.dev@gmail.com</a>.
-            </p>
-          </div>
-        </div>
+        <Footer />
 
       </div>
     </div>

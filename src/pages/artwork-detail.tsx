@@ -32,6 +32,7 @@ import TabInfo from '@/components/artworkDetail/TabInfo';
 import TabDocument from '@/components/artworkDetail/TabDocument';
 import TabAudio from '@/components/artworkDetail/TabAudio';
 import TabVideo from '@/components/artworkDetail/TabVideo';
+import Footer from '@/components/Footer';
 
 const ArtworkDetail = () => {
   const router = useRouter();
@@ -223,9 +224,7 @@ const ArtworkDetail = () => {
         <hr />
         <br />
 
-        <div className="project-detail-container">
-          <p>Si tienes alguna duda, puedes contactarnos a través de nuestras redes sociales o por correo electrónico <a href="mailto:josegomez.dev@gmail.com">josegomez.dev@gmail.com</a>.</p>
-        </div>
+        <Footer />
       </div>
     </div>
   );
