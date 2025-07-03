@@ -13,10 +13,12 @@ import { ARTWORK, EMPTY_ARTWORK } from "@/types/artworks.types";
 
 interface InviteRegisterFormProps {
   closeModal: () => void;
+  refetchData?: () => void; // Optional, can be used to refetch data after submission
 }
 
 const categoryIcons: Record<string, string> = {
-  feria: "/icons/icons-feria.png", // TODO: update this icon
+  literatura: "/icons/icons-literature.png", 
+  feria: "/icons/icons-feria.png",
   escultura: "/icons/icons-sculture.png",
   fotografia: "/icons/icons-photography.png",
   arte_digital: "/icons/icons-digital.png",
@@ -24,7 +26,7 @@ const categoryIcons: Record<string, string> = {
   baile: "/icons/icons-dance.png",
 };
 
-const ArtworkRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) => {
+const ArtworkRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal, refetchData }) => {
   const { user } = useAuth();
   const [formData, setFormData] = useState<ARTWORK>(EMPTY_ARTWORK);
   const [isLoading, setIsLoading] = useState(false);
@@ -79,7 +81,9 @@ const ArtworkRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) 
       toast.success("Obra de arte registrada con éxito");
       setFormData(EMPTY_ARTWORK);
       closeModal();
-      window.location.reload(); // optional, can be removed if modal rerenders list
+      if (refetchData) {
+        refetchData(); // Call the refetch function if provided
+      }
     } catch (error) {
       console.error("Error saving artwork:", error);
       toast.error("Error al registrar la obra");
@@ -132,6 +136,7 @@ const ArtworkRegisterForm: React.FC<InviteRegisterFormProps> = ({ closeModal }) 
             required
           >
             <option value="">Selecciona una categoría</option>
+            <option value="literatura">Literatura</option>
             <option value="feria">Feria Científica</option>
             <option value="escultura">Escultura</option>
             <option value="fotografia">Fotografía</option>

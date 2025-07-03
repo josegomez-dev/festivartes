@@ -224,6 +224,9 @@ const EventDetail = ({ }) => {
     });
     onCloseSelectArtworksModal();
     toast.success('Obras seleccionadas correctamente!');
+    // refech the artworks to update the local state
+    fetchEvents(id);
+    fetchAllArtworks();
   };
 
   const saveJudgesSelection = async () => {
@@ -233,6 +236,9 @@ const EventDetail = ({ }) => {
     });
     onCloseSelectJudgesModal();
     toast.success('Jurados seleccionados correctamente!');
+    // refech the judges to update the local state
+    fetchEvents(id);
+    fetchAllJudges();
   };
 
   return (
