@@ -58,7 +58,7 @@ export default function Profile() {
       return url;
     } catch (error) {
       console.error("Error uploading file:", error);
-      toast.error("Error uploading image");
+      toast.error("Error subiendo la foto de perfil.");
       throw error;
     }
   };
@@ -66,7 +66,7 @@ export default function Profile() {
   const handleImageChange = async (file: File) => {
     if (!user || !user.uid) {
       console.error("Error: User is not authenticated or UID is undefined.");
-      toast.error("User is not authenticated.");
+      toast.error("El usuario no está autenticado o el UID es indefinido.");
       return;
     }
     const url = await uploadProfilePhoto(file, user.uid); 
@@ -80,7 +80,7 @@ export default function Profile() {
       profilePic: url,
       updatedAt: new Date(),
     });
-    toast.success("Profile picture updated successfully.");
+    toast.success("Foto de perfil actualizada correctamente.");
   };
 
   if (!authenticated || !user) {
@@ -100,7 +100,13 @@ export default function Profile() {
       }
       const accountRef = doc(db, "accounts", accountData.uid);
       await updateDoc(accountRef, accountData);
+      setAccountData((prevState) => ({
+        ...prevState,
+        updatedAt: new Date(),
+      }));
       toast.success("Cuenta actualizada correctamente.");
+      console.log("Account updated successfully.");
+      window.location.href = '/dashboard';
     } catch (error) {
       console.error("Error updating account:", error);
     }

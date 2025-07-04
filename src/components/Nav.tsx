@@ -240,16 +240,16 @@ export default function Nav() {
                     Mi Perfil
                   </p>
                 </Link>
+                <Link href="/activity" className={styles.dropdownLink}>
+                  <p className={`${styles.dropdownItem} link-item`}>
+                    Actividad
+                  </p>
+                </Link>
                 <Link href="/onboarding" className={styles.dropdownLink}>
                   <p className={`${styles.dropdownItem} link-item`}>
                     ¿Como usar? <b>Festivartes</b>
                   </p>
                 </Link>
-                {/* <Link href="/faq" className={styles.dropdownLink}>
-                  <p className={`${styles.dropdownItem} link-item`}>
-                    Preguntas Frecuentes
-                  </p>
-                </Link> */}
                 <Link href="/docs" className={styles.dropdownLink}>
                   <p className={`${styles.dropdownItem} link-item`}>
                     Documentación
