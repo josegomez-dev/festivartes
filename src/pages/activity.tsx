@@ -9,8 +9,6 @@ import { EVENTS } from "@/types/events.types";
 import { db } from "@/../firebaseConfig";
 import {
   collection,
-  query,
-  where,
   getDocs,
 } from "firebase/firestore";
 import {
@@ -29,6 +27,7 @@ import dynamic from "next/dynamic";
 import FloatingMenuButton from '@/components/FloatingMenuButton';
 import UnauthorizedMessage from '@/components/UnauthorizedMessage';
 import Footer from "@/components/Footer";
+import { RATE } from "@/types/rate.types";
 
 const Bar = dynamic(() => import("react-chartjs-2").then(mod => mod.Bar), { ssr: false });
 const Line = dynamic(() => import("react-chartjs-2").then(mod => mod.Line), { ssr: false });
@@ -46,6 +45,7 @@ export default function ActivityDashboard() {
   const [artworks, setArtworks] = useState<ARTWORK[]>([]);
   const [events, setEvents] = useState<EVENTS[]>([]);
   const [loading, setLoading] = useState(true);
+  const [ratedArtworks, setRatedArtworks] = useState<ARTWORK[]>([]);
 
   useEffect(() => {
     if (!user) return;
@@ -54,16 +54,22 @@ export default function ActivityDashboard() {
       const artworksRef = collection(db, "artworks");
       const eventsRef = collection(db, "events");
 
-      const qArtworks = query(artworksRef, where("createdBy", "==", user.uid));
-      const qEvents = query(eventsRef, where("createdBy", "==", user.uid));
-
       const [artworksSnap, eventsSnap] = await Promise.all([
-        getDocs(qArtworks),
-        getDocs(qEvents)
+        getDocs(artworksRef),
+        getDocs(eventsRef)
       ]);
 
-      setArtworks(artworksSnap.docs.map(doc => doc.data() as ARTWORK));
-      setEvents(eventsSnap.docs.map(doc => doc.data() as EVENTS));
+      const allArtworks = artworksSnap.docs.map(doc => doc.data() as ARTWORK);
+
+      setArtworks(allArtworks.filter(a => a.createdBy === user.uid));
+      setEvents(eventsSnap.docs.map(doc => doc.data() as EVENTS).filter(e => e.createdBy === user.uid));
+
+      const userRated = allArtworks.filter(art =>
+        Array.isArray(art.rates) &&
+        art.rates.some((rate: RATE) => rate.judgeIdentifier === user.uid)
+      );
+
+      setRatedArtworks(userRated);
       setLoading(false);
     };
 
@@ -126,8 +132,6 @@ export default function ActivityDashboard() {
 
   return (
     <div className={styles["sidebar-menu-view"]}>
-      {/* <SidebarMenu /> */}
-
       <div className={styles["main-content"]}>
         <div className={activityStyles.container}>
           <h1>📊 Actividad General</h1> 
@@ -146,26 +150,54 @@ export default function ActivityDashboard() {
               <div className={activityStyles.sections}>
                   <section className={activityStyles.card}>
                     <h2><b>🎨 Obras Creadas</b></h2>
-                    <ul>
-                      {artworks.map((art, idx) => (
-                        <li key={idx}><strong>{art.title}</strong> ({art.category})</li>
-                      ))}
-                    </ul>
+                    {artworks.length > 0 ? (
+                      <ul>
+                        {artworks.map((art, idx) => (
+                          <li key={idx}><strong>{art.title}</strong> ({art.category})</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p>No has creado ninguna obra aún.</p>
+                    )}
                   </section>
-  
+
                   <section className={activityStyles.card}>
                     <h2><b>🎭 Eventos Creados</b></h2>
-                    <ul>
-                      {events.map((ev, idx) => (
-                        <li key={idx}><strong>{ev.name}</strong> — {ev.description}</li>
-                      ))}
-                    </ul>
+                    {events.length > 0 ? (
+                      <ul>
+                        {events.map((ev, idx) => (
+                          <li key={idx}><strong>{ev.name}</strong> — {ev.description}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p>No has creado ningún evento aún.</p>
+                    )}
                   </section>
-  
-                  {["judge", "admin"].includes(role) && (
+
+                  {(["judge", "admin"].includes(role)) && (
                     <section className={activityStyles.card}>
                       <h2><b>⭐ Calificaciones dadas</b></h2>
-                      <p>Próximamente: Mostrar obras evaluadas por este juez/admin</p>
+                      {ratedArtworks.length > 0 ? (
+                        <ul>
+                          {ratedArtworks.map((art, idx) => {
+                            const ratesArray = Array.isArray(art.rates) ? (art.rates as unknown as RATE[]) : [];
+                            const userRate = user ? ratesArray.find((rate) => rate.judgeIdentifier === user.uid) : undefined;
+                            const value =
+                              typeof userRate?.ratingForm === 'object'
+                                ? userRate.ratingForm.rateValue
+                                : userRate?.rateValue;
+                            return (
+                              <li key={idx}>
+                                <strong>{art.title}</strong> — <b>{userRate?.rateValue} pts</b>
+                                <br />
+                                <small>{new Date(userRate?.rateAt || '').toLocaleDateString()}</small>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      ) : (
+                        <p>Aún no has calificado ninguna obra.</p>
+                      )}
                     </section>
                   )}
               </div>
