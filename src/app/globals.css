@@ -254,7 +254,7 @@ b {
 .project-miniature {
   display: flex;
   flex-direction: row;
-  border: 2px solid var(--color-blue);;
+  border: 2px solid var(--color-blue);
   border-radius: 8px;
   width: 200px;
   height: 200px;
@@ -363,6 +363,7 @@ b {
   width: 200px;
   height: 280px;
   overflow: hidden;
+  
 }
 
 .project-miniature-custom-event .project-miniature {
@@ -374,6 +375,7 @@ b {
   padding: 10px;
   border-radius: 12px;
   margin-top: 5px;
+  padding-bottom: 0px;
 }
 
 .project-miniature-custom-judge .project-miniature {
@@ -1261,7 +1263,6 @@ Down
   height: auto;
   margin-bottom: 35px;
   margin-top: -5px;
-  border: 1px solid var(--color-blue);
   padding: 15px;
 }
 
@@ -1276,7 +1277,7 @@ Down
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
-  height: auto;
+  height: auto;  
 }
 
 .festivartes-miniature-panel .project-miniature, .festivartes-miniature-panel .project-thumbnail {
@@ -1756,7 +1757,7 @@ margin: 10px 0;
 
 .info-overlay {
   position: absolute;
-  bottom: 0;
+  bottom: -5px;
   width: 100%;
   background: linear-gradient(to top, rgba(0,0,0,1), transparent);
   color: white;
@@ -1785,7 +1786,7 @@ margin: 10px 0;
 
 .upcoming-badge {
   position: absolute;
-  top: -208px;
+  top: -45px;
   right: 8px;
   display: flex;
   flex-direction: column;
