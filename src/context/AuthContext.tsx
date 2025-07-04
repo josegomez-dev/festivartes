@@ -13,7 +13,7 @@ import {
 } from "firebase/auth";
 import { auth, db } from "./../../firebaseConfig";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import { createEmptyUser } from '@/types/userTypes';
+import { createEmptyUser, User as _User } from '@/types/userTypes';
 import emailjs from 'emailjs-com';
 import toast from 'react-hot-toast';
 import { v4 as uuidv4 } from 'uuid';
@@ -38,7 +38,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | _User | null>(null);
   const [loading, setLoading] = useState(true);
   const [role, setRole] = useState<string>('user')
   const [authenticated, setAuthenticated] = useState<boolean>(false)

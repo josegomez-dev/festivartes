@@ -1668,30 +1668,55 @@ button:disabled {
 }
 
 .chatInput {
-  display: flex;
   padding: 10px;
-  background: var(--background-transparent);
-  backdrop-filter: blur(100px);
   border-top: 1px solid #ccc;
-  
+  background: var(--background-gradient-blue-orange);
 }
 
-.chatInput input {
-  flex-grow: 1;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-right: 10px;
+.chatActionsTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
 }
-  
-.chatInput button {
-  background-color: var(--color-orange);
-  color: var(--color-white);
+
+.chatTopicSelect {
+  flex: 1;
+  padding: 6px;
+  font-size: 0.9rem;
+}
+
+.clearBtn {
+  margin-left: 10px;
+  padding: 6px 12px;
   border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.chatMessageRow {
+  display: flex;
+  gap: 6px;
+}
+
+.chatInputField {
+  flex: 1;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.sendBtn {
+  padding: 8px 14px;
+  background-color: var(--color-orange);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
   cursor: pointer;
 }
+
 
 .closeButton {
   background: none;
@@ -1812,3 +1837,98 @@ margin: 10px 0;
   border: none;
 }
 
+
+
+
+
+
+.messageItem {
+  display: flex;
+  flex-direction: column;
+  margin: 12px 0;
+  max-width: 80%;
+  padding: 10px;
+  border-radius: 18px;
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.myMessage {
+  align-self: flex-end;
+  background: linear-gradient(to right, #a18cd1, #fbc2eb);
+  color: #fff;
+  border-top-right-radius: 0;
+}
+
+.botMessage {
+  align-self: flex-start;
+  background: #fff5e1;
+  color: #333;
+  border-top-left-radius: 0;
+  border: 1px solid #ffe0a3;
+}
+
+.adminMessage {
+  align-self: flex-start;
+  background: #e1f5fe;
+  color: #005b76;
+  border-top-left-radius: 0;
+  border: 1px solid #b3e5fc;
+}
+
+.messageHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.senderName {
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.messageBody {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.msg-topic {
+  font-size: 0.8rem;
+  margin-top: 6px;
+  color: #888;
+  font-style: italic;
+}
+
+.deleteBtn {
+  align-self: flex-end;
+  margin-top: 6px;
+  background: transparent;
+  border: none;
+  color: #888;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.deleteBtn:hover {
+  color: #e74c3c;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
