@@ -19,9 +19,12 @@ const TabInfo: React.FC<TabInfoProps> = ({ project, onTogglePrivacy }) => {
       <h2><b className='font-size-title'>{project.title || 'Título'}</b></h2>
      
       <div style={{ width: '300px', margin: '0 auto', color: 'lightgray' }}>
+        <p>
+          <span className='project-info-small-text'>¿Quién puede ver este proyecto?</span>
+        </p>
         <p className='project-info-small-text' style={{ marginBottom: '5px' }}>
           🔐:&nbsp;
-          <span style={{ color: isPublic ? 'orange' : 'red' }}>
+          <span style={{ color: isPublic ? 'lightgreen' : 'orange' }}>
             {isPublic ? 'Público' : 'Privado'}
             &nbsp;
             &nbsp;

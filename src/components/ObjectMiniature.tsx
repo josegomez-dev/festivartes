@@ -111,7 +111,7 @@ const ObjectMiniature: React.FC<ObjectMiniatureProps> = ({
                   )}
 
                   {/* Claps & Stars */}
-                  <div style={{ display: 'flex', justifyContent: 'center', gap: '2px', textShadow: '1px 1px 2px black', overflow: 'auto' }}>
+                  <div style={{ marginBottom: '-30px', display: 'flex', justifyContent: 'center', gap: '2px', textShadow: '1px 1px 2px black', overflow: 'auto' }}>
                     {clapCount > 0 && (
                       <span title="Claps">👏 {clapCount}</span>
                     )}
@@ -135,6 +135,7 @@ const ObjectMiniature: React.FC<ObjectMiniatureProps> = ({
                       textShadow: '1px 1px 2px black'
                     }}
                   >
+                    <b>{project.upcoming ? 'Próximamente' : ''} <br/></b>
                     {project.name || project.title || project.displayName}
                   </p>
                 </div>
