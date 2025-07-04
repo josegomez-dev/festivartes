@@ -245,11 +245,11 @@ export default function Nav() {
                     ¿Como usar? <b>Festivartes</b>
                   </p>
                 </Link>
-                <Link href="/faq" className={styles.dropdownLink}>
+                {/* <Link href="/faq" className={styles.dropdownLink}>
                   <p className={`${styles.dropdownItem} link-item`}>
                     Preguntas Frecuentes
                   </p>
-                </Link>
+                </Link> */}
                 <Link href="/docs" className={styles.dropdownLink}>
                   <p className={`${styles.dropdownItem} link-item`}>
                     Documentación

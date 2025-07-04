@@ -33,6 +33,7 @@ import TabDocument from '@/components/artworkDetail/TabDocument';
 import TabAudio from '@/components/artworkDetail/TabAudio';
 import TabVideo from '@/components/artworkDetail/TabVideo';
 import Footer from '@/components/Footer';
+import ArtworkRegisterForm from '@/components/ArtworkRegisterForm';
 
 const ArtworkDetail = () => {
   const router = useRouter();
@@ -50,24 +51,27 @@ const ArtworkDetail = () => {
   const clapSoundRef = useRef<HTMLAudioElement | null>(null);
   const unclapSoundRef = useRef<HTMLAudioElement | null>(null);
 
-  useEffect(() => {
-    const fetchArtworks = async () => {
-      const params = new URLSearchParams(document.location.search);
-      const _id = params.get('id');
-      const _shareLink = params.get('share-link');
-      if (_shareLink) localStorage.setItem('share-link', _shareLink);
-      else localStorage.removeItem('share-link');
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-      try {
-        const snapshot = await getDocs(collection(db, 'artworks'));
-        const items = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-        const selected = items.find((e) => e.id === id || e.id === _id);
-        if (selected) setProject(selected as ARTWORK);
-        setData(items as ARTWORK[]);
-      } catch (err) {
-        console.error('Error loading data:', err);
-      }
-    };
+  const fetchArtworks = async () => {
+    const params = new URLSearchParams(document.location.search);
+    const _id = params.get('id');
+    const _shareLink = params.get('share-link');
+    if (_shareLink) localStorage.setItem('share-link', _shareLink);
+    else localStorage.removeItem('share-link');
+
+    try {
+      const snapshot = await getDocs(collection(db, 'artworks'));
+      const items = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      const selected = items.find((e) => e.id === id || e.id === _id);
+      if (selected) setProject(selected as ARTWORK);
+      setData(items as ARTWORK[]);
+    } catch (err) {
+      console.error('Error loading data:', err);
+    }
+  };
+  
+  useEffect(() => {
     fetchArtworks();
   }, [id]);
 
@@ -188,6 +192,23 @@ const ArtworkDetail = () => {
             {activeTab === 'video' && <TabVideo project={project} user={user} loading={loading} onUpload={handleUpload} />}
           </div>
 
+
+        {role === 'admin' && project.createdBy === user?.uid && (
+          <>
+            <button style={{ padding: 10, background: 'orange', border: 'none', cursor: 'pointer', borderRadius: '8px', width: '100%',  maxWidth: '600px', margin: '0 auto' }} onClick={() => setIsEditModalOpen(true)} className="edit-btn">Editar Obra</button>
+            {isEditModalOpen && (
+              <CustomModal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} height="75%">
+              <ArtworkRegisterForm
+                initialData={project}
+                closeModal={() => {
+                  setIsEditModalOpen(false);
+                  fetchArtworks();
+                }}
+              />
+            </CustomModal>)}
+            <br />
+          </>
+        )}
             
           {role === 'admin' && project.createdBy === user?.uid && (
             <button style={{ padding: 10, background: 'red', border: 'none', cursor: 'pointer', borderRadius: '8px', width: '100%',  maxWidth: '600px', margin: '0 auto' }} onClick={() => handleDelete(project.id)}>

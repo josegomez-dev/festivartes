@@ -20,6 +20,7 @@ import CoreSectionSelectedJudges from '@/components/CoreSectionSelectedJudges';
 import { User } from '@/types/userTypes';
 import RatingForm from '@/components/RatingForm';
 import Footer from '@/components/Footer';
+import EventRegisterForm from '@/components/EventRegisterForm';
 
 const EventDetail = ({ }) => {
   const router = useRouter();
@@ -48,6 +49,8 @@ const EventDetail = ({ }) => {
 
   const clapSoundRef = useRef<HTMLAudioElement | null>(null);
   const unclapSoundRef = useRef<HTMLAudioElement | null>(null);
+
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const fetchEvents = async (id: string | string[] | undefined) => {
     const params = new URLSearchParams(document.location.search);
@@ -447,6 +450,24 @@ const EventDetail = ({ }) => {
           {/* Add more project details as needed */}
 
           <br />
+
+          {role === 'admin' && project.createdBy === user?.uid && (
+            <>
+              <button style={{ padding: 10, background: 'orange', border: 'none', cursor: 'pointer', borderRadius: '8px', width: '100%',  maxWidth: '600px', margin: '0 auto' }} onClick={() => setIsEditModalOpen(true)} className="edit-btn">Editar Obra</button>
+              {isEditModalOpen && (
+                <CustomModal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} height="75%">
+                <EventRegisterForm
+                  initialData={project}
+                  closeModal={() => {
+                    setIsEditModalOpen(false);
+                    fetchEvents(id); 
+                  }}
+                />
+              </CustomModal>)}
+              <br />
+            </>
+          )}
+          
           {role === 'admin' && project.createdBy === user?.uid && (
             <button 
               style={{ padding: 10, background: 'red', border: 'none', cursor: 'pointer', borderRadius: '8px', width: '100%',  maxWidth: '600px', margin: '0 auto' }}
