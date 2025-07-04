@@ -4,7 +4,7 @@ import CoreSectionJudges from '@/components/CoreSectionJudges';
 import authStyles from '@/app/assets/styles/Auth.module.css';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
-import { collection, getDocs, updateDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, updateDoc, doc, deleteDoc } from 'firebase/firestore';
 import { db } from './../../firebaseConfig';
 import { useAuth } from '@/context/AuthContext';
 import StarRating from '@/components/StarRating';
@@ -242,6 +242,19 @@ const EventDetail = ({ }) => {
     fetchAllJudges();
   };
 
+    const handleDelete = async (id: string) => {
+      const docRef = doc(db, 'events', id); // adjust collection name if needed
+  
+      try {
+        await deleteDoc(docRef);
+        toast.success('Evento eliminada exitosamente');
+        router.push('/events');
+      } catch (err) {
+        console.error('Error eliminando obra:', err);
+        toast.error('Error al eliminar la obra');
+      }
+    };
+
   return (
     <div className={styles['full-view']}>
       {/* <SubMenu /> */} 
@@ -437,21 +450,7 @@ const EventDetail = ({ }) => {
           {role === 'admin' && project.createdBy === user?.uid && (
             <button 
               style={{ padding: 10, background: 'red', border: 'none', cursor: 'pointer', borderRadius: '8px', width: '100%',  maxWidth: '600px', margin: '0 auto' }}
-              onClick={() => {
-                if (confirm('¿Estás seguro de que deseas eliminar este evento? Esta acción no se puede deshacer.')) {
-                  const docRef = doc(db, 'events', project.id);
-                  updateDoc(docRef, { deleted: true })
-                    .then(() => {
-                      toast.success('Evento eliminado exitosamente');
-                      router.push('/events');
-                    })
-                    .catch((err) => {
-                      console.error('Error eliminando evento:', err);
-                      toast.error('Error al eliminar el evento');
-                    });
-                }
-              }}
-            >
+              onClick={() => handleDelete(project.id)}> 
               Eliminar Evento
             </button>
           )}

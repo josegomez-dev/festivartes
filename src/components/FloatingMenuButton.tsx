@@ -46,17 +46,18 @@ const FloatingMenuButton: React.FC<FloatingMenuButtonProps> = ({ mainBtn }) => {
 
   // Handle click function
   const handleOptionClick = (option: string) => {
+    closeDropdown(); // 👈 This will hide the menu first
+
     setCurrentAction(option);
-    if (option === 'Registrar Nueva Obra') { // admin, judge, user
+    if (option === 'Registrar Nueva Obra') {
       openUserModal();
-    } else if (option === 'Consultar Reglamento') { // admin, judge, user
+    } else if (option === 'Consultar Reglamento') {
       openRulesModal();
-    } else if (option === 'Registrar Evento') { // admin INTERNAL PANEL FEATURE
+    } else if (option === 'Registrar Evento') {
       openEventModal();
-    } else if (option === 'Invitar Jurado') { // admin
+    } else if (option === 'Invitar Jurado') {
       openInviteModal();
     }
-    return;
   };
 
 
@@ -132,7 +133,7 @@ const FloatingMenuButton: React.FC<FloatingMenuButtonProps> = ({ mainBtn }) => {
       <CustomModal
         isOpen={isInviteModalOpen}
         onClose={closeInviteModal}
-        height="75%" // Custom height
+        height="80%" // Custom height
         // bgColor="black" // Custom background color
       >
         <div className="modal-title-centered">
