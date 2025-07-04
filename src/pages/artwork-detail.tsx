@@ -190,7 +190,7 @@ const ArtworkDetail = () => {
 
             
           {role === 'admin' && project.createdBy === user?.uid && (
-            <button style={{ padding: 10, background: 'red', border: 'none', cursor: 'pointer', borderRadius: '8px' }} onClick={() => handleDelete(project.id)}>
+            <button style={{ padding: 10, background: 'red', border: 'none', cursor: 'pointer', borderRadius: '8px', width: '100%',  maxWidth: '600px', margin: '0 auto' }} onClick={() => handleDelete(project.id)}>
               Eliminar Obra
             </button>
           )}

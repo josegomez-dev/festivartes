@@ -412,27 +412,31 @@ const EventDetail = ({ }) => {
             src={project.thumbnail} 
             alt={project.name} 
             className='project-thumbnail-wrapper'
-            style={{ width: '100%', height: 'auto', maxWidth: '600px', borderRadius: '8px' }}
+            style={{ width: '100%', height: 'auto', maxWidth: '600px', borderRadius: '8px', marginBottom: 5 }}
           />
-          <br />
-          <p>
-            <b className='bolder-text'>&nbsp;
-            &nbsp;Fecha:</b> &nbsp;
-              <span style={{ animation: project.upcoming ? 'pulseGlow 1s infinite' : '', color: project.upcoming ? 'black' : '' }}>
-                {`${project.date}`}
-              </span>
-          </p>
-          <p ><b className='bolder-text'>Ubicación:</b> {project.location}</p>      
-          <br />
-          <p className='overflow-area'>
-            {project.description}
-          </p>
+          
+          <div style={{ width: '100%', maxWidth: '600px', background: 'linear-gradient(0deg, var(--color-blue), var(--color-orange))', textAlign: 'justify', margin: '0 auto', padding: '10px', borderRadius: '8px', color: 'var(--color-white)' }}>
+            <p>
+              <b className='bolder-text'>&nbsp;
+              &nbsp;Fecha:</b> &nbsp;
+                <span style={{ animation: project.upcoming ? 'pulseGlow 1s infinite' : '', color: project.upcoming ? 'black' : '' }}>
+                  {`${project.date}`}
+                </span>
+            </p>
+            <p ><b className='bolder-text'>Ubicación:</b> {project.location}</p>      
+            <hr />
+            <b>Descripción del Evento:</b> <br />
+            <p className='overflow-area'>
+              {project.description || 'No hay descripción disponible para este evento.'}
+            </p>
+          </div>
+
           {/* Add more project details as needed */}
 
           <br />
           {role === 'admin' && project.createdBy === user?.uid && (
             <button 
-              style={{ padding: 10, background: 'red', border: 'none', cursor: 'pointer', borderRadius: '8px' }} 
+              style={{ padding: 10, background: 'red', border: 'none', cursor: 'pointer', borderRadius: '8px', width: '100%',  maxWidth: '600px', margin: '0 auto' }}
               onClick={() => {
                 if (confirm('¿Estás seguro de que deseas eliminar este evento? Esta acción no se puede deshacer.')) {
                   const docRef = doc(db, 'events', project.id);
@@ -466,12 +470,11 @@ const EventDetail = ({ }) => {
                       Obras Registradas
                     </b>
                   </h2>
-                  <br />
-                  <br />
-                  <CoreSectionSelectedArtworks selectedArtworks={localSelectedArtworks} />
-                  <button className={authStyles['auth-button']} onClick={onOpenSelectArtworksModal} style={{ marginTop: '-160px', marginLeft: '-120px', position: 'absolute' }}>
+                  <br />                  
+                  <button className={authStyles['auth-button']} onClick={onOpenSelectArtworksModal}>
                     <b>Editar Lista 🎨</b>
                   </button>
+                  <CoreSectionSelectedArtworks selectedArtworks={localSelectedArtworks} />
                 </>
               ) : (
                 <>
@@ -497,12 +500,14 @@ const EventDetail = ({ }) => {
                       Jurado Seleccionador
                     </b>
                   </h2>
+                  <p>
+                    Los jueces seleccionados para este evento son:
+                  </p>
                   <br />
-                  <br />
-                  <CoreSectionSelectedJudges selectedJudges={localSelectedJudges} />
-                  <button className={authStyles['auth-button']} onClick={onOpenSelectJudgesModal} style={{ marginTop: '-160px', marginLeft: '-120px', position: 'absolute' }}>
+                  <button className={authStyles['auth-button']} onClick={onOpenSelectJudgesModal}>
                     <b>Editar Lista 👨‍⚖️</b>
                   </button>
+                  <CoreSectionSelectedJudges selectedJudges={localSelectedJudges} />
                 </>
               ) : (
                 <>

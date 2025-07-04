@@ -45,14 +45,14 @@ const TabInfo: React.FC<TabInfoProps> = ({ project, onTogglePrivacy }) => {
         style={{ width: '100%', height: 'auto', maxWidth: '600px', borderRadius: '8px' }}
       />
 
-      <div style={{ width: '300px', textAlign: 'left', margin: '0 auto' }}>
-        <br />
-        <p><b className='bolder-text'>Artista/Grupo:</b> {project.artist}</p>
-        <p><b className='bolder-text'>Categoría:</b> {project.category}</p>
+      <div style={{ width: '100%', maxWidth: '600px', background: 'linear-gradient(0deg, var(--color-blue), var(--color-orange))', textAlign: 'justify', margin: '0 auto', padding: '10px', borderRadius: '8px', color: 'var(--color-white)' }}>
+        <p><b>Artista/Grupo:</b> {project.artist}</p>
+        <p><b>Categoría:</b> {project.category}</p>
+        <hr />
+        <b>Descripción de la Obra</b>
+        <p className="overflow-area">{project.description}</p>
       </div>
       
-      <br />
-      <p className="overflow-area">{project.description}</p>
     </div>
   );
 };

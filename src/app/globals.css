@@ -256,8 +256,8 @@ b {
   flex-direction: row;
   border: 2px solid var(--color-blue);;
   border-radius: 8px;
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
 
   margin-top: 20px;
 
@@ -295,18 +295,10 @@ b {
   border-radius: 4px;
 }
 .project-thumbnail-wrapper {
-  max-width: 200px;
   border: 1px solid var(--color-blue);
   padding: 2px;
   background: var(--background-gradient-midnight-blue);
 }
-.project-thumbnail-judge {
-  max-width: 200px;
-  max-height: 200px; 
-  border: 1px solid var(--color-blue);
-  
-}
-
 .project-name {
   margin-top: 8px;
   font-size: 14px;
@@ -368,26 +360,21 @@ b {
 }
 
 .project-miniature-custom-event .project-miniature, .project-miniature-custom-event .project-thumbnail {
-  width: 120px;
-  height: 180px;
+  width: 200px;
+  height: 280px;
   overflow: hidden;
-  margin-bottom: 5px;
-}
-.project-miniature-custom-artwork .project-miniature, .project-miniature-custom-artwork .project-thumbnail {
-  margin-bottom: 5px;
 }
 
 .project-miniature-custom-event .project-miniature {
   background: linear-gradient(0deg, var(--color-blue), var(--color-orange));
 }
 
-.project-miniature-custom-event .project-thumbnail {
-  width: 117px;
-}
 .project-miniature-custom-judge {
   background: linear-gradient(0deg, var(--color-blue), var(--color-orange));
-  padding: 10px 5px;
+  padding: 10px;
   border-radius: 12px;
+  margin-top: 5px;
+  
 }
 
 .project-miniature-custom-judge .project-miniature {
@@ -396,30 +383,29 @@ b {
   align-items: center;
   justify-content: center;
   padding: 5px;
-  border-radius: 12px;
+  border-radius: 50%;
   margin-top: 0px;
   border: 1px solid var(--color-orange);
 }
 
 .project-miniature-custom-judge .project-miniature, .project-miniature-custom-judge .project-thumbnail {
-  width: 70px;
-  height: 70px;
-
-  border-radius: 2px;
+  width: 120px;
+  height: 120px;
+  min-height: 110px;
+  min-width: 110px;
+  border-radius: 50%;
+  
 }
 
 .project-miniature-custom-judge .project-thumbnail {
   width: 100%;
   height: auto;
+  
 }
 
 .project-miniature-custom-artwork .project-miniature {
   background: linear-gradient(0deg, var(--color-blue), var(--color-orange));
   overflow: hidden;
-}
-.project-miniature-custom-artwork .project-thumbnail {
-  width: 98px;
-  height: 98px;
 }
 
 .upcoming-message {
@@ -623,12 +609,11 @@ b {
 }
 
 .overflow-area {
-  background: white;
+  background: var(--background-gradient-midnight-blue);
   backdrop-filter: blur(100px); 
   border: 1px solid var(--background-transparent); 
   border-radius: 10px; 
-  color:var(--color-orange); 
-  border: 1px solid var(--background-transparent); 
+  color:var(--color-white); 
   width: 100%; 
   max-width: 500px; 
   margin: 0 auto; 
@@ -1284,8 +1269,8 @@ Down
 }
 
 .artworks-miniature-panel .project-miniature, .artworks-miniature-panel .project-thumbnail {
-  width: 60px;
-  height: 60px; 
+  width: 150px;
+  height: 150px; 
 }
 
 .artworks-miniature-panel {
@@ -1298,8 +1283,8 @@ Down
 }
 
 .festivartes-miniature-panel .project-miniature, .festivartes-miniature-panel .project-thumbnail {
-  width: 70px;
-  height: 100px; 
+  width: 120px;
+  height: 200px; 
 }
 
 .festivartes-miniature-panel {
@@ -1444,7 +1429,7 @@ Down
 }
 
 .font-size-title {
-  font-size: 3rem;
+  font-size: 2rem;
 }
 .close-session-link {
   color: var(--color-white); 
@@ -1803,7 +1788,7 @@ margin: 10px 0;
 
 .upcoming-badge {
   position: absolute;
-  top: -145px;
+  top: -245px;
   right: 8px;
   display: flex;
   flex-direction: column;
