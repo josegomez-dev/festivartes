@@ -11,7 +11,6 @@ import {
   setDoc,
   doc,
   serverTimestamp,
-  getDoc,
 } from "firebase/firestore";
 import { db } from "@/../firebaseConfig";
 import { User } from "@/types/userTypes";
@@ -199,7 +198,7 @@ export default function AdminChatPanel() {
                   </div>
                 ))}
               </div>
-              <AdminReplyBox userId={selectedUserId} />
+              <AdminReplyBox userId={selectedUserId} chatStatuses={chatStatuses} />
             </>
           ) : <p style={{ padding: "1rem", fontStyle: "italic" }}>Selecciona un usuario para ver el chat.</p>}
         </section>
@@ -208,7 +207,7 @@ export default function AdminChatPanel() {
   );
 }
 
-function AdminReplyBox({ userId }: { userId: string }) {
+function AdminReplyBox({ userId, chatStatuses }: { userId: string, chatStatuses: Record<string, ChatStatus> }) {
   const [message, setMessage] = useState("");
   const [topic, setTopic] = useState("general");
   const { user } = useAuth();
@@ -219,7 +218,6 @@ function AdminReplyBox({ userId }: { userId: string }) {
     await addDoc(collection(db, "chats", userId, "messages"), {
       sender: user.uid,
       name: user.displayName || user.email || "Usuario",
-      photoURL: user.photoURL || "/default-avatar.png",
       text: message,
       topic,
       timestamp: serverTimestamp(),
