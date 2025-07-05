@@ -243,7 +243,7 @@ const ChatSidebar = () => {
               className="chatInputField"
             />
             <button onClick={sendMessage} className="sendBtn">
-              🚀 Enviar
+              🚀
             </button>
           </div>
         </div>
