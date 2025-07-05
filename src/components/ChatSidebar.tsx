@@ -1,4 +1,3 @@
-// components/ChatSidebar.tsx
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -14,6 +13,8 @@ import {
   query,
   orderBy,
   serverTimestamp,
+  setDoc,
+  getDoc,
 } from "firebase/firestore";
 import { User } from "@/types/userTypes";
 
@@ -29,12 +30,13 @@ const topicLabels: { [key: string]: string } = {
 };
 
 const ChatSidebar = () => {
-const { user } = useAuth() as { user: User | null };
+  const { user } = useAuth() as { user: User | null };
 
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<any[]>([]);
   const [newMessage, setNewMessage] = useState("");
   const [topic, setTopic] = useState("general");
+  const [hasUnread, setHasUnread] = useState(false);
 
   const chatId = user?.uid ?? "guest";
 
@@ -55,47 +57,92 @@ const { user } = useAuth() as { user: User | null };
     return () => unsubscribe();
   }, [user]);
 
+  useEffect(() => {
+    if (!user) return;
+
+    const chatDocRef = doc(db, "chats", chatId);
+
+    const unsub = onSnapshot(chatDocRef, (docSnap) => {
+      const data = docSnap.data();
+      if (data?.hasUnread) {
+        setHasUnread(true);
+      } else {
+        setHasUnread(false);
+      }
+    });
+
+    return () => unsub();
+  }, [user]);
+
+  useEffect(() => {
+    if (!user || !isOpen) return;
+
+    // Mark chat as read when user opens chat
+    const markAsRead = async () => {
+      await setDoc(doc(db, "chats", chatId), { hasUnread: false }, { merge: true });
+    };
+
+    markAsRead();
+  }, [isOpen]);
+
   const toggleChat = () => setIsOpen(!isOpen);
 
   const sendMessage = async () => {
     if (!newMessage.trim() || !user) return;
 
-    await addDoc(collection(db, "chats", chatId, "messages"), {
+    const userMessage = {
       sender: "user",
       name: user.displayName || "Usuario",
       photoURL: user.profilePic || "/blank-profile-picture.png",
       text: newMessage,
       topic,
       timestamp: serverTimestamp(),
-    });
+    };
+
+    await addDoc(collection(db, "chats", chatId, "messages"), userMessage);
+
+    await setDoc(doc(db, "chats", chatId), {
+      hasUnread: true,
+      lastMessageTimestamp: new Date(),
+    }, { merge: true });
 
     setNewMessage("");
 
-    setTimeout(async () => {
-      await addDoc(collection(db, "chats", chatId, "messages"), {
-        sender: "bot",
-        name: "Asistente Festivartes",
-        photoURL: "/logo2.png",
-        text: "Gracias por tu mensaje. Te responderemos lo antes posible.",
-        timestamp: serverTimestamp(),
-      });
+    // Simulated auto-reply (frontend only)
+    setTimeout(() => {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `auto-reply-${Date.now()}`,
+          sender: "bot",
+          name: "Asistente Festivartes",
+          photoURL: "/logo2.png",
+          text: "Gracias por tu mensaje. Te responderemos lo antes posible.",
+          topic,
+          timestamp: { seconds: Date.now() / 1000 },
+          isTemp: true,
+        },
+      ]);
     }, 1000);
   };
 
   const handleTopicChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedTopic = e.target.value;
-    //how to get the label text of the selected Topic
-
     setTopic(selectedTopic);
 
     await addDoc(collection(db, "chats", chatId, "messages"), {
       sender: "bot",
       name: "Asistente Festivartes",
       photoURL: "/logo2.png",
-      text: `Vamos a conversar sobre ${topicLabels[selectedTopic] || selectedTopic}. En qué podemos ayudarte?`,
+      text: `Vamos a conversar sobre ${topicLabels[selectedTopic] || selectedTopic}. ¿En qué podemos ayudarte?`,
       topic: selectedTopic,
       timestamp: serverTimestamp(),
     });
+
+    await setDoc(doc(db, "chats", chatId), {
+      hasUnread: true,
+      lastMessageTimestamp: new Date(),
+    }, { merge: true });
   };
 
   const deleteMessage = async (messageId: string) => {
@@ -120,6 +167,7 @@ const { user } = useAuth() as { user: User | null };
     <>
       <button className="chatToggle" onClick={toggleChat}>
         <b>Festivartes</b> <span>CHAT</span>
+        {hasUnread && <span className="unreadBadge">●</span>}
       </button>
 
       <div className={`chatSidebar ${isOpen ? "open" : ""}`}>
@@ -140,7 +188,7 @@ const { user } = useAuth() as { user: User | null };
                   : msg.sender === "bot"
                   ? "botMessage"
                   : "adminMessage"
-              }`}
+              } ${msg.isTemp ? "tempMessage" : ""}`}
             >
               <div className="messageHeader">
                 <img
@@ -174,14 +222,9 @@ const { user } = useAuth() as { user: User | null };
               value={topic}
               onChange={handleTopicChange}
             >
-              <option value="general">General</option>
-              <option value="projects">Proyectos</option>
-              <option value="events">Eventos</option>
-              <option value="artworks">Obras</option>
-              <option value="ratings">Calificaciones</option>
-              <option value="claps">Aplausos</option>
-              <option value="profile">Perfil</option>
-              <option value="invitations">Invitaciones</option>
+              {Object.entries(topicLabels).map(([key, label]) => (
+                <option key={key} value={key}>{label}</option>
+              ))}
             </select>
             <button onClick={clearConversation} className="clearBtn">
               🧹 Limpiar
@@ -202,8 +245,23 @@ const { user } = useAuth() as { user: User | null };
             </button>
           </div>
         </div>
-
       </div>
+
+      <style jsx>{`
+        .unreadBadge {
+          margin-left: 8px;
+          background: red;
+          color: white;
+          padding: 0 6px;
+          border-radius: 50%;
+          font-size: 0.75rem;
+          font-weight: bold;
+        }
+        .tempMessage {
+          opacity: 0.7;
+          font-style: italic;
+        }
+      `}</style>
     </>
   );
 };

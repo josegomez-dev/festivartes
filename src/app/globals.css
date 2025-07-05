@@ -1932,3 +1932,8 @@ margin: 10px 0;
     transform: translateY(0);
   }
 }
+
+.tempMessage {
+  opacity: 0.6;
+  font-style: italic;
+}
