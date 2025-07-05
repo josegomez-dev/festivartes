@@ -167,7 +167,9 @@ const ChatSidebar = () => {
     <>
       <button className="chatToggle" onClick={toggleChat}>
         <b>Festivartes</b> <span>CHAT</span>
-        {hasUnread && <span className="unreadBadge">●</span>}
+        {hasUnread && <span 
+          className="unreadBadge">●</span>
+        }
       </button>
 
       <div className={`chatSidebar ${isOpen ? "open" : ""}`}>
@@ -250,11 +252,13 @@ const ChatSidebar = () => {
       <style jsx>{`
         .unreadBadge {
           margin-left: 8px;
-          background: red;
+          background: var(--color-blue);
           color: white;
           padding: 0 6px;
           border-radius: 50%;
           font-size: 0.75rem;
+          line-height: 1;
+          animation: pulse 1.5s infinite;
           font-weight: bold;
         }
         .tempMessage {
