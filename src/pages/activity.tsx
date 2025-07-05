@@ -66,7 +66,7 @@ export default function ActivityDashboard() {
 
       const userRated = allArtworks.filter(art =>
         Array.isArray(art.rates) &&
-        art.rates.some((rate: RATE) => rate.judgeIdentifier === user.uid)
+        ((art.rates as unknown as RATE[]).some((rate) => (rate as RATE).judgeIdentifier === user.uid))
       );
 
       setRatedArtworks(userRated);

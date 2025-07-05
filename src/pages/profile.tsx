@@ -8,7 +8,7 @@ import Image from "next/image";
 import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { db, storage } from "./../../firebaseConfig"
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { createEmptyUser } from "@/types/userTypes";
+import { createEmptyUser, User } from "@/types/userTypes";
 import toast from 'react-hot-toast';
 
 export default function Profile() {
@@ -21,7 +21,6 @@ export default function Profile() {
     email: user?.email,
     role: role,
     displayName: user?.displayName,
-    profilePic: user?.photoURL || user?.photoURL || '/logo2.png',
   });
 
   useEffect(() => {

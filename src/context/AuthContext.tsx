@@ -20,7 +20,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 interface AuthContextType {
-  user: User | null;
+  user: User | _User | null;
   loading: boolean;
   
   role: string

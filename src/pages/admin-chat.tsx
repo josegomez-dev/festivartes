@@ -104,7 +104,7 @@ export default function AdminChatPanel() {
       color: "#fff",
       transition: "all 0.3s ease-in-out"
     }}>
-      <h2 style={{ textAlign: "center", fontSize: "1.8rem", marginBottom: "1rem" }}>💬 Panel de Chats - Admin</h2>
+      <h2 style={{ textAlign: "center", fontSize: "1.8rem", marginBottom: "1rem" }}>💬 Panel de Mensajeria</h2>
 
       <div style={{
         display: "flex",
