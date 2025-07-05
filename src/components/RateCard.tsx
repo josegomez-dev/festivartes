@@ -13,9 +13,10 @@ export interface Rate {
 
 interface RateCardProps {
   rates: Rate[];
+  onClick?: (rate: Rate) => void;
 }
 
-const RateCard: React.FC<RateCardProps> = ({ rates }) => {
+const RateCard: React.FC<RateCardProps> = ({ rates, onClick }) => {
     
     const [allJudges, setAllJudges] = React.useState<any[]>([]);
 
@@ -44,7 +45,7 @@ const RateCard: React.FC<RateCardProps> = ({ rates }) => {
   return (
     <div className={styles.rateCardsContainer}>
       {rates.map((rate, index) => (
-        <div key={index} className={styles.rateCard}>
+        <div key={index} className={styles.rateCard} onClick={() => onClick && onClick(rate)}>
           <div className={styles.rateHeader}>
             <Image
                 src={allJudges.find(judge => judge.uid === rate.judgeIdentifier)?.profilePic || ''}

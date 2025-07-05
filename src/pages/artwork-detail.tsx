@@ -225,7 +225,10 @@ const ArtworkDetail = () => {
         <div className="project-detail-container">
           <h2><b className='font-size-title'>Calificaciones</b></h2>
           <div className="project-detail-header-rates">
-            {project.rates?.length ? <RateCard rates={(project.rates as any[]).map((r) => ({
+            {project.rates?.length ? <RateCard onClick={() => {
+              //redirect to rates detail page
+              router.push(`/artwork-rates-detail?id=${project.id}`);
+            }} rates={(project.rates as any[]).map((r) => ({
               judgeIdentifier: r.judgeIdentifier,
               rateAt: r.rateAt,
               rateValue: r.rateValue,
