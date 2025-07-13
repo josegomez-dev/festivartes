@@ -250,6 +250,14 @@ export default function Nav() {
                     ¿Como usar? <b>Festivartes</b>
                   </p>
                 </Link>
+                <div onClick={() => {
+                  // this is a emergency feature for childrens to report real life issues
+                  alert('Esta funcionalidad es para reportar problemas reales, no es un juego. Si tienes un problema real, por favor contacta a un adulto de confianza o a las autoridades correspondientes.');
+                }} className={styles.dropdownLink}>
+                  <p className={`${styles.dropdownItem} link-item`}>
+                    Denunciar / Reportar ⚠️
+                  </p>
+                </div>
                 <Link href="/docs" className={styles.dropdownLink}>
                   <p className={`${styles.dropdownItem} link-item`}>
                     Documentación
