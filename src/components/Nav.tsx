@@ -203,7 +203,8 @@ export default function Nav() {
                 <br />
                 <label htmlFor="profile-pic" className="profile-pic-label-custom">
                   <Image
-                    src={user?.profilePic}
+                    // src={user?.profilePic}
+                    src={'/blank-profile-picture.png'}
                     alt="Profile Picture"
                     width={100}
                     height={100}
