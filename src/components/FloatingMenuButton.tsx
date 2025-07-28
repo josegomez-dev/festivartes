@@ -8,6 +8,7 @@ import EventRegisterForm from "./EventRegisterForm";
 import InviteRegisterForm from "./InviteRegisterForm";
 import { RiBubbleChartFill } from "react-icons/ri";
 import { AiOutlineMenu } from "react-icons/ai";
+import { useRouter } from "next/router";
 
 interface FloatingMenuButtonProps {
   mainBtn?: boolean;
@@ -15,6 +16,7 @@ interface FloatingMenuButtonProps {
 
 const FloatingMenuButton: React.FC<FloatingMenuButtonProps> = ({ mainBtn }) => {
   const { role } = useAuth();
+  const router = useRouter();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);  
   const [currentAction, setCurrentAction] = useState('');
@@ -37,7 +39,7 @@ const FloatingMenuButton: React.FC<FloatingMenuButtonProps> = ({ mainBtn }) => {
 
 
   const menuOptions : any = {
-    admin: ["Registrar Evento", "Registrar Nueva Obra", "Invitar Jurado", "Exportar Agenda Cultural"],
+    admin: ["ADM Chat", "Registrar Evento", "Registrar Nueva Obra", "Invitar Jurado", "Exportar Agenda Cultural"],
     judge: ["Registrar Nueva Obra", "Exportar Agenda Cultural"],
     user: ["Registrar Nueva Obra"],
   };
@@ -57,6 +59,9 @@ const FloatingMenuButton: React.FC<FloatingMenuButtonProps> = ({ mainBtn }) => {
       openEventModal();
     } else if (option === 'Invitar Jurado') {
       openInviteModal();
+    } else if (option === 'ADM Chat') {
+      // redirect to ADM Chat
+      router.push('/admin-chat');
     }
   };
 

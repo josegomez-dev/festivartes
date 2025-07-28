@@ -200,8 +200,8 @@ export default function Nav() {
               >
                 <br />
                 <br />
-                <br />
-                <label htmlFor="profile-pic" className="profile-pic-label-custom">
+                {/* <br /> */}
+                {/* <label htmlFor="profile-pic" className="profile-pic-label-custom">
                   <Image
                     // src={user?.profilePic}
                     src={'/blank-profile-picture.png'}
@@ -210,7 +210,7 @@ export default function Nav() {
                     height={100}
                     className="profile-pic"
                   />
-                </label>
+                </label> */}
 
                 <div className="go-to-profile-container" >
                   <Link href="/profile" className={styles.dropdownLink}>⚙️ Ir al Perfil</Link>
@@ -218,10 +218,6 @@ export default function Nav() {
 
 
                 <div className="small-text-size">
-                  <p className={styles.dropdownItem} style={{ position: 'absolute', top: '50px', left: '5px' }}>
-                    🛡️:&nbsp;
-                    <b className="medium-text-size">{role}</b>
-                  </p>
                   {/* <p className={styles.dropdownItem} style={{ position: 'absolute', top: '50px', right: '5px' }}>
                     ✅ :&nbsp;
                     <b className="medium-text-size">{user?.status}</b>
@@ -232,8 +228,12 @@ export default function Nav() {
                 {/* <p className={styles.dropdownItem}>
                   <b className="medium-text-size">{user?.type === 'normal' ? 'Usuario Regular' : user?.type}</b>
                 </p> */}
-                <p className={`${styles.dropdownItem} color-orange`}><strong>{user?.displayName || 'Usuario'}</strong></p>
-                <p className={`${styles.dropdownItem} small-text-size`}>{user?.email}</p>
+                <p className={`${styles.dropdownItem} color-orange`}>
+                  <strong>{user?.displayName || 'Usuario'}</strong>
+                  &nbsp;|🛡️:&nbsp;
+                    <b className="medium-text-size">{role}</b>
+                </p>
+                <p className={`${styles.dropdownItem} small-text-size`} style={{ color: '#32acc0'}}>{user?.email}</p>
                 
                 <hr />
                 <br />
