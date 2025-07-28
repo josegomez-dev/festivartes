@@ -144,6 +144,10 @@ const ArtworkDetail = () => {
     }
   };
 
+  const redirectToRatesDetail = () => {
+    router.push(`/artwork-rates-detail?id=${project.id}`);
+  };
+
   return (
     <div className={styles['full-view']}>
       <audio ref={clapSoundRef} src="/sounds/spot.mp3" />
@@ -224,6 +228,11 @@ const ArtworkDetail = () => {
 
         <div className="project-detail-container">
           <h2><b className='font-size-title'>Calificaciones</b></h2>
+          {role === 'judge' || role === 'admin' && (
+          <>
+            <br />
+            <button style={{ padding: 10, background: 'orange', border: 'none', cursor: 'pointer', borderRadius: '8px', width: '100%',  maxWidth: '600px', margin: '0 auto' }} onClick={redirectToRatesDetail} className="edit-btn">Ver Registro Completo</button>
+          </>)}
           <div className="project-detail-header-rates">
             {project.rates?.length ? <RateCard onClick={() => {
               //redirect to rates detail page
