@@ -122,7 +122,8 @@ export default function Profile() {
       <div className="profile-container">
         <label htmlFor="profile-pic" className="profile-pic-label">
           <Image
-            src={accountData?.profilePic}
+            // src={accountData?.profilePic}
+            src={'/blank-profile-picture.png'}
             alt="Profile Picture"
             width={100}
             height={100}

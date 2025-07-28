@@ -42,7 +42,8 @@ const TabInfo: React.FC<TabInfoProps> = ({ project, onTogglePrivacy }) => {
       </div>
 
       <img
-        src={project.thumbnail || 'https://getuikit.com/v2/docs/images/placeholder_600x400.svg'}
+        // src={project.thumbnail || 'https://getuikit.com/v2/docs/images/placeholder_600x400.svg'}
+        src={'https://getuikit.com/v2/docs/images/placeholder_600x400.svg'}
         alt={project.title}
         className="project-thumbnail-wrapper"
         style={{ width: '100%', height: 'auto', maxWidth: '600px', borderRadius: '8px' }}

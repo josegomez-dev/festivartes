@@ -53,7 +53,10 @@ const ObjectMiniature: React.FC<ObjectMiniatureProps> = ({
       {projects.map((project, index) => {
         const projectId = project.id || project.uid || index.toString();
         // const imageUrl = project.thumbnail || project.profilePic || '/blank-profile-picture.png';
-        const imageUrl = 'https://getuikit.com/v2/docs/images/placeholder_600x400.svg';
+        let imageUrl = 'https://getuikit.com/v2/docs/images/placeholder_600x400.svg';
+        if (type === 'judge') {
+          imageUrl = '/blank-profile-picture.png';
+        }
         const icon = badgeIcons[project.type];
         const isPrivate = project.privacy === 'private';
         const isOwner = project.createdBy === currentUserId;

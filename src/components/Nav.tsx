@@ -187,7 +187,8 @@ export default function Nav() {
             <Image
               width={50}
               height={50}
-              src={user?.profilePic || "/"}
+              // src={user?.profilePic || "/"}
+              src={"/blank-profile-picture.png"}
               alt="Profile Picture"
               className={styles['profile-picture']}
               onClick={() => setShowDropdown(!showDropdown)}

@@ -48,7 +48,8 @@ const RateCard: React.FC<RateCardProps> = ({ rates, onClick }) => {
         <div key={index} className={styles.rateCard} onClick={() => onClick && onClick(rate)}>
           <div className={styles.rateHeader}>
             <Image
-                src={allJudges.find(judge => judge.uid === rate.judgeIdentifier)?.profilePic || ''}
+                // src={allJudges.find(judge => judge.uid === rate.judgeIdentifier)?.profilePic || ''}
+                src={'/blank-profile-picture.png'}
                 alt="Judge Avatar"
                 width={50}
                 height={50}
