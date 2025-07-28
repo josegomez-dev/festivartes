@@ -260,7 +260,7 @@ export default function Nav() {
                     Denunciar / Reportar ⚠️
                   </p>
                 </div>
-                <Link href="/docs" className={styles.dropdownLink}>
+                <Link href="https://joses-organization-73.gitbook.io/festivartes/conoce-nuestro-proyecto/plataforma-en-linea" className={styles.dropdownLink}>
                   <p className={`${styles.dropdownItem} link-item`}>
                     Documentación
                   </p>
