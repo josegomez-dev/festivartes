@@ -52,7 +52,8 @@ const ObjectMiniature: React.FC<ObjectMiniatureProps> = ({
     <div className={`project-miniature-container project-miniature-custom-${type} ${customClass}`}>
       {projects.map((project, index) => {
         const projectId = project.id || project.uid || index.toString();
-        const imageUrl = project.thumbnail || project.profilePic;
+        // const imageUrl = project.thumbnail || project.profilePic || '/blank-profile-picture.png';
+        const imageUrl = 'https://getuikit.com/v2/docs/images/placeholder_600x400.svg';
         const icon = badgeIcons[project.type];
         const isPrivate = project.privacy === 'private';
         const isOwner = project.createdBy === currentUserId;
